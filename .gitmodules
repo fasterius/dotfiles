@@ -2,3 +2,7 @@
 	path = bundle/rainbow
     url = https://github.com/luochen1990/rainbow
     ignore = dirty
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+    ignore = dirty
