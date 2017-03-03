@@ -1,3 +1,5 @@
+.viminfo
+.netrwhist
+tmp/
 *.un*
 *.swp*
-tmp/
