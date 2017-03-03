@@ -6,3 +6,7 @@
 	path = bundle/vim-airline
 	url = https://github.com/vim-airline/vim-airline
     ignore = dirty
+[submodule "bundle/vim-airline-themes"]
+	path = bundle/vim-airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+    ignore = dirty
