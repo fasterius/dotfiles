@@ -38,12 +38,17 @@ set t_Co=16  " 16 bit colours
 colorscheme solarized  " Solarized colours 
 
 " Parentheses
-let g:rainbow_active = 1  " Use rainbow parentheses
+let g:rainbow_active=1  " Use rainbow parentheses
 set showmatch  " Show matching parenthesis on cursor hovering
 
 " Status bar
 let g:airline_theme='solarized'  " Solarized theme
 set laststatus=2  " Status bar is always on
+
+" Commenting
+let g:NERDSpaceDelims=1  " Add a space after each comment
+let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
+let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
 " }}}1
 " Syntax highlighting and file types {{{1
 
