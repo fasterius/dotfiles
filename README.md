@@ -9,20 +9,13 @@ This repository is based on http://vimcasts.org/episodes/synchronizing-plugins-w
 Clone the repository:
 
 ```bash
-git clone git://github.com/fasterius/dotvim.git ~/.vim
+git clone --recursive git://github.com/fasterius/dotvim.git ~/.vim
 ```
 
-Create symlinks:
+Create a symbolic link to the `.vimrc` file in your home directory:
 
 ```bash
 ln -s ~/.vim/vimrc ~/.vimrc
-```
-
-Switch to the `~/.vim` directory and fetch submodules:
-
-```bash
-cd ~/.vim
-git submodule update --init
 ```
 
 ### Updating plugins
