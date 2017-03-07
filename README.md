@@ -22,8 +22,7 @@ Switch to the `~/.vim` directory and fetch submodules:
 
 ```bash
 cd ~/.vim
-git submodule init 
-git submodule update
+git submodule update --init
 ```
 
 ### Updating plugins
