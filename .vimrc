@@ -22,10 +22,6 @@ set number
 
 " Add background highlight to current line
 set cursorline
-
-" Highlight the first character exceeding a linewidth of 79
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%80v.', 100)
 " }}}1
 " Plugins {{{1
 
@@ -64,6 +60,10 @@ let python_highlight_all = 1
 filetype on  " Enable filetype detection
 filetype plugin on  " Enable filetype-specific plugins
 filetype indent on  " Enable filetype-specific indentation
+
+" Highlight the first character exceeding a linewidth of 79
+highlight ColorColumn ctermbg=red ctermfg=white
+call matchadd('ColorColumn', '\%80v.', 100)
 " }}}1
 " Search settings {{{1
 
