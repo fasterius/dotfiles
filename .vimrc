@@ -57,6 +57,8 @@ syntax enable
 autocmd BufNewFile,BufRead Snakefile,*.snakefile set filetype=snakemake
 autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout.save,*.Rout.fail set filetype=r
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.py set filetype=python
+let python_highlight_all = 1
 
 " Filetypes
 filetype on  " Enable filetype detection
