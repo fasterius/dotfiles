@@ -30,7 +30,7 @@ syn case match
 
 " Definitions
 "  Comments: {{{1
-syn match rComment "/\#.*$/"
+syn match rComment "#.*$"
 syn keyword rTodo TODO ToDo Todo
 " }}}
 "  Constants: {{{1
