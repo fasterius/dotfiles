@@ -99,8 +99,8 @@ syn match rComplex "\<\.\d\+\([Ee][-+]\=\d\+\)\=i"
 syn match rComplex "\<\d\+[Ee][-+]\=\d\+i"
 " }}}
 " Strings {{{1
-syn region rString start=/"/ skip=/\\\\\|\\"/ end=/"/ end=/$/
-syn region rString start=/'/ skip=/\\\\\|\\'/ end=/'/ end=/$/
+syn region rString start=/"/ skip=/\\\\\|\\"/ end=/"/
+syn region rString start=/'/ skip=/\\\\\|\\'/ end=/'/
 " }}}
 
 " Set highlighting {{{1
