@@ -2,6 +2,9 @@
 "  Author:  Erik Fasterius <erikfas at kth dot se>
 "  URL:     https://github.com/fasterius/dotvim
 
+" Set folding method to 'marker'
+setlocal foldmethod=marker
+
 "  Backup Settings: {{{1
 
 " Backups in '~/.vim/tmp' folder
@@ -29,12 +32,6 @@ autocmd BufNewFile,BufRead *bash* set filetype=sh
 " }}}
 "   Miscellaneous Settings: {{{1
 
-" Use Vim-mode rather than vi-mode
-set nocompatible
-
-" Set folding method to 'marker'
-setlocal foldmethod=marker
-
 " Set <leader> to comma
 let mapleader=','
 
@@ -49,6 +46,9 @@ set number
 
 " Add background highlight to current line
 set cursorline
+
+" Set linewidth to 79
+set textwidth=79
 " }}}1
 "  Movements: {{{1
 " Remove arrow key mappings for normal mode
