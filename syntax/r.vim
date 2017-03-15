@@ -53,10 +53,14 @@ syn match rWarning "^Warning.*"
 " Matches any function that does not start with a '$'
 syn match rFunction "\($.*\)\@<!\([a-zA-Z0-9_.]\+\|[a-zA-Z0-9]\+\)("me=e-1
 
+" Function definitions
+syn match rFunctionDef "[a-zA-Z]*\ =\ function("me=e-12
+
 " Default functions
+syn match rCombine "c("me=e-1
 syn keyword rInclude library require detach
 syn keyword rMessage suppressMessage suppressWarnings suppressPackageStartupMessages
-syn match rCombine "c("me=e-1
+syn keyword rTry try tryCatch
 " }}}
 "  Miscellaneous: {{{1
 syn match rDollar "\$"
@@ -143,6 +147,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rError       Error
     HiLink rFloat       Underlined
     HiLink rFunction    Identifier
+    HiLink rFunctionDef PreProc
     HiLink rInclude     Underlined
     HiLink rIndex       Underlined
     HiLink rInf         Type
@@ -154,6 +159,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rRepeat      Type
     HiLink rString      String
     HiLink rTodo        Todo
+    HiLink rTry         Type
     HiLink rType        Type
     HiLink rWarning     Error
 
