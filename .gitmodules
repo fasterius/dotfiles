@@ -26,3 +26,6 @@
 	path = bundle/syntastic
 	url = https://github.com/vim-syntastic/syntastic
     ignore = dirty
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree
