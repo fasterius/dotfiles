@@ -60,12 +60,6 @@ noremap <Right> <NOP>
 " Move by visual lines instead of physical lines
 nnoremap j gj
 nnoremap k gk
-
-" Remap split movements to just CTR + <movement>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 " }}}1
 "  Plugins: {{{1
 
@@ -101,6 +95,18 @@ set smartcase  " ... except when using capital letters
 " Cancel a search with <Return>
 nnoremap <CR> :noh<CR><CR>
 " }}}1
+"  Splits: {{{1
+
+" Create splits below and to the right
+set splitbelow
+set splitright
+
+" Remap split movements to just CTR + <movement>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+"  }}}
 "  Syntax Highlighting: {{{1
 
 " Enable syntax highlighting
