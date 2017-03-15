@@ -83,6 +83,9 @@ set laststatus=2  " Status bar is always on
 let g:NERDSpaceDelims=1  " Add a space after each comment
 let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
 let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
+
+" File browsing
+map <leader>t :NERDTreeToggle<CR>
 " }}}1
 "  Search Settings: {{{1
 
