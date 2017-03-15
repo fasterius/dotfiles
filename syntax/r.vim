@@ -157,6 +157,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rNegNum      Identifier
     HiLink rNumber      Identifier
     HiLink rRepeat      Type
+    HiLink rStatement   PreProc
     HiLink rString      String
     HiLink rTodo        Todo
     HiLink rTry         Type
