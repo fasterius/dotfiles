@@ -152,7 +152,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rIndex       Underlined
     HiLink rInf         Type
     HiLink rInteger     Identifier
-    HiLink rMessage     PreProc
+    HiLink rMessage     Underlined
     HiLink rNegFloat    Identifier
     HiLink rNegNum      Identifier
     HiLink rNumber      Identifier
