@@ -59,7 +59,7 @@ syn match rFunctionDef "[a-zA-Z_.]*\ =\ function("me=e-12
 " Default functions
 syn match rCombine "c("me=e-1
 syn keyword rInclude library require detach
-syn match rImportFrom "[a-zA-Z_.]*\:\:"me=e-2
+syn match rImportFrom "[a-zA-Z0-9_.]*\:\:"me=e-2
 syn keyword rMessage suppressMessage suppressWarnings suppressPackageStartupMessages
 syn keyword rTry try tryCatch
 " }}}
