@@ -59,6 +59,7 @@ syn match rFunctionDef "[a-zA-Z_.]*\ =\ function("me=e-12
 " Default functions
 syn match rCombine "c("me=e-1
 syn keyword rInclude library require detach
+syn match rImportFrom "[a-zA-Z_.]*\:\:"me=e-2
 syn keyword rMessage suppressMessage suppressWarnings suppressPackageStartupMessages
 syn keyword rTry try tryCatch
 " }}}
@@ -148,6 +149,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rFloat       Underlined
     HiLink rFunction    Identifier
     HiLink rFunctionDef PreProc
+    HiLink rImportFrom  Underlined
     HiLink rInclude     Underlined
     HiLink rIndex       Underlined
     HiLink rInf         Type
