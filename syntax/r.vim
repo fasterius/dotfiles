@@ -54,7 +54,7 @@ syn match rWarning "^Warning.*"
 syn match rFunction "\($.*\)\@<!\([a-zA-Z0-9_.]\+\|[a-zA-Z0-9]\+\)("me=e-1
 
 " Function definitions
-syn match rFunctionDef "[a-zA-Z]*\ =\ function("me=e-12
+syn match rFunctionDef "[a-zA-Z_.]*\ =\ function("me=e-12
 
 " Default functions
 syn match rCombine "c("me=e-1
