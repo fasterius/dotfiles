@@ -52,6 +52,7 @@ syn match rWarning "^Warning.*"
 "  Functions: {{{1
 " Matches any function that does not start with a '$'
 syn match rFunction "\($.*\)\@<!\([a-zA-Z0-9_.]\+\|[a-zA-Z0-9]\+\)("me=e-1
+syn match rFunction "as.[a-zA-Z]("me=e-1
 
 " Function definitions
 syn match rFunctionDef "[a-zA-Z_.]*\ =\ function("me=e-12
