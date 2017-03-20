@@ -19,9 +19,6 @@ set undofile
 " }}}1
 "  Filetypes: {{{1
 
-" Enable filetype detection and filetype-specific indentation/plugins
-filetype plugin indent on
-
 " File types
 autocmd BufNewFile,BufRead Snakefile,*.snakefile set filetype=snakemake
 autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout.save,*.Rout.fail set filetype=r
@@ -86,6 +83,9 @@ let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
 
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
+
+" Enable filetype detection and filetype-specific indentation/plugins
+filetype plugin indent on
 " }}}1
 "  Search Settings: {{{1
 
