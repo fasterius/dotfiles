@@ -68,6 +68,7 @@ syn keyword rTry try tryCatch
 syn match rDollar "\$"
 syn match rBuiltIn "%in%"
 syn match rBuiltIn "|\|&"
+syn match rDplyr "%>%"
 
 " Index of vectors
 syn match rIndex /^\s*\[\d\+\]/
@@ -146,6 +147,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rDate        Underlined
     HiLink rDelimiter   Normal
     HiLink rDollar      Comment
+    HiLink rDplyr       Type
     HiLink rError       Error
     HiLink rFloat       Underlined
     HiLink rFunction    Identifier
