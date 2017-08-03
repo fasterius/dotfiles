@@ -56,6 +56,7 @@ syn match rFunction "as.[a-zA-Z]("me=e-1
 
 " Function definitions
 syn match rFunctionDef "[a-zA-Z_.]*\ =\ function("me=e-12
+syn match rFunctionDef "[a-zA-Z_.]*\ <-\ function("me=e-12
 
 " Default functions
 syn match rCombine "c("me=e-1
