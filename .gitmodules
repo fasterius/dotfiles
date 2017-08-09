@@ -34,3 +34,11 @@
 	path = bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
     ignore = dirty
+[submodule "bundle/vim-pandoc"]
+	path = bundle/vim-pandoc
+	url = https://github.com/vim-pandoc/vim-pandoc
+    ignore = dirty
+[submodule "bundle/vim-pandoc-syntax"]
+	path = bundle/vim-pandoc-syntax
+	url = https://github.com/vim-pandoc/vim-pandoc-syntax
+    ignore = dirty
