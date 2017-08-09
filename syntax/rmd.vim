@@ -120,5 +120,7 @@ endfor
 hi def link rmdInlineDelim Special
 hi def link rmdSlidifySpecial Special
 
+setlocal textwidth=79
+
 let b:current_syntax = "rmd"
 
