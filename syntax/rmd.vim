@@ -11,15 +11,10 @@
 "   many other advanced features like folding of markdown sections, it is
 "   recommended to install the vim-pandoc filetype plugin as well as the
 "   vim-pandoc-syntax filetype plugin from https://github.com/vim-pandoc.
-"
-"   [Slightly modified by Erik Fasterius, <erikfas at kth dot se>]
 
 if exists("b:current_syntax")
   finish
 endif
-
-" set local linewidth
-setlocal textwidth=0
 
 " load all of pandoc info, e.g. from
 " https://github.com/vim-pandoc/vim-pandoc-syntax
