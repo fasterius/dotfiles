@@ -111,12 +111,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 "  }}}
-"  Syntax Checking: {{{1
-
-" Syntax checking for R
-let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_r_checkers = ['lintr']
-" }}}
 "  Syntax Highlighting: {{{1
 
 " Enable syntax highlighting
