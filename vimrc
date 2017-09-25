@@ -20,7 +20,7 @@ set undofile
 "  Filetypes: {{{1
 
 " File types
-autocmd BufNewFile,BufRead Snakefile,*.snakefile set filetype=snakemake
+autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake set filetype=snakemake
 autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout.save,*.Rout.fail set filetype=r
 autocmd BufNewFile,BufRead *.Rmd,*.rmd set filetype=rmd
 autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -81,6 +81,7 @@ set laststatus=2  " Status bar is always on
 let g:NERDSpaceDelims=1  " Add a space after each comment
 let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
 let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
+let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
