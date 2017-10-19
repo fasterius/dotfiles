@@ -41,9 +41,12 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/w0rp/ale
+    ignore = dirty
 [submodule "bundle/lintr"]
 	path = bundle/lintr
 	url = https://github.com/jimhester/lintr
+    ignore = dirty
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
+    ignore = dirty
