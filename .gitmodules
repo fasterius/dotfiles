@@ -44,3 +44,6 @@
 [submodule "bundle/lintr"]
 	path = bundle/lintr
 	url = https://github.com/jimhester/lintr
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
