@@ -27,6 +27,7 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.py set filetype=python
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead *bash* set filetype=sh
+autocmd BufNewFile,BufRead nextflow.config set filetype=java
 " }}}
 "   Miscellaneous Settings: {{{1
 
