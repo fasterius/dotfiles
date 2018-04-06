@@ -50,3 +50,11 @@
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
     ignore = dirty
+[submodule "bundle/FastFold"]
+	path = bundle/FastFold
+	url = https://github.com/Konfekt/FastFold
+    ignore = dirty
+[submodule "bundle/SimpylFold"]
+	path = bundle/SimpylFold
+	url = https://github.com/tmhedberg/SimpylFold
+    ignore = dirty
