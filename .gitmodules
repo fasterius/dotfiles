@@ -58,3 +58,7 @@
 	path = bundle/SimpylFold
 	url = https://github.com/tmhedberg/SimpylFold
     ignore = dirty
+[submodule "bundle/Nvim-R"]
+	path = bundle/Nvim-R
+	url = https://github.com/jalvesaq/Nvim-R
+    ignore = dirty
