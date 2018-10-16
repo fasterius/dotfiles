@@ -31,8 +31,9 @@ autocmd BufNewFile,BufRead nextflow.config set filetype=java
 " }}}
 "   Miscellaneous Settings: {{{1
 
-" Set <leader> to comma
-let mapleader=','
+" Set leaders
+let maplocalleader=','
+let mapleader='\<SPACE>'
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
