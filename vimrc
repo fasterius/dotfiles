@@ -33,7 +33,7 @@ autocmd BufNewFile,BufRead nextflow.config set filetype=java
 
 " Set leaders
 let maplocalleader=','
-let mapleader='\<SPACE>'
+let mapleader="\<SPACE>"
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
@@ -51,6 +51,7 @@ set cursorline
 set textwidth=79
 " }}}1
 "  Movements: {{{1
+
 " Remove arrow key mappings for normal mode
 noremap <Up> <NOP>
 noremap <Down> <NOP>
