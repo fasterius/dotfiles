@@ -41,5 +41,5 @@ cd ~/.vim/bundle
 git submodule add <http://github.com/example-user/example-plugin.git>
 ```
 
-The plugin can now be updates in the same manner as the others already included in this repository. In order to not dirty the repository tree when generating helptags, you should also add the line `ignore = dirty` for your newly installed plugin in the `.gitmodules` file (you can read more about this at http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules).
+The plugin can now be updated in the same manner as the others already included in this repository. In order to not dirty the repository tree when generating helptags, you should also add the line `ignore = dirty` for your newly installed plugin in the `.gitmodules` file (you can read more about this at http://www.nils-haldenwang.de/frameworks-and-tools/git/how-to-ignore-changes-in-git-submodules).
 
