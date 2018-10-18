@@ -79,17 +79,23 @@ set showmatch  " Show matching parenthesis on cursor hovering
 let g:airline_theme='solarized'  " Solarized theme
 set laststatus=2  " Status bar is always on
 
-" Commenting
-let g:NERDSpaceDelims=1  " Add a space after each comment
-let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
-let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
-let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
-
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
+
+" NERDcommenter
+let g:NERDSpaceDelims=1  " Add a space after each comment
+let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
+let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
+let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
+
+" Nvim-R
+let R_min_editor_width = 80  " Set the minimum source window width
+let R_rconsole_width = 0  " Always add the R console through a horizontal split
+let R_rconsole_height = 25  " Specify the R console height
+let R_assign = 0 " Disable the default underscore shortcut for '<-'
 " }}}1
 "  Search Settings: {{{1
 
