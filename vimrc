@@ -92,11 +92,14 @@ let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines
 let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
 let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
-" Nvim-R
+" NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
 let R_rconsole_width = 0  " Always add the R console through a horizontal split
 let R_rconsole_height = 25  " Specify the R console height
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
+
+" Add head() command for NVim-R
+nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 " }}}1
 "  Search Settings: {{{1
 
