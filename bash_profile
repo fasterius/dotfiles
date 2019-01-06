@@ -8,10 +8,18 @@ export LANG=en_GB.UTF-8
 # Default editor
 export EDITOR=vim
 
+# Colours for `gls`
+LS_COLORS='ow=01;90' # Other-writable directory (bold black)
+LS_COLORS=$LS_COLORS':di=00;34' # Directories (blue)
+LS_COLORS=$LS_COLORS':ln=00;36' # Symbolic links (teal)
+LS_COLORS=$LS_COLORS':ex=00;33' # Executable (orange) 
+LS_COLORS=$LS_COLORS':mi=01;31' # Missing symlink (bold red)
+export LS_COLORS
+
 # Aliases --------------------------------------------------------------------
 
-# Long-format, coloured `ls`
-alias ll='ls -lG'
+# Long-format, coloured `ls` that ignore home directory folders
+alias ll='gls -l --color=auto'
 
 # Move upwards multiple directories
 alias ..='cd ..'
