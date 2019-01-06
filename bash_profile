@@ -23,6 +23,18 @@ alias ......='cd ../../../../..'
 # Auto-clour `grep` output
 alias grep='grep --color=auto'
 
+# Git aliases
+alias gst='git status -s'
+alias ga='git add'
+alias gd='git diff'
+alias gcm='git commit'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gl='git log'
+alias glo='git log --oneline'
+alias gun='git reset HEAD --'
+alias gp='git push'
+
 # Prompt ---------------------------------------------------------------------
 
 # Function to get branch if inside a git repository
