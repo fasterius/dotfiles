@@ -1,3 +1,6 @@
+# Path
+export PATH="$PATH:/usr/local/bin/"
+
 # Prompt
 export PS1='[\[\e[1;36m\]\h: \[\e[0;34m\]\w\[\e[m\]]$ '
 
