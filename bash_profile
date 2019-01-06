@@ -8,7 +8,7 @@ export LANG=en_GB.UTF-8
 # Default editor
 export EDITOR=vim
 
-# Colours for `gls`
+# Colours for GNU-ls
 LS_COLORS='ow=01;90' # Other-writable directory (bold black)
 LS_COLORS=$LS_COLORS':di=00;34' # Directories (blue)
 LS_COLORS=$LS_COLORS':ln=00;36' # Symbolic links (teal)
@@ -18,8 +18,11 @@ export LS_COLORS
 
 # Aliases --------------------------------------------------------------------
 
-# Long-format, coloured `ls` that ignore home directory folders
-alias ll='gls -l --color=auto'
+# Long-format, coloured GNU-ls that ignore OSX specific home directory folders
+LL='gls -l --literal --color=auto'
+LL=$LL' -I Applications -I Desktop -I Documents -I Downloads -I Library'
+LL=$LL' -I Movies -I Music -I Pictures -I Public'
+alias ll=$LL
 
 # Move upwards multiple directories
 alias ..='cd ..'
