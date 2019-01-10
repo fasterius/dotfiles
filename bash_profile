@@ -20,7 +20,6 @@ export LS_COLORS
 
 # Long-format, coloured GNU-ls that ignore OSX specific home directory folders
 LL='gls -l --literal --color=auto'
-LL=$LL' --hide=Applications'
 LL=$LL' --hide=Desktop'
 LL=$LL' --hide=Documents'
 LL=$LL' --hide=Downloads'
