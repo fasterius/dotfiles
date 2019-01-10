@@ -18,6 +18,11 @@ export LS_COLORS
 
 # Aliases --------------------------------------------------------------------
 
+# Python versions
+alias python2='/usr/bin/python'
+alias python='python3'
+alias pip='pip3'
+
 # Long-format, coloured GNU-ls that ignore OSX specific home directory folders
 LL='gls -l --literal --color=auto'
 LL=$LL' --hide=Desktop'
