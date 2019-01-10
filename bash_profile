@@ -20,8 +20,8 @@ export LS_COLORS
 
 # Long-format, coloured GNU-ls that ignore OSX specific home directory folders
 LL='gls -l --literal --color=auto'
-LL=$LL' -I Applications -I Desktop -I Documents -I Downloads -I Library'
-LL=$LL' -I Movies -I Music -I Pictures -I Public'
+LL=$LL' -I Applications -I Desktop -I Documents -I Downloads -I Dropbox'
+LL=$LL' -I Library -I Movies -I Music -I Pictures -I Public'
 alias ll=$LL
 
 # Move upwards multiple directories
