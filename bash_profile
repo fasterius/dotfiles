@@ -1,6 +1,6 @@
 # Path
-export PATH="$PATH:/usr/local/bin/"
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
+export PATH="$PATH:$HOME/opt/miniconda3/bin"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
