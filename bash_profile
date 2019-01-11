@@ -1,5 +1,6 @@
 # Path
 export PATH="$PATH:/usr/local/bin/"
+export PATH="$PATH:/usr/local/opt/libxml2/bin"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
