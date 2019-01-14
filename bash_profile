@@ -50,6 +50,7 @@ alias grep='grep --color=auto'
 
 # Git aliases
 alias gst='git status -s'
+alias gb='git branch'
 alias ga='git add'
 alias gd='git diff'
 alias gcm='git commit'
