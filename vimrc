@@ -21,7 +21,8 @@ set undofile
 
 " File types
 autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake set filetype=snakemake
-autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout.save,*.Rout.fail set filetype=r
+autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
+    \ set filetype=r
 autocmd BufNewFile,BufRead *.Rmd,*.rmd set filetype=rmd
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.py set filetype=python
@@ -47,8 +48,8 @@ set number
 " Add background highlight to current line
 set cursorline
 
-" Set linewidth to 79
-set textwidth=79
+" Do not insert line breaks automatically
+set textwidth=0
 " }}}1
 "  Movements: {{{1
 
