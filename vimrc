@@ -40,10 +40,11 @@ let mapleader="\<SPACE>"
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
-" Knit RMarkdown/Sweave files
-nmap <LocalLeader>k :w<CR>
+" Knit current file
+nmap <silent> <LocalLeader>k 
+    \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :!Rscript -e 'knitr::knit2pdf("%:p")'<CR>
+    \ :!Rscript -e 'knitr::knit2pdf("%:p")'<CR><CR>
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
