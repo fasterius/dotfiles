@@ -31,11 +31,24 @@ autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd BufNewFile,BufRead nextflow.config set filetype=java
 " }}}
-"   Miscellaneous Settings: {{{1
+"  Key Mappings: {{{1
 
 " Set leaders
 let maplocalleader=','
 let mapleader="\<SPACE>"
+
+" File browsing
+map <leader>t :NERDTreeToggle<CR>
+
+" Knit RMarkdown/Sweave files
+nmap <LocalLeader>k :w<CR>
+    \ :cd %:p:h<CR>
+    \ :!Rscript -e 'knitr::knit2pdf("%:p")'<CR>
+
+" Add head() command for NVim-R
+nmap <silent> <LocalLeader>h :call RAction("head")<CR>
+" }}}
+"   Miscellaneous Settings: {{{1
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
@@ -82,9 +95,6 @@ set showmatch  " Show matching parenthesis on cursor hovering
 let g:airline_theme='solarized'  " Solarized theme
 set laststatus=2  " Status bar is always on
 
-" File browsing
-map <leader>t :NERDTreeToggle<CR>
-
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
 
@@ -99,9 +109,6 @@ let R_min_editor_width = 80  " Set the minimum source window width
 let R_rconsole_width = 0  " Always add the R console through a horizontal split
 let R_rconsole_height = 25  " Specify the R console height
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
-
-" Add head() command for NVim-R
-nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 " }}}1
 "  Search Settings: {{{1
 
