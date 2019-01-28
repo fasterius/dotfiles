@@ -11,7 +11,9 @@ export LANG=en_GB.UTF-8
 # Default editor
 export EDITOR=vim
 
-# Colours for GNU-ls
+# List command ----------------------------------------------------------------
+
+# List colours
 LS_COLORS='ow=01;90' # Other-writable directory (bold black)
 LS_COLORS=$LS_COLORS':di=00;34' # Directories (blue)
 LS_COLORS=$LS_COLORS':ln=00;36' # Symbolic links (teal)
@@ -19,18 +21,10 @@ LS_COLORS=$LS_COLORS':ex=00;33' # Executable (orange)
 LS_COLORS=$LS_COLORS':mi=01;31' # Missing symlink (bold red)
 export LS_COLORS
 
-# Aliases --------------------------------------------------------------------
-
-# Python versions
-alias python2='/usr/bin/python'
-alias python='python3'
-alias py='python3'
-alias pip='pip3'
-
-# Use either ls or GNU-ls, as appropriate
+# Use either `ls`  or `gls` (GNU-ls), as appropriate
 if hash gls 2>/dev/null; then
 
-    # Long-format, coloured GNU-ls that ignore OSX specific home directories
+    # Long-format, coloured `gls` that ignore OSX specific home directories
     LL='gls -l --literal --color=auto'
     LL=$LL' --hide=Desktop'
     LL=$LL' --hide=Documents'
@@ -42,9 +36,23 @@ if hash gls 2>/dev/null; then
     LL=$LL' --hide=Pictures'
     LL=$LL' --hide=Public'
 else
+
+    # Long-format, coloured `ls`
     LL='ls -l --color=auto'
 fi
 alias ll=$LL
+
+# Aliases --------------------------------------------------------------------
+
+# Conda aliases
+alias coac='conda activate'
+alias code='conda deactivate'
+
+# Python versions
+alias python2='/usr/bin/python'
+alias python='python3'
+alias py='python3'
+alias pip='pip3'
 
 # Move upwards multiple directories
 alias ..='cd ..'
@@ -69,10 +77,6 @@ alias gl='git log'
 alias glo='git log --oneline'
 alias gun='git reset HEAD --'
 alias gp='git push'
-
-# Conda aliases
-alias coac='conda activate'
-alias code='conda deactivate'
 
 # iTerm2 profile-switching for Solarized light/dark colour schemes
 alias light='echo -e "\033]50;SetProfile=light\a"'
