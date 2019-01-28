@@ -72,6 +72,9 @@ alias code='conda deactivate'
 alias light='echo -e "\033]50;SetProfile=light\a"'
 alias dark='echo -e "\033]50;SetProfile=dark\a"'
 
+# Alias to log into rackham @ uppmax
+alias rackham='ssh erikfas@rackham.uppmax.uu.se'
+
 # Prompt ---------------------------------------------------------------------
 
 # Function to get conda env if in an activated environment
