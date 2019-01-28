@@ -42,7 +42,7 @@ if hash gls 2>/dev/null; then
     LL=$LL' --hide=Pictures'
     LL=$LL' --hide=Public'
 else
-    LL='ls -l --colour=auto'
+    LL='ls -l --color=auto'
 fi
 alias ll=$LL
 
