@@ -1,8 +1,8 @@
+# Conda
+source $HOME/opt/miniconda3/etc/profile.d/conda.sh
+
 # Path
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
-
-# Conda
-. /Users/erikfas/opt/miniconda3/etc/profile.d/conda.sh
 
 # Locale
 export LC_ALL=en_GB.UTF-8
