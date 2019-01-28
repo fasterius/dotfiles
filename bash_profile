@@ -70,13 +70,20 @@ alias dark='echo -e "\033]50;SetProfile=dark\a"'
 
 # Prompt ---------------------------------------------------------------------
 
+# Function to get conda env if in an activated environment
+conda_env() {
+    basename $(echo $CONDA_DEFAULT_ENV) 2> /dev/null \
+        | sed -e 's/\(.*\)/(\1) /'
+}
+
 # Function to get branch if inside a git repository
 git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 # Build prompt
-export PS1='[\[\e[1;36m\]\h: ' # Hostname (bold grey)
+export PS1='\[\e[0;95m\]$(conda_env)' # Conda environment (purple)
+export PS1=$PS1'\[\e[m\][\[\e[1;36m\]\h: ' # Hostname (bold grey)
 export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]' # Current directory (blue)
 export PS1=$PS1'\[\e[0;36m\]$(git_branch)' # Git branch (teal)
-export PS1=$PS1'\[\e[m\]$ ' # End
+export PS1=$PS1'\[\e[m\]$ ' # End (grey)
