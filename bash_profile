@@ -27,17 +27,23 @@ alias python='python3'
 alias py='python3'
 alias pip='pip3'
 
-# Long-format, coloured GNU-ls that ignore OSX specific home directory folders
-LL='gls -l --literal --color=auto'
-LL=$LL' --hide=Desktop'
-LL=$LL' --hide=Documents'
-LL=$LL' --hide=Downloads'
-LL=$LL' --hide=Dropbox'
-LL=$LL' --hide=Library'
-LL=$LL' --hide=Movies'
-LL=$LL' --hide=Music'
-LL=$LL' --hide=Pictures'
-LL=$LL' --hide=Public'
+# Use either ls or GNU-ls, as appropriate
+if hash gls 2>/dev/null; then
+
+    # Long-format, coloured GNU-ls that ignore OSX specific home directories
+    LL='gls -l --literal --color=auto'
+    LL=$LL' --hide=Desktop'
+    LL=$LL' --hide=Documents'
+    LL=$LL' --hide=Downloads'
+    LL=$LL' --hide=Dropbox'
+    LL=$LL' --hide=Library'
+    LL=$LL' --hide=Movies'
+    LL=$LL' --hide=Music'
+    LL=$LL' --hide=Pictures'
+    LL=$LL' --hide=Public'
+else
+    LL='ls -l --colour=auto'
+fi
 alias ll=$LL
 
 # Move upwards multiple directories
