@@ -20,7 +20,7 @@ set undofile
 "  Filetypes: {{{1
 
 " File types
-autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake set filetype=snakemake
+autocmd BufNewFile,BufRead Snakefile,*.snakefile,*.smk set filetype=snakemake
 autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
     \ set filetype=r
 autocmd BufNewFile,BufRead *.Rmd,*.rmd set filetype=rmd
