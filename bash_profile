@@ -64,6 +64,9 @@ alias ......='cd ../../../../..'
 # Auto-clour `grep` output
 alias grep='grep --color=auto'
 
+# Use GNU readlink
+alias readlink='greadlink'
+
 # Git aliases
 alias gst='git status -s'
 alias gb='git branch'
