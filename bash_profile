@@ -26,7 +26,7 @@ export LS_COLORS
 if hash gls 2>/dev/null; then
 
     # Long-format, coloured `gls` that ignore OSX specific home directories
-    LL='gls -l --literal --color=auto'
+    LL='gls -l -v --literal --color=auto'
     LL=$LL' --hide=Desktop'
     LL=$LL' --hide=Documents'
     LL=$LL' --hide=Downloads'
@@ -39,7 +39,7 @@ if hash gls 2>/dev/null; then
 else
 
     # Long-format, coloured `ls`
-    LL='ls -l --color=auto'
+    LL='ls -l -v --color=auto'
 fi
 alias ll=$LL
 
