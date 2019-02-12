@@ -3,6 +3,7 @@ source $HOME/opt/miniconda3/etc/profile.d/conda.sh
 
 # Path
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
+export PATH="$PATH:/Users/erik.fasterius/Library/Python/3.7/bin"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
@@ -25,7 +26,7 @@ export LS_COLORS
 if hash gls 2>/dev/null; then
 
     # Long-format, coloured `gls` that ignore OSX specific home directories
-    LL='gls -l --literal --color=auto'
+    LL='gls -l -v --literal --color=auto'
     LL=$LL' --hide=Desktop'
     LL=$LL' --hide=Documents'
     LL=$LL' --hide=Downloads'
@@ -63,6 +64,9 @@ alias ......='cd ../../../../..'
 
 # Auto-clour `grep` output
 alias grep='grep --color=auto'
+
+# Use GNU readlink
+alias readlink='greadlink'
 
 # Git aliases
 alias gst='git status -s'
