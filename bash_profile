@@ -39,7 +39,7 @@ if hash gls 2>/dev/null; then
 else
 
     # Long-format, coloured `ls`
-    LL='ls -l --color=auto'
+    LL='ls -l -v --color=auto'
 fi
 alias ll=$LL
 
