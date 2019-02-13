@@ -81,6 +81,7 @@ alias gl='git log'
 alias glo='git log --oneline'
 alias gun='git reset HEAD --'
 alias gp='git push'
+alias gu='git pull'
 
 # iTerm2 profile-switching for Solarized light/dark colour schemes
 alias light='echo -e "\033]50;SetProfile=light\a"'
