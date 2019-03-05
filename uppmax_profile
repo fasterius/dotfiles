@@ -1,0 +1,2 @@
+# Load latest TMUX module
+module load tmux

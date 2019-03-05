@@ -1,3 +1,8 @@
+# Source custom uppmax_profile if in a SSH session
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    source ~/.uppmax_profile
+fi
+
 # Conda
 source $HOME/opt/miniconda3/etc/profile.d/conda.sh
 
