@@ -58,7 +58,6 @@ alias code='conda deactivate'
 alias python2='/usr/bin/python'
 alias python='python3'
 alias py='python3'
-alias pip='pip3'
 
 # Move upwards multiple directories
 alias ..='cd ..'
