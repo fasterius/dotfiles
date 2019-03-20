@@ -1,2 +1,3 @@
 # Load latest TMUX module
-module load tmux
+module load tmux/2.5
+module load vim/8.0-16
