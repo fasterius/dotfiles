@@ -7,8 +7,8 @@ fi
 source $HOME/opt/miniconda3/etc/profile.d/conda.sh
 
 # Path
-export PATH="$PATH:/usr/local/opt/libxml2/bin"
-export PATH="$PATH:/Users/erik.fasterius/Library/Python/3.7/bin"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export PATH="/Users/erik.fasterius/Library/Python/3.7/bin:$PATH"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
