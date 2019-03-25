@@ -94,6 +94,10 @@ alias dark='echo -e "\033]50;SetProfile=dark\a"'
 
 # Alias to log into rackham @ uppmax
 alias rackham='ssh erikfas@rackham.uppmax.uu.se'
+alias rackham1='ssh erikfas@rackham1.uppmax.uu.se'
+alias rackham2='ssh erikfas@rackham2.uppmax.uu.se'
+alias rackham3='ssh erikfas@rackham3.uppmax.uu.se'
+alias rackham4='ssh erikfas@rackham4.uppmax.uu.se'
 
 # Prompt ---------------------------------------------------------------------
 
