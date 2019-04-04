@@ -3,6 +3,9 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     source ~/.uppmax_profile
 fi
 
+# Files to ignore for tab-completion
+export FIGNORE=$FIGNORE:.un~
+
 # Conda
 source $HOME/opt/miniconda3/etc/profile.d/conda.sh
 
