@@ -1,30 +1,13 @@
 " Vim syntax file
 " Language:	Snakemake (extended from python.vim)
 " Maintainer:	Jay Hesselberth (jay.hesselberth@gmail.com)
-" Last Change:	2016 Jan 23
-"
-" Usage
-"
-" copy to $HOME/.vim/syntax directory and add:
-"
-" au BufNewFile,BufRead Snakefile set syntax=snakemake
-" au BufNewFile,BufRead *.snake set syntax=snakemake
-"
-" to your $HOME/.vimrc file
-"
-" force coloring in a vim session with:
-"
-" :set syntax=snakemake
-"
+" Edited:       Erik Fasterius (erik.fasterius@outlook.com)
+" Last Change:	2019 May 3rd
 
 " load settings from system python.vim (7.4)
 source $VIMRUNTIME/syntax/python.vim
 
-"
-" Snakemake rules, as of version 3.3
-"
-" XXX N.B. several of the new defs are missing from this table i.e.
-" subworkflow, touch etc
+" Snakemake rules
 "
 " rule       = "rule" (identifier | "") ":" ruleparams
 " include    = "include:" stringliteral
@@ -34,6 +17,7 @@ source $VIMRUNTIME/syntax/python.vim
 " input      = "input" ":" parameter_list
 " output     = "output" ":" parameter_list
 " params     = "params" ":" parameter_list
+" group	     = "group" ":" parameter_list
 " message    = "message" ":" stringliteral
 " threads    = "threads" ":" integer
 " resources  = "resources" ":" parameter_list
@@ -44,9 +28,10 @@ source $VIMRUNTIME/syntax/python.vim
 syn keyword pythonStatement	include workdir onsuccess onerror
 syn keyword pythonStatement	ruleorder localrules configfile
 syn keyword pythonStatement	touch protected temp wrapper
-syn keyword pythonStatement	input output params message threads resources
-syn keyword pythonStatement	version run shell benchmark snakefile log script
-syn keyword pythonStatement	rule subworkflow nextgroup=pythonFunction skipwhite
+syn keyword pythonStatement	input output params group message threads
+syn keyword pythonStatement	resources version run shell benchmark snakefile
+syn keyword pythonStatement	log script rule subworkflow skipwhite
+syn keyword pythonStatement	nextgroup=pythonFunction
 
 " similar to special def and class treatment from python.vim, except
 " parenthetical part of def and class
@@ -56,5 +41,3 @@ syn match   pythonFunction
 syn sync match pythonSync grouphere NONE "^\s*\%(rule\|subworkflow\)\s\+\h\w*\s*"
 
 let b:current_syntax = "snakemake"
-
-" vim:set sw=2 sts=2 ts=8 noet:
