@@ -38,6 +38,17 @@ autocmd BufNewFile,BufRead nextflow.config set filetype=java
 let maplocalleader=','
 let mapleader="\<SPACE>"
 
+" Autoclosing
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap {<cr> {<cr>}<esc>O
+inoremap (<cr> (<cr>)<esc>O
+inoremap [<cr> [<cr>]<esc>O
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap ``` ```<cr>```<esc>O
+
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
