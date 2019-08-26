@@ -66,7 +66,3 @@
 	path = bundle/vimtex
 	url = https://github.com/lervag/vimtex
     ignore = dirty
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = https://github.com/ycm-core/YouCompleteMe
-    ignore = dirty
