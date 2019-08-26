@@ -13,5 +13,8 @@ symbolic links in a new `~/home` folder for easy access without cluttering up
 the default `~` home folder. Simply execute it if you want to use this
 solution.
 
+The `gitignore_global` file contains git ignore statements that will be used on
+a global (system-wide) scale.
+
 [1]: https://img.shields.io/badge/License-MIT-blue.svg
 [2]: https://opensource.org/licenses/MIT

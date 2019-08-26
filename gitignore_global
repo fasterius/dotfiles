@@ -1,0 +1,9 @@
+# R files
+**/.DS_Store
+**/.Rhistory
+
+# Vim undo history
+**/*.un*
+
+# Open Word documents
+**~$*.docx
