@@ -1,6 +1,6 @@
 # Source custom uppmax_profile if in a SSH session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    source ~/.uppmax_profile
+    source ~/.bash/profiles/uppmax_profile
 fi
 
 # Files to ignore for tab-completion
