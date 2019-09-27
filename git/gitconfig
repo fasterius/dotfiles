@@ -2,4 +2,4 @@
 	name = Erik Fasterius
 	email = erik.fasterius@outlook.com
 [core]
-	excludesfile = /Users/erik.fasterius/.bash/gitignore_global
+	excludesfile = /Users/erik.fasterius/.gitignore_global
