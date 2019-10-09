@@ -31,6 +31,7 @@ autocmd BufNewFile,BufRead *.py set filetype=python
 autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd BufNewFile,BufRead nextflow.config set filetype=java
+autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 " }}}
 "  Key Mappings: {{{1
 
