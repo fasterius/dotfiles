@@ -2,8 +2,9 @@
 **/.DS_Store
 **/.Rhistory
 
-# Vim undo history
+# Vim undo history and swap-files
 **/*.un*
+**/*.swp*
 
 # Open Word documents
 **~$*.docx
