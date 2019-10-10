@@ -1,5 +1,3 @@
 .viminfo
 .netrwhist
-tmp/
-*.un*
-*.swp*
+plugged/

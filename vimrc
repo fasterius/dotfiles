@@ -88,6 +88,25 @@ nnoremap k gk
 " }}}1
 "  Plugins: {{{1
 
+" Use vim-plug for plugin management
+call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
+Plug 'jalvesaq/Nvim-R'
+Plug 'Konfekt/FastFold'
+Plug 'luochen1990/rainbow'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+call plug#end()
+
 " Colour scheme
 set background=light  " Light background
 set t_Co=16  " 16 bit colours
