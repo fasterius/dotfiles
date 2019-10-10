@@ -88,9 +88,6 @@ nnoremap k gk
 " }}}1
 "  Plugins: {{{1
 
-" Pathogen plugin manager
-execute pathogen#infect()
-
 " Colour scheme
 set background=light  " Light background
 set t_Co=16  " 16 bit colours
