@@ -1,4 +1,4 @@
 # Load more recent module versions
 module load git/2.16.1
 module load tmux/2.5
-module load vim/8.0-16
+module load vim/8.1-1053
