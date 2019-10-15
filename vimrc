@@ -50,6 +50,9 @@ nmap <silent> <LocalLeader>k
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
+
+" Replace all occurences of word underneath the cursor
+map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " }}}
 "   Miscellaneous Settings: {{{1
 
