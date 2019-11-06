@@ -12,14 +12,13 @@ Clone the repository:
 git clone --recursive git://github.com/fasterius/dotvim.git ~/.vim
 ```
 
-Create a symbolic link to the `.vimrc` file in your home directory:
+You then need to add a symbolic link to the `vimrc` file in your home
+directory, as well as install the plugins using `:PlugInstall`. These
+steps can be done automatically by running the initialising script:
 
-```bash
-ln -s ~/.vim/vimrc ~/.vimrc
+```{bash}
+bash ~/.vim/initialise.sh
 ```
-
-The last step is to install the plugins using [vim-plug][vim-plug], which can
-be done by opening a file in Vim and typing `:PlugInstall`.
 
 ## Adding another plugin
 
