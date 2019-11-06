@@ -9,7 +9,7 @@ and Nextflow are also included in the `syntax` directory.
 Clone the repository:
 
 ```bash
-git clone --recursive git://github.com/fasterius/dotvim.git ~/.vim
+git clone git://github.com/fasterius/dotvim.git ~/.vim
 ```
 
 You then need to add a symbolic link to the `vimrc` file in your home
