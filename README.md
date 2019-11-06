@@ -16,7 +16,7 @@ You then need to add a symbolic link to the `vimrc` file in your home
 directory, as well as install the plugins using `:PlugInstall`. These
 steps can be done automatically by running the initialising script:
 
-```{bash}
+```bash
 bash ~/.vim/initialise.sh
 ```
 
