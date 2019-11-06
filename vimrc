@@ -56,6 +56,13 @@ nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 " Replace all occurences of word underneath the cursor
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+" Add quotes around a word
+nnoremap <Leader>q" ciw""<Esc>P
+nnoremap <Leader>q' ciw''<Esc>P
+
+" Remove quotes around a word
+nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
+
 " Open VIMRC file for editing
 :nmap <Leader>v :sp <CR> :e $MYVIMRC <CR>
 
