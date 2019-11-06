@@ -56,6 +56,12 @@ nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 " Replace all occurences of word underneath the cursor
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+" Open VIMRC file for editing
+:nmap <Leader>v :sp <CR> :e $MYVIMRC <CR>
+
+" Re-source VIMRC
+:nmap <Leader>s :source $MYVIMRC <CR>
+
 " }}}
 "   Functions: {{{1
 
