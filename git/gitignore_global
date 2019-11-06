@@ -8,3 +8,6 @@
 
 # Open Word documents
 **~$*.docx
+
+# Jupyter notebook checkpoints
+**/.ipynb_checkpoints
