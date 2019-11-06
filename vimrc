@@ -16,6 +16,7 @@ set writebackup
 
 " Store undo data in a file
 set undofile
+
 " }}}1
 "  Filetypes: {{{1
 
@@ -32,6 +33,7 @@ autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd BufNewFile,BufRead nextflow.config set filetype=java
 autocmd BufNewFile,BufRead *.nf set filetype=nextflow
+
 " }}}
 "  Key Mappings: {{{1
 
@@ -42,18 +44,31 @@ let mapleader="\<SPACE>"
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
-" Knit current file
+" Knit current Sweave file
 nmap <silent> <LocalLeader>k 
     \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :!Rscript -e 'knitr::knit2pdf("%:p")'<CR><CR>
+    \ :call RenderRMarkdown()<CR><CR>
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 
 " Replace all occurences of word underneath the cursor
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 " }}}
+"   Functions: {{{1
+
+" Function for rendering Sweave/RMarkdown documents
+function! RenderRMarkdown()
+    if &ft == "rnoweb"
+        !Rscript -e 'knitr::knit2pdf("%:p")'
+    elseif &ft == "rmd"
+        !Rscript -e 'rmarkdown::render("%:p")'
+    endif
+endfunction
+
+" }}}1
 "   Miscellaneous Settings: {{{1
 
 " Make <BACKSPACE> work as normal
@@ -70,6 +85,7 @@ set cursorline
 
 " Do not insert line breaks automatically
 set textwidth=0
+
 " }}}1
 "  Movements: {{{1
 
@@ -82,6 +98,7 @@ noremap <Right> <NOP>
 " Move by visual lines instead of physical lines
 nnoremap j gj
 nnoremap k gk
+
 " }}}1
 "  Plugins: {{{1
 
@@ -133,6 +150,7 @@ let R_min_editor_width = 80  " Set the minimum source window width
 let R_rconsole_width = 0  " Always add the R console through a horizontal split
 let R_rconsole_height = 25  " Specify the R console height
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
+
 " }}}1
 "  Search Settings: {{{1
 
@@ -144,6 +162,7 @@ set smartcase  " ... except when using capital letters
 
 " Cancel a search with <Return>
 nnoremap <CR> :noh<CR><CR>
+
 " }}}1
 "  Splits: {{{1
 
@@ -156,6 +175,7 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
 "  }}}
 "  Syntax Highlighting: {{{1
 
@@ -168,6 +188,7 @@ let python_highlight_all = 1
 " Highlight the first character exceeding a linewidth of 79
 highlight ColorColumn ctermbg=red ctermfg=white
 call matchadd('ColorColumn', '\%80v.', 100)
+
 " }}}
 "  Tab Settings: {{{1
 
@@ -181,4 +202,5 @@ set pastetoggle=<F6>
 
 " Graphical menu for tab-completion of files 
 set wildmenu
+
 " }}}1
