@@ -3,6 +3,9 @@
 # Script that hides the default OS X home folders from Finder, but creates a
 # new subdirectory with symbolic links to them for access when needed.
 
+# Store current directory
+cwd=$(pwd)
+
 # Move to home directory
 cd ~
 
@@ -32,3 +35,6 @@ for DIR in $DIRS; do
     # Hide directory from Finder
     SetFile -a V $DIR
 done
+
+# Move to starting directory
+cd $cwd
