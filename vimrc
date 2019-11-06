@@ -65,6 +65,8 @@ function! RenderRMarkdown()
         !Rscript -e 'knitr::knit2pdf("%:p")'
     elseif &ft == "rmd"
         !Rscript -e 'rmarkdown::render("%:p")'
+    else
+        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
     endif
 endfunction
 
