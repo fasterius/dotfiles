@@ -21,7 +21,7 @@ set undofile
 "  Filetypes: {{{1
 
 " File types
-autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk 
+autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk
     \ set filetype=snakemake
 autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
     \ set filetype=r
@@ -45,7 +45,7 @@ let mapleader="\<SPACE>"
 map <leader>t :NERDTreeToggle<CR>
 
 " Knit current Sweave file
-nmap <silent> <LocalLeader>k 
+nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
     \ :call RenderRMarkdown()<CR><CR>
@@ -129,6 +129,7 @@ Plug 'jalvesaq/Nvim-R'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Konfekt/FastFold'
 Plug 'luochen1990/rainbow'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/SimpylFold'
@@ -144,7 +145,7 @@ call plug#end()
 " Colour scheme
 set background=light  " Light background
 set t_Co=16  " 16 bit colours
-colorscheme solarized  " Solarized colours 
+colorscheme solarized  " Solarized colours
 
 " Parentheses
 let g:rainbow_active=1  " Use rainbow parentheses
@@ -159,7 +160,7 @@ filetype plugin indent on
 
 " NERDcommenter
 let g:NERDSpaceDelims=1  " Add a space after each comment
-let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines  
+let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines
 let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
 let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
@@ -218,7 +219,7 @@ set shiftwidth=4  " Use 4 spaces when indenting with '>'
 " Paste toggling with F6 button
 set pastetoggle=<F6>
 
-" Graphical menu for tab-completion of files 
+" Graphical menu for tab-completion of files
 set wildmenu
 
 " }}}1
