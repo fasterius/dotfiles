@@ -101,6 +101,9 @@ set cursorline
 " Do not insert line breaks automatically
 set textwidth=0
 
+" Use the same indentation as currently on for new lines
+set autoindent
+
 " }}}1
 "  Movements: {{{1
 
