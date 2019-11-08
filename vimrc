@@ -64,10 +64,10 @@ nnoremap <Leader>q' ciw''<Esc>P
 nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 
 " Open VIMRC file for editing
-:nmap <Leader>v :sp <CR> :e $MYVIMRC <CR>
+:nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 
 " Re-source VIMRC
-:nmap <Leader>s :source $MYVIMRC <CR>
+:nmap <Leader>v :source $MYVIMRC <CR>
 
 " }}}
 "   Functions: {{{1
