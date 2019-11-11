@@ -6,8 +6,9 @@
 **/*.un*
 **/*.swp*
 
-# Open Word documents
-**~$*.docx
+# Open Word/Powerpoint documents
+**/*~$*.docx
+**/*~$*.pptx
 
 # Jupyter notebook checkpoints
 **/.ipynb_checkpoints
