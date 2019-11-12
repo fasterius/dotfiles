@@ -48,7 +48,7 @@ map <leader>t :NERDTreeToggle<CR>
 nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :call RenderRMarkdown()<CR><CR>
+    \ :call RenderRMarkdown()<CR>
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
