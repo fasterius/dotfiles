@@ -35,6 +35,28 @@ autocmd BufNewFile,BufRead nextflow.config set filetype=java
 autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 
 " }}}
+"   Functions: {{{1
+
+" Function for inserting a new chunk in RMarkdown/Sweave documents
+function! AddChunk()
+    call inputsave()
+    let chunk_name = input("Chunk name: ")
+    call inputrestore()
+    execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
+endfunction
+
+" Function for rendering RMarkdown/Sweave documents
+function! RenderRMarkdown()
+    if &ft == "rnoweb"
+        !Rscript -e 'knitr::knit2pdf("%:p")'
+    elseif &ft == "rmd"
+        !Rscript -e 'rmarkdown::render("%:p")'
+    else
+        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
+    endif
+endfunction
+
+" }}}1
 "  Key Mappings: {{{1
 
 " Set leaders
@@ -44,7 +66,11 @@ let mapleader="\<SPACE>"
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
-" Knit current Sweave file
+" Insert new chunk in RMarkdown/Sweave files
+nnoremap <silent> <LocalLeader>ic
+    \ :call AddChunk()<CR>
+
+" Knit current RMarkdown/Sweave file
 nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
@@ -70,20 +96,6 @@ nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 :nmap <Leader>v :source $MYVIMRC <CR>
 
 " }}}
-"   Functions: {{{1
-
-" Function for rendering Sweave/RMarkdown documents
-function! RenderRMarkdown()
-    if &ft == "rnoweb"
-        !Rscript -e 'knitr::knit2pdf("%:p")'
-    elseif &ft == "rmd"
-        !Rscript -e 'rmarkdown::render("%:p")'
-    else
-        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
-    endif
-endfunction
-
-" }}}1
 "   Miscellaneous Settings: {{{1
 
 " Make <BACKSPACE> work as normal
@@ -166,7 +178,7 @@ let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
-let R_rconsole_width = 0  " Always add the R console through a horizontal split
+" let R_rconsole_width = 0  " Always add the R console through a horizontal split
 let R_rconsole_height = 25  " Specify the R console height
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
 
