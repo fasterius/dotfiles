@@ -178,8 +178,7 @@ let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
-" let R_rconsole_width = 0  " Always add the R console through a horizontal split
-let R_rconsole_height = 25  " Specify the R console height
+let R_rconsole_width = 80  " Always add the R console through a vertical split
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
 
 " }}}1
