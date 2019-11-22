@@ -117,11 +117,17 @@ set autoindent
 " }}}1
 "  Movements: {{{1
 
-" Remove arrow key mappings for normal mode
+" Disable arrow key mappings for normal mode
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Disable arrow key mappings for insert mode
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
 
 " Move by visual lines instead of physical lines
 nnoremap j gj
