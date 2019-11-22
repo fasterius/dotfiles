@@ -170,9 +170,10 @@ set laststatus=2  " Status bar is always on
 filetype plugin indent on
 
 " NERDcommenter
-let g:NERDSpaceDelims=1  " Add a space after each comment
-let g:NERDCommentEmptyLines=1  " Allow commenting of empty lines
-let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
+let g:NERDSpaceDelims = 1  " Add a space after each comment
+let g:NERDCommentEmptyLines = 1  " Allow commenting of empty lines
+let g:NERDTrimTrailingWhitespace = 1  " Trim trailing whitespace for commenting
+let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " Vim-pandoc
