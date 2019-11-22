@@ -1,15 +1,12 @@
 " Vim syntax file
 " Language:     R
-" Maintainer:   Erik Fasterius <erik dot fasterius at hotmail dot com>
+" Maintainer:   Erik Fasterius <erik dot fasterius at outlook dot com>
 " URL:          https://github.com/fasterius/dotvim
 " Comments:     This is the syntax highlighting file i use for my R
 "               scripting. It contains some keyword highlighting for
 "               some standard R functions and built-ins, and a number
 "               of regex matches for other things.
 " --------------------------------------------------------------------
-
-" Use the 'marker' folding method
-set foldmethod=marker
 
 " Version 5.x: clear all syntaxes
 " Version 6.x: quit when another syntax file is loaded
