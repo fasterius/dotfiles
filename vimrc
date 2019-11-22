@@ -176,7 +176,8 @@ let g:NERDTrimTrailingWhitespace=1  " Trim trailing whitespace when commenting
 let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " Vim-pandoc
-let g:pandoc#folding#mode = 'expr'
+let g:pandoc#folding#mode = 'expr'  " Use expression folding
+let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 
 " NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
