@@ -36,14 +36,23 @@ autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 
 " Function for inserting a new chunk in RMarkdown/Sweave documents
 function! AddChunk()
-    call inputsave()
-    let chunk_name = input("Chunk name: ")
-    call inputrestore()
-    execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
+    if &ft == "rnoweb"
+        call inputsave()
+        let chunk_name = input("Chunk name: ")
+        call inputrestore()
+        execute "normal! o<<".chunk_name.">>=\<CR>\<CR>@\<Up>"
+    elseif &ft == "rmd"
+        call inputsave()
+        let chunk_name = input("Chunk name: ")
+        call inputrestore()
+        execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
+    else
+        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
+    endif
 endfunction
 
 " Function for rendering RMarkdown/Sweave documents
-function! RenderRMarkdown()
+function! RenderDocument()
     if &ft == "rnoweb"
         !Rscript -e 'knitr::knit2pdf("%:p")'
     elseif &ft == "rmd"
@@ -71,7 +80,7 @@ nnoremap <silent> <LocalLeader>ic
 nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :call RenderRMarkdown()<CR>
+    \ :call RenderDocument()<CR>
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
