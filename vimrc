@@ -31,7 +31,6 @@ autocmd BufNewFile,BufRead *bash* let g:is_bash=1
 autocmd BufNewFile,BufRead *bash* set filetype=sh
 autocmd BufNewFile,BufRead nextflow.config set filetype=java
 autocmd BufNewFile,BufRead *.nf set filetype=nextflow
-
 " }}}
 "   Functions: {{{1
 
@@ -155,7 +154,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 call plug#end()
 
