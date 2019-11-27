@@ -36,18 +36,29 @@ autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 
 " Function for inserting a new chunk in RMarkdown/Sweave documents
 function! AddChunk()
+
+    " Stop execution if current filetype is not Sweave/RMarkdown
+    if &ft != "rnoweb" && &ft != "rmd"
+        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
+        return
+    endif
+
+    " Get chunk name from user
+    call inputsave()
+    let chunk_name = input("Chunk name: ")
+    call inputrestore()
+
+    " Add empty line if current line is not empty
+    let line = getline('.')
+    if line =~ '[^\s]'
+        execute "normal! o\<Esc>"
+    endif
+
+    " Add named chunk
     if &ft == "rnoweb"
-        call inputsave()
-        let chunk_name = input("Chunk name: ")
-        call inputrestore()
         execute "normal! o<<".chunk_name.">>=\<CR>\<CR>@\<Up>"
     elseif &ft == "rmd"
-        call inputsave()
-        let chunk_name = input("Chunk name: ")
-        call inputrestore()
         execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
-    else
-        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
     endif
 endfunction
 
@@ -58,7 +69,7 @@ function! RenderDocument()
     elseif &ft == "rmd"
         !Rscript -e 'rmarkdown::render("%:p")'
     else
-        echo "Error:" expand("%:p") "is not a RMarkdown or Sweave file."
+        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
     endif
 endfunction
 
