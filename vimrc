@@ -21,16 +21,19 @@ set undofile
 "  Filetypes: {{{1
 
 " File types
-autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk
-    \ set filetype=snakemake
-autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
-    \ set filetype=r
-autocmd BufNewFile,BufRead *.Rnw,*.rnw set filetype=rnoweb
-autocmd BufNewFile,BufRead *.py set filetype=python
-autocmd BufNewFile,BufRead *bash* let g:is_bash=1
-autocmd BufNewFile,BufRead *bash* set filetype=sh
-autocmd BufNewFile,BufRead nextflow.config set filetype=java
-autocmd BufNewFile,BufRead *.nf set filetype=nextflow
+augroup filetypes
+    autocmd!
+    autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk
+        \ set filetype=snakemake
+    autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
+        \ set filetype=r
+    autocmd BufNewFile,BufRead *.Rnw,*.rnw set filetype=rnoweb
+    autocmd BufNewFile,BufRead *.py set filetype=python
+    autocmd BufNewFile,BufRead *bash* let g:is_bash=1
+    autocmd BufNewFile,BufRead *bash* set filetype=sh
+    autocmd BufNewFile,BufRead nextflow.config set filetype=java
+    autocmd BufNewFile,BufRead *.nf set filetype=nextflow
+augroup END
 " }}}
 "   Functions: {{{1
 
