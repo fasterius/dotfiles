@@ -266,3 +266,6 @@ set pastetoggle=<F6>
 set wildmenu
 
 " }}}1
+" Modeline: {{{1
+" vim:foldmethod=marker
+" }}}
