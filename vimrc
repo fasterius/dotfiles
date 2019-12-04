@@ -2,10 +2,7 @@
 "  Author:  Erik Fasterius <erik dot fasterius at outlook dot com>
 "  URL:     https://github.com/fasterius/dotvim
 
-" Set local folding method to 'marker'
-setlocal foldmethod=marker
-
-"  Backup Settings: {{{1
+" Backup Settings: {{{1
 
 " Backups in '~/.vim/tmp' folder
 set backup
@@ -18,9 +15,9 @@ set writebackup
 set undofile
 
 " }}}1
-"  Filetypes: {{{1
+" Filetypes: {{{1
 
-" File types
+" Autocommands for filetypes
 augroup filetypes
     autocmd!
     autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk
@@ -34,8 +31,9 @@ augroup filetypes
     autocmd BufNewFile,BufRead nextflow.config set filetype=java
     autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 augroup END
+
 " }}}
-"   Functions: {{{1
+" Functions: {{{1
 
 " Function for inserting a new chunk in RMarkdown/Sweave documents
 function! AddChunk()
@@ -77,7 +75,7 @@ function! RenderDocument()
 endfunction
 
 " }}}1
-"  Key Mappings: {{{1
+" Key Mappings: {{{1
 
 " Set leaders
 let maplocalleader=','
@@ -116,7 +114,7 @@ nnoremap <Leader>qd daW"=substitute(@@,"'\\\|\"","","g")<CR>P
 :nmap <Leader>v :source $MYVIMRC <CR>
 
 " }}}
-"   Miscellaneous Settings: {{{1
+" Miscellaneous Settings: {{{1
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
@@ -137,7 +135,7 @@ set textwidth=0
 set autoindent
 
 " }}}1
-"  Movements: {{{1
+" Movements: {{{1
 
 " Disable arrow key mappings for normal mode
 noremap <Up> <NOP>
@@ -156,7 +154,7 @@ nnoremap j gj
 nnoremap k gk
 
 " }}}1
-"  Plugins: {{{1
+" Plugins: {{{1
 
 " Use vim-plug for plugin management
 call plug#begin('~/.vim/plugged')
@@ -213,7 +211,7 @@ let R_rconsole_width = 80  " Always add the R console through a vertical split
 let R_assign = 0 " Disable the default underscore shortcut for '<-'
 
 " }}}1
-"  Search Settings: {{{1
+" Search Settings: {{{1
 
 " Search
 set incsearch  " Search as characters are entered
@@ -225,7 +223,7 @@ set smartcase  " ... except when using capital letters
 nnoremap <CR> :noh<CR><CR>
 
 " }}}1
-"  Splits: {{{1
+" Splits: {{{1
 
 " Create splits below and to the right
 set splitbelow
@@ -238,7 +236,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 "  }}}
-"  Syntax Highlighting: {{{1
+" Syntax Highlighting: {{{1
 
 " Enable syntax highlighting
 syntax enable
@@ -254,7 +252,7 @@ highlight ColorColumn ctermbg=red ctermfg=white
 call matchadd('ColorColumn', '\%80v.', 100)
 
 " }}}
-"  Tab Settings: {{{1
+" Tab Settings: {{{1
 
 " General tab settings
 set tabstop=4  " <TAB> is 4 spaces wide
