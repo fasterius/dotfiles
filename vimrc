@@ -240,6 +240,9 @@ nnoremap <C-H> <C-W><C-H>
 " Enable syntax highlighting
 syntax enable
 
+" Use faster regex engine
+set regexpengine=1
+
 " Python-specific setting to highlight all syntax groups
 let python_highlight_all = 1
 
