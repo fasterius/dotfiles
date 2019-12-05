@@ -194,12 +194,15 @@ set laststatus=2  " Status bar is always on
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
 
-" NERDcommenter
+" NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
 let g:NERDCommentEmptyLines = 1  " Allow commenting of empty lines
 let g:NERDTrimTrailingWhitespace = 1  " Trim trailing whitespace for commenting
+let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' },
+                             \ 'nextflow': { 'left': '//' } }
+
+" NERD Tree
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
-let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' } }
 
 " Vim-pandoc
 let g:pandoc#folding#mode = 'expr'  " Use expression folding
