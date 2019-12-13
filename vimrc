@@ -176,6 +176,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
 call plug#end()
 
 " Colour scheme
@@ -207,6 +208,8 @@ let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 " Vim-pandoc
 let g:pandoc#folding#mode = 'expr'  " Use expression folding
 let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
+let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
+let g:pandoc#syntax#conceal#use = 0  " Turn off ```-conversion to lambda
 
 " NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
