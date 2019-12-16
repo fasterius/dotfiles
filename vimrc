@@ -32,6 +32,10 @@ augroup filetypes
     autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 augroup END
 
+autocmd FileType r set commentstring=#\ %s
+autocmd FileType rmd set commentstring=#\ %s
+autocmd FileType rmarkdown set commentstring=#\ %s
+
 " }}}
 " Functions: {{{1
 
@@ -39,7 +43,7 @@ augroup END
 function! AddChunk()
 
     " Stop execution if current filetype is not Sweave/RMarkdown
-    if &ft != "rnoweb" && &ft != "rmd"
+    if &ft != "rnoweb" && &ft != "rmd" && &ft != "rmarkdown"
         echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
         return
     endif
@@ -58,7 +62,7 @@ function! AddChunk()
     " Add named chunk
     if &ft == "rnoweb"
         execute "normal! o<<".chunk_name.">>=\<CR>\<CR>@\<Up>"
-    elseif &ft == "rmd"
+    else
         execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
     endif
 endfunction
