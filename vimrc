@@ -213,6 +213,7 @@ let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 let g:pandoc#folding#mode = 'expr'  " Use expression folding
 let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
+let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
 let g:pandoc#syntax#conceal#use = 0  " Turn off ```-conversion to lambda
 
 " NVim-R
