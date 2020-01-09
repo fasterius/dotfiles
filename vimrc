@@ -219,7 +219,8 @@ let g:pandoc#syntax#conceal#use = 0  " Turn off ```-conversion to lambda
 " NVim-R
 let R_min_editor_width = 80  " Set the minimum source window width
 let R_rconsole_width = 80  " Always add the R console through a vertical split
-let R_assign = 0 " Disable the default underscore shortcut for '<-'
+let R_assign = 0  " Disable the default underscore shortcut for '<-'
+let r_syntax_folding = 1  " Enable Nvim-R folding of R code
 
 " }}}1
 " Search Settings: {{{1
