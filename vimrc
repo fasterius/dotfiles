@@ -39,6 +39,14 @@ augroup commentstrings
     autocmd FileType rmarkdown set commentstring=#\ %s
 augroup END
 
+" Autocommands for filetype foldmethods
+augroup folding
+    autocmd FileType r set foldmethod=syntax
+    autocmd FileType r set foldnestmax=1
+    autocmd FileType rmd set foldmethod=expr
+    autocmd FileType rmarkdown set foldmethod=expr
+augroup END
+
 " }}}
 " Functions: {{{1
 

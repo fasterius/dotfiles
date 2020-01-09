@@ -173,7 +173,3 @@ endif
 
 " Set current syntax to 'r'
 let b:current_syntax = "r"
-
-" Set foldmethod to 'syntax'
-setlocal foldmethod=syntax
-setlocal foldnestmax=1
