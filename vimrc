@@ -32,9 +32,12 @@ augroup filetypes
     autocmd BufNewFile,BufRead *.nf set filetype=nextflow
 augroup END
 
-autocmd FileType r set commentstring=#\ %s
-autocmd FileType rmd set commentstring=#\ %s
-autocmd FileType rmarkdown set commentstring=#\ %s
+" Autocommands for filetype commentstrings
+augroup commentstrings
+    autocmd FileType r set commentstring=#\ %s
+    autocmd FileType rmd set commentstring=#\ %s
+    autocmd FileType rmarkdown set commentstring=#\ %s
+augroup END
 
 " }}}
 " Functions: {{{1
