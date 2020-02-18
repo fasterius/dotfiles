@@ -3,3 +3,5 @@
 	email = erik.fasterius@outlook.com
 [core]
 	excludesfile = ~/.gitignore_global
+[fetch]
+	prune = true
