@@ -143,8 +143,9 @@ set number
 " Add background highlight to current line
 set cursorline
 
-" Do not insert line breaks automatically
-set textwidth=0
+" Wrap lines at 80 characters
+set textwidth=80
+set formatoptions+=t
 
 " Use the same indentation as currently on for new lines
 set autoindent
