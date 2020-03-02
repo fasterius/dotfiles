@@ -79,13 +79,22 @@ function! AddChunk()
 endfunction
 
 " Function for rendering RMarkdown/Sweave documents
-function! RenderDocument()
+function! RenderRMarkdown()
     if &ft == "rnoweb"
         !Rscript -e 'knitr::knit2pdf("%:p")'
     elseif &ft == "rmd"
         !Rscript -e 'rmarkdown::render("%:p")'
     else
         echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
+    endif
+endfunction
+
+" Function for rendering RMarkdown presentations with Xaringan
+function! RenderXaringan()
+    if &ft == "rmarkdown"
+        !Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
+    else
+        echo "Error: `".expand("%:p")."` is not a RMarkdown file."
     endif
 endfunction
 
@@ -103,11 +112,18 @@ map <leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <LocalLeader>ic
     \ :call AddChunk()<CR>
 
-" Knit current RMarkdown/Sweave file
+" Render current RMarkdown/Sweave file to
 nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :call RenderDocument()<CR>
+    \ :call RenderRMarkdown()<CR>
+
+" Render current RMarkdown to Xaringan presentation
+nmap <silent> <LocalLeader>x
+    \ :w<CR>
+    \ :cd %:p:h<CR>
+    \ :call RenderXaringan()<CR><CR>
+    \ :! open -a Firefox %:p:r.html<CR><CR>
 
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
