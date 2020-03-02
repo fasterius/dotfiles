@@ -287,9 +287,9 @@ set regexpengine=1
 " Python-specific setting to highlight all syntax groups
 let python_highlight_all = 1
 
-" Highlight the first character exceeding a linewidth of 79
+" Highlight the first character exceeding a linewidth of 80
 highlight ColorColumn ctermbg=red ctermfg=white
-call matchadd('ColorColumn', '\%80v.', 100)
+call matchadd('ColorColumn', '\%81v.', 100)
 
 " }}}
 " Tab Settings: {{{1
