@@ -125,6 +125,16 @@ nmap <silent> <LocalLeader>x
     \ :call RenderXaringan()<CR><CR>
     \ :! open -a Firefox %:p:r.html<CR><CR>
 
+" Render current Markdown to HTML and open
+nmap <LocalLeader>p
+    \ :w!<CR>
+    \ :w!/tmp/vim-markdown.md<CR>
+    \ :!pandoc -s -f markdown -t html
+        \ -o /tmp/vim-markdown.html
+        \ /tmp/vim-markdown.md<CR>
+    \ :!open -a firefox /tmp/vim-markdown.html
+        \ > /dev/null 2> /dev/null &<CR><CR>
+
 " Add head() command for NVim-R
 nmap <silent> <LocalLeader>h :call RAction("head")<CR>
 
