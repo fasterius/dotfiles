@@ -243,6 +243,7 @@ let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' },
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 
 " Vim-pandoc
+let g:pandoc#formatting#textwidth=80
 let g:pandoc#folding#mode = 'expr'  " Use expression folding
 let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
