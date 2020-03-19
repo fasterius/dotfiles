@@ -45,6 +45,8 @@ augroup folding
     autocmd FileType r set foldnestmax=1
     autocmd FileType rmd set foldmethod=expr
     autocmd FileType rmarkdown set foldmethod=expr
+    autocmd FileType snakemake set foldmethod=indent
+    autocmd FileType snakemake set foldnestmax=1
 augroup END
 
 " }}}
