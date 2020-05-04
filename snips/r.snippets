@@ -1,0 +1,10 @@
+snippet library "Import a library" b
+library("${0:${VISUAL:package}}")
+endsnippet
+
+snippet readtab "Read a tab-delimited file" b
+${1:data} <- read.table("${2:file.txt}",
+                   sep              = "\t",
+                   header           = TRUE,
+                   stringsAsFactors = FALSE)
+endsnippet

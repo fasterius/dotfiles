@@ -52,34 +52,6 @@ augroup END
 " }}}
 " Functions: {{{1
 
-" Function for inserting a new chunk in RMarkdown/Sweave documents
-function! AddChunk()
-
-    " Stop execution if current filetype is not Sweave/RMarkdown
-    if &ft != "rnoweb" && &ft != "rmd" && &ft != "rmarkdown"
-        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
-        return
-    endif
-
-    " Get chunk name from user
-    call inputsave()
-    let chunk_name = input("Chunk name: ")
-    call inputrestore()
-
-    " Add empty line if current line is not empty
-    let line = getline('.')
-    if line =~ '[^\s]'
-        execute "normal! o\<Esc>"
-    endif
-
-    " Add named chunk
-    if &ft == "rnoweb"
-        execute "normal! o<<".chunk_name.">>=\<CR>\<CR>@\<Up>"
-    else
-        execute "normal! o```{r ".chunk_name."}\<CR>\<CR>```\<Up>"
-    endif
-endfunction
-
 " Function for rendering RMarkdown/Sweave documents
 function! RenderRMarkdown()
     if &ft == "rnoweb"
@@ -110,11 +82,7 @@ let mapleader="\<SPACE>"
 " File browsing
 map <leader>t :NERDTreeToggle<CR>
 
-" Insert new chunk in RMarkdown/Sweave files
-nnoremap <silent> <LocalLeader>ic
-    \ :call AddChunk()<CR>
-
-" Render current RMarkdown/Sweave file to
+" Render current RMarkdown/Sweave file
 nmap <silent> <LocalLeader>k
     \ :w<CR>
     \ :cd %:p:h<CR>
@@ -148,6 +116,9 @@ map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Re-source VIMRC
 :nmap <Leader>v :source $MYVIMRC <CR>
+
+" Open snippets file for current filetype
+:nnoremap <Leader>n :UltiSnipsEdit <CR>
 
 " }}}
 " Miscellaneous Settings: {{{1
@@ -206,6 +177,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbberger/vim-singularity-syntax'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -233,6 +205,11 @@ set laststatus=2  " Status bar is always on
 
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
+
+" UltiSnips
+let g:UltiSnipsEditSplit = 'context'
+let g:UltiSnipsExpandTrigger = '<C-l>'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
