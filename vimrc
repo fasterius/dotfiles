@@ -66,7 +66,9 @@ endfunction
 " Function for rendering RMarkdown presentations with Xaringan
 function! RenderXaringan()
     if &ft == "rmarkdown"
-        !Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
+        :silent ! Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
+        :silent ! echo "Converting to PDF ..."
+        :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
     else
         echo "Error: `".expand("%:p")."` is not a RMarkdown file."
     endif
@@ -92,8 +94,9 @@ nmap <silent> <LocalLeader>k
 nmap <silent> <LocalLeader>x
     \ :w<CR>
     \ :cd %:p:h<CR>
-    \ :call RenderXaringan()<CR><CR>
-    \ :! open -a Firefox %:p:r.html<CR><CR>
+    \ :call RenderXaringan()<CR>
+    \ :silent ! open -a Firefox %:p:r.html<CR>
+    \ :redraw!<CR>
 
 " Render current Markdown to HTML and open
 nmap <LocalLeader>p
