@@ -30,6 +30,7 @@ augroup filetypes
     autocmd BufNewFile,BufRead *bash* set filetype=sh
     autocmd BufNewFile,BufRead nextflow.config set filetype=java
     autocmd BufNewFile,BufRead *.nf set filetype=nextflow
+    autocmd BufNewFile,BufRead *.def set filetype=singularity
 augroup END
 
 " Autocommands for filetype commentstrings
@@ -37,6 +38,7 @@ augroup commentstrings
     autocmd FileType r set commentstring=#\ %s
     autocmd FileType rmd set commentstring=#\ %s
     autocmd FileType rmarkdown set commentstring=#\ %s
+    autocmd FileType singularity set commentstring=#\ %s
 augroup END
 
 " Autocommands for filetype foldmethods
