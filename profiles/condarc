@@ -1,14 +1,14 @@
 # Default channels
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 
 # Always say 'yes' when prompted
-always_yes: True
+always_yes: true
 
 # Don't change the PS1 prompt
-changeps1: False
+changeps1: false
 
 # Allow downgrades
 allow_conda_downgrades: true
