@@ -1,5 +1,35 @@
 extends r
 
+snippet new "Initialise an empty RMarkdown document" b
+---
+title: "${1:Document title}"
+author: "Erik Fasterius"
+date: "\`r format(Sys.time(), '%d %B, %Y')\`"
+output:
+    html_document:
+        code_folding: hide
+        toc: true
+        toc_float:
+            collapsed: true
+---
+
+\`\`\`{r Setup}
+# Knitr options
+knitr::opts_chunk$set(fig.width  = ${2:12},
+                      fig.height = ${3:8},
+                      fig.align  = "center",
+                      message    = ${4:FALSE},
+                      warning    = ${5:FALSE},
+                      results    = "asis")
+\`\`\`
+
+\`\`\`{r Load packages}
+suppressPackageStartupMessages({
+	library("${6:A package}")
+})
+\`\`\`
+endsnippet
+
 snippet chunk "Create a new code chunk" b
 \`\`\`{r ${1:New chunk}}
 ${2:${VISUAL:Contents}}
