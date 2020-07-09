@@ -2,7 +2,6 @@
 " Language:	        Nextflow (extended from groovy.vim)
 " Original Version:	Luke Goodsell
 " Maintainer:       Erik Fasterius (erik.fasterius@outlook.com)
-" Last Change:	    2019 October 9th
 
 if exists("b:current_syntax")
   finish
@@ -18,12 +17,12 @@ syn keyword nextflowDirective ext label maxErrors maxForks maxRetries memory
 syn keyword nextflowDirective module penv publishDir queue scratch storeDir
 syn keyword nextflowDirective stageInMode stageOutMode tag time validExitStatus
 syn keyword nextflowKeyword from into
-syn keyword nextflowType file val process Channel
+syn keyword nextflowType Channel file path process tuple val
 syn keyword nextflowSpecial workflow params launchDir
 syn keyword nextflowConstant null
 syn match nextflowBlock "\v(input|output|script|shell|exec):"
 syn match nextflowELExpr "\!{.\{-}}" contained
-syn region nextflowBlockString start=+'''+ keepend end=+'''+ 
+syn region nextflowBlockString start=+'''+ keepend end=+'''+
     \ contains=groovySpecialChar,groovySpecialError,@Spell,nextflowELExpr,@shell
 
 " Apply highlighting
