@@ -168,6 +168,9 @@ inoremap <Right> <NOP>
 nnoremap j gj
 nnoremap k gk
 
+" Always keep at least 5 lines above/below scrolling visible
+set scrolloff=5
+
 " }}}1
 " Plugins: {{{1
 
