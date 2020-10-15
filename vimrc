@@ -112,9 +112,6 @@ nmap <LocalLeader>p
     \ :!open -a firefox /tmp/vim-markdown.html
         \ > /dev/null 2> /dev/null &<CR><CR>
 
-" Add head() command for NVim-R
-nmap <silent> <LocalLeader>h :call RAction("head")<CR>
-
 " Replace all occurences of word underneath the cursor
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
@@ -179,8 +176,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'dense-analysis/ale'
-Plug 'jalvesaq/Nvim-R'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jpalardy/vim-slime'
 Plug 'Konfekt/FastFold'
 Plug 'luochen1990/rainbow'
 Plug 'ntpeters/vim-better-whitespace'
@@ -238,14 +235,43 @@ let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
 let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
 
-" NVim-R
-let R_min_editor_width = 80  " Set the minimum source window width
-let R_rconsole_width = 80  " Always add the R console through a vertical split
-let R_assign = 0  " Disable the default underscore shortcut for '<-'
+" Slime
+let g:slime_target = "vimterminal"  " Use the Vim built-in terminal
+let g:slime_vimterminal_config = { "term_finish": "close",
+                                 \  "vertical": 1 }
+let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
+
+" Slime key mappings
+nmap <localleader>l <Plug>SlimeLineSend
+nmap <localleader>p <Plug>SlimeParagraphSend
+xmap <localleader>s <Plug>SlimeRegionSend
+nmap <localleader>c <Plug>SlimeSendCell
+
+" Function and key mapping for opening a new R / Python terminal window
+function! OpenTerminal()
+
+    " Get starting window number
+    let starting_window = bufwinnr(bufname('%'))
+
+    " Get language to use from filetype
+    if &ft == "python"
+        let language = "python"
+    elseif &ft == "r" || &ft == "rmarkdown"
+        let language = "r"
+    else
+        let language = "bash"
+    endif
+
+    " Open a terminal with selected language and move back to starting buffer
+    :execute ':vertical terminal ++close' language
+    :execute starting_window 'wincmd w'
+endfunction
+nmap <localleader>t :call OpenTerminal()<CR>
 
 " Enable FastFold
 let g:markdown_folding = 1
 let g:r_syntax_folding = 1
+
 " }}}1
 " Search Settings: {{{1
 
