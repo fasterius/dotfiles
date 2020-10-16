@@ -247,26 +247,45 @@ nmap <localleader>p <Plug>SlimeParagraphSend
 xmap <localleader>s <Plug>SlimeRegionSend
 nmap <localleader>c <Plug>SlimeSendCell
 
-" Function and key mapping for opening a new R / Python terminal window
+" Function for getting the appropriate language for the current filetype
+function! GetLanguage()
+    if &ft == "rmarkdown"
+        let language = "r"
+    else
+        let language = &filetype
+    endif
+    return language
+endfunction
+
+" Function and key mapping for opening a new terminal window
 function! OpenTerminal()
 
     " Get starting window number
     let starting_window = bufwinnr(bufname('%'))
 
-    " Get language to use from filetype
-    if &ft == "python"
-        let language = "python"
-    elseif &ft == "r" || &ft == "rmarkdown"
-        let language = "r"
-    else
-        let language = "bash"
-    endif
-
-    " Open a terminal with selected language and move back to starting buffer
-    :execute ':vertical terminal ++close' language
+    " Open a terminal with appropriate language and move back to starting window
+    :execute ':vertical terminal ++close ++norestore' GetLanguage()
     :execute starting_window 'wincmd w'
+    :SlimeConfig
 endfunction
 nmap <localleader>t :call OpenTerminal()<CR>
+
+" Function for exiting terminal windows
+function! CloseTerminal()
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Close terminal using the appropriate command
+    if language == "r"
+        :SlimeSend1 quit(save = "no")
+    elseif language == "python"
+        :SlimeSend1 exit()
+    else
+        :SlimeSend1 exit
+    endif
+endfunction
+nmap <localleader>q :call CloseTerminal()<CR>
 
 " Enable FastFold
 let g:markdown_folding = 1
