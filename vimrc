@@ -234,6 +234,7 @@ let g:pandoc#folding#mode = 'expr'  " Use expression folding
 let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
 let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
+let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
 
 " Slime
 let g:slime_target = "vimterminal"  " Use the Vim built-in terminal
