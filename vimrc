@@ -239,6 +239,7 @@ nmap <localleader>l <Plug>SlimeLineSend
 nmap <localleader>p <Plug>SlimeParagraphSend
 xmap <localleader>s <Plug>SlimeRegionSend
 nmap <localleader>c <Plug>SlimeSendCell
+nmap <localleader>w viw<Plug>SlimeRegionSend
 nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 
