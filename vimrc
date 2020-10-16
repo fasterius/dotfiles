@@ -2,7 +2,7 @@
 "  Author:  Erik Fasterius <erik dot fasterius at outlook dot com>
 "  URL:     https://github.com/fasterius/dotvim
 
-" Backup Settings: {{{1
+" Backups: {{{1
 
 " Backups in '~/.vim/tmp' folder
 set backup
@@ -14,8 +14,10 @@ set writebackup
 " Store undo data in a file
 set undofile
 
-" }}}1
 " Filetypes: {{{1
+
+" Enable filetype detection and filetype-specific indentation/plugins
+filetype plugin indent on
 
 " Autocommands for filetypes
 augroup filetypes
@@ -53,64 +55,23 @@ augroup folding
     autocmd FileType nextflow set foldnestmax=1
 augroup END
 
-" }}}
-" Functions: {{{1
+" Folding: {{{1
 
-" Function for rendering RMarkdown/Sweave documents
-function! RenderRMarkdown()
-    if &ft == "rnoweb"
-        !Rscript -e 'knitr::knit2pdf("%:p")'
-    elseif &ft == "rmd"
-        !Rscript -e 'rmarkdown::render("%:p")'
-    else
-        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
-    endif
-endfunction
+" Enable FastFold
+let g:markdown_folding = 1
+let g:r_syntax_folding = 1
 
-" Function for rendering RMarkdown presentations with Xaringan
-function! RenderXaringan()
-    if &ft == "rmarkdown"
-        :silent ! Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
-        :silent ! echo "Converting to PDF ..."
-        :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
-    else
-        echo "Error: `".expand("%:p")."` is not a RMarkdown file."
-    endif
-endfunction
+" Folding for vim-pandoc
+let g:pandoc#folding#mode = 'expr'  " Use expression folding
+let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
+let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
+let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
 
-" }}}1
-" Key Mappings: {{{1
+" General Key Mappings: {{{1
 
 " Set leaders
 let maplocalleader=','
 let mapleader="\<SPACE>"
-
-" File browsing
-map <leader>t :NERDTreeToggle<CR>
-
-" Render current RMarkdown/Sweave file
-nmap <silent> <LocalLeader>k
-    \ :w<CR>
-    \ :cd %:p:h<CR>
-    \ :call RenderRMarkdown()<CR>
-
-" Render current RMarkdown to Xaringan presentation
-nmap <silent> <LocalLeader>x
-    \ :w<CR>
-    \ :cd %:p:h<CR>
-    \ :call RenderXaringan()<CR>
-    \ :silent ! open -a Firefox %:p:r.html<CR>
-    \ :redraw!<CR>
-
-" Render current Markdown to HTML and open
-nmap <LocalLeader>p
-    \ :w!<CR>
-    \ :w!/tmp/vim-markdown.md<CR>
-    \ :!pandoc -s -f markdown -t html
-        \ -o /tmp/vim-markdown.html
-        \ /tmp/vim-markdown.md<CR>
-    \ :!open -a firefox /tmp/vim-markdown.html
-        \ > /dev/null 2> /dev/null &<CR><CR>
 
 " Replace all occurences of word underneath the cursor
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -124,8 +85,7 @@ map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " Open snippets file for current filetype
 :nnoremap <Leader>n :UltiSnipsEdit <CR>
 
-" }}}
-" Miscellaneous Settings: {{{1
+" Miscellaneous: {{{1
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
@@ -146,7 +106,6 @@ set formatoptions+=t
 " Use the same indentation as currently on for new lines
 set autoindent
 
-" }}}1
 " Movements: {{{1
 
 " Disable arrow key mappings for normal mode
@@ -168,7 +127,6 @@ nnoremap k gk
 " Always keep at least 5 lines above/below scrolling visible
 set scrolloff=5
 
-" }}}1
 " Plugins: {{{1
 
 " Use vim-plug for plugin management
@@ -210,9 +168,6 @@ set showmatch  " Show matching parenthesis on cursor hovering
 let g:airline_theme='solarized'  " Solarized theme
 set laststatus=2  " Status bar is always on
 
-" Enable filetype detection and filetype-specific indentation/plugins
-filetype plugin indent on
-
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsExpandTrigger = '<C-l>'
@@ -227,26 +182,19 @@ let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' },
 
 " NERD Tree
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
+map <leader>t :NERDTreeToggle<CR>
 
 " Vim-pandoc
 let g:pandoc#formatting#textwidth=80
-let g:pandoc#folding#mode = 'expr'  " Use expression folding
-let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
-let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
-let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
 let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
 
-" Slime
+" REPL: {{{1
+
+" General vim-slime settings
 let g:slime_target = "vimterminal"  " Use the Vim built-in terminal
 let g:slime_vimterminal_config = { "term_finish": "close",
                                  \  "vertical": 1 }
 let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
-
-" Slime key mappings
-nmap <localleader>l <Plug>SlimeLineSend
-nmap <localleader>p <Plug>SlimeParagraphSend
-xmap <localleader>s <Plug>SlimeRegionSend
-nmap <localleader>c <Plug>SlimeSendCell
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
@@ -269,7 +217,6 @@ function! OpenTerminal()
     :execute starting_window 'wincmd w'
     :SlimeConfig
 endfunction
-nmap <localleader>t :call OpenTerminal()<CR>
 
 " Function for exiting terminal windows
 function! CloseTerminal()
@@ -286,13 +233,63 @@ function! CloseTerminal()
         :SlimeSend1 exit
     endif
 endfunction
+
+" Vim-slime key mappings
+nmap <localleader>l <Plug>SlimeLineSend
+nmap <localleader>p <Plug>SlimeParagraphSend
+xmap <localleader>s <Plug>SlimeRegionSend
+nmap <localleader>c <Plug>SlimeSendCell
+nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 
-" Enable FastFold
-let g:markdown_folding = 1
-let g:r_syntax_folding = 1
+" RMarkdown: {{{1
 
-" }}}1
+" Function for rendering RMarkdown/Sweave documents
+function! RenderRMarkdown()
+    if &ft == "rnoweb"
+        !Rscript -e 'knitr::knit2pdf("%:p")'
+    elseif &ft == "rmd"
+        !Rscript -e 'rmarkdown::render("%:p")'
+    else
+        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
+    endif
+endfunction
+
+" Function for rendering RMarkdown presentations with Xaringan
+function! RenderXaringan()
+    if &ft == "rmarkdown"
+        :silent ! Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
+        :silent ! echo "Converting to PDF ..."
+        :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
+    else
+        echo "Error: `".expand("%:p")."` is not a RMarkdown file."
+    endif
+endfunction
+
+" Render current RMarkdown/Sweave file
+nmap <silent> <LocalLeader>k
+    \ :w<CR>
+    \ :cd %:p:h<CR>
+    \ :call RenderRMarkdown()<CR>
+
+" Render current RMarkdown to Xaringan presentation
+nmap <silent> <LocalLeader>x
+    \ :w<CR>
+    \ :cd %:p:h<CR>
+    \ :call RenderXaringan()<CR>
+    \ :silent ! open -a Firefox %:p:r.html<CR>
+    \ :redraw!<CR>
+
+" Render current Markdown to HTML and open
+nmap <LocalLeader>p
+    \ :w!<CR>
+    \ :w!/tmp/vim-markdown.md<CR>
+    \ :!pandoc -s -f markdown -t html
+        \ -o /tmp/vim-markdown.html
+        \ /tmp/vim-markdown.md<CR>
+    \ :!open -a firefox /tmp/vim-markdown.html
+        \ > /dev/null 2> /dev/null &<CR><CR>
+
 " Search Settings: {{{1
 
 " Search
@@ -304,7 +301,6 @@ set smartcase  " ... except when using capital letters
 " Cancel a search with <Return>
 nnoremap <CR> :noh<CR><CR>
 
-" }}}1
 " Splits: {{{1
 
 " Create splits below and to the right
@@ -317,7 +313,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"  }}}
 " Syntax Highlighting: {{{1
 
 " Enable syntax highlighting
@@ -333,7 +328,6 @@ let python_highlight_all = 1
 highlight ColorColumn ctermbg=red ctermfg=white
 call matchadd('ColorColumn', '\%81v.', 100)
 
-" }}}
 " Tab Settings: {{{1
 
 " General tab settings
