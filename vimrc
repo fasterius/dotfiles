@@ -206,7 +206,7 @@ function! GetLanguage()
     return language
 endfunction
 
-" Function and key mapping for opening a new terminal window
+" Function for opening a new REPL window
 function! OpenTerminal()
 
     " Get starting window number
@@ -218,7 +218,7 @@ function! OpenTerminal()
     :SlimeConfig
 endfunction
 
-" Function for exiting terminal windows
+" Function for exiting REPL windows
 function! CloseTerminal()
 
     " Get language of current filetype
@@ -234,6 +234,25 @@ function! CloseTerminal()
     endif
 endfunction
 
+" Function for printing the head of a pandas/R dataframe
+function! PrintHead()
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Get the word under the cursor
+    let current_word = expand("<cword>")
+
+    " Send appropriate command to REPL
+    if language == "r"
+        :SlimeSend0 "head(" . current_word . ")\n"
+    elseif language == "python"
+        :SlimeSend0 current_word . ".head()\n"
+    else
+        :echo "Error: requires Python or R"
+    endif
+endfunction
+
 " Vim-slime key mappings
 nmap <localleader>l <Plug>SlimeLineSend
 nmap <localleader>p <Plug>SlimeParagraphSend
@@ -242,6 +261,7 @@ nmap <localleader>c <Plug>SlimeSendCell
 nmap <localleader>w viw<Plug>SlimeRegionSend
 nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
+nmap <localleader>h :call PrintHead()<CR>
 
 " RMarkdown: {{{1
 
