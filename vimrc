@@ -263,43 +263,37 @@ nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 nmap <localleader>h :call PrintHead()<CR>
 
-" RMarkdown: {{{1
+" REPL RMarkdown Rendering: {{{1
 
 " Function for rendering RMarkdown/Sweave documents
 function! RenderRMarkdown()
     if &ft == "rnoweb"
-        !Rscript -e 'knitr::knit2pdf("%:p")'
-    elseif &ft == "rmd"
-        !Rscript -e 'rmarkdown::render("%:p")'
+        :SlimeSend0 "knitr::knit2pdf('" . expand("%:p") . "')\n"
+        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".pdf')\n"
+    elseif &ft == "rmd" || &ft == "rmarkdown"
+        :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "')\n"
+        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
     else
-        echo "Error: `".expand("%:p")."` is not a RMarkdown or Sweave file."
+        echoerr "`".expand("%:p")."` is not a RMarkdown or Sweave file."
+        return 1
     endif
 endfunction
 
 " Function for rendering RMarkdown presentations with Xaringan
 function! RenderXaringan()
     if &ft == "rmarkdown"
-        :silent ! Rscript -e 'rmarkdown::render("%:p", "xaringan::moon_reader")'
-        :silent ! echo "Converting to PDF ..."
-        :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
+        :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "', 'xaringan::moon_reader')\n"
+        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
+        " :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
     else
-        echo "Error: `".expand("%:p")."` is not a RMarkdown file."
+        echoerr "`".expand("%:p")."` is not a RMarkdown file."
+        return 1
     endif
 endfunction
 
 " Render current RMarkdown/Sweave file
-nmap <silent> <LocalLeader>k
-    \ :w<CR>
-    \ :cd %:p:h<CR>
-    \ :call RenderRMarkdown()<CR>
-
-" Render current RMarkdown to Xaringan presentation
-nmap <silent> <LocalLeader>x
-    \ :w<CR>
-    \ :cd %:p:h<CR>
-    \ :call RenderXaringan()<CR>
-    \ :silent ! open -a Firefox %:p:r.html<CR>
-    \ :redraw!<CR>
+nmap <silent> <LocalLeader>k :call RenderRMarkdown()<CR>
+nmap <silent> <LocalLeader>x :call RenderXaringan()<CR>
 
 " Render current Markdown to HTML and open
 nmap <LocalLeader>p
