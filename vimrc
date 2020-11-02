@@ -198,10 +198,12 @@ let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
-    if &ft == "rmarkdown"
+    if &ft == "rmarkdown" || &ft == "r"
         let language = "r"
+    elseif &ft == "python"
+        let language = "python"
     else
-        let language = &filetype
+        let language = "bash"
     endif
     return language
 endfunction
