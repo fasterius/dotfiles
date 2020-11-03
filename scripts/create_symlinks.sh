@@ -12,3 +12,6 @@ ln -s ~/.bash/profiles/condarc ~/.condarc
 # Git
 ln -s ~/.bash/git/gitconfig ~/.gitconfig
 ln -s ~/.bash/git/gitignore_global ~/.gitignore_global
+
+# Tmux
+ln -s ~/.bash/profiles/tmux.conf ~/.tmux.conf
