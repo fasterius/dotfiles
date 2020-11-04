@@ -5,3 +5,5 @@
 	excludesfile = ~/.gitignore_global
 [fetch]
 	prune = true
+[init]
+	defaultBranch = main
