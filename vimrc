@@ -264,6 +264,7 @@ nmap <localleader>w viw<Plug>SlimeRegionSend
 nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 nmap <localleader>h :call PrintHead()<CR>
+nmap <localleader>C :SlimeSend0 "\x03"<CR>
 
 " REPL RMarkdown Rendering: {{{1
 
