@@ -298,7 +298,7 @@ nmap <silent> <LocalLeader>k :call RenderRMarkdown()<CR>
 nmap <silent> <LocalLeader>x :call RenderXaringan()<CR>
 
 " Render current Markdown to HTML and open
-nmap <LocalLeader>p
+nmap <LocalLeader>P
     \ :w!<CR>
     \ :w!/tmp/vim-markdown.md<CR>
     \ :!pandoc -s -f markdown -t html
