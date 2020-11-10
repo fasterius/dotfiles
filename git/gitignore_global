@@ -13,3 +13,6 @@
 
 # Jupyter notebook checkpoints
 **/.ipynb_checkpoints
+
+# Conda environments
+**/*-env
