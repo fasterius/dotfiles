@@ -271,9 +271,11 @@ nmap <localleader>C :SlimeSend0 "\x03"<CR>
 " Function for rendering RMarkdown/Sweave documents
 function! RenderRMarkdown()
     if &ft == "rnoweb"
+        :w!
         :SlimeSend0 "knitr::knit2pdf('" . expand("%:p") . "')\n"
         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".pdf')\n"
     elseif &ft == "rmd" || &ft == "rmarkdown"
+        :w!
         :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "')\n"
         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
     else
@@ -285,6 +287,7 @@ endfunction
 " Function for rendering RMarkdown presentations with Xaringan
 function! RenderXaringan()
     if &ft == "rmarkdown"
+        :w!
         :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "', 'xaringan::moon_reader')\n"
         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
         " :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
