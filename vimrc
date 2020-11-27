@@ -186,8 +186,9 @@ let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 map <leader>t :NERDTreeToggle<CR>
 
 " Vim-pandoc
-let g:pandoc#formatting#textwidth=80
+let g:pandoc#formatting#textwidth = 80
 let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
+let g:pandoc#keyboard#use_default_mappings = 0
 
 " REPL: {{{1
 
