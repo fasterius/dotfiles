@@ -35,3 +35,23 @@ snippet chunk "Create a new code chunk" b
 ${2:${VISUAL:Contents}}
 \`\`\`
 endsnippet
+
+snippet function_table "Add a function for printing knitr tables" b
+# Function for creating tables
+print_table <- function(data,
+                        digits     = 2,
+                        caption    = NULL,
+                        full_width = TRUE,
+                        font_size  = 12) {
+    cat("\n")
+    print(data %>%
+        knitr::kable(digits  = digits,
+                     caption = caption) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover"),
+                                  full_width        = full_width,
+                                  font_size         = font_size,
+                                  fixed_thead       = TRUE,
+                                  position          = "left"))
+    cat("\n")
+}
+endsnippet
