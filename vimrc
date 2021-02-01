@@ -263,6 +263,7 @@ nmap <localleader>p <Plug>SlimeParagraphSend
 xmap <localleader>s <Plug>SlimeRegionSend
 nmap <localleader>c <Plug>SlimeSendCell
 nmap <localleader>w viw<Plug>SlimeRegionSend
+nmap <localleader>a ggVG<Plug>SlimeRegionSend
 nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 nmap <localleader>h :call PrintHead()<CR>
