@@ -130,6 +130,8 @@ set scrolloff=5
 " Plugins: {{{1
 
 " Use vim-plug for plugin management
+" (The use of a specific commit for YouCompleteMe is due to subsequent commits
+" requiring Mac OSX 10.15 and breaks systems using previous versions)
 call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
@@ -147,7 +149,7 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-pandoc/vim-pandoc'
