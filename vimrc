@@ -106,6 +106,9 @@ set formatoptions+=t
 " Use the same indentation as currently on for new lines
 set autoindent
 
+" Use UTF-8 encoding
+set encoding=utf-8
+
 " Movements: {{{1
 
 " Disable arrow key mappings for normal mode
