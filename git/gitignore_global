@@ -16,3 +16,7 @@
 
 # Conda environments
 **/*-env
+
+# Nextflow files
+**/.nextflow*
+work/*
