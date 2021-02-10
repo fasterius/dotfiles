@@ -1,0 +1,30 @@
+snippet workflow "Initialise a Nextflow workflow" b
+#!/usr/bin/env nextflow
+nextflow.enable.dsl=2
+
+// Results directory
+resultsdir = "results/"
+
+// Main workflow
+workflow {
+    // Run workflow
+    process_01(input_01)
+}
+
+process process_01 {
+    tag "${input}"
+    publishDir "${resultsdir}/",
+        mode: "copy"
+
+    input:
+    path(input_01)
+
+    output:
+    path("output_01")
+
+    script:
+    """
+
+    """
+}
+endsnippet
