@@ -28,3 +28,22 @@ process process_01 {
     """
 }
 endsnippet
+
+snippet process "Add a new Nextflow process" b
+process process_01 {
+    tag "${input}"
+    publishDir "${resultsdir}/",
+        mode: "copy"
+
+    input:
+    path(input_01)
+
+    output:
+    path("output_01")
+
+    script:
+    """
+
+    """
+}
+endsnippet
