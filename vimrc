@@ -33,6 +33,8 @@ augroup filetypes
     autocmd BufNewFile,BufRead nextflow.config set filetype=java
     autocmd BufNewFile,BufRead *.nf set filetype=nextflow
     autocmd BufNewFile,BufRead *.def set filetype=singularity
+    autocmd BufNewFile,BufRead Dockerfile,*.dockerfile,.dockerignore
+        \ set filetype=dockerfile
 augroup END
 
 " Autocommands for filetype commentstrings

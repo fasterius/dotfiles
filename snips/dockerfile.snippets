@@ -52,3 +52,11 @@ RUN conda config --add channels bioconda \
 # Start Bash shell by default
 CMD /bin/bash
 endsnippet
+
+snippet dockerignore "Initialise a new .dockerignore file" b
+# Ignore everything
+*
+
+# Except the Conda environment file
+!environment.yml
+endsnippet
