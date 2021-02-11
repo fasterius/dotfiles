@@ -4,6 +4,9 @@ channels:
   - bioconda
   - defaults
 
+# Use strict channel priorities
+channel_priority: strict
+
 # Always say 'yes' when prompted
 always_yes: true
 
