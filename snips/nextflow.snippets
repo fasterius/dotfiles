@@ -12,7 +12,7 @@ workflow {
 }
 
 process process_01 {
-    tag "${input}"
+    tag "${input_01}"
     publishDir "${resultsdir}/",
         mode: "copy"
 
@@ -31,7 +31,7 @@ endsnippet
 
 snippet process "Add a new Nextflow process" b
 process process_01 {
-    tag "${input}"
+    tag "${input_01}"
     publishDir "${resultsdir}/",
         mode: "copy"
 
