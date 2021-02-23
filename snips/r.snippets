@@ -8,3 +8,13 @@ ${1:data} <- read.table("${2:file.txt}",
                    header           = TRUE,
                    stringsAsFactors = FALSE)
 endsnippet
+
+snippet argument_parser "Add an argument parser" b
+# Argument parser
+suppressPackageStartupMessages(library("argparse"))
+parser <- ArgumentParser()
+parser$add_argument("${1:argument_1}",
+                    type    = "${2:character}",
+                    help    = "${3:Argument help string}")
+args <- parser$parse_args()
+endsnippet
