@@ -61,6 +61,31 @@ if [ ! -d "$HOME/opt/vim/" ]; then
     fi
 fi
 
+# Install Nextflow if `$HOME/opt/miniconda3` doesn't exist
+if [ ! -d "$HOME/opt/miniconda3" ]; then
+
+    # Get the current system
+    if [ $(uname) == "Darwin" ]; then
+        SYS="MacOSX"
+    elif [ $(uname) == "Linux" ]; then
+        SYS="Linux"
+    fi
+
+    # Download and install Conda for the appropriate system
+    cd $HOME/opt
+    wget https://repo.continuum.io/miniconda/Miniconda3-4.7.12.1-$SYS-x86_64.sh
+    bash Miniconda3-4.7.12.1-$SYS-x86_64.sh -b -p $HOME/opt/miniconda3
+    rm Miniconda3-4.7.12.1-$SYS-x86_64.sh
+
+    # Verify Conda installation
+    source $HOME/.bash_profile
+    conda --version
+    if [ $? != 0 ]; then
+        echo "Error: Conda installation failed"
+        exit 1
+    fi
+fi
+
 # Install Nextflow if `$HOME/opt/nextflow/nextflow` doesn't exist
 if [ ! -f "$HOME/opt/nextflow/nextflow" ]; then
 
