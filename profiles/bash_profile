@@ -11,11 +11,15 @@ else
     export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 fi
 
+# Add to PATH
+export PATH="$HOME/opt/python3/bin:$PATH"
+export PATH="$HOME/opt/vim/bin:$PATH"
+
+# Source Conda
+source $HOME/opt/miniconda3/etc/profile.d/conda.sh
+
 # Files to ignore for tab-completion
 export FIGNORE=$FIGNORE:.un~:DS_Store
-
-# Conda
-source $HOME/opt/miniconda3/etc/profile.d/conda.sh
 
 # Locale
 export LC_ALL=en_GB.UTF-8
