@@ -3,7 +3,8 @@
 # Script for installing Python and Vim so that the YouCompleteMe and UltiSnips
 # Vim plugins will work on Uppmax
 
-# Create `~/opt` directory (if non-existing)
+# Directories used in installations
+STARTDIR=$(pwd)
 mkdir -p ~/opt
 
 # Install Python 3 if `$HOME/opt/python3/` directory doesn't exist
@@ -59,3 +60,21 @@ if [ ! -d "$HOME/opt/vim/" ]; then
         exit 1
     fi
 fi
+
+# Install Nextflow if `$HOME/opt/nextflow/nextflow` doesn't exist
+if [ ! -f "$HOME/opt/nextflow/nextflow" ]; then
+
+    # Download and install Nextflow
+    mkdir -p $HOME/opt/nextflow
+    cd $HOME/opt/nextflow
+    wget -qO- https://get.nextflow.io | bash
+
+    # Verify Nextflow installation
+    if [ $? != 0 ]; then
+        echo "Error: Nextflow installation failed"
+        exit 1
+    fi
+fi
+
+# Move to starting directory
+cd $STARTDIR
