@@ -17,7 +17,7 @@ if [ ! -d "$HOME/opt/python3/" ]; then
     cd Python-$PY_VERSION
 
     # Configure and install Python
-    ./configure --prefix="$HOME/opt"
+    ./configure --prefix="$HOME/opt/python3/"
     make
     make install
 
@@ -46,7 +46,7 @@ if [ ! -d "$HOME/opt/vim/" ]; then
         --enable-largefile \
         --enable-python3interp=yes \
         --with-python3-config-dir="$HOME/opt/python3/lib" \
-        --prefix="$HOME/opt/vim"
+        --prefix="$HOME/opt/vim/"
     make
     make install
     cd ..
