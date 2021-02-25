@@ -79,13 +79,10 @@ let mapleader="\<SPACE>"
 map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Open VIMRC file for editing
-:nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
+nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 
 " Re-source VIMRC
-:nmap <Leader>v :source $MYVIMRC <CR>
-
-" Open snippets file for current filetype
-:nnoremap <Leader>n :UltiSnipsEdit <CR>
+nmap <Leader>v :source $MYVIMRC <CR>
 
 " Miscellaneous: {{{1
 
@@ -178,8 +175,11 @@ set laststatus=2  " Status bar is always on
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
-let g:UltiSnipsExpandTrigger = '<C-l>'
+let g:UltiSnipsExpandTrigger = '<C-l>' " CTRL-l expands snippets
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
+
+" Open snippets file for current filetype
+nnoremap <Leader>n :UltiSnipsEdit <CR>
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
@@ -300,7 +300,6 @@ function! RenderXaringan()
         :w!
         :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "', 'xaringan::moon_reader')\n"
         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-        " :silent ! Rscript -e 'webshot::webshot("%:p:r.html", "%:p:r.pdf")'
     else
         echoerr "`".expand("%:p")."` is not a RMarkdown file."
         return 1
