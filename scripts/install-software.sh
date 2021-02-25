@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Script for installing Python and Vim so that the YouCompleteMe and UltiSnips
-# Vim plugins will work on Uppmax
+# Script for installing Python 3, Vim, Conda and Nextflow into `$HOME/opt/` for
+# increased portability as well as solving problems with Python libraries for
+# some Vim plugins (e.g. YouCompleteMe and UltiSnips) on the Uppmax cluster
 
 # Directories used in installations
 STARTDIR=$(pwd)
@@ -61,7 +62,7 @@ if [ ! -d "$HOME/opt/vim/" ]; then
     fi
 fi
 
-# Install Nextflow if `$HOME/opt/miniconda3` doesn't exist
+# Install Conda if `$HOME/opt/miniconda3` doesn't exist
 if [ ! -d "$HOME/opt/miniconda3" ]; then
 
     # Get the current system
