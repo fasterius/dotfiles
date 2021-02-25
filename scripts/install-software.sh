@@ -85,6 +85,9 @@ if [ ! -d "$HOME/opt/miniconda3" ]; then
         echo "Error: Conda installation failed"
         exit 1
     fi
+
+    # Install Mamba
+    conda install mamba -n base
 fi
 
 # Install Nextflow if `$HOME/opt/nextflow/nextflow` doesn't exist
