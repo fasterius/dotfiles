@@ -2,6 +2,8 @@ extends r
 
 snippet rmarkdown "Initialise an empty RMarkdown document" b
 ---
+params:
+	root_directory: NULL
 title: "${1:Document title}"
 author: "Erik Fasterius"
 date: "\`r format(Sys.time(), '%d %B, %Y')\`"
@@ -14,7 +16,10 @@ output:
 ---
 
 \`\`\`{r Setup}
-# Knitr options
+# Knit options
+knitr::opts_knit$set(root.dir = params$root_directory)
+
+# Chunk options
 knitr::opts_chunk$set(fig.width  = ${2:12},
                       fig.height = ${3:8},
                       fig.align  = "center",
