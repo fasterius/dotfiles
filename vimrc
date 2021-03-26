@@ -22,10 +22,8 @@ filetype plugin indent on
 " Autocommands for filetypes
 augroup filetypes
     autocmd!
-    autocmd BufNewFile,BufRead Snakefile,*.snakefile,*snake,*.smk
-        \ set filetype=snakemake
-    autocmd BufNewFile,BufRead *.R,*.Rout,*.r,*.Rhistory,*.Rt,*.Rout*
-        \ set filetype=r
+    autocmd BufNewFile,BufRead Snakefile,*.smk set filetype=snakemake
+    autocmd BufNewFile,BufRead *.R,*.r set filetype=r
     autocmd BufNewFile,BufRead *.Rnw,*.rnw set filetype=rnoweb
     autocmd BufNewFile,BufRead *.py set filetype=python
     autocmd BufNewFile,BufRead *bash* let g:is_bash=1
