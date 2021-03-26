@@ -57,6 +57,11 @@ augroup folding
     autocmd FileType nextflow set foldnestmax=1
 augroup END
 
+" Autocommand for syntax syncing methods
+augroup syntaxsync
+    autocmd BufEnter *.nf :syntax sync fromstart
+augroup END
+
 " Folding: {{{1
 
 " Enable FastFold
