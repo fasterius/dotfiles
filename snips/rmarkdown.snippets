@@ -4,7 +4,8 @@ snippet rmarkdown "Initialise an empty RMarkdown document" b
 ---
 params:
 	root_directory: NULL
-title: "${1:Document title}"
+title: "${1:NBIS Support #9999}"
+subtitle: "${2:Analysis}"
 author: "Erik Fasterius"
 date: "\`r format(Sys.time(), '%d %B, %Y')\`"
 output:
@@ -20,17 +21,17 @@ output:
 knitr::opts_knit$set(root.dir = params$root_directory)
 
 # Chunk options
-knitr::opts_chunk$set(fig.width  = ${2:12},
-                      fig.height = ${3:8},
+knitr::opts_chunk$set(fig.width  = ${3:12},
+                      fig.height = ${4:8},
                       fig.align  = "center",
-                      message    = ${4:FALSE},
-                      warning    = ${5:FALSE},
+                      message    = ${5:FALSE},
+                      warning    = ${6:FALSE},
                       results    = "asis")
 \`\`\`
 
 \`\`\`{r Load packages}
 suppressPackageStartupMessages({
-	library("${6:A package}")
+	library("${7:ggplot2}")
 })
 \`\`\`
 endsnippet
