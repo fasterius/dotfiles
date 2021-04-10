@@ -87,6 +87,24 @@ nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 " Re-source VIMRC
 nmap <Leader>v :source $MYVIMRC <CR>
 
+" Markdown And LaTeX: {{{1
+
+" Render current Markdown to HTML and open
+nmap <LocalLeader>P
+    \ :w!<CR>
+    \ :w!/tmp/vim-markdown.md<CR>
+    \ :!pandoc -s -f markdown -t html
+        \ -o /tmp/vim-markdown.html
+        \ /tmp/vim-markdown.md<CR>
+    \ :!open -a firefox /tmp/vim-markdown.html
+        \ > /dev/null 2> /dev/null &<CR><CR>
+
+" Compile current LaTeX to PDF and open
+nmap <LocalLeader>L
+    \ :w!<CR>
+    \ :!pdflatex "%:p" <CR>
+    \ :!open "%:p:r.pdf" <CR><CR>
+
 " Miscellaneous: {{{1
 
 " Make <BACKSPACE> work as normal
@@ -312,16 +330,6 @@ endfunction
 " Render current RMarkdown/Sweave file
 nmap <silent> <LocalLeader>k :call RenderRMarkdown()<CR>
 nmap <silent> <LocalLeader>x :call RenderXaringan()<CR>
-
-" Render current Markdown to HTML and open
-nmap <LocalLeader>P
-    \ :w!<CR>
-    \ :w!/tmp/vim-markdown.md<CR>
-    \ :!pandoc -s -f markdown -t html
-        \ -o /tmp/vim-markdown.html
-        \ /tmp/vim-markdown.md<CR>
-    \ :!open -a firefox /tmp/vim-markdown.html
-        \ > /dev/null 2> /dev/null &<CR><CR>
 
 " Search Settings: {{{1
 
