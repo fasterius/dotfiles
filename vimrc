@@ -285,6 +285,25 @@ function! PrintHead()
     endif
 endfunction
 
+" Function for finding function blocks
+function! FindFunction()
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Find appropriate function block depending on language
+    if language == "r"
+        ?^[a-zA-Z_\.]*[[:space:]]<-[[:space:]]function(
+        execute "normal! V"
+        /^}
+    elseif language == "python"
+        ?^def[[:space:]][a-zA-Z0-9_()]*:
+        execute "normal! V"
+        /^[^# ]
+        ?^\s\+\S
+    endif
+endfunction
+
 " Vim-slime key mappings
 nmap <localleader>l <Plug>SlimeLineSend
 nmap <localleader>p <Plug>SlimeParagraphSend
@@ -296,6 +315,7 @@ nmap <localleader>t :call OpenTerminal()<CR>
 nmap <localleader>q :call CloseTerminal()<CR>
 nmap <localleader>h :call PrintHead()<CR>
 nmap <localleader>C :SlimeSend0 "\x03"<CR>
+nmap <localleader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
 
 " REPL RMarkdown Rendering: {{{1
 
