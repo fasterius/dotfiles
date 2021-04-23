@@ -4,21 +4,21 @@
 # and installs all Vim plugins
 
 # Bash
-ln -sfn ~/.bash/profiles/bashrc ~/.bashrc
-ln -sfn ~/.bash/profiles/bash_profile ~/.bash_profile
+ln -sfn ~/.dotfiles/profiles/bashrc ~/.bashrc
+ln -sfn ~/.dotfiles/profiles/bash_profile ~/.bash_profile
 
 # Conda
-ln -sfn ~/.bash/profiles/condarc ~/.condarc
+ln -sfn ~/.dotfiles/profiles/condarc ~/.condarc
 
 # Git
-ln -sfn ~/.bash/git/gitconfig ~/.gitconfig
-ln -sfn ~/.bash/git/gitignore_global ~/.gitignore_global
+ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
+ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 
 # Tmux
-ln -sfn ~/.bash/profiles/tmux.conf ~/.tmux.conf
+ln -sfn ~/.dotfiles/profiles/tmux.conf ~/.tmux.conf
 
 # Terminfo
-cp -r ~/.bash/terminfo ~/.terminfo
+cp -r ~/.dotfiles/terminfo ~/.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
 tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
