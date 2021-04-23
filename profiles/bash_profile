@@ -42,8 +42,8 @@ export LS_COLORS
 # Use either `ls`  or `gls` (GNU-ls), as appropriate
 if hash gls 2>/dev/null; then
 
-    # Long-format, coloured `gls` that ignore OSX specific home directories
-    LL='gls -l -v -h --literal --color=auto'
+    # GNU `gls` that ignore OSX specific home directories
+    LL='gls --literal'
     LL=$LL' --hide=Desktop'
     LL=$LL' --hide=Documents'
     LL=$LL' --hide=Downloads'
@@ -55,10 +55,12 @@ if hash gls 2>/dev/null; then
     LL=$LL' --hide=Public'
 else
 
-    # Long-format, coloured, human readable `ls`
-    LL='ls -l -v -h --color=auto'
+    # Standard `ls`
+    LL='ls'
 fi
-alias ll=$LL
+
+# Final long-format, coloured and human-readable `ll` command
+alias ll=$LL' -lvh --color=auto --group-directories-first'
 
 # Aliases --------------------------------------------------------------------
 
