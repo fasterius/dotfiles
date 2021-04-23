@@ -18,7 +18,7 @@ ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 ln -sfn ~/.dotfiles/profiles/tmux.conf ~/.tmux.conf
 
 # Terminfo
-cp -r ~/.dotfiles/terminfo ~/.terminfo
+cp -r ~/.dotfiles/profiles/terminfo ~/.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
 tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
