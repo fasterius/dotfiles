@@ -8,9 +8,7 @@
 This is my collection of `dotfiles`, covering everything from bash to vim. You
 can find Git settings in `git/`, several configuration files in `profiles/`,
 everything related to Vim in `vim/` as well as several helper scripts in
-`scripts/`.
-
-### Quick installation
+`scripts/`. Install it like so:
 
 ```bash
 git clone git@github.com:fasterius/dotfiles.git ~/.dotfiles
