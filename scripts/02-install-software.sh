@@ -19,7 +19,7 @@ if [ ! -d "$HOME/opt/python3/" ]; then
     cd Python-$PY_VERSION
 
     # Configure and install Python
-    ./configure --prefix="$HOME/opt/python3/"
+    ./configure --enable-shared --prefix="$HOME/opt/python3/"
     make
     make install
 
