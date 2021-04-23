@@ -1,17 +1,30 @@
 #!/bin/bash
 
 # Script that creates symbolic links for all relevant files in the repository
+# and installs all Vim plugins
 
 # Bash
-ln -s ~/.bash/profiles/bashrc ~/.bashrc
-ln -s ~/.bash/profiles/bash_profile ~/.bash_profile
+ln -sfn ~/.bash/profiles/bashrc ~/.bashrc
+ln -sfn ~/.bash/profiles/bash_profile ~/.bash_profile
 
 # Conda
-ln -s ~/.bash/profiles/condarc ~/.condarc
+ln -sfn ~/.bash/profiles/condarc ~/.condarc
 
 # Git
-ln -s ~/.bash/git/gitconfig ~/.gitconfig
-ln -s ~/.bash/git/gitignore_global ~/.gitignore_global
+ln -sfn ~/.bash/git/gitconfig ~/.gitconfig
+ln -sfn ~/.bash/git/gitignore_global ~/.gitignore_global
 
 # Tmux
-ln -s ~/.bash/profiles/tmux.conf ~/.tmux.conf
+ln -sfn ~/.bash/profiles/tmux.conf ~/.tmux.conf
+
+# Terminfo
+cp -r ~/.bash/terminfo ~/.terminfo
+tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
+tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
+tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
+
+# Vim
+ln -sfn ~/.vim/vimrc ~/.vimrc
+
+# Install Vim plugins using VimPlug
+vim +PlugInstall +qall
