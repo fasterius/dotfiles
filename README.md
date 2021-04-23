@@ -1,55 +1,62 @@
-# Bash settings
+# Dotfiles
 
-[![License: MIT][1]][2] 
-
-These are my (fairly minimalistic) Bash settings, contained in the
-`bash_profile` and `bashrc` files. The latter simply sources the former. The
-`gitignore_global` file contains git ignore statements that will be used on a
-global (system-wide) scale. A `gitconfig` is also included, containing a git
-username and email, as well as the path to the global gitignore file.
-
-In order to simplify usage of this repo, you can execute the
-`scripts/create_symlinks.sh` script, which will create symbolic links in your
-home folder for the bash profiles and the gitconfig file.
-
-There is also a Bash script (`/scripts/hide_home_folder.sh`) that hides the
-default OSX home folders (i.e. "Desktop", "Downloads", etc.) from Finder and
-creates symbolic links in a new `~/home` folder for easy access without
-cluttering up the default `~` home folder. Simply execute it if you want to use
-this solution.
+[![License: MIT][1]][2]
 
 [1]: https://img.shields.io/badge/License-MIT-blue.svg
 [2]: https://opensource.org/licenses/MIT
 
-# Vim files
+This is my collection of `dotfiles`, covering everything from bash to vim. You
+can find Git settings in `git/`, several configuration files in `profiles/`,
+everything related to Vim in `vim/` as well as several helper scripts in
+`scripts/`.
 
-This is my dotvim repository with files and settings I use for Vim. The main
-interest is the `.vimrc` file, but syntax highlighting files for R, Snakemake
-and Nextflow are also included in the `syntax` directory. 
-
-## Installation
-
-Clone the repository:
+### Quick installation
 
 ```bash
-git clone git://github.com/fasterius/dotvim.git ~/.vim
+git clone git@github.com:fasterius/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles/scripts
+./01-hide-home-directories.sh
+./02-install-software.sh
+./03-create-symlinks.sh
 ```
 
-You then need to add a symbolic link to the `vimrc` file in your home
-directory, as well as install the plugins using `:PlugInstall`. These
-steps can be done automatically by running the initialising script:
+## Git
 
-```bash
-bash ~/.vim/initialise.sh
-```
+The `gitignore_global` file contains git ignore statements that will be used on
+a global (system-wide) scale. A `gitconfig` is also included, containing a git
+username and email, as well as the path to the global gitignore file.
 
-## Adding another plugin
+## Profiles
+
+The main `bash_profile` contains all bash-related settings and aliases, while
+`bashrc` simply source the former. The `uppmax_profile` is source when logged in
+to a remote using SSH. The `condarc` contains the Conda configuration, while
+`tmux.config` does the same for TMUX.
+
+## Vim
+
+The main interest here is the `.vimrc` file, but syntax highlighting files for
+R, Snakemake and Nextflow are also included in the `syntax/` directory.
 
 If you want to add another plugin, all you need to do is add a line in the
-`vimrc` file specifying the URL or GitHub location to the plugin, followed
-by the `:PlugInstall` command again. This line should be between the 
-`call plug#begin('~/.vim/plugged')` and `call plug#end()` commands. For
-example, the line to install Tim Pope's `vim-surround` looks like this:
-`Plug 'tpope/vim-surround'`.
+`vimrc` file specifying the URL or GitHub location to the plugin, followed by
+the `:PlugInstall` command again. This line should be between the `call
+plug#begin('~/.vim/plugged')` and `call plug#end()` commands. For example, the
+line to install Tim Pope's `vim-surround` looks like this: `Plug
+'tpope/vim-surround'`.
 
-[vim-plug]: https://github.com/junegunn/vim-plug
+## Scripts
+
+In order to simplify usage of this repo, you can execute the scripts contained
+in the `scripts/` directory. The `01-hide-home-folder.sh` script hides the
+default MacOS home directories (*i.e.* "Desktop", "Download", *etc.*) from
+Finder and creates symbolic links in a new `~/home/` directory for easy access
+without cluttering up the default home directory.
+
+The `02-install-software.sh` installs Python3, Vim, Conda and Nextflow in
+`~/opt/` with the correct build settings that will enable use of *e.g.*
+`YouCompleteMe` for Vim.
+
+The `03-create-symlinks.sh` creates all the symbolic links needed for all the
+various profiles and configs contained in this repository, as well as installs
+all the plugins specified in the Vim settings.
