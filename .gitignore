@@ -1,1 +1,4 @@
 *.un~
+.viminfo
+.netrwhist
+plugged/

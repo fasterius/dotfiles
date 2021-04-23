@@ -1,0 +1,66 @@
+extends r
+
+snippet rmarkdown "Initialise an empty RMarkdown document" b
+---
+params:
+	root_directory: NULL
+title: "${1:NBIS Support #9999}"
+subtitle: "${2:Analysis}"
+author: "Erik Fasterius"
+date: "\`r format(Sys.time(), '%d %B, %Y')\`"
+output:
+    html_document:
+        code_folding: hide
+        toc: true
+        toc_float:
+            collapsed: true
+---
+
+\`\`\`{r Setup}
+# Knit options
+knitr::opts_knit$set(root.dir = params$root_directory)
+
+# Chunk options
+knitr::opts_chunk$set(fig.width  = ${3:12},
+                      fig.height = ${4:8},
+                      fig.align  = "center",
+                      message    = ${5:FALSE},
+                      warning    = ${6:FALSE},
+                      results    = "asis")
+
+# Set seed
+set.seed(42)
+\`\`\`
+
+\`\`\`{r Load packages}
+suppressPackageStartupMessages({
+	library("${7:ggplot2}")
+})
+\`\`\`
+endsnippet
+
+snippet chunk "Create a new code chunk" b
+\`\`\`{r ${1:New chunk}}
+${2:${VISUAL:Contents}}
+\`\`\`
+endsnippet
+
+snippet function_table "Add a function for printing knitr tables" b
+# Function for creating tables
+print_table <- function(data,
+                        digits     = 2,
+                        caption    = NULL,
+                        full_width = TRUE,
+                        font_size  = 12) {
+    cat("\n")
+    print(data %>%
+        knitr::kable(digits  = digits,
+                     caption = caption) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover"),
+                                  full_width        = full_width,
+                                  font_size         = font_size,
+                                  fixed_thead       = TRUE,
+                                  position          = "left"))
+    cat("\n")
+}
+endsnippet
