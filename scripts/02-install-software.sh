@@ -60,6 +60,9 @@ if [ ! -d "$HOME/opt/vim/" ]; then
         echo "Error: Vim installation failed"
         exit 1
     fi
+
+    # Install Vim plugins using VimPlug
+    vim +PlugInstall +qall
 fi
 
 # Install Conda if `$HOME/opt/miniconda3` doesn't exist

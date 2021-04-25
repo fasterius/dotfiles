@@ -26,6 +26,3 @@ tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 # Vim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
-
-# Install Vim plugins using VimPlug
-vim +PlugInstall +qall
