@@ -38,7 +38,7 @@ if [ ! -d "$HOME/opt/vim/" ]; then
 
     # Download Vim
     cd ~/opt
-    git clone https://github.com/vim/vim.git vim-source
+    git clone --depth 1 https://github.com/vim/vim.git vim-source
     cd vim-source
 
     # Configure and install Vim
