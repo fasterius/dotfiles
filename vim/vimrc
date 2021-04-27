@@ -129,6 +129,9 @@ set autoindent
 " Use UTF-8 encoding
 set encoding=utf-8
 
+" Use the system clipboard
+set clipboard=unnamed
+
 " Movements: {{{1
 
 " Disable arrow key mappings for normal mode
