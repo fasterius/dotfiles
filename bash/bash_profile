@@ -2,7 +2,7 @@
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 
     # Source Uppmax-specific profile
-    source ~/.dotfiles/profiles/uppmax_profile
+    source ~/.dotfiles/bash/uppmax_profile
 else
 
     # Local paths
