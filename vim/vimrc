@@ -230,9 +230,9 @@ let g:pandoc#keyboard#use_default_mappings = 0
 " REPL: {{{1
 
 " General vim-slime settings
-let g:slime_target = "vimterminal"  " Use the Vim built-in terminal
-let g:slime_vimterminal_config = { "term_finish": "close",
-                                 \  "vertical": 1 }
+let g:slime_target = "tmux"
+let g:slime_dont_ask_default = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": "!"}
 let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
@@ -250,13 +250,17 @@ endfunction
 " Function for opening a new REPL window
 function! OpenTerminal()
 
-    " Get starting window number
-    let starting_window = bufwinnr(bufname('%'))
 
     " Open a terminal with appropriate language and move back to starting window
-    :execute ':vertical terminal ++close ++norestore' GetLanguage()
-    :execute starting_window 'wincmd w'
+    :silent !tmux split-window -h
+    :silent !tmux select-pane -l
     :SlimeConfig
+
+    " Get language of current filetype
+    let language = GetLanguage()
+    if language != "bash"
+        :SlimeSend0 language . "\n"
+    endif
 endfunction
 
 " Function for exiting REPL windows
@@ -270,9 +274,8 @@ function! CloseTerminal()
         :SlimeSend1 quit(save = "no")
     elseif language == "python"
         :SlimeSend1 exit()
-    else
-        :SlimeSend1 exit
     endif
+    :SlimeSend1 exit
 endfunction
 
 " Function for printing the head of a pandas/R dataframe
@@ -392,10 +395,10 @@ set splitbelow
 set splitright
 
 " Remap split movements to just CTR + <movement>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " Syntax Highlighting: {{{1
 
