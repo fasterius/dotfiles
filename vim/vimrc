@@ -227,6 +227,9 @@ let g:pandoc#formatting#textwidth = 80
 let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
 let g:pandoc#keyboard#use_default_mappings = 0
 
+" Disable conflicting plugin mapping for 'å' button
+let g:AutoPairsShortcutFastWrap = ''
+
 " REPL: {{{1
 
 " General vim-slime settings
