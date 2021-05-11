@@ -1,7 +1,7 @@
 # Start a TMUX session
 if command -v tmux &> /dev/null && [ -n "$PS1"  ] && \
     [[ ! "$TERM" =~ tmux  ]] && [ -z "$TMUX"  ]; then
-      exec tmux
+      tmux new-session
 fi
 
 # Source custom uppmax_profile if in a SSH session
