@@ -1,5 +1,3 @@
-autocmd BufEnter *.nf :syntax sync fromstart
-
 " Helper function for getting the next non-blank line for folding
 function! NextNonBlankLine(lnum)
     let numlines = line('$')  " Get total lines in file
@@ -24,25 +22,21 @@ function! IndentLevel(lnum)
 endfunction
 
 " Main Nextflow folding function
-function! NextflowFold(lnum)
+function! PythonFold(lnum)
 
-    " Fold ending curly-brackets with previous lines
-    if getline(a:lnum) =~? '\v^}$'
+    " Fold import statements
+    if getline(a:lnum) =~? '\v^import'
+        return 1
+    endif
+
+    " Fold blank lines with later lines
+    if getline(a:lnum) =~? '\v^\s*$'
         return '-1'
     endif
 
     " Get indentation level of current line and next non-blank line
     let this_indent = IndentLevel(a:lnum)
     let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
-
-    " Fold blank lines with later lines
-    if getline(a:lnum) =~? '\v^\s*$'
-        if getline(a:lnum - 1) =~? '\v^}$'  " Let lone curly-brackets end folds
-            return '<' . this_indent
-        else
-            return '-1'
-        endif
-    endif
 
     " Compare current and next indentation and set fold level as appropriate
     if next_indent == this_indent
@@ -57,4 +51,4 @@ function! NextflowFold(lnum)
 endfunction
 
 setlocal foldmethod=expr
-setlocal foldexpr=NextflowFold(v:lnum)
+setlocal foldexpr=PythonFold(v:lnum)
