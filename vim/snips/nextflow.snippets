@@ -59,6 +59,7 @@ profiles {
             memory = { 6.GB * task.attempt }
             cpus = { 1 * task.attempt }
             time = { 10.h * task.attempt }
+            scratch = '$SNIC_TMP'
             errorStrategy  = 'retry'
             maxRetries = 1
         }
