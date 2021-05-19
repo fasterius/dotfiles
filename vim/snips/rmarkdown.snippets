@@ -30,13 +30,27 @@ knitr::opts_chunk$set(fig.width  = ${3:12},
 
 # Set seed
 set.seed(42)
-\`\`\`
 
-\`\`\`{r Load packages}
+# Load packages
 suppressPackageStartupMessages({
 	library("${7:ggplot2}")
 })
 \`\`\`
+
+# ${8:Analyses}
+
+\`\`\`{r ${9:New chunk}}
+${10:${VISUAL:Contents}}
+\`\`\`
+
+# Session info
+
+\`\`\`{r Session info, echo = FALSE, results = "markup"}
+devtools::session_info()
+\`\`\`
+
+<!-- Remove whitespace at end of document due to using floating ToC -->
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
 endsnippet
 
 snippet chunk "Create a new code chunk" b
