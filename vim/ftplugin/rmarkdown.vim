@@ -1,3 +1,6 @@
+" Set commenstring
+autocmd FileType rmarkdown set commentstring=#\ %s
+
 " Use expression folding
 autocmd FileType rmarkdown set foldmethod=expr
 
