@@ -102,7 +102,6 @@ Plug 'dense-analysis/ale'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
 Plug 'Konfekt/FastFold'
-Plug 'luochen1990/rainbow'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbberger/vim-singularity-syntax'
 Plug 'scrooloose/nerdcommenter'
@@ -122,10 +121,6 @@ call plug#end()
 set background=light  " Light background
 set t_Co=16  " 16 bit colours
 colorscheme solarized  " Solarized colours
-
-" Parentheses
-let g:rainbow_active=1  " Use rainbow parentheses
-set showmatch  " Show matching parenthesis on cursor hovering
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
