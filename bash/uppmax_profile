@@ -4,3 +4,5 @@ module load tmux/2.5
 
 # Set Python library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/opt/python3/lib/
+
+alias transit='ssh erikfas@transit.uppmax.uu.se'
