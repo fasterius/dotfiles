@@ -102,7 +102,7 @@ Plug 'luochen1990/rainbow'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbberger/vim-singularity-syntax'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'SirVer/ultisnips'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tpope/vim-repeat'
