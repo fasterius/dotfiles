@@ -103,7 +103,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
 Plug 'Konfekt/FastFold'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rbberger/vim-singularity-syntax'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
 Plug 'SirVer/ultisnips'
