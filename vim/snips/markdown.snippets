@@ -1,0 +1,47 @@
+snippet readme "Initialise a README.md for NBIS projects" b
+# NBIS Support \#${1:0000}
+
+This is the home of the NBIS support project with the Redmine issue \#${0:$1},
+*"${2:Project name as written in Redmine}"*.
+
+## Reproducibility
+
+A Conda environment specification is provided in the \`environment.yml\` file, a
+Docker image specification in \`Dockerfile\` and a Nextflow workflow allows
+reproducibility of the analyses. Nextflow is included in the Conda environment,
+but you can also install it by following the instruction at [this
+website](https://www.nextflow.io/).
+
+If you are running the workflow on the Uppmax HPC system you may use the
+\`-profile uppmax\` flag, which will submit everything through the SLURM system
+available at Uppmax rather than run the workflow locally.
+
+Raw data is not stored in this repository.
+
+### Using Docker
+
+You can install Docker by following the instructions at [this
+website](https://docs.docker.com/get-docker/).
+
+\`\`\`bash
+# Build the Docker image
+docker build -t ${0:$1} .
+
+# Run the workflow
+nextflow run . -use-docker ${0:$1}
+\`\`\`
+
+### Using Conda
+
+You can install Conda by following the instruction at [this
+website](https://docs.conda.io/en/latest/miniconda.html).
+
+\`\`\`bash
+# Create and activate the Conda environment
+conda env create -p ${0:$1}-env -f environment.yml
+conda activate ${0:$1}-env/
+
+# Run the workflow
+nextflow run .
+\`\`\`
+endsnippet
