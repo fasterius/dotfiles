@@ -99,6 +99,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
+Plug 'itchyny/vim-gitbranch'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jpalardy/vim-slime'
 Plug 'Konfekt/FastFold'
@@ -274,8 +275,8 @@ set laststatus=2
 
 " Function to get the current Git branch
 function! GitBranch()
-    let l:branchname = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+    let l:branchname = gitbranch#name()
+    return strlen(l:branchname) > 0 ? '  '.l:branchname.' ' : ''
 endfunction
 
 " Left side
