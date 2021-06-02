@@ -95,7 +95,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
+Plug 'fasterius/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
@@ -118,8 +118,8 @@ Plug 'wellle/targets.vim'
 call plug#end()
 
 " Colour scheme
+set t_Co=256  " 256 bit colours
 set background=light  " Light background
-set t_Co=16  " 16 bit colours
 colorscheme solarized  " Solarized colours
 
 " UltiSnips
