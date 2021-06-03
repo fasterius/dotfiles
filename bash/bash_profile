@@ -5,6 +5,9 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     source ~/.dotfiles/bash/uppmax_profile
 else
 
+    # Silence the OS X zsh message
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+
     # Local paths
     export PATH="/usr/local/opt/libxml2/bin:$PATH"
     export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
