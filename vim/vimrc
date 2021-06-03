@@ -2,6 +2,10 @@
 "  Author:  Erik Fasterius <erik dot fasterius at outlook dot com>
 "  URL:     https://github.com/fasterius/dotfiles
 
+" Use vi-noncompatibility (this is redundant in most cases but setting it here
+" explicitly for clarity over using the implicit default behaviour)
+set nocompatible
+
 " Backups: {{{1
 
 " Backups in '~/.vim/tmp' directory
@@ -30,7 +34,7 @@ nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 nmap <Leader>v :source $MYVIMRC <CR>
 
 " Miscellaneous: {{{1
-"
+
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
 
