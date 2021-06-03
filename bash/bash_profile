@@ -64,6 +64,11 @@ alias ll=$LL' -lvh --color=auto --group-directories-first'
 
 # Aliases --------------------------------------------------------------------
 
+# TMUX aliases
+alias tn='tmux new -t'
+alias ta='tmux attach -t'
+alias tl='tmux ls'
+
 # Conda aliases
 alias coac='conda activate'
 alias code='conda deactivate'
