@@ -97,26 +97,26 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'fasterius/vim-colors-solarized'
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dense-analysis/ale'
-Plug 'itchyny/vim-gitbranch'
-Plug 'jiangmiao/auto-pairs'
-Plug 'jpalardy/vim-slime'
-Plug 'Konfekt/FastFold'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'  }
-Plug 'SirVer/ultisnips'
-Plug 'tmhedberg/SimpylFold'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py' }
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'wellle/targets.vim'
+Plug 'dense-analysis/ale',             { 'as': 'ale' }
+Plug 'jiangmiao/auto-pairs',           { 'as': 'auto-pairs' }
+Plug 'ntpeters/vim-better-whitespace', { 'as': 'better-whitespace' }
+Plug 'fasterius/vim-colors-solarized', { 'as': 'colors-solarized' }
+Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
+Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
+Plug 'itchyny/vim-gitbranch',          { 'as': 'gitbranch' }
+Plug 'scrooloose/nerdcommenter',       { 'as': 'nerdcommenter' }
+Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle'  }
+Plug 'vim-pandoc/vim-pandoc',          { 'as': 'pandoc' }
+Plug 'vim-pandoc/vim-pandoc-syntax',   { 'as': 'pandoc-syntax' }
+Plug 'tpope/vim-repeat',               { 'as': 'repeat' }
+Plug 'vim-pandoc/vim-rmarkdown',       { 'as': 'rmarkdown' }
+Plug 'tmhedberg/SimpylFold',           { 'as': 'simpylfold' }
+Plug 'jpalardy/vim-slime',             { 'as': 'slime' }
+Plug 'tpope/vim-surround',             { 'as': 'surround' }
+Plug 'wellle/targets.vim',             { 'as': 'targets' }
+Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
+Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
+Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'do': 'python3 install.py' }
 call plug#end()
 
 " Colour scheme
