@@ -7,7 +7,6 @@ else
 
     # Local paths
     export PATH="/usr/local/opt/libxml2/bin:$PATH"
-    export PATH="/Users/erik.fasterius/Library/Python/3.7/bin:$PATH"
     export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 fi
 
