@@ -91,6 +91,8 @@ set scrolloff=5
 " Plugins: {{{1
 
 " Use vim-plug for plugin management
+" (The use of a specific commit for YouCompleteMe is due to subsequent commits
+" requiring Mac OSX 10.15 and breaks systems using previous versions)
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -105,7 +107,7 @@ Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
 Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
 Plug 'itchyny/vim-gitbranch',          { 'as': 'gitbranch' }
 Plug 'scrooloose/nerdcommenter',       { 'as': 'nerdcommenter' }
-Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle'  }
+Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
 Plug 'vim-pandoc/vim-pandoc',          { 'as': 'pandoc' }
 Plug 'vim-pandoc/vim-pandoc-syntax',   { 'as': 'pandoc-syntax' }
 Plug 'tpope/vim-repeat',               { 'as': 'repeat' }
@@ -116,7 +118,7 @@ Plug 'tpope/vim-surround',             { 'as': 'surround' }
 Plug 'wellle/targets.vim',             { 'as': 'targets' }
 Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
 Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
-Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'do': 'python3 install.py' }
+Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
 call plug#end()
 
 " Colour scheme
