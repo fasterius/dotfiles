@@ -6,3 +6,8 @@ module load tmux/2.5
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/opt/python3/lib/
 
 alias transit='ssh erikfas@transit.uppmax.uu.se'
+
+# Aliases to log into Bianca @ Uppmax
+alias bianca-molba='ssh -A erikfas-sens2020519@bianca.uppmax.uu.se'
+alias bianca-pbmc='ssh -A erikfas-sens2020543@bianca.uppmax.uu.se'
+alias bianca='ssh -A erikfas-sens2020023@bianca.uppmax.uu.se'

@@ -120,10 +120,6 @@ alias rackham2='ssh erikfas@rackham2.uppmax.uu.se'
 alias rackham3='ssh erikfas@rackham3.uppmax.uu.se'
 alias rackham4='ssh erikfas@rackham4.uppmax.uu.se'
 
-# Aliases to log into Bianca @ Uppmax
-alias bianca-molba='ssh -A erikfas-sens2020519@bianca.uppmax.uu.se'
-alias bianca='ssh -A erikfas-sens2020023@bianca.uppmax.uu.se'
-
 # Prompt ---------------------------------------------------------------------
 
 # Function to get conda env if in an activated environment
