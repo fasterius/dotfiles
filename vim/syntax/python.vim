@@ -9,7 +9,7 @@
 "
 " Based on python.vim (from Vim 6.1 distribution)
 " by Neil Schemenauer <nas at python dot ca>
-" (Slightly modified by Erik Fasterius <erikfas at kth dot se>)
+" (Modified by Erik Fasterius <erik dot fasterius at outlook dot com>)
 "
 " Please use the following channels for reporting bugs, offering suggestions or
 " feedback:

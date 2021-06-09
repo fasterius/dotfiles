@@ -4,7 +4,7 @@
 " Filenames:	*.git/COMMIT_EDITMSG
 " Last Change:	2010 May 21
 "
-" (Small changes by Erik Fasterius <erikfas at kth dot se>
+" (Small changes by Erik Fasterius <erik dot fasterius at outlook dot com>
 
 if exists("b:current_syntax")
   finish

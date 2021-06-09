@@ -1,10 +1,14 @@
 "  Vim Run Commands file
 "  Author:  Erik Fasterius <erik dot fasterius at outlook dot com>
-"  URL:     https://github.com/fasterius/dotvim
+"  URL:     https://github.com/fasterius/dotfiles
+
+" Use vi-noncompatibility (this is redundant in most cases but setting it here
+" explicitly for clarity over using the implicit default behaviour)
+set nocompatible
 
 " Backups: {{{1
 
-" Backups in '~/.vim/tmp' folder
+" Backups in '~/.vim/tmp' directory
 set backup
 set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
@@ -13,64 +17,6 @@ set writebackup
 
 " Store undo data in a file
 set undofile
-
-" Filetypes: {{{1
-
-" Enable filetype detection and filetype-specific indentation/plugins
-filetype plugin indent on
-
-" Autocommands for filetypes
-augroup filetypes
-    autocmd!
-    autocmd BufNewFile,BufRead Snakefile,*.smk set filetype=snakemake
-    autocmd BufNewFile,BufRead *.R,*.r set filetype=r
-    autocmd BufNewFile,BufRead *.Rnw,*.rnw set filetype=rnoweb
-    autocmd BufNewFile,BufRead *.py set filetype=python
-    autocmd BufNewFile,BufRead *bash* let g:is_bash=1
-    autocmd BufNewFile,BufRead *bash* set filetype=sh
-    autocmd BufNewFile,BufRead nextflow.config set filetype=java
-    autocmd BufNewFile,BufRead *.nf set filetype=nextflow
-    autocmd BufNewFile,BufRead *.def set filetype=singularity
-    autocmd BufNewFile,BufRead Dockerfile,*.dockerfile,.dockerignore
-        \ set filetype=dockerfile
-augroup END
-
-" Autocommands for filetype commentstrings
-augroup commentstrings
-    autocmd FileType r set commentstring=#\ %s
-    autocmd FileType rmd set commentstring=#\ %s
-    autocmd FileType rmarkdown set commentstring=#\ %s
-    autocmd FileType singularity set commentstring=#\ %s
-augroup END
-
-" Autocommands for filetype foldmethods
-augroup folding
-    autocmd FileType r set foldmethod=syntax
-    autocmd FileType r set foldnestmax=1
-    autocmd FileType rmd set foldmethod=expr
-    autocmd FileType rmarkdown set foldmethod=expr
-    autocmd FileType snakemake set foldmethod=indent
-    autocmd FileType snakemake set foldnestmax=1
-    autocmd FileType nextflow set foldmethod=indent
-    autocmd FileType nextflow set foldnestmax=1
-augroup END
-
-" Autocommand for syntax syncing methods
-augroup syntaxsync
-    autocmd BufEnter *.nf :syntax sync fromstart
-augroup END
-
-" Folding: {{{1
-
-" Enable FastFold
-let g:markdown_folding = 1
-let g:r_syntax_folding = 1
-
-" Folding for vim-pandoc
-let g:pandoc#folding#mode = 'expr'  " Use expression folding
-let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
-let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
-let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
 
 " General Key Mappings: {{{1
 
@@ -87,25 +33,10 @@ nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 " Re-source VIMRC
 nmap <Leader>v :source $MYVIMRC <CR>
 
-" Markdown And LaTeX: {{{1
-
-" Render current Markdown to HTML and open
-nmap <LocalLeader>P
-    \ :w!<CR>
-    \ :w!/tmp/vim-markdown.md<CR>
-    \ :!pandoc -s -f markdown -t html
-        \ -o /tmp/vim-markdown.html
-        \ /tmp/vim-markdown.md<CR>
-    \ :!open -a firefox /tmp/vim-markdown.html
-        \ > /dev/null 2> /dev/null &<CR><CR>
-
-" Compile current LaTeX to PDF and open
-nmap <LocalLeader>L
-    \ :w!<CR>
-    \ :!pdflatex "%:p" <CR>
-    \ :!open "%:p:r.pdf" <CR><CR>
-
 " Miscellaneous: {{{1
+
+" Enable filetype detection and filetype-specific indentation/plugins
+filetype plugin indent on
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
@@ -131,6 +62,10 @@ set encoding=utf-8
 
 " Use the system clipboard
 set clipboard=unnamed
+
+" Create splits below and to the right
+set splitbelow
+set splitright
 
 " Movements: {{{1
 
@@ -164,44 +99,32 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
-Plug 'airblade/vim-gitgutter'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dense-analysis/ale'
-Plug 'jiangmiao/auto-pairs'
-Plug 'jpalardy/vim-slime'
-Plug 'Konfekt/FastFold'
-Plug 'luochen1990/rainbow'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'rbberger/vim-singularity-syntax'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'SirVer/ultisnips'
-Plug 'tmhedberg/SimpylFold'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', { 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'wellle/targets.vim'
+Plug 'dense-analysis/ale',             { 'as': 'ale' }
+Plug 'jiangmiao/auto-pairs',           { 'as': 'auto-pairs' }
+Plug 'ntpeters/vim-better-whitespace', { 'as': 'better-whitespace' }
+Plug 'fasterius/vim-colors-solarized', { 'as': 'colors-solarized' }
+Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
+Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
+Plug 'itchyny/vim-gitbranch',          { 'as': 'gitbranch' }
+Plug 'scrooloose/nerdcommenter',       { 'as': 'nerdcommenter' }
+Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
+Plug 'vim-pandoc/vim-pandoc',          { 'as': 'pandoc' }
+Plug 'vim-pandoc/vim-pandoc-syntax',   { 'as': 'pandoc-syntax' }
+Plug 'tpope/vim-repeat',               { 'as': 'repeat' }
+Plug 'vim-pandoc/vim-rmarkdown',       { 'as': 'rmarkdown' }
+Plug 'tmhedberg/SimpylFold',           { 'as': 'simpylfold' }
+Plug 'jpalardy/vim-slime',             { 'as': 'slime' }
+Plug 'tpope/vim-surround',             { 'as': 'surround' }
+Plug 'wellle/targets.vim',             { 'as': 'targets' }
+Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
+Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
+Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
 call plug#end()
 
 " Colour scheme
+set t_Co=256  " 256 bit colours
 set background=light  " Light background
-set t_Co=16  " 16 bit colours
 colorscheme solarized  " Solarized colours
-
-" Parentheses
-let g:rainbow_active=1  " Use rainbow parentheses
-set showmatch  " Show matching parenthesis on cursor hovering
-
-" Status bar
-let g:airline_theme='solarized'  " Solarized theme
-set laststatus=2  " Status bar is always on
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
@@ -222,10 +145,22 @@ let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' },
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
 map <leader>t :NERDTreeToggle<CR>
 
+" FastFold
+let g:markdown_folding = 1
+let g:r_syntax_folding = 1
+
 " Vim-pandoc
 let g:pandoc#formatting#textwidth = 80
 let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
 let g:pandoc#keyboard#use_default_mappings = 0
+let g:pandoc#folding#mode = 'expr'  " Use expression folding
+let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
+let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
+let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
+let g:ycm_filetype_blacklist = {}  " Clear the YCM filetype blacklist
+
+" Disable conflicting plugin mapping for 'å' button
+let g:AutoPairsShortcutFastWrap = ''
 
 " REPL: {{{1
 
@@ -237,7 +172,7 @@ let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
-    if &ft == "rmarkdown" || &ft == "r"
+    if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
         let language = "r"
     elseif &ft == "python"
         let language = "python"
@@ -329,54 +264,6 @@ nmap <localleader>h :call PrintHead()<CR>
 nmap <localleader>C :SlimeSend0 "\x03"<CR>
 nmap <localleader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
 
-" REPL RMarkdown Rendering: {{{1
-
-" Function for rendering RMarkdown/Sweave documents
-function! RenderRMarkdown()
-    if &ft == "rnoweb"
-        :w!
-        :SlimeSend0 "knitr::knit2pdf('" . expand("%:p") . "')\n"
-        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".pdf')\n"
-    elseif &ft == "rmd" || &ft == "rmarkdown"
-        :w!
-        :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "')\n"
-        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-    else
-        echoerr "`".expand("%:p")."` is not a RMarkdown or Sweave file."
-        return 1
-    endif
-endfunction
-
-" Function for rendering RMarkdown presentations with Xaringan into HTML
-function! RenderXaringan()
-    if &ft == "rmarkdown"
-        :w!
-        :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "', 'xaringan::moon_reader')\n"
-        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-    else
-        echoerr "`".expand("%:p")."` is not a RMarkdown file."
-        return 1
-    endif
-endfunction
-
-" Function for rendering RMarkdown presentations with Xaringan into HTML and PDF
-function! RenderXaringanPDF()
-    if &ft == "rmarkdown"
-        :w!
-        :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "', 'xaringan::moon_reader')\n"
-        :SlimeSend0 "webshot::webshot('" . expand("%:p:r") . ".html', '" . expand("%:p:r") . ".pdf')\n"
-        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".pdf')\n"
-    else
-        echoerr "`".expand("%:p")."` is not a RMarkdown file."
-        return 1
-    endif
-endfunction
-
-" Render current RMarkdown/Sweave file
-nmap <silent> <LocalLeader>k :call RenderRMarkdown()<CR>
-nmap <silent> <LocalLeader>x :call RenderXaringan()<CR>
-nmap <silent> <LocalLeader>X :call RenderXaringanPDF()<CR>
-
 " Search Settings: {{{1
 
 " Search
@@ -388,17 +275,44 @@ set smartcase  " ... except when using capital letters
 " Cancel a search with <Return>
 nnoremap <CR> :noh<CR><CR>
 
-" Splits: {{{1
+" Statusline: {{{1
 
-" Create splits below and to the right
-set splitbelow
-set splitright
+" Statusline is always on
+set laststatus=2
 
-" Remap split movements to just CTR + <movement>
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
+" Function to get the current Git branch
+function! GitBranch()
+    let l:branchname = gitbranch#name()
+    return strlen(l:branchname) > 0 ? '  '.l:branchname.' ' : ''
+endfunction
+
+" Left side
+set statusline=                  " Initialise empty statusline
+
+" MODE and corresponding colours
+set statusline+=%#StatusLine#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#pandocStrikeoutTable#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#StatusLineTermNC#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=%#StatusLineTermNC#%{(mode()=='s')?'\ \ SELECT\ ':''}
+set statusline+=%#pandocStrikeoutHeading#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+
+" Git branch and filename
+set statusline+=%#StatusLineNC#  " Light grey
+set statusline+=%{GitBranch()}   " Current Git branch
+set statusline+=%#CursorColumn#  " Light beige
+set statusline+=\ %f             " Filename
+
+" Right side
+set statusline+=%=
+set statusline+=%#StatusLineNC#  " Light grey
+set statusline+=\ %y             " Filetype
+set statusline+=\ %3p%%\         " Percentage through file
+set statusline+=%#StatusLine#    " Light grey
+set statusline+=\ %3l:%2c        " Line:column number
+set statusline+=\                " Ending space
+
+" Don't show mode; it's included in the statusline
+set noshowmode
 
 " Syntax Highlighting: {{{1
 
@@ -418,9 +332,6 @@ call matchadd('ColorColumn', '\%81v.', 100)
 set tabstop=4  " <TAB> is 4 spaces wide
 set expandtab  " <TAB> is expanded to spaces
 set shiftwidth=4  " Use 4 spaces when indenting with '>'
-
-" Paste toggling with F6 button
-set pastetoggle=<F6>
 
 " Graphical menu for tab-completion of files
 set wildmenu

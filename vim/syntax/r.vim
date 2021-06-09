@@ -1,12 +1,11 @@
 " Vim syntax file
 " Language:     R
 " Maintainer:   Erik Fasterius <erik dot fasterius at outlook dot com>
-" URL:          https://github.com/fasterius/dotvim
+" URL:          https://github.com/fasterius/dotfiles
 " Comments:     This is the syntax highlighting file i use for my R
 "               scripting. It contains some keyword highlighting for
 "               some standard R functions and built-ins, and a number
 "               of regex matches for other things.
-" --------------------------------------------------------------------
 
 " Version 5.x: clear all syntaxes
 " Version 6.x: quit when another syntax file is loaded
@@ -118,8 +117,8 @@ syn region rString start=/"/ skip=/\\\\\|\\"/ end=/"/
 syn region rString start=/'/ skip=/\\\\\|\\'/ end=/'/
 " }}}
 "  Types: {{{1
-syn keyword rType S4 raw promise weakref environment externalptr closure 
-syn keyword rType bytecode pairlist list symbol expression any ... 
+syn keyword rType S4 raw promise weakref environment externalptr closure
+syn keyword rType bytecode pairlist list symbol expression any ...
 syn keyword rType character language special complex double integer
 syn keyword rType logical char builtin
 " }}}
@@ -141,7 +140,7 @@ if version >= 508 || !exists("did_r_syn_inits")
     HiLink rComment     Comment
     HiLink rComplex     Type
     HiLink rConditional Type
-    HiLink rConstant    Type 
+    HiLink rConstant    Type
     HiLink rDate        Underlined
     HiLink rDelimiter   Normal
     HiLink rDollar      Comment

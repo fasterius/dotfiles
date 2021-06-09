@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	        Nextflow (extended from groovy.vim)
 " Original Version:	Luke Goodsell
-" Maintainer:       Erik Fasterius (erik.fasterius@outlook.com)
+" Maintainer:       Erik Fasterius (erik dot fasterius at outlook dot com)
 
 if exists("b:current_syntax")
   finish

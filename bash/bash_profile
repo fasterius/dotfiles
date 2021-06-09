@@ -11,9 +11,11 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     source ~/.dotfiles/bash/uppmax_profile
 else
 
+    # Silence the OS X zsh message
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+
     # Local paths
     export PATH="/usr/local/opt/libxml2/bin:$PATH"
-    export PATH="/Users/erik.fasterius/Library/Python/3.7/bin:$PATH"
     export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 fi
 
@@ -70,6 +72,11 @@ alias ll=$LL' -lvh --color=auto --group-directories-first'
 
 # Aliases --------------------------------------------------------------------
 
+# TMUX aliases
+alias tn='tmux new -t'
+alias ta='tmux attach -t'
+alias tl='tmux ls'
+
 # Conda aliases
 alias coac='conda activate'
 alias code='conda deactivate'
@@ -118,10 +125,6 @@ alias rackham1='ssh erikfas@rackham1.uppmax.uu.se'
 alias rackham2='ssh erikfas@rackham2.uppmax.uu.se'
 alias rackham3='ssh erikfas@rackham3.uppmax.uu.se'
 alias rackham4='ssh erikfas@rackham4.uppmax.uu.se'
-
-# Aliases to log into Bianca @ Uppmax
-alias bianca-molba='ssh -A erikfas-sens2020519@bianca.uppmax.uu.se'
-alias bianca='ssh -A erikfas-sens2020023@bianca.uppmax.uu.se'
 
 # Prompt ---------------------------------------------------------------------
 
