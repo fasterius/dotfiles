@@ -85,6 +85,12 @@ inoremap <Right> <NOP>
 nnoremap j gj
 nnoremap k gk
 
+" Also use CTRL-<hjkl> to move to/from Vim terminals
+tnoremap <C-J> <C-W><C-J>
+tnoremap <C-K> <C-W><C-K>
+tnoremap <C-L> <C-W><C-L>
+tnoremap <C-H> <C-W><C-H>
+
 " Always keep at least 5 lines above/below scrolling visible
 set scrolloff=5
 
@@ -166,8 +172,7 @@ let g:AutoPairsShortcutFastWrap = ''
 
 " General vim-slime settings
 let g:slime_target = "vimterminal"  " Use the Vim built-in terminal
-let g:slime_vimterminal_config = { "term_finish": "close",
-                                 \  "vertical": 1 }
+let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
 let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
