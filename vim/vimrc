@@ -168,6 +168,7 @@ let g:AutoPairsShortcutFastWrap = ''
 let g:slime_target = "tmux"
 let g:slime_dont_ask_default = 1
 let g:slime_default_config = {"socket_name": "default", "target_pane": "!"}
+let g:slime_paste_file = "$HOME/.slime_paste"
 let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
@@ -185,12 +186,12 @@ endfunction
 " Function for opening a new REPL window
 function! OpenTerminal()
 
-
     " Open a terminal with appropriate language and move back to starting window
     :silent !tmux split-window -h
     :silent !tmux select-pane -l
+    :silent !tmux display-panes
     :SlimeConfig
-
+"
     " Get language of current filetype
     let language = GetLanguage()
     if language != "bash"
