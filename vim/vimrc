@@ -45,6 +45,7 @@ set backspace=indent,eol,start
 set showcmd
 
 " Add line numbers
+set relativenumber
 set number
 
 " Add background highlight to current line
@@ -112,6 +113,7 @@ Plug 'fasterius/vim-colors-solarized', { 'as': 'colors-solarized' }
 Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
 Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
 Plug 'itchyny/vim-gitbranch',          { 'as': 'gitbranch' }
+Plug 'takac/vim-hardtime',             { 'as': 'hardtime' }
 Plug 'scrooloose/nerdcommenter',       { 'as': 'nerdcommenter' }
 Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
 Plug 'vim-pandoc/vim-pandoc',          { 'as': 'pandoc' }
@@ -126,6 +128,9 @@ Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
 Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
 Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
 call plug#end()
+
+" Use Hardtime by default
+let g:hardtime_default_on = 1
 
 " Colour scheme
 set t_Co=256  " 256 bit colours
