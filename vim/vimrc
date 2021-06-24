@@ -280,7 +280,7 @@ set ignorecase  " Case-insensitive searches ...
 set smartcase  " ... except when using capital letters
 
 " Cancel a search with <Return>
-nnoremap <CR> :noh<CR><CR>
+nnoremap <CR> :noh<CR>
 
 " Statusline: {{{1
 
