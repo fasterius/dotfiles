@@ -27,8 +27,8 @@ username and email, as well as the path to the global gitignore file.
 ## Profiles
 
 The main `bash_profile` contains all bash-related settings and aliases, while
-`bashrc` simply source the former. The `uppmax_profile` is source when logged in
-to a remote using SSH. The `condarc` contains the Conda configuration, while
+`bashrc` simply sources the former. The `uppmax_profile` is sourced when logged
+in to a remote using SSH. The `condarc` contains the Conda configuration, while
 `tmux.config` does the same for TMUX.
 
 ## Vim
