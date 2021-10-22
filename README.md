@@ -31,23 +31,42 @@ The `03-create-symlinks.sh` creates all the symbolic links needed for all the
 various profiles and configs contained in this repository, as well as installs
 all the plugins specified in the Vim settings.
 
-## Git
+## Contents
+
+### Bash
+
+The main `bash_profile` contains all bash-related settings and aliases, while
+`bashrc` simply sources the former. The `uppmax_profile` is sourced when logged
+in to a remote using SSH.
+
+### Conda
+
+The `condarc` file contains configurations for Conda.
+
+### Git
 
 The `gitignore_global` file contains git ignore statements that will be used on
 a global (system-wide) scale. A `gitconfig` is also included, containing a git
 username and email, as well as the path to the global gitignore file.
 
-## Profiles
+### iTerm2
 
-The main `bash_profile` contains all bash-related settings and aliases, while
-`bashrc` simply sources the former. The `uppmax_profile` is sourced when logged
-in to a remote using SSH. The `condarc` contains the Conda configuration, while
-`tmux.config` does the same for TMUX.
+The `com.googlecode.iterm2.plist` file contains configuration for the iTerm2
+terminal software. If you want to use it, you'll have to to to *Preferences* ->
+*General* -> *Preferences*, tick `Load preferences from a custom folder or URL`
+and type `~/.dotfiles/iterm2`
 
-## Vim
+### Tmux
 
-The main interest here is the `.vimrc` file, but syntax highlighting files for
-R, Snakemake and Nextflow are also included in the `syntax/` directory.
+The `tmux.conf` file contains general configuration for Tmux, including
+functionality to make it play well with Vim (*e.g.* moving between Vim splits
+anv Tmux panes in the same way).
+
+### Vim
+
+The main interest here is the `.vimrc` file, but custom syntax highlighting
+files for R, Snakemake and Nextflow are also included in the `syntax/`
+directory.
 
 If you want to add another plugin, all you need to do is add a line in the
 `vimrc` file specifying the URL or GitHub location to the plugin, followed by
@@ -55,4 +74,3 @@ the `:PlugInstall` command again. This line should be between the `call
 plug#begin('~/.vim/plugged')` and `call plug#end()` commands. For example, the
 line to install Tim Pope's `vim-surround` looks like this: `Plug
 'tpope/vim-surround'`.
-
