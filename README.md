@@ -66,7 +66,10 @@ anv Tmux panes in the same way).
 
 The main interest here is the `.vimrc` file, but custom syntax highlighting
 files for R, Snakemake and Nextflow are also included in the `syntax/`
-directory.
+directory. You can read more about what the different directories do in this
+[great overview](https://learnvimscriptthehardway.stevelosh.com/chapters/42.html) over
+at [Learn Vimscript the Hard way](https://learnvimscriptthehardway.stevelosh.com/),
+which is an excellent vim resource in general.
 
 If you want to add another plugin, all you need to do is add a line in the
 `vimrc` file specifying the URL or GitHub location to the plugin, followed by
