@@ -11,3 +11,6 @@ alias transit='ssh erikfas@transit.uppmax.uu.se'
 alias bianca-molba='ssh -A erikfas-sens2020519@bianca.uppmax.uu.se'
 alias bianca-pbmc='ssh -A erikfas-sens2020543@bianca.uppmax.uu.se'
 alias bianca='ssh -A erikfas-sens2020023@bianca.uppmax.uu.se'
+
+# Aliases to log into Irma @ Uppmax
+alias irma='ssh erikfas@irma.uppmax.uu.se'
