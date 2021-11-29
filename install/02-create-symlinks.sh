@@ -23,6 +23,7 @@ tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
 tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 
-# Vim
+# Vim & NeoVim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
+ln -sfn ~/.dotfiles/vim/init.vim ~/.config/nvim/init.vim
