@@ -67,6 +67,10 @@ alias ll=$LL' -lvh --color=auto --group-directories-first'
 
 # Aliases --------------------------------------------------------------------
 
+# Vim aliases
+alias vim='nvim'
+alias oldvim='\vim'
+
 # TMUX aliases
 alias tn='tmux new -t'
 alias ta='tmux attach -t'
