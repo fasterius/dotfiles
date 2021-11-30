@@ -177,11 +177,13 @@ let g:AutoPairsShortcutFastWrap = ''
 " REPL: {{{1
 
 " General vim-slime settings
-let g:slime_target = "tmux"
-" let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"} " This should work according to the documentation, but doesn't.
-let b:slime_config = {"socket_name": "default", "target_pane": "{last}"} " Workaround for the problem above
-" let g:slime_dont_ask_default = 1 " This doesn't seem to work currently
-let g:slime_paste_file = "$HOME/.slime_paste"
+if has('nvim')
+    let g:slime_target = "neovim"
+else
+    let g:slime_target = "vimterminal"
+    let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
+endif
+let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
@@ -198,15 +200,19 @@ endfunction
 " Function for opening a new REPL window
 function! OpenTerminal()
 
+    " Get starting window number
+    let starting_window = bufwinnr(bufname('%'))
+
     " Open a terminal with appropriate language and move back to starting window
-    :silent !tmux split-window -h
-    :silent !tmux select-pane -l
-    :SlimeConfig
-"
-    " Get language of current filetype
-    let language = GetLanguage()
-    if language != "bash"
-        :SlimeSend0 language . "\n"
+    if has('nvim')
+        :execute ':vsplit term://'.GetLanguage()
+        let t:term_id = b:terminal_job_id
+        :execute starting_window 'wincmd w'
+        :execute 'let b:slime_config = {"jobid": "'.t:term_id . '"}'
+    else
+        :execute ':vertical terminal ++close ++norestore' GetLanguage()
+        :execute starting_window 'wincmd w'
+        :SlimeConfig
     endif
 endfunction
 
@@ -221,8 +227,9 @@ function! CloseTerminal()
         :SlimeSend1 quit(save = "no")
     elseif language == "python"
         :SlimeSend1 exit()
+    else
+        :SlimeSend1 exit
     endif
-    :SlimeSend1 exit
 endfunction
 
 " Function for printing the head of a pandas/R dataframe
