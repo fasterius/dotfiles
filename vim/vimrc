@@ -18,6 +18,21 @@ set writebackup
 " Store undo data in a file
 set undofile
 
+" Appearance: {{{1
+
+" Add line numbers
+set relativenumber
+set number
+
+" Add background highlight to current line
+set cursorline
+
+" Cursor appearance
+set guicursor=
+
+" Show commands
+set showcmd
+
 " General Key Mappings: {{{1
 
 " Set leaders
@@ -40,16 +55,6 @@ filetype plugin indent on
 
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
-
-" Show commands
-set showcmd
-
-" Add line numbers
-set relativenumber
-set number
-
-" Add background highlight to current line
-set cursorline
 
 " Wrap lines at 80 characters
 set textwidth=80
