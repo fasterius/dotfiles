@@ -16,9 +16,9 @@ syn keyword nextflowDirective clusterOptions disk echo errorStrategy executor
 syn keyword nextflowDirective ext label maxErrors maxForks maxRetries memory
 syn keyword nextflowDirective module penv publishDir queue scratch storeDir
 syn keyword nextflowDirective stageInMode stageOutMode tag time validExitStatus
-syn keyword nextflowKeyword from into
+syn keyword nextflowKeyword into
 syn keyword nextflowType Channel file path process tuple val fromPath
-syn keyword nextflowType fromFilePairs set
+syn keyword nextflowType fromFilePairs set from
 syn keyword nextflowSpecial workflow params launchDir
 syn keyword nextflowConstant null
 syn match nextflowBlock "\v(input|output|script|shell|exec):"

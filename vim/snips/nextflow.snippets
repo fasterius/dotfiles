@@ -1,6 +1,6 @@
 snippet workflow "Initialise a Nextflow workflow" b
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=2
+nextflow.enable.dsl = 2
 
 // Results directory
 resultsdir = "results/"
@@ -8,42 +8,42 @@ resultsdir = "results/"
 // Main workflow
 workflow {
     // Run workflow
-    process_01(input_01)
+    PROCESS_01(ch_input)
 }
 
-process process_01 {
-    tag "${input_01}"
+process PROCESS_01 {
+    tag "${input}"
     publishDir "${resultsdir}/",
         mode: "copy"
 
     input:
-    path(input_01)
+    path(ch_input)
 
     output:
     path("output_01")
 
     script:
     """
-
+	touch output_01
     """
 }
 endsnippet
 
 snippet process "Add a new Nextflow process" b
-process process_01 {
-    tag "${input_01}"
+process PROCESS_01 {
+    tag "${input}"
     publishDir "${resultsdir}/",
         mode: "copy"
 
     input:
-    path(input_01)
+    path(ch_input)
 
     output:
     path("output_01")
 
     script:
     """
-
+	touch output_01
     """
 }
 endsnippet
@@ -54,25 +54,25 @@ profiles {
     // Uppmax general profile
     uppmax {
         process {
-            executor = 'slurm'
-            clusterOptions = { '-A "${1:account}"' }
-            memory = { 6.GB * task.attempt }
-            cpus = { 1 * task.attempt }
-            time = { 10.h * task.attempt }
-            scratch = '$SNIC_TMP'
+            executor       = 'slurm'
+            clusterOptions = '-A "${1:account}"'
+            memory         = { 6.GB * task.attempt }
+            cpus           = { 1 * task.attempt }
+            time           = { 10.h * task.attempt }
+            scratch        = '$SNIC_TMP'
             errorStrategy  = 'retry'
-            maxRetries = 1
+            maxRetries     = 1
         }
     }
 
     // Uppmax devel profile
     devel {
         process {
-            time = 1.h
+            time           = 1.h
             errorStrategy  = 'terminate'
         }
         executor.queueSize = 1
-        process.queue = 'devel'
+        process.queue      = 'devel'
     }
 }
 endsnippet

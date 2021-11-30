@@ -45,6 +45,7 @@ set backspace=indent,eol,start
 set showcmd
 
 " Add line numbers
+set relativenumber
 set number
 
 " Add background highlight to current line
@@ -84,6 +85,12 @@ inoremap <Right> <NOP>
 " Move by visual lines instead of physical lines
 nnoremap j gj
 nnoremap k gk
+
+" Also use CTRL-<hjkl> to move to/from Vim terminals
+tnoremap <C-J> <C-W><C-J>
+tnoremap <C-K> <C-W><C-K>
+tnoremap <C-L> <C-W><C-L>
+tnoremap <C-H> <C-W><C-H>
 
 " Always keep at least 5 lines above/below scrolling visible
 set scrolloff=5
@@ -274,7 +281,7 @@ set ignorecase  " Case-insensitive searches ...
 set smartcase  " ... except when using capital letters
 
 " Cancel a search with <Return>
-nnoremap <CR> :noh<CR><CR>
+nnoremap <CR> :noh<CR>
 
 " Statusline: {{{1
 
