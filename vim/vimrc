@@ -183,12 +183,11 @@ else
     let g:slime_target = "vimterminal"
     let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
 endif
-let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
     if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
-        let language = "r"
+        let language = "R"
     elseif &ft == "python"
         let language = "python"
     else
