@@ -182,7 +182,6 @@ let g:slime_target = "tmux"
 let b:slime_config = {"socket_name": "default", "target_pane": "{last}"} " Workaround for the problem above
 " let g:slime_dont_ask_default = 1 " This doesn't seem to work currently
 let g:slime_paste_file = "$HOME/.slime_paste"
-let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()

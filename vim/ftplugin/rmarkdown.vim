@@ -4,6 +4,9 @@ autocmd FileType rmarkdown set commentstring=#\ %s
 " Use expression folding
 autocmd FileType rmarkdown set foldmethod=expr
 
+" Set the vim-slime delimiter for R Markdown chunks
+let g:slime_cell_delimiter = "```"
+
 " Function for rendering RMarkdown/Sweave documents
 function! RenderRMarkdown()
     :w!
