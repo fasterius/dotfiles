@@ -178,8 +178,9 @@ let g:AutoPairsShortcutFastWrap = ''
 
 " General vim-slime settings
 let g:slime_target = "tmux"
-let g:slime_dont_ask_default = 1
-let g:slime_default_config = {"socket_name": "default", "target_pane": "!"}
+" let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"} " This should work according to the documentation, but doesn't.
+let b:slime_config = {"socket_name": "default", "target_pane": "{last}"} " Workaround for the problem above
+" let g:slime_dont_ask_default = 1 " This doesn't seem to work currently
 let g:slime_paste_file = "$HOME/.slime_paste"
 let g:slime_cell_delimiter = "```"  " Delimiter for RMarkdown chunks
 
@@ -201,7 +202,6 @@ function! OpenTerminal()
     " Open a terminal with appropriate language and move back to starting window
     :silent !tmux split-window -h
     :silent !tmux select-pane -l
-    :silent !tmux display-panes
     :SlimeConfig
 "
     " Get language of current filetype
