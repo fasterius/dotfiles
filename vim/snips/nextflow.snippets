@@ -1,9 +1,25 @@
 snippet workflow "Initialise a Nextflow workflow" b
 #!/usr/bin/env nextflow
+
+// Enable DSL2 syntax
 nextflow.enable.dsl = 2
 
-// Results directory
-resultsdir = "results/"
+// Default parameters (can be overridden in \`nextflow.config\`)
+params.resultsdir = "results/"
+params.workdir = "work/"
+params.publish_mode = "copy"
+
+// Show workflow parameters before execution
+log.info("""
+    NBIS support #${1:0000}
+    ==================
+
+    Workflow parameters
+        Results directory       : ${params.resultsdir}
+        Work directory          : ${params.workdir}
+        Resume                  : ${workflow.resume}
+        Profile                 : ${workflow.profile}
+    """)
 
 // Main workflow
 workflow {
@@ -11,10 +27,11 @@ workflow {
     PROCESS_01(ch_input)
 }
 
+// First process
 process PROCESS_01 {
     tag "${input}"
-    publishDir "${resultsdir}/",
-        mode: "copy"
+    publishDir "${params.resultsdir}/",
+        mode: params.publish_mode
 
     input:
     path(ch_input)
@@ -24,7 +41,7 @@ process PROCESS_01 {
 
     script:
     """
-	touch output_01
+    touch output_01
     """
 }
 endsnippet
@@ -32,8 +49,8 @@ endsnippet
 snippet process "Add a new Nextflow process" b
 process PROCESS_01 {
     tag "${input}"
-    publishDir "${resultsdir}/",
-        mode: "copy"
+    publishDir "${params.resultsdir}/",
+        mode: params.publish_mode
 
     input:
     path(ch_input)
@@ -48,14 +65,28 @@ process PROCESS_01 {
 }
 endsnippet
 
-snippet profiles "Uppmax profiles for Nextflow config file" b
-profiles {
+snippet config "Initialise a Nextflow config file" b
+// Workflow manifest
+manifest {
+    name          = "NBIS support #${1:0000}"
+    author        = "Erik Fasterius"
+    defaultBranch = "main"
+    mainScript    = "main.nf"
+}
 
-    // Uppmax general profile
+// Parameters
+params {
+    resultsdir   = "results/"
+    workdir      = "work/"
+    publish_mode = "copy"
+}
+
+// Workflow profiles
+profiles {
     uppmax {
         process {
             executor       = 'slurm'
-            clusterOptions = '-A "${1:account}"'
+            clusterOptions = '-A "${2:snic2020999}"'
             memory         = { 6.GB * task.attempt }
             cpus           = { 1 * task.attempt }
             time           = { 10.h * task.attempt }
@@ -64,8 +95,6 @@ profiles {
             maxRetries     = 1
         }
     }
-
-    // Uppmax devel profile
     devel {
         process {
             time           = 1.h
