@@ -110,7 +110,7 @@ if [ ! -d "$HOME/opt/miniconda3" ]; then
 fi
 
 # Install Nextflow if `$HOME/opt/nextflow/nextflow` doesn't exist
-if [ ! -f "$HOME/opt/nextflow/nextflow" ]; then
+if [ ! -f "$HOME/opt/nextflow" ]; then
 
     # Download and install Nextflow
     mkdir -p $HOME/opt/nextflow
