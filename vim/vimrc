@@ -111,9 +111,9 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'dense-analysis/ale',             { 'as': 'ale' }
 Plug 'jiangmiao/auto-pairs',           { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace', { 'as': 'better-whitespace' }
+Plug 'neoclide/coc.nvim',              { 'as': 'coc', 'branch': 'release' }
 Plug 'fasterius/vim-colors-solarized', { 'as': 'colors-solarized' }
 Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
 Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
@@ -130,13 +130,22 @@ Plug 'tpope/vim-surround',             { 'as': 'surround' }
 Plug 'wellle/targets.vim',             { 'as': 'targets' }
 Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
 Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
-Plug 'Valloric/YouCompleteMe',         { 'as': 'you-complete-me', 'commit': '14f0d3968c43be7edde15aa67bc600c3998cae16', 'do': 'python3 install.py' }
 call plug#end()
 
 " Colour scheme
 set t_Co=256  " 256 bit colours
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
+
+" CoC extensions
+let g:coc_global_extensions = ['coc-r-lsp', 'coc-ultisnips']
+
+" Move between CoC completions using TAB
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Let CoC handle R Markdown as R
+let g:coc_filetype_map = { 'rmarkdown': 'r' }
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
