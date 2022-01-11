@@ -18,6 +18,7 @@ fi
 export PATH="$HOME/opt/:$PATH"
 export PATH="$HOME/opt/python3/bin:$PATH"
 export PATH="$HOME/opt/vim/bin:$PATH"
+export PATH="$HOME/opt/node/bin:$PATH"
 
 # Source Conda
 source $HOME/opt/miniconda3/etc/profile.d/conda.sh
