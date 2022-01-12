@@ -196,7 +196,7 @@ endif
 " Function for getting the appropriate language for the current filetype
 function! GetLanguage()
     if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
-        let language = "R"
+        let language = "r"
     elseif &ft == "python"
         let language = "python"
     else
