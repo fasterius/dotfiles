@@ -111,25 +111,29 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'jiangmiao/auto-pairs',           { 'as': 'auto-pairs' }
-Plug 'ntpeters/vim-better-whitespace', { 'as': 'better-whitespace' }
-Plug 'neoclide/coc.nvim',              { 'as': 'coc', 'branch': 'release' }
-Plug 'fasterius/vim-colors-solarized', { 'as': 'colors-solarized' }
-Plug 'Konfekt/FastFold',               { 'as': 'fastfold' }
-Plug 'airblade/vim-gitgutter',         { 'as': 'gitgutter' }
-Plug 'itchyny/vim-gitbranch',          { 'as': 'gitbranch' }
-Plug 'scrooloose/nerdcommenter',       { 'as': 'nerdcommenter' }
-Plug 'scrooloose/nerdtree',            { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
-Plug 'vim-pandoc/vim-pandoc',          { 'as': 'pandoc' }
-Plug 'vim-pandoc/vim-pandoc-syntax',   { 'as': 'pandoc-syntax' }
-Plug 'tpope/vim-repeat',               { 'as': 'repeat' }
-Plug 'vim-pandoc/vim-rmarkdown',       { 'as': 'rmarkdown' }
-Plug 'tmhedberg/SimpylFold',           { 'as': 'simpylfold' }
-Plug 'jpalardy/vim-slime',             { 'as': 'slime' }
-Plug 'tpope/vim-surround',             { 'as': 'surround' }
-Plug 'wellle/targets.vim',             { 'as': 'targets' }
-Plug 'christoomey/vim-tmux-navigator', { 'as': 'tmux-navigator' }
-Plug 'SirVer/ultisnips',               { 'as': 'ultisnips' }
+Plug 'prabirshrestha/asyncomplete.vim',           { 'as': 'asyncomplete' }
+Plug 'prabirshrestha/asyncomplete-lsp.vim',       { 'as': 'asyncomplete-lsp' }
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnips' }
+Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
+Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
+Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
+Plug 'airblade/vim-gitgutter',                    { 'as': 'gitgutter' }
+Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
+Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
+Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
+Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
+Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
+Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
+Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
+Plug 'tpope/vim-repeat',                          { 'as': 'repeat' }
+Plug 'vim-pandoc/vim-rmarkdown',                  { 'as': 'rmarkdown' }
+Plug 'tmhedberg/SimpylFold',                      { 'as': 'simpylfold' }
+Plug 'jpalardy/vim-slime',                        { 'as': 'slime' }
+Plug 'tpope/vim-surround',                        { 'as': 'surround' }
+Plug 'wellle/targets.vim',                        { 'as': 'targets' }
+Plug 'christoomey/vim-tmux-navigator',            { 'as': 'tmux-navigator' }
+Plug 'SirVer/ultisnips',                          { 'as': 'ultisnips' }
 call plug#end()
 
 " Colour scheme
@@ -137,20 +141,25 @@ set t_Co=256  " 256 bit colours
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
 
-" CoC extensions
-let g:coc_global_extensions = ['coc-r-lsp', 'coc-pyright', 'coc-ultisnips']
-
-" Move between CoC completions using TAB
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Let CoC handle R Markdown as R
-let g:coc_filetype_map = { 'rmarkdown': 'r' }
-
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsExpandTrigger = '<C-l>' " CTRL-l expands snippets
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
+
+" Asyncomplete
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    \ 'name': 'ultisnips',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
+
+" Use `r-languageserver` LSP for R Markdown files
+let g:lsp_settings = {
+    \ 'r-languageserver': {
+    \    'allowlist': ['r', 'rmarkdown'] }}
 
 " Open snippets file for current filetype
 nnoremap <Leader>n :UltiSnipsEdit <CR>
