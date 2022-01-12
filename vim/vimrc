@@ -146,10 +146,15 @@ let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsExpandTrigger = '<C-l>' " CTRL-l expands snippets
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 
-" Asyncomplete
+" Open UltiSnips snippet file for current filetype
+nnoremap <Leader>n :UltiSnipsEdit <CR>
+
+" Asyncomplete mappings
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" Register UltiSnips as source for Asyncomplete
 call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
     \ 'name': 'ultisnips',
     \ 'allowlist': ['*'],
@@ -161,15 +166,12 @@ let g:lsp_settings = {
     \ 'r-languageserver': {
     \    'allowlist': ['r', 'rmarkdown'] }}
 
-" Open snippets file for current filetype
-nnoremap <Leader>n :UltiSnipsEdit <CR>
-
 " NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
 let g:NERDCommentEmptyLines = 1  " Allow commenting of empty lines
 let g:NERDTrimTrailingWhitespace = 1  " Trim trailing whitespace for commenting
 let g:NERDCustomDelimiters = { 'snakemake': { 'left': '#' },
-                             \ 'nextflow': { 'left': '//' } }
+                             \ 'nextflow':  { 'left': '//' } }
 
 " NERD Tree
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
@@ -187,7 +189,6 @@ let g:pandoc#folding#mode = 'expr'  " Use expression folding
 let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
 let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
 let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
-let g:ycm_filetype_blacklist = {}  " Clear the YCM filetype blacklist
 
 " Disable conflicting plugin mapping for 'å' button
 let g:AutoPairsShortcutFastWrap = ''
