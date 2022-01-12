@@ -33,22 +33,6 @@ if [ ! -d "$HOME/opt/python3/" ]; then
     fi
 fi
 
-# Install Node if `$HOME/opt/node` doesn't exist
-if [ ! -d "$HOME/opt/node" ]; then
-
-    # Download and install Node
-    cd "$HOME/opt/"
-    mkdir -p node
-    curl -sL install-node.vercel.app/lts \
-        | bash -s -- --prefix=$HOME/opt/node/ --yes
-
-    # Verify Node installation
-    if [ $? != 0 ]; then
-        echo "Error: Node installation failed"
-        exit 1
-    fi
-fi
-
 # Install Vim if `$HOME/opt/vim/` directory doesn't exist
 if [ ! -d "$HOME/opt/vim/" ]; then
 
