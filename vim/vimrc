@@ -161,6 +161,26 @@ call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_opti
     \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
     \ }))
 
+" LSP settings function
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <Buffer> gd <Plug>(lsp-definition)
+    nmap <Buffer> gr <Plug>(lsp-references)
+    nmap <Buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <Buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <Buffer> K <Plug>(lsp-hover)
+    nnoremap <Buffer> <Expr><c-f> lsp#scroll(+4)
+    nnoremap <Buffer> <Expr><c-d> lsp#scroll(-4)
+    let g:lsp_format_sync_timeout = 1000
+endfunction
+
+" Only set LSP settings when a server is registered
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
 " Use `r-languageserver` LSP for R Markdown files
 let g:lsp_settings = {
     \ 'r-languageserver': {
