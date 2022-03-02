@@ -111,17 +111,13 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/asyncomplete.vim',           { 'as': 'asyncomplete' }
-Plug 'prabirshrestha/asyncomplete-lsp.vim',       { 'as': 'asyncomplete-lsp' }
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnips' }
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'jayli/vim-easycomplete',                    { 'as': 'easycomplete' }
 Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
 Plug 'airblade/vim-gitgutter',                    { 'as': 'gitgutter' }
 Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
-Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
-Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
 Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
 Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
 Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
@@ -149,43 +145,10 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 " Open UltiSnips snippet file for current filetype
 nnoremap <Leader>n :UltiSnipsEdit <CR>
 
-" Asyncomplete mappings
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-" Register UltiSnips as source for Asyncomplete
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    \ 'name': 'ultisnips',
-    \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    \ }))
-
-" LSP settings function
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <Buffer> gd <Plug>(lsp-definition)
-    nmap <Buffer> gr <Plug>(lsp-references)
-    nmap <Buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <Buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <Buffer> K <Plug>(lsp-hover)
-    nnoremap <Buffer> <Expr><c-f> lsp#scroll(+4)
-    nnoremap <Buffer> <Expr><c-d> lsp#scroll(-4)
-    let g:lsp_format_sync_timeout = 1000
-endfunction
-
-" Only set LSP settings when a server is registered
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-" Use `r-languageserver` LSP for R Markdown files
-let g:lsp_settings = {
-    \ 'r-languageserver': { 'allowlist': ['r', 'rmarkdown'] },
-    \ 'groovy-language-server': { 'allowlist': ['groovy', 'nextflow'] },
-    \ 'remark-language-server' : { 'allowlist': ['markdown', 'pandoc'] }}
+" Easycomplete
+let g:easycomplete_lsp_checking = 0  " Disable warnings
+nnoremap <silent> <C-n> :EasyCompleteNextDiagnostic<CR>
+nnoremap <silent> <C-p> :EasyCompletePreviousDiagnostic<CR>
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
