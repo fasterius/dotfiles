@@ -149,6 +149,11 @@ nnoremap <Leader>n :UltiSnipsEdit <CR>
 let g:easycomplete_lsp_checking = 0  " Disable warnings
 nnoremap <silent> <C-n> :EasyCompleteNextDiagnostic<CR>
 nnoremap <silent> <C-p> :EasyCompletePreviousDiagnostic<CR>
+let g:easycomplete_filetypes = {
+      \   "r": {
+      \     "whitelist": ["rmd", "rmarkdown"]
+      \   },
+      \ }
 
 " NERD Commenter
 let g:NERDSpaceDelims = 1  " Add a space after each comment
