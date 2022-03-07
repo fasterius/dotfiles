@@ -7,7 +7,7 @@
 
 # Check number of input arguments
 if [ "$#" -ne 1 ]; then
-    echo "Must provide exactly one input Docker image"
+    echo "Must provide exactly one input Docker image; aborting."
     exit 1
 fi
 
