@@ -124,7 +124,6 @@ Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
 Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
 Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
 Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
-Plug 'Mxrcon/nextflow-vim',                       { 'as': 'nextflow-vim' }
 Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
 Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
 Plug 'tpope/vim-repeat',                          { 'as': 'repeat' }
