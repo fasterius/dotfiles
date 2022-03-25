@@ -118,6 +118,8 @@ Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
 Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
+Plug 'junegunn/fzf',                              { 'as': 'fzf', 'do': {-> fzf#install()} }
+Plug 'junegunn/fzf.vim',                          { 'as': 'fzf-vim' }
 Plug 'airblade/vim-gitgutter',                    { 'as': 'gitgutter' }
 Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
 Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
@@ -140,6 +142,10 @@ call plug#end()
 set t_Co=256  " 256 bit colours
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
+
+" Fuzzy finder
+nnoremap <silent> <leader>f :GFiles<CR>
+nnoremap <silent> <leader>F :Files<CR>
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
