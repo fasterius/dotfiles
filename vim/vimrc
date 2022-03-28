@@ -143,9 +143,17 @@ set t_Co=256  " 256 bit colours
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
 
-" Fuzzy finder
+" Find files and Git files with fzf
 nnoremap <silent> <leader>f :GFiles<CR>
 nnoremap <silent> <leader>F :Files<CR>
+
+" Find words inside Git repo with fzf
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+nnoremap <silent> <leader>G :GGrep<CR>
+nnoremap <silent> <leader>g :execute 'GGrep ' . expand('<cword>') <CR>
 
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
