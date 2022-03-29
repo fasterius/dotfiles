@@ -155,7 +155,10 @@ command! -bang -nargs=* GGrep
 nnoremap <silent> <leader>G :GGrep<CR>
 nnoremap <silent> <leader>g :execute 'GGrep ' . expand('<cword>') <CR>
 
-" Set fzf colours
+" Put fzf preview window on the right at 40% (the default)
+let g:fzf_preview_window = ['right:40%']
+
+" Set fzf preview colours
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
     \   'bg':      ['bg', 'Normal'],
