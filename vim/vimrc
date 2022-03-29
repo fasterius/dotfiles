@@ -155,6 +155,22 @@ command! -bang -nargs=* GGrep
 nnoremap <silent> <leader>G :GGrep<CR>
 nnoremap <silent> <leader>g :execute 'GGrep ' . expand('<cword>') <CR>
 
+" Set fzf colours
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+    \   'bg':      ['bg', 'Normal'],
+    \   'hl':      ['fg', 'WildMenu'],
+    \   'fg+':     ['fg', 'Normal'],
+    \   'bg+':     ['bg', 'CursorLine'],
+    \   'hl+':     ['fg', 'ToolbarButton'],
+    \   'info':    ['fg', 'Comment'],
+    \   'border':  ['fg', 'Normal'],
+    \   'prompt':  ['fg', 'Comment'],
+    \   'pointer': ['fg', 'Exception'],
+    \   'marker':  ['fg', 'ToolbarButton'],
+    \   'spinner': ['fg', 'Label'],
+    \   'header':  ['fg', 'Comment'] }
+
 " UltiSnips
 let g:UltiSnipsEditSplit = 'context'
 let g:UltiSnipsExpandTrigger = '<C-l>' " CTRL-l expands snippets
