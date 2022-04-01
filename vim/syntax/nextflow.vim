@@ -22,9 +22,9 @@ syn keyword nextflowDirective machineType maxErrors maxForks maxRetries memory
 syn keyword NextflowDirective module penv pod publishDir queue scratch
 syn keyword nextflowDirective StageInMode stageOutMode storeDir tag time
 syn keyword nextflowDirective validExitStatus
-syn keyword nextflowType      set tuple file val env path fromPath fromFilePairs
-syn keyword nextflowType      toList
-syn keyword nextflowKeyword   from into as nextflow params
+syn keyword nextflowType      set tuple file val env path from fromPath
+syn keyword nextflowType      fromFilePairs toList splitCsv map
+syn keyword nextflowKeyword   into as nextflow params
 syn keyword nextflowBoolean   true false
 syn keyword nextflowSpecial   include Channel channel launchDir process workflow
 syn keyword nextflowConstant  null
