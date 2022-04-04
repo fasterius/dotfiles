@@ -152,8 +152,8 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-nnoremap <silent> <leader>G :GGrep<CR>
-nnoremap <silent> <leader>g :execute 'GGrep ' . expand('<cword>') <CR>
+nnoremap <silent> <leader>g :GGrep<CR>
+nnoremap <silent> <leader>G :execute 'GGrep ' . expand('<cword>') <CR>
 
 " Put fzf preview window on the right at 40% (the default)
 let g:fzf_preview_window = ['right:40%']
