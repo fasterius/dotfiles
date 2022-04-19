@@ -139,7 +139,6 @@ Plug 'SirVer/ultisnips',                          { 'as': 'ultisnips' }
 call plug#end()
 
 " Colour scheme
-set t_Co=256  " 256 bit colours
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
 
