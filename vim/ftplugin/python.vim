@@ -21,11 +21,13 @@ function! IndentLevel(lnum)
     return min([indentlevel, 1])  " Do not nest folds
 endfunction
 
-" Main Nextflow folding function
+" Main folding function
 function! PythonFold(lnum)
 
     " Fold import statements
     if getline(a:lnum) =~? '\v^import'
+        return 1
+    elseif getline(a:lnum) =~? '\v^from'
         return 1
     endif
 
