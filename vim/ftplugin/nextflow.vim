@@ -23,8 +23,13 @@ function! IndentLevel(lnum)
     return min([indentlevel, 1])  " Do not nest folds
 endfunction
 
-" Main Nextflow folding function
+" Main folding function
 function! NextflowFold(lnum)
+
+    " Fold import statements
+    if getline(a:lnum) =~? '\v^import'
+        return 1
+    endif
 
     " Fold ending curly-brackets with previous lines
     if getline(a:lnum) =~? '\v^}$'
