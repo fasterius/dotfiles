@@ -128,6 +128,7 @@ Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
 Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
 Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
 Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
+Plug 'quarto-dev/quarto-vim',                     { 'as': 'quarto-vim' }
 Plug 'tpope/vim-repeat',                          { 'as': 'repeat' }
 Plug 'vim-pandoc/vim-rmarkdown',                  { 'as': 'rmarkdown' }
 Plug 'tmhedberg/SimpylFold',                      { 'as': 'simpylfold' }
