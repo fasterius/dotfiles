@@ -55,7 +55,11 @@ function! NextflowFold(lnum)
     elseif next_indent < this_indent
         return this_indent
     elseif next_indent > this_indent
-        return '>' . next_indent
+        if getline(a:lnum) =~? '\v^\=*$' " Don't fold nf-core section delimiters
+            return '0'
+        else
+            return '>' . next_indent
+        endif
     endif
 
     return '0'
