@@ -117,6 +117,7 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnip
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
 Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
 Plug 'junegunn/fzf',                              { 'as': 'fzf', 'do': {-> fzf#install()} }
 Plug 'junegunn/fzf.vim',                          { 'as': 'fzf-vim' }
