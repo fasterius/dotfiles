@@ -77,7 +77,7 @@ alias ll=$LL' -lvh --color=auto --group-directories-first'
 # alias oldvim='\vim'
 
 # TMUX aliases
-alias tn='tmux new -t'
+alias tn=tmux-new.sh
 alias ta='tmux attach -t'
 alias tl='tmux ls'
 
