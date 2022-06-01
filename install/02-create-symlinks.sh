@@ -27,7 +27,3 @@ tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
 ln -sfn ~/.dotfiles/vim/init.vim ~/.config/nvim/init.vim
-
-# Scripts
-mkdir -p ~/opt
-ln -sfn ~/.dotfiles/scripts/singularity-in-docker.sh ~/opt/singularity-in-docker.sh
