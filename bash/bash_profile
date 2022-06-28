@@ -78,6 +78,7 @@ alias ll=$LL' -lvh --color=auto --group-directories-first'
 
 # TMUX aliases
 alias tn=tmux-new.sh
+alias tnn='tmux new -t'
 alias ta='tmux attach -t'
 alias tl='tmux ls'
 
