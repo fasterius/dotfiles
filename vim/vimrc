@@ -53,6 +53,9 @@ nmap <Leader>v :source $MYVIMRC <CR>
 " Enable filetype detection and filetype-specific indentation/plugins
 filetype plugin indent on
 
+" Allow hidden buffers
+set hidden
+
 " Make <BACKSPACE> work as normal
 set backspace=indent,eol,start
 
