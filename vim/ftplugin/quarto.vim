@@ -7,12 +7,19 @@ endfunction
 nmap <silent> <LocalLeader>P :call QuartoPreview()<CR>
 
 " Function for rendering Quarto documents
-function! RenderQuarto()
+function! RenderQuarto() abort
     :w!
-    :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . " --to html')\n"
-    :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
+    let language = GetLanguage()
+    if language == "r"
+        :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . " --to html')\n"
+        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
+    elseif language == "python"
+        :SlimeSend0 "import os\n"
+        :SlimeSend0 "os.system('quarto render " . expand("%:p") . " --to html')\n"
+        :SlimeSend0 "os.system('open " . expand("%:p:r") . ".html')\n"
+    endif
 endfunction
-nmap <silent> <LocalLeader>k :call RenderQuarto()<CR>
+nmap <silent> <LocalLeader>r :call RenderQuarto()<CR>
 
 " Quarto-specific function to find language from the YAML header
 " This is used in conjunction with the generalised REPL functions in the main
@@ -34,7 +41,6 @@ function! GetLanguage() abort
     endtry
 
     " Get the language based on specified kernel
-    echo 'Quarto [' . kernel . "] kernel found"
     if (kernel == "python3")
         let language = "python"
     elseif (kernel == "knitr")
