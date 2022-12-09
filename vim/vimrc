@@ -288,26 +288,29 @@ function! GetLanguage()
 endfunction
 
 " Function for opening a new REPL window
-function! OpenTerminal()
+function! OpenTerminal() abort
 
     " Get starting window number
     let starting_window = bufwinnr(bufname('%'))
 
+    " Get language
+    let language = GetLanguage()
+
     " Open a terminal with appropriate language and move back to starting window
     if has('nvim')
-        :execute ':vsplit term://'.GetLanguage()
+        :execute ':vsplit term://' . language
         let t:term_id = b:terminal_job_id
         :execute starting_window 'wincmd w'
-        :execute 'let b:slime_config = {"jobid": "'.t:term_id . '"}'
+        :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
     else
-        :execute ':vertical terminal ++close ++norestore' GetLanguage()
+        :execute ':vertical terminal ++close ++norestore ' . language
         :execute starting_window 'wincmd w'
         :SlimeConfig
     endif
 endfunction
 
 " Function for exiting REPL windows
-function! CloseTerminal()
+function! CloseTerminal() abort
 
     " Get language of current filetype
     let language = GetLanguage()
@@ -323,7 +326,7 @@ function! CloseTerminal()
 endfunction
 
 " Function for printing the head of a pandas/R dataframe
-function! PrintHead()
+function! PrintHead() abort
 
     " Get language of current filetype
     let language = GetLanguage()
@@ -342,7 +345,7 @@ function! PrintHead()
 endfunction
 
 " Function for finding function blocks
-function! FindFunction()
+function! FindFunction() abort
 
     " Get language of current filetype
     let language = GetLanguage()
