@@ -159,6 +159,13 @@ command! -bang -nargs=* GGrep
 nnoremap <silent> <leader>g :GGrep<CR>
 nnoremap <silent> <leader>G :execute 'GGrep ' . expand('<cword>') <CR>
 
+" Build the quickfix list from fzf searches
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
+function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+endfunction
+let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list'), }
+
 " Put fzf preview window on the right at 40% (the default)
 let g:fzf_preview_window = ['right:40%']
 
