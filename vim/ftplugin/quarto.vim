@@ -1,9 +1,3 @@
-" Use expression folding
-" autocmd FileType quarto set foldmethod=expr
-
-" Set the vim-slime delimiter for Quarto chunks
-let g:slime_cell_delimiter = "```"
-
 " Preview Quarto document in a tab
 function! QuartoPreview()
     :w!
@@ -21,6 +15,9 @@ endfunction
 nmap <silent> <LocalLeader>k :call RenderQuarto()<CR>
 
 " Quarto-specific function to find language from the YAML header
+" This is used in conjunction with the generalised REPL functions in the main
+" VIMRC file, where another function with the same name and slightly different
+" functionality is used.
 function! GetLanguage() abort
 
     " Parse the YAML header and find the chosen kernel
