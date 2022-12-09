@@ -23,12 +23,12 @@ function! GetLanguage() abort
     " Parse the YAML header and find the chosen kernel
     let current_position = getpos('.')
     normal! gg
-    let line = search('^kernel: .*$', 'W')
+    let line = search('^kernel\|jupyter: .*$', 'W')
     call setpos('.', current_position)
 
     " Check for existance of kernel specification
     try
-        let kernel = matchlist(getline(line), 'kernel: \(.*\)')[1]
+        let kernel = matchlist(getline(line), '^kernel\|jupyter: \(.*\)')[1]
     catch
         echoerr "No kernel specification found; aborting"
     endtry
