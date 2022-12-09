@@ -1,6 +1,3 @@
-" Set commenstring
-" autocmd FileType quarto set commentstring=#\ %s
-
 " Use expression folding
 " autocmd FileType quarto set foldmethod=expr
 
