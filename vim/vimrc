@@ -153,9 +153,9 @@ nnoremap <silent> <leader>F :Files<CR>
 
 " Find words inside Git repo with fzf
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+    \ call fzf#vim#grep(
+    \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 nnoremap <silent> <leader>g :GGrep<CR>
 nnoremap <silent> <leader>G :execute 'GGrep ' . expand('<cword>') <CR>
 
