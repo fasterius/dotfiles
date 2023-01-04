@@ -147,7 +147,8 @@ call plug#end()
 set background=light  " Light background
 colorscheme solarized  " Solarized colours
 
-" Find files and Git files with fzf
+" Find buffers, files and Git files with fzf
+nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>f :GFiles<CR>
 nnoremap <silent> <leader>F :Files<CR>
 
