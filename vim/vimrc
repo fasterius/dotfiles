@@ -100,6 +100,12 @@ tnoremap <C-K> <C-W><C-K>
 tnoremap <C-L> <C-W><C-L>
 tnoremap <C-H> <C-W><C-H>
 
+" Move and indent visual selection
+vnoremap <silent> <S-J> :m '>+1 <CR> gv
+vnoremap <silent> <S-K> :m '<-2 <CR> gv
+vnoremap > >gv
+vnoremap < <gv
+
 " Always keep at least 5 lines above/below scrolling visible
 set scrolloff=5
 
