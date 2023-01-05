@@ -27,3 +27,6 @@ tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
 ln -sfn ~/.dotfiles/vim/init.vim ~/.config/nvim/init.vim
+
+# Alacritty
+ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
