@@ -48,3 +48,8 @@ colors:
 cursor:
   style:
     shape: Block
+
+key_bindings:
+  # Move one word backwards/forwards
+  - { key: H, mods: Alt, chars: "\x1BB" }
+  - { key: L, mods: Alt, chars: "\x1BF" }
