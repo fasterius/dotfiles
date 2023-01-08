@@ -120,6 +120,7 @@ Plug 'junegunn/fzf',                              { 'as': 'fzf', 'do': {-> fzf#i
 Plug 'junegunn/fzf.vim',                          { 'as': 'fzf-vim' }
 Plug 'airblade/vim-gitgutter',                    { 'as': 'gitgutter' }
 Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
+Plug 'junegunn/goyo.vim',                         { 'as': 'goyo' }
 Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
 Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
 Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
@@ -259,6 +260,9 @@ map <leader>dg :diffget<CR>
 
 " Disable conflicting plugin mapping for 'å' button
 let g:AutoPairsShortcutFastWrap = ''
+
+" Set Goyo width to 81 to correctly wrap lines at 80 characters
+let g:goyo_width = 81
 
 " REPL: {{{1
 
