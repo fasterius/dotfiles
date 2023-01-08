@@ -114,6 +114,7 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnip
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'romainl/vim-cool',                          { 'as': 'cool' }
 Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
 Plug 'junegunn/vim-easy-align',                   { 'as': 'easy-align' }
 Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
@@ -383,13 +384,13 @@ nmap <localleader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
 " Search Settings: {{{1
 
 " Search
-set incsearch  " Search as characters are entered
-set hlsearch  " Highlight searches
+set incsearch   " Search as characters are entered
+set hlsearch    " Highlight searches
 set ignorecase  " Case-insensitive searches ...
-set smartcase  " ... except when using capital letters
+set smartcase   " ... except when using capital letters
 
-" Cancel a search with <Return>
-nnoremap <CR> :noh<CR>
+" Show total number of matches (from `vim-cool` plugin)
+let g:cool_total_matches = 1
 
 " Statusline: {{{1
 
