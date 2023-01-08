@@ -115,6 +115,7 @@ Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
 Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
+Plug 'junegunn/vim-easy-align',                   { 'as': 'easy-align' }
 Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
 Plug 'junegunn/fzf',                              { 'as': 'fzf', 'do': {-> fzf#install()} }
 Plug 'junegunn/fzf.vim',                          { 'as': 'fzf-vim' }
@@ -263,6 +264,10 @@ let g:AutoPairsShortcutFastWrap = ''
 
 " Set Goyo width to 81 to correctly wrap lines at 80 characters
 let g:goyo_width = 81
+
+" Use easy-align in normal and visual modes
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " REPL: {{{1
 
