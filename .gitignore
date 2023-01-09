@@ -2,3 +2,4 @@
 .viminfo
 .netrwhist
 plugged/
+autoload/
