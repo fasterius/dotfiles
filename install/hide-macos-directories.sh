@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script that hides the default OS X home folders from Finder, but creates a
+# Script that hides the default MacOS home folders from Finder, but creates a
 # new subdirectory with symbolic links to them for access when needed.
 
 # Store current directory

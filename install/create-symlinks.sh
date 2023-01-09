@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Script that creates symbolic links for all relevant files in the repository
-# and installs all Vim plugins
 
 # Bash
 ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
