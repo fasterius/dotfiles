@@ -114,6 +114,7 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnip
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'tpope/vim-commentary',                      { 'as': 'commentary' }
 Plug 'romainl/vim-cool',                          { 'as': 'cool' }
 Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
 Plug 'junegunn/vim-easy-align',                   { 'as': 'easy-align' }
@@ -125,7 +126,6 @@ Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
 Plug 'junegunn/goyo.vim',                         { 'as': 'goyo' }
 Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
 Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
-Plug 'scrooloose/nerdcommenter',                  { 'as': 'nerdcommenter' }
 Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
 Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
 Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
@@ -228,16 +228,6 @@ let g:lsp_settings = {
     \ 'r-languageserver': { 'allowlist': ['r', 'rmarkdown'] },
     \ 'groovy-language-server': { 'allowlist': ['groovy', 'nextflow'] },
     \ 'remark-language-server' : { 'allowlist': ['markdown', 'pandoc'] }}
-
-" NERD Commenter
-let g:NERDSpaceDelims = 1  " Add a space after each comment
-let g:NERDCommentEmptyLines = 1  " Allow commenting of empty lines
-let g:NERDTrimTrailingWhitespace = 1  " Trim trailing whitespace for commenting
-let g:NERDCustomDelimiters = {
-                             \ 'snakemake': { 'left': '#' },
-                             \ 'nextflow':  { 'left': '//' },
-                             \ 'quarto':    { 'left': '#' }
-                             \ }
 
 " NERD Tree
 let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file

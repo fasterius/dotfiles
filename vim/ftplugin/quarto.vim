@@ -1,3 +1,5 @@
+autocmd FileType quarto.rmarkdown setlocal commentstring=#\ %s
+
 " Preview Quarto document in a tab
 function! QuartoPreview()
     :w!

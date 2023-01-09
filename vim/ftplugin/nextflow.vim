@@ -1,3 +1,8 @@
+" FIXME: Setting commentstring with FileType does not work in Nextflow
+" autocmd FileType nextflow setlocal commentstring=//\ %s
+autocmd BufEnter *.nf setlocal commentstring=//\ %s
+
+" Fix errors with syntax highlighting
 autocmd BufEnter *.nf :syntax sync fromstart
 
 " Helper function for getting the next non-blank line for folding
