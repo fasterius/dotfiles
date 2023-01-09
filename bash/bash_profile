@@ -37,6 +37,9 @@ export EDITOR=vim
 # Config file location for `bat`
 export BAT_CONFIG_PATH="$HOME/.dotfiles/bat/bat.conf"
 
+# Turn off auto-update for Homebrew
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # List command ----------------------------------------------------------------
 
 # List colours
