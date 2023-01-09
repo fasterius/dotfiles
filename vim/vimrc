@@ -112,6 +112,7 @@ Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnip
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
 Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
 Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
+Plug 'wellle/context.vim',                        { 'as': 'context' }
 Plug 'tpope/vim-commentary',                      { 'as': 'commentary' }
 Plug 'romainl/vim-cool',                          { 'as': 'cool' }
 Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
