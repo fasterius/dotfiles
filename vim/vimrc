@@ -107,6 +107,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'prabirshrestha/asyncomplete.vim',           { 'as': 'asyncomplete' }
+Plug 'prabirshrestha/asyncomplete-buffer.vim',    { 'as': 'asyncomplete-buffer' }
 Plug 'prabirshrestha/asyncomplete-lsp.vim',       { 'as': 'asyncomplete-lsp' }
 Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnips' }
 Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
@@ -202,6 +203,22 @@ call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_opti
     \ 'allowlist': ['*'],
     \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
     \ }))
+
+" Register buffers as sources for Asyncomplete
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+
+" Fix completion for files opened directly by Vim on the command line, rather
+" than as a buffer from inside Vim.
+" (see https://github.com/prabirshrestha/asyncomplete-buffer.vim/issues/17)
+function! s:fix_buffer_complete() abort
+    let l:info = asyncomplete#get_source_info('buffer')
+    call l:info.on_event(l:info, {}, 'BufWinEnter')
+endfunction
+autocmd User asyncomplete_setup call s:fix_buffer_complete()
 
 " LSP settings function
 function! s:on_lsp_buffer_enabled() abort
