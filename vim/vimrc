@@ -130,6 +130,7 @@ Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
 Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
 Plug 'quarto-dev/quarto-vim',                     { 'as': 'quarto-vim' }
 Plug 'tpope/vim-repeat',                          { 'as': 'repeat' }
+Plug 'vim-scripts/ReplaceWithRegister',           { 'as': 'replace-with-register' }
 Plug 'vim-pandoc/vim-rmarkdown',                  { 'as': 'rmarkdown' }
 Plug 'tmhedberg/SimpylFold',                      { 'as': 'simpylfold' }
 Plug 'jpalardy/vim-slime',                        { 'as': 'slime' }
