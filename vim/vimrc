@@ -229,7 +229,7 @@ set scrolloff=5
 
 " Asyncomplete And LSP: {{{2
 
-" General mappings
+" Asyncomplete mappings
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
@@ -261,9 +261,9 @@ function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gh <plug>(lsp-hover)
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
     nnoremap <buffer> <expr><C-f> lsp#scroll(+4)
     nnoremap <buffer> <expr><C-d> lsp#scroll(-4)
     let g:lsp_format_sync_timeout = 1000
