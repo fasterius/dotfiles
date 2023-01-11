@@ -1,405 +1,99 @@
 "  Vim Run Commands file
 "  Author:  Erik Fasterius <erik dot fasterius at outlook dot com>
 "  URL:     https://github.com/fasterius/dotfiles
+"
+"  This file is heavily commented with documentation explaining each setting and
+"  its functionality, but you can always check the help pages for more info.
 
 " Use vi-noncompatibility (this is redundant in most cases but setting it here
 " explicitly for clarity over using the implicit default behaviour)
 set nocompatible
 
-" Backups: {{{1
+" Load Plugins: {{{1
 
-" Backups in '~/.vim/tmp' directory
-set backup
-set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
+" Use vim-plug for plugin management; auto-install missing
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    Silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
 
-" Store undo data in a file
-set undofile
+" Appearance
+Plug 'fasterius/vim-colors-solarized' " A colour scheme
+Plug 'wellle/context.vim'             " Display the context of the currently visible buffer content, e.g. function definitions
+Plug 'romainl/vim-cool'               " Disable search highlight after search is finished
+Plug 'Konfekt/FastFold'               " Optimise folding for speed
+Plug 'junegunn/goyo.vim'              " Distraction-free writing
+Plug 'tmhedberg/SimpylFold'           " Python folding
+
+" Autocompletion, LSP and snippets
+Plug 'prabirshrestha/asyncomplete.vim'           " A vimscript autocompletion engine
+Plug 'prabirshrestha/asyncomplete-buffer.vim'    " Include buffers for completion
+Plug 'prabirshrestha/asyncomplete-lsp.vim'       " Include LSP for completion
+Plug 'prabirshrestha/asyncomplete-ultisnips.vim' " Include UltiSnips for comlpetion
+Plug 'prabirshrestha/vim-lsp'                    " A vimscript LSP engine
+Plug 'mattn/vim-lsp-settings'                    " Facilitate installation of LSPs
+Plug 'SirVer/ultisnips'                          " A snipper manager
+
+" Files and buffers
+Plug 'junegunn/fzf',      { 'do': {-> fzf#install()} } " A fuzzy file finder
+Plug 'junegunn/fzf.vim'                                " Use fzf with vim
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " A file tree explorer
+
+" Formatting
+Plug 'jiangmiao/auto-pairs'            " Automatically insert bracket (etc.) pairs
+Plug 'ntpeters/vim-better-whitespace'  " Working with whitespace
+Plug 'tpope/vim-commentary'            " Commenting code
+Plug 'junegunn/vim-easy-align'         " Alignment around user-based input
+Plug 'tpope/vim-repeat'                " Allow additional motions to be repeated
+Plug 'vim-scripts/ReplaceWithRegister' " Optimise replacement from registers
+Plug 'tpope/vim-surround'              " Surround with brackets, parentheses, quotes, etc.
+Plug 'wellle/targets.vim'              " Add additional text objects
+
+" Integrations
+Plug 'whiteinge/diffconflicts'        " Working with Git merge conflicts
+Plug 'airblade/vim-gitgutter'         " Show changed code in the signcolumn
+Plug 'itchyny/vim-gitbranch'          " For showing the Git branch in the statusline
+Plug 'vim-pandoc/vim-pandoc'          " Working with markdown documents
+Plug 'vim-pandoc/vim-pandoc-syntax'   " Syntax for markdown documents
+Plug 'quarto-dev/quarto-vim'          " Working with Quarto documents
+Plug 'vim-pandoc/vim-rmarkdown'       " Working with R Markdown documents
+Plug 'christoomey/vim-tmux-navigator' " Facilitate movement between Vim and Tmux
+
+" REPL and terminal
+Plug 'jpalardy/vim-slime' " An all-purpose REPL for sending code to a terminal
+
+call plug#end()
 
 " Appearance: {{{1
 
-" Add line numbers
+" Add relative line numbers and absolute for the current line
 set relativenumber
 set number
 
 " Add background highlight to current line
 set cursorline
 
-" Cursor appearance
+" Non-blinking block cursor
 set guicursor=
 
-" Show commands
+" Show commands in statusline after they have been executed
 set showcmd
 
-" General Key Mappings: {{{1
-
-" Set leaders
-let maplocalleader=','
-let mapleader="\<SPACE>"
-
-" Replace all occurences of word underneath the cursor
-map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
-
-" Open VIMRC file for editing
-nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
-
-" Re-source VIMRC
-nmap <Leader>v :source $MYVIMRC <CR>
-
-" Miscellaneous: {{{1
-
-" Enable filetype detection and filetype-specific indentation/plugins
-filetype plugin indent on
-
-" Allow hidden buffers
-set hidden
-
-" Make <BACKSPACE> work as normal
-set backspace=indent,eol,start
-
-" Wrap lines at 80 characters
-set textwidth=80
-set formatoptions+=t
-
-" Use the same indentation as currently on for new lines
-set autoindent
-
-" Use UTF-8 encoding
-set encoding=utf-8
-
-" Use the system clipboard
-set clipboard=unnamed
-
-" Create splits below and to the right
-set splitbelow
-set splitright
-
-" Movements: {{{1
-
-" Move by visual lines instead of physical lines
-nnoremap j gj
-nnoremap k gk
-
-" Also use CTRL-<hjkl> to move to/from Vim terminals
-tnoremap <C-J> <C-W><C-J>
-tnoremap <C-K> <C-W><C-K>
-tnoremap <C-L> <C-W><C-L>
-tnoremap <C-H> <C-W><C-H>
-
-" Move and indent visual selection
-vnoremap <silent> <S-J> :m '>+1 <CR> gv
-vnoremap <silent> <S-K> :m '<-2 <CR> gv
-vnoremap > >gv
-vnoremap < <gv
-
-" Always keep at least 5 lines above/below scrolling visible
-set scrolloff=5
-
-" Plugins: {{{1
-
-" Use vim-plug for plugin management
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/asyncomplete.vim',           { 'as': 'asyncomplete' }
-Plug 'prabirshrestha/asyncomplete-buffer.vim',    { 'as': 'asyncomplete-buffer' }
-Plug 'prabirshrestha/asyncomplete-lsp.vim',       { 'as': 'asyncomplete-lsp' }
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim', { 'as': 'asyncomplete-ultisnips' }
-Plug 'jiangmiao/auto-pairs',                      { 'as': 'auto-pairs' }
-Plug 'ntpeters/vim-better-whitespace',            { 'as': 'better-whitespace' }
-Plug 'fasterius/vim-colors-solarized',            { 'as': 'colors-solarized' }
-Plug 'wellle/context.vim',                        { 'as': 'context' }
-Plug 'tpope/vim-commentary',                      { 'as': 'commentary' }
-Plug 'romainl/vim-cool',                          { 'as': 'cool' }
-Plug 'whiteinge/diffconflicts',                   { 'as': 'diffconflicts' }
-Plug 'junegunn/vim-easy-align',                   { 'as': 'easy-align' }
-Plug 'Konfekt/FastFold',                          { 'as': 'fastfold' }
-Plug 'junegunn/fzf',                              { 'as': 'fzf', 'do': {-> fzf#install()} }
-Plug 'junegunn/fzf.vim',                          { 'as': 'fzf-vim' }
-Plug 'airblade/vim-gitgutter',                    { 'as': 'gitgutter' }
-Plug 'itchyny/vim-gitbranch',                     { 'as': 'gitbranch' }
-Plug 'junegunn/goyo.vim',                         { 'as': 'goyo' }
-Plug 'prabirshrestha/vim-lsp',                    { 'as': 'lsp' }
-Plug 'mattn/vim-lsp-settings',                    { 'as': 'lsp-settings' }
-Plug 'scrooloose/nerdtree',                       { 'as': 'nerdtree', 'on': 'NERDTreeToggle' }
-Plug 'vim-pandoc/vim-pandoc',                     { 'as': 'pandoc' }
-Plug 'vim-pandoc/vim-pandoc-syntax',              { 'as': 'pandoc-syntax' }
-Plug 'quarto-dev/quarto-vim',                     { 'as': 'quarto-vim' }
-Plug 'tpope/vim-repeat',                          { 'as': 'repeat' }
-Plug 'vim-scripts/ReplaceWithRegister',           { 'as': 'replace-with-register' }
-Plug 'vim-pandoc/vim-rmarkdown',                  { 'as': 'rmarkdown' }
-Plug 'tmhedberg/SimpylFold',                      { 'as': 'simpylfold' }
-Plug 'jpalardy/vim-slime',                        { 'as': 'slime' }
-Plug 'tpope/vim-surround',                        { 'as': 'surround' }
-Plug 'wellle/targets.vim',                        { 'as': 'targets' }
-Plug 'christoomey/vim-tmux-navigator',            { 'as': 'tmux-navigator' }
-Plug 'SirVer/ultisnips',                          { 'as': 'ultisnips' }
-call plug#end()
-
-" Colour scheme
-set background=light  " Light background
-colorscheme solarized  " Solarized colours
-
-" Find buffers, files and Git files with fzf
-nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>f :GFiles<CR>
-nnoremap <silent> <leader>F :Files<CR>
-
-" Find words inside Git repo with fzf
-command! -bang -nargs=* GGrep
-    \ call fzf#vim#grep(
-    \   'git grep --line-number -- '.shellescape(<q-args>), 0,
-    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-nnoremap <silent> <leader>g :GGrep<CR>
-nnoremap <silent> <leader>G :execute 'GGrep ' . expand('<cword>') <CR>
-
-" Build the quickfix list from fzf searches
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
-function! s:build_quickfix_list(lines)
-    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-endfunction
-let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list'), }
-
-" Put fzf preview window on the right at 40% (the default)
-let g:fzf_preview_window = ['right:40%']
-
-" Set fzf preview colours
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-    \   'bg':      ['bg', 'Normal'],
-    \   'hl':      ['fg', 'WildMenu'],
-    \   'fg+':     ['fg', 'Normal'],
-    \   'bg+':     ['bg', 'CursorLine'],
-    \   'hl+':     ['fg', 'ToolbarButton'],
-    \   'info':    ['fg', 'Comment'],
-    \   'border':  ['fg', 'Normal'],
-    \   'prompt':  ['fg', 'Comment'],
-    \   'pointer': ['fg', 'Exception'],
-    \   'marker':  ['fg', 'ToolbarButton'],
-    \   'spinner': ['fg', 'Label'],
-    \   'header':  ['fg', 'Comment'] }
-
-" UltiSnips
-let g:UltiSnipsEditSplit = 'context'
-let g:UltiSnipsExpandTrigger = '<C-l>' " CTRL-l expands snippets
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
-
-" Open UltiSnips snippet file for current filetype
-nnoremap <Leader>n :UltiSnipsEdit <CR>
-
-" Asyncomplete mappings
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-" Register UltiSnips as source for Asyncomplete
-call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    \ 'name': 'ultisnips',
-    \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    \ }))
-
-" Register buffers as sources for Asyncomplete
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    \ 'name': 'buffer',
-    \ 'allowlist': ['*'],
-    \ 'completor': function('asyncomplete#sources#buffer#completor'),
-    \ }))
-
-" Fix completion for files opened directly by Vim on the command line, rather
-" than as a buffer from inside Vim.
-" (see https://github.com/prabirshrestha/asyncomplete-buffer.vim/issues/17)
-function! s:fix_buffer_complete() abort
-    let l:info = asyncomplete#get_source_info('buffer')
-    call l:info.on_event(l:info, {}, 'BufWinEnter')
-endfunction
-autocmd User asyncomplete_setup call s:fix_buffer_complete()
-
-" LSP settings function
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <Buffer> gd <Plug>(lsp-definition)
-    nmap <Buffer> gr <Plug>(lsp-references)
-    nmap <Buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <Buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <Buffer> K <Plug>(lsp-hover)
-    nnoremap <Buffer> <Expr><c-f> lsp#scroll(+4)
-    nnoremap <Buffer> <Expr><c-d> lsp#scroll(-4)
-    let g:lsp_format_sync_timeout = 1000
-endfunction
-
-" Only set LSP settings when a server is registered
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-" Use `r-languageserver` LSP for R Markdown files
-let g:lsp_settings = {
-    \ 'r-languageserver': { 'allowlist': ['r', 'rmarkdown'] },
-    \ 'groovy-language-server': { 'allowlist': ['groovy', 'nextflow'] },
-    \ 'remark-language-server' : { 'allowlist': ['markdown', 'pandoc'] }}
-
-" NERD Tree
-let g:NERDTreeQuitOnOpen = 1  " Close NERDTree after opening a file
-map <leader>t :NERDTreeToggle<CR>
-
-" FastFold
-let g:markdown_folding = 1
-let g:r_syntax_folding = 1
-
-" Vim-pandoc
-let g:pandoc#formatting#textwidth = 80
-let g:pandoc#keyboard#blacklist_submodule_mappings = ['lists']
-let g:pandoc#keyboard#use_default_mappings = 0
-let g:pandoc#folding#mode = 'expr'  " Use expression folding
-let g:pandoc#folding#fold_yaml = 1  " Fold the YAML header
-let g:pandoc#folding#fold_fenced_codeblocks = 1  " Fold R code chunks
-let g:pandoc#folding#fastfolds = 1  " Use FastFolds for Pandoc folding
-
-" DiffConflicts
-map <leader>dc :DiffConflicts<CR>
-map <leader>dg :diffget<CR>
-
-" Disable conflicting plugin mapping for 'å' button
-let g:AutoPairsShortcutFastWrap = ''
-
-" Set Goyo width to 81 to correctly wrap lines at 80 characters
-let g:goyo_width = 81
-
-" Use easy-align in normal and visual modes
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-
-" REPL: {{{1
-
-" General vim-slime settings
-if has('nvim')
-    let g:slime_target = "neovim"
-else
-    let g:slime_target = "vimterminal"
-    let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
-endif
-
-" Function for getting the appropriate language for the current filetype
-function! GetLanguage()
-    if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
-        let language = "r"
-    elseif &ft == "python"
-        let language = "python"
-    else
-        let language = "bash"
-    endif
-    return language
-endfunction
-
-" Function for opening a new REPL window
-function! OpenTerminal() abort
-
-    " Get starting window number
-    let starting_window = bufwinnr(bufname('%'))
-
-    " Get language
-    let language = GetLanguage()
-
-    " Open a terminal with appropriate language and move back to starting window
-    if has('nvim')
-        :execute ':vsplit term://' . language
-        let t:term_id = b:terminal_job_id
-        :execute starting_window 'wincmd w'
-        :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
-    else
-        :execute ':vertical terminal ++close ++norestore ' . language
-        :execute starting_window 'wincmd w'
-        :SlimeConfig
-    endif
-endfunction
-
-" Function for exiting REPL windows
-function! CloseTerminal() abort
-
-    " Get language of current filetype
-    let language = GetLanguage()
-
-    " Close terminal using the appropriate command
-    if language == "r"
-        :SlimeSend1 quit(save = "no")
-    elseif language == "python"
-        :SlimeSend1 exit()
-    else
-        :SlimeSend1 exit
-    endif
-endfunction
-
-" Function for printing the head of a pandas/R dataframe
-function! PrintHead() abort
-
-    " Get language of current filetype
-    let language = GetLanguage()
-
-    " Get the word under the cursor
-    let current_word = expand("<cword>")
-
-    " Send appropriate command to REPL
-    if language == "r"
-        :SlimeSend0 "head(" . current_word . ")\n"
-    elseif language == "python"
-        :SlimeSend0 current_word . ".head()\n"
-    else
-        :echo "Error: requires Python or R"
-    endif
-endfunction
-
-" Function for finding function blocks
-function! FindFunction() abort
-
-    " Get language of current filetype
-    let language = GetLanguage()
-
-    " Find appropriate function block depending on language
-    if language == "r"
-        ?^[a-zA-Z_\.]*[[:space:]]<-[[:space:]]function(
-        execute "normal! V"
-        /^}
-    elseif language == "python"
-        ?^def[[:space:]][a-zA-Z0-9_()]*:
-        execute "normal! V"
-        /^[^# ]
-        ?^\s\+\S
-    endif
-endfunction
-
-" Vim-slime key mappings
-nmap <localleader>l <Plug>SlimeLineSend
-nmap <localleader>p <Plug>SlimeParagraphSend
-xmap <localleader>s <Plug>SlimeRegionSend
-nmap <localleader>c <Plug>SlimeSendCell
-nmap <localleader>w viw<Plug>SlimeRegionSend
-nmap <localleader>a ggVG<Plug>SlimeRegionSend
-nmap <localleader>t :call OpenTerminal()<CR>
-nmap <localleader>q :call CloseTerminal()<CR>
-nmap <localleader>h :call PrintHead()<CR>
-nmap <localleader>C :SlimeSend0 "\x03"<CR>
-nmap <localleader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
-
-" Search Settings: {{{1
-
-" Search
-set incsearch   " Search as characters are entered
-set hlsearch    " Highlight searches
-set ignorecase  " Case-insensitive searches ...
-set smartcase   " ... except when using capital letters
-
-" Show total number of matches (from `vim-cool` plugin)
-let g:cool_total_matches = 1
-
-" Statusline: {{{1
+" Enable syntax highlighting
+syntax enable
+
+" Use the Solarized light colour scheme
+set background=light
+colorscheme solarized
+
+" Highlight the first character exceeding a linewidth of 80
+" (needs to be after any colorscheme specification to work)
+highlight ColorColumn ctermbg=red ctermfg=white
+call matchadd('ColorColumn', '\%81v.', 100)
+
+" Statusline: {{{2
 
 " Statusline is always on
 set laststatus=2
@@ -438,29 +132,386 @@ set statusline+=\                " Ending space
 " Don't show mode; it's included in the statusline
 set noshowmode
 
-" Syntax Highlighting: {{{1
+" }}}2
 
-" Enable syntax highlighting
-syntax enable
+" General Settings: {{{1
 
-" Python-specific setting to highlight all syntax groups
-let python_highlight_all = 1
+" Enable filetype detection and filetype-specific indentation/plugins
+filetype plugin indent on
 
-" Highlight the first character exceeding a linewidth of 80
-highlight ColorColumn ctermbg=red ctermfg=white
-call matchadd('ColorColumn', '\%81v.', 100)
+" Allow hidden buffers
+set hidden
 
-" Tab Settings: {{{1
+" Allow backspacing over indentation, end of line and start of insert
+set backspace=indent,eol,start
 
-" General tab settings
-set tabstop=4  " <TAB> is 4 spaces wide
-set expandtab  " <TAB> is expanded to spaces
-set shiftwidth=4  " Use 4 spaces when indenting with '>'
+" Wrap lines at 80 characters
+set textwidth=80
+set formatoptions+=t
+
+" Use the same indentation as currently on for new lines
+set autoindent
+
+" Use UTF-8 encoding
+set encoding=utf-8
+
+" Use the system clipboard when not specifying a register
+set clipboard=unnamed
+
+" Create splits below and to the right
+set splitbelow
+set splitright
+
+" Tab settings
+set expandtab    " Expand tabs to spaces
+set tabstop=4    " Tabs are 4 spaces wide
+set shiftwidth=4 " Use 4 spaces when indenting with '>'
 
 " Graphical menu for tab-completion of files
 set wildmenu
 
+" Search settings
+set incsearch   " Search as characters are entered
+set hlsearch    " Highlight searches
+set ignorecase  " Case-insensitive searches ...
+set smartcase   " ... except when using capital letters
+
+" Backup settings
+set backup
+set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set writebackup
+
+" Undo settings
+set undofile
+
+" General Key Mappings: {{{1
+
+" Set leaders
+let maplocalleader=','
+let mapleader="\<SPACE>"
+
+" Replace all occurences of word underneath the cursor
+map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Open VIMRC file for editing
+nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
+
+" Re-source VIMRC
+nmap <Leader>v :source $MYVIMRC <CR>
+
+" Movement: {{{1
+
+" Move by visual lines instead of physical lines
+nnoremap j gj
+nnoremap k gk
+
+" Also use CTRL-<hjkl> to move to/from Vim terminals
+tnoremap <C-j> <C-w><C-j>
+tnoremap <C-k> <C-w><C-k>
+tnoremap <C-l> <C-w><C-l>
+tnoremap <C-h> <C-w><C-h>
+
+" Move and indent visual selection
+vnoremap <Silent> <S-j> :m '>+1 <CR> gv
+vnoremap <Silent> <S-k> :m '<-2 <CR> gv
+vnoremap > >gv
+vnoremap < <gv
+
+" Always keep at least 5 lines above/below scrolling visible
+set scrolloff=5
+
+" Plugin Settings: {{{1
+
+" Asyncomplete And LSP: {{{2
+
+" General mappings
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
+
+" Register buffers and UltiSnips as sources
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name':      'buffer',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ }))
+call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    \ 'name':      'ultisnips',
+    \ 'allowlist': ['*'],
+    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    \ }))
+
+" Fix completion for files opened directly by Vim on the command line, rather
+" than as a buffer from inside Vim.
+" (see https://github.com/prabirshrestha/asyncomplete-buffer.vim/issues/17)
+function! s:fix_buffer_complete() abort
+    let l:info = asyncomplete#get_source_info('buffer')
+    call l:info.on_event(l:info, {}, 'BufWinEnter')
+endfunction
+autocmd User asyncomplete_setup call s:fix_buffer_complete()
+
+" LSP settings function
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <Buffer> gd <Plug>(lsp-definition)
+    nmap <Buffer> gr <Plug>(lsp-references)
+    nmap <Buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <Buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <Buffer> K <Plug>(lsp-hover)
+    nnoremap <Buffer> <Expr><C-f> lsp#scroll(+4)
+    nnoremap <Buffer> <Expr><C-d> lsp#scroll(-4)
+    let g:lsp_format_sync_timeout = 1000
+endfunction
+
+" Only set LSP settings when a server is registered
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" Use `r-languageserver` LSP for R Markdown files
+let g:lsp_settings = {
+    \ 'r-languageserver':       { 'allowlist': ['r', 'rmarkdown'] },
+    \ 'groovy-language-server': { 'allowlist': ['groovy', 'nextflow'] },
+    \ 'remark-language-server': { 'allowlist': ['markdown', 'pandoc'] }}
+
+" Autopairs: {{{2
+
+" Disable conflicting plugin mapping for 'å' button
+let g:AutoPairsShortcutFastWrap = ''
+
+" Cool: {{{2
+
+" Show total number of search matches
+let g:cool_total_matches = 1
+
+" DiffConflicts: {{{2
+
+map <Leader>dc :DiffConflicts<CR>
+map <Leader>dg :diffget<CR>
+
+" Easyalign: {{{2
+
+" Use easy-align in normal and visual modes
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+" FastFold: {{{2
+
+" Use FastFold for Markdown and R files
+let g:markdown_folding = 1
+let g:r_syntax_folding = 1
+
+" Fzf: {{{2
+
+" Maps to find buffers, files and Git files
+nnoremap <Silent> <Leader>b :Buffers<CR>
+nnoremap <Silent> <Leader>f :GFiles<CR>
+nnoremap <Silent> <Leader>F :Files<CR>
+
+" Find words inside a Git repository
+command! -bang -nargs=* GGrep
+    \ call fzf#vim#grep(
+    \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+nnoremap <Silent> <Leader>g :GGrep<CR>
+nnoremap <Silent> <Leader>G :execute 'GGrep ' . expand('<cword>') <CR>
+
+" Build the quickfix list from fzf searches
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
+function! s:build_quickfix_list(lines)
+    call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+endfunction
+let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list'), }
+
+" Put fzf preview window on the right at 40% (the default)
+let g:fzf_preview_window = ['right:40%']
+
+" Set fzf preview colours
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+    \   'bg':      ['bg', 'Normal'],
+    \   'hl':      ['fg', 'WildMenu'],
+    \   'fg+':     ['fg', 'Normal'],
+    \   'bg+':     ['bg', 'CursorLine'],
+    \   'hl+':     ['fg', 'ToolbarButton'],
+    \   'info':    ['fg', 'Comment'],
+    \   'border':  ['fg', 'Normal'],
+    \   'prompt':  ['fg', 'Comment'],
+    \   'pointer': ['fg', 'Exception'],
+    \   'marker':  ['fg', 'ToolbarButton'],
+    \   'spinner': ['fg', 'Label'],
+    \   'header':  ['fg', 'Comment'] }
+
+" Goyo: {{{2
+
+" Set Goyo width to 81 to correctly wrap lines at 80 characters
+let g:goyo_width = 81
+
+" NERDTree: {{{2
+
+" Close NERDTree after opening a file
+let g:NERDTreeQuitOnOpen = 1
+
+map <Leader>t :NERDTreeToggle<CR>
+
+" Pandoc: {{{2
+
+" Do not use default mappings
+let g:pandoc#keyboard#use_default_mappings = 0
+
+" Wrap pandoc lines at 80 characters
+let g:pandoc#formatting#textwidth = 80
+
+" Use expression folding
+let g:pandoc#folding#mode = 'expr'
+
+" Fold the YAML header
+let g:pandoc#folding#fold_yaml = 1
+
+" Fold R code chunks
+let g:pandoc#folding#fold_fenced_codeblocks = 1
+
+" Use FastFolds for Pandoc folding
+let g:pandoc#folding#fastfolds = 1
+
+" Slime: {{{2
+
+" Use either Vim or Neovim terminal, as appropriate
+if has('nvim')
+    let g:slime_target = "neovim"
+else
+    let g:slime_target = "vimterminal"
+    let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
+endif
+
+" Function: get the appropriate language for the current filetype {{{3
+function! GetLanguage()
+    if &ft == "rmarkdown" || &ft == "rnoweb" || &ft == "r"
+        let language = "r"
+    elseif &ft == "python"
+        let language = "python"
+    else
+        let language = "bash"
+    endif
+    return language
+endfunction
+
+" }}}3
+" Function: open a new REPL window {{{3
+function! OpenTerminal() abort
+
+    " Get starting window number
+    let starting_window = bufwinnr(bufname('%'))
+
+    " Get language
+    let language = GetLanguage()
+
+    " Open a terminal with appropriate language and move back to starting window
+    if has('nvim')
+        :execute ':vsplit term://' . language
+        let t:term_id = b:terminal_job_id
+        :execute starting_window 'wincmd w'
+        :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
+    else
+        :execute ':vertical terminal ++close ++norestore ' . language
+        :execute starting_window 'wincmd w'
+        :SlimeConfig
+    endif
+endfunction
+
+" }}}3
+" Function: exit REPL windows {{{3
+function! CloseTerminal() abort
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Close terminal using the appropriate command
+    if language == "r"
+        :SlimeSend1 quit(save = "no")
+    elseif language == "python"
+        :SlimeSend1 exit()
+    else
+        :SlimeSend1 exit
+    endif
+endfunction
+
+" }}}3
+" Function: print the head of a pandas/R dataframe {{{3
+function! PrintHead() abort
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Get the word under the cursor
+    let current_word = expand("<cword>")
+
+    " Send appropriate command to REPL
+    if language == "r"
+        :SlimeSend0 "head(" . current_word . ")\n"
+    elseif language == "python"
+        :SlimeSend0 current_word . ".head()\n"
+    else
+        :echo "Error: requires Python or R"
+    endif
+endfunction
+
+" }}}3
+" Function: find function blocks {{{3
+function! FindFunction() abort
+
+    " Get language of current filetype
+    let language = GetLanguage()
+
+    " Find appropriate function block depending on language
+    if language == "r"
+        ?^[a-zA-Z_\.]*[[:space:]]<-[[:space:]]function(
+        execute "normal! V"
+        /^}
+    elseif language == "python"
+        ?^def[[:space:]][a-zA-Z0-9_()]*:
+        execute "normal! V"
+        /^[^# ]
+        ?^\s\+\S
+    endif
+endfunction
+
+" }}}3
+
+" Mappings
+nmap <LocalLeader>l <Plug>SlimeLineSend
+nmap <LocalLeader>p <Plug>SlimeParagraphSend
+xmap <LocalLeader>s <Plug>SlimeRegionSend
+nmap <LocalLeader>c <Plug>SlimeSendCell
+nmap <LocalLeader>w viw<Plug>SlimeRegionSend
+nmap <LocalLeader>a ggVG<Plug>SlimeRegionSend
+nmap <LocalLeader>t :call OpenTerminal()<CR>
+nmap <LocalLeader>q :call CloseTerminal()<CR>
+nmap <LocalLeader>h :call PrintHead()<CR>
+nmap <LocalLeader>C :SlimeSend0 "\x03"<CR>
+nmap <LocalLeader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
+
+" UltiSnips: {{{2
+
+" use CTRL-l to expand snippets
+let g:UltiSnipsExpandTrigger = '<C-l>'
+
+" Store snippets in vimrc base directory
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
+
+" Open UltiSnips snippet file for current filetype either horizontally or
+" vertically depending on context
+let g:UltiSnipsEditSplit = 'context'
+nnoremap <Leader>n :UltiSnipsEdit <CR>
+
+" }}}2
+
 " }}}1
 
+" Set foldmethod to marker inside this file using the modeline
 set modelines=1
 " vim:foldmethod=marker

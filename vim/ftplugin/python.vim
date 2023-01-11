@@ -1,3 +1,6 @@
+" Highlight all Python syntax groups
+let python_highlight_all = 1
+
 " Helper function for getting the next non-blank line for folding
 function! NextNonBlankLine(lnum)
     let numlines = line('$')  " Get total lines in file
