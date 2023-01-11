@@ -181,15 +181,13 @@ set hlsearch    " Highlight searches
 set ignorecase  " Case-insensitive searches ...
 set smartcase   " ... except when using capital letters
 
-" Backup settings
-set backup
-set backupdir=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim/tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
-
-" Undo settings
-set undofile
+" Backup, swap and undo settings
+set backup                           " Keep backup files
+set backupdir=~/.tmp,/var/tmp,/tmp   " Store backups in these directories
+set backupskip=/tmp/*,/private/tmp/* " Do not backup in these directories
+set directory=~/.tmp,/var/tmp,/tmp   " Store swapfiles in these directories
+set undofile                         " Keep undofiles
+set undodir=~/.tmp,/var/tmp,/tmp     " Stor undofiles in these directories
 
 " General Key Mappings: {{{1
 
