@@ -47,7 +47,7 @@ Plug 'ntpeters/vim-better-whitespace'  " Working with whitespace
 Plug 'tpope/vim-commentary'            " Commenting code
 Plug 'junegunn/vim-easy-align'         " Alignment around user-based input
 Plug 'tpope/vim-repeat'                " Allow additional motions to be repeated
-Plug 'vim-scripts/ReplaceWithRegister' " Optimise replacement from registers
+Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 Plug 'tpope/vim-surround'              " Surround with brackets, parentheses, quotes, etc.
 Plug 'wellle/targets.vim'              " Add additional text objects
 
@@ -195,14 +195,14 @@ set undodir=~/.tmp,/var/tmp,/tmp     " Stor undofiles in these directories
 let maplocalleader=','
 let mapleader="\<SPACE>"
 
-" Replace all occurences of word underneath the cursor
-map <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
-
 " Open VIMRC file for editing
 nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
 
 " Re-source VIMRC
 nmap <Leader>v :source $MYVIMRC <CR>
+
+" Add custom text object `ie` for 'inner entire buffer'
+onoremap ie :exec "normal! ggVG"<cr>
 
 " Movement: {{{1
 
@@ -497,6 +497,19 @@ nmap <LocalLeader>q :call CloseTerminal()<CR>
 nmap <LocalLeader>h :call PrintHead()<CR>
 nmap <LocalLeader>C :SlimeSend0 "\x03"<CR>
 nmap <LocalLeader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
+
+
+" Subversive: {{{2
+
+" Substitute motion with register content
+nmap s <Plug>(SubversiveSubstitute)
+
+" Substitite word under cursor within motion with user input
+" Useful with e.g. `ie` motion, `inner entire buffer`
+nmap <Leader>s <Plug>(SubversiveSubstituteWordRange)
+
+" Do not move cursor after substituting
+let g:subversivePreserveCursorPosition = 1
 
 " UltiSnips: {{{2
 
