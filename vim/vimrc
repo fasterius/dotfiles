@@ -20,12 +20,12 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Appearance
-Plug 'fasterius/vim-colors-solarized' " A colour scheme
-Plug 'wellle/context.vim'             " Display the context of the currently visible buffer content, e.g. function definitions
-Plug 'romainl/vim-cool'               " Disable search highlight after search is finished
-Plug 'Konfekt/FastFold'               " Optimise folding for speed
-Plug 'junegunn/goyo.vim'              " Distraction-free writing
-Plug 'tmhedberg/SimpylFold'           " Python folding
+Plug 'altercation/vim-colors-solarized' " A colour scheme
+Plug 'wellle/context.vim'               " Display the context of the currently visible buffer content, e.g. function definitions
+Plug 'romainl/vim-cool'                 " Disable search highlight after search is finished
+Plug 'Konfekt/FastFold'                 " Optimise folding for speed
+Plug 'junegunn/goyo.vim'                " Distraction-free writing
+Plug 'tmhedberg/SimpylFold'             " Python folding
 
 " Autocompletion, LSP and snippets
 Plug 'prabirshrestha/asyncomplete.vim'           " A vimscript autocompletion engine
@@ -92,6 +92,11 @@ colorscheme solarized
 " (needs to be after any colorscheme specification to work)
 highlight ColorColumn ctermbg=red ctermfg=white
 call matchadd('ColorColumn', '\%81v.', 100)
+
+" Workaround for gitgutter and signcolumn background colours
+" (see https://github.com/airblade/vim-gitgutter/issues/696 for details)
+highlight! link SignColumn LineNr
+autocmd ColorScheme * highlight! link SignColumn LineNr
 
 " Statusline: {{{2
 
