@@ -11,7 +11,7 @@ set nocompatible
 
 " Load Plugins: {{{1
 
-" Use vim-plug for plugin management; auto-install missing
+" Use vim-plug for plugin management; auto-install if missing
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -49,7 +49,6 @@ Plug 'junegunn/vim-easy-align'         " Alignment around user-based input
 Plug 'tpope/vim-repeat'                " Allow additional motions to be repeated
 Plug 'svermeulen/vim-subversive'       " Add operators for substitutions
 Plug 'tpope/vim-surround'              " Surround with brackets, parentheses, quotes, etc.
-Plug 'wellle/targets.vim'              " Add additional text objects
 
 " Integrations
 Plug 'whiteinge/diffconflicts'        " Working with Git merge conflicts
@@ -63,6 +62,13 @@ Plug 'christoomey/vim-tmux-navigator' " Facilitate movement between Vim and Tmux
 
 " REPL and terminal
 Plug 'jpalardy/vim-slime' " An all-purpose REPL for sending code to a terminal
+
+" Text objects
+Plug 'wellle/targets.vim'                  " Several additional text objects
+Plug 'kana/vim-textobj-entire'             " Text object: entire buffer
+Plug 'kana/vim-textobj-indent'             " Text object: indentation
+Plug 'kana/vim-textobj-line'               " Text object: line
+Plug 'kana/vim-textobj-user'               " Framework for creating text objects
 
 call plug#end()
 
@@ -200,9 +206,6 @@ nmap <leader>V :sp <CR> :e $MYVIMRC <CR>
 
 " Re-source VIMRC
 nmap <leader>v :source $MYVIMRC <CR>
-
-" Add custom text object `ie` for 'inner entire buffer'
-onoremap ie :exec "normal! ggVG"<cr>
 
 " Movement: {{{1
 
