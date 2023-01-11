@@ -14,7 +14,7 @@ set nocompatible
 " Use vim-plug for plugin management; auto-install missing
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-    Silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
@@ -196,10 +196,10 @@ let maplocalleader=','
 let mapleader="\<SPACE>"
 
 " Open VIMRC file for editing
-nmap <Leader>V :sp <CR> :e $MYVIMRC <CR>
+nmap <leader>V :sp <CR> :e $MYVIMRC <CR>
 
 " Re-source VIMRC
-nmap <Leader>v :source $MYVIMRC <CR>
+nmap <leader>v :source $MYVIMRC <CR>
 
 " Add custom text object `ie` for 'inner entire buffer'
 onoremap ie :exec "normal! ggVG"<cr>
@@ -217,8 +217,8 @@ tnoremap <C-l> <C-w><C-l>
 tnoremap <C-h> <C-w><C-h>
 
 " Move and indent visual selection
-vnoremap <Silent> <S-j> :m '>+1 <CR> gv
-vnoremap <Silent> <S-k> :m '<-2 <CR> gv
+vnoremap <silent> <S-j> :m '>+1 <CR> gv
+vnoremap <silent> <S-k> :m '<-2 <CR> gv
 vnoremap > >gv
 vnoremap < <gv
 
@@ -259,13 +259,13 @@ autocmd User asyncomplete_setup call s:fix_buffer_complete()
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <Buffer> gd <Plug>(lsp-definition)
-    nmap <Buffer> gr <Plug>(lsp-references)
-    nmap <Buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <Buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <Buffer> K <Plug>(lsp-hover)
-    nnoremap <Buffer> <Expr><C-f> lsp#scroll(+4)
-    nnoremap <Buffer> <Expr><C-d> lsp#scroll(-4)
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><C-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><C-d> lsp#scroll(-4)
     let g:lsp_format_sync_timeout = 1000
 endfunction
 
@@ -293,14 +293,14 @@ let g:cool_total_matches = 1
 
 " DiffConflicts: {{{2
 
-map <Leader>dc :DiffConflicts<CR>
-map <Leader>dg :diffget<CR>
+map <leader>dc :DiffConflicts<CR>
+map <leader>dg :diffget<CR>
 
 " Easyalign: {{{2
 
 " Use easy-align in normal and visual modes
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
+nmap ga <plug>(EasyAlign)
+xmap ga <plug>(EasyAlign)
 
 " FastFold: {{{2
 
@@ -311,17 +311,17 @@ let g:r_syntax_folding = 1
 " Fzf: {{{2
 
 " Maps to find buffers, files and Git files
-nnoremap <Silent> <Leader>b :Buffers<CR>
-nnoremap <Silent> <Leader>f :GFiles<CR>
-nnoremap <Silent> <Leader>F :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>f :GFiles<CR>
+nnoremap <silent> <leader>F :Files<CR>
 
 " Find words inside a Git repository
 command! -bang -nargs=* GGrep
     \ call fzf#vim#grep(
     \   'git grep --line-number -- '.shellescape(<q-args>), 0,
     \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-nnoremap <Silent> <Leader>g :GGrep<CR>
-nnoremap <Silent> <Leader>G :execute 'GGrep ' . expand('<cword>') <CR>
+nnoremap <silent> <leader>g :GGrep<CR>
+nnoremap <silent> <leader>G :execute 'GGrep ' . expand('<cword>') <CR>
 
 " Build the quickfix list from fzf searches
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all,ctrl-d:deselect-all'
@@ -359,7 +359,7 @@ let g:goyo_width = 81
 " Close NERDTree after opening a file
 let g:NERDTreeQuitOnOpen = 1
 
-map <Leader>t :NERDTreeToggle<CR>
+map <leader>t :NERDTreeToggle<CR>
 
 " Pandoc: {{{2
 
@@ -486,27 +486,27 @@ endfunction
 " }}}3
 
 " Mappings
-nmap <LocalLeader>l <Plug>SlimeLineSend
-nmap <LocalLeader>p <Plug>SlimeParagraphSend
-xmap <LocalLeader>s <Plug>SlimeRegionSend
-nmap <LocalLeader>c <Plug>SlimeSendCell
-nmap <LocalLeader>w viw<Plug>SlimeRegionSend
-nmap <LocalLeader>a ggVG<Plug>SlimeRegionSend
-nmap <LocalLeader>t :call OpenTerminal()<CR>
-nmap <LocalLeader>q :call CloseTerminal()<CR>
-nmap <LocalLeader>h :call PrintHead()<CR>
-nmap <LocalLeader>C :SlimeSend0 "\x03"<CR>
-nmap <LocalLeader>f :call FindFunction()<CR><Plug>SlimeRegionSend<CR>
+nmap <localleader>l <plug>SlimeLineSend
+nmap <localleader>p <plug>SlimeParagraphSend
+xmap <localleader>s <plug>SlimeRegionSend
+nmap <localleader>c <plug>SlimeSendCell
+nmap <localleader>w viw<plug>SlimeRegionSend
+nmap <localleader>a ggVG<plug>SlimeRegionSend
+nmap <localleader>t :call OpenTerminal()<CR>
+nmap <localleader>q :call CloseTerminal()<CR>
+nmap <localleader>h :call PrintHead()<CR>
+nmap <localleader>C :SlimeSend0 "\x03"<CR>
+nmap <localleader>f :call FindFunction()<CR><plug>SlimeRegionSend<CR>
 
 
 " Subversive: {{{2
 
 " Substitute motion with register content
-nmap s <Plug>(SubversiveSubstitute)
+nmap s <plug>(SubversiveSubstitute)
 
 " Substitite word under cursor within motion with user input
 " Useful with e.g. `ie` motion, `inner entire buffer`
-nmap <Leader>s <Plug>(SubversiveSubstituteWordRange)
+nmap <leader>s <plug>(SubversiveSubstituteWordRange)
 
 " Do not move cursor after substituting
 let g:subversivePreserveCursorPosition = 1
@@ -522,7 +522,7 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
 " Open UltiSnips snippet file for current filetype either horizontally or
 " vertically depending on context
 let g:UltiSnipsEditSplit = 'context'
-nnoremap <Leader>n :UltiSnipsEdit <CR>
+nnoremap <leader>n :UltiSnipsEdit <CR>
 
 " }}}2
 
