@@ -59,8 +59,11 @@ draw_bold_text_with_bright_colors: true
 alt_send_esc: false
 
 key_bindings:
-  - { key: H,     mods: Alt,         chars: "\x1bb"       } # Forward one word
-  - { key: L,     mods: Alt,         chars: "\x1bf"       } # Backwards one word
-  - { key: H,     mods: Control|Alt, chars: "\x1bOH"      } # Home
-  - { key: L,     mods: Control|Alt, chars: "\x1bOF"      } # End
-  # - { key: Space, mods: Control,     action: ToggleViMode } # Toggle ViMode
+  - { key: H,     mods: Alt,         chars: "\x1bb"  } # Backwards one word
+  - { key: L,     mods: Alt,         chars: "\x1bf"  } # Forward one word
+  - { key: Left,  mods: Alt,         chars: "\x1bb"  } # Backwards one word
+  - { key: Right, mods: Alt,         chars: "\x1bf"  } # Forward one word
+  - { key: J,     mods: Alt,         chars: "\x1b[B" } # Down
+  - { key: K,     mods: Alt,         chars: "\x1b[A" } # Up
+  - { key: H,     mods: Control|Alt, chars: "\x1bOH" } # Home
+  - { key: L,     mods: Control|Alt, chars: "\x1bOF" } # End
