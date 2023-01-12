@@ -99,7 +99,7 @@ colorscheme solarized8
 
 " Highlight the first character exceeding a linewidth of 80
 " (needs to be after any colorscheme specification to work)
-highlight ColorColumn ctermbg=red ctermfg=white
+highlight ColorColumn guibg=#93a1a1 guifg=white
 call matchadd('ColorColumn', '\%81v.', 100)
 
 " Workaround for gitgutter and signcolumn background colours
