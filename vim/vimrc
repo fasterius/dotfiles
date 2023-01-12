@@ -343,10 +343,10 @@ let g:fzf_preview_window = ['right:40%']
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
     \   'bg':      ['bg', 'Normal'],
-    \   'hl':      ['fg', 'WildMenu'],
+    \   'hl':      ['fg', 'Function'],
     \   'fg+':     ['fg', 'Normal'],
     \   'bg+':     ['bg', 'CursorLine'],
-    \   'hl+':     ['fg', 'ToolbarButton'],
+    \   'hl+':     ['fg', 'Function'],
     \   'info':    ['fg', 'Comment'],
     \   'border':  ['fg', 'Normal'],
     \   'prompt':  ['fg', 'Comment'],
