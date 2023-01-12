@@ -20,7 +20,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Appearance
-Plug 'altercation/vim-colors-solarized' " A colour scheme
+Plug 'lifepillar/vim-solarized8'        " A True Color version of the Solarized color scheme
 Plug 'wellle/context.vim'               " Display the context of the currently visible buffer content, e.g. function definitions
 Plug 'romainl/vim-cool'                 " Disable search highlight after search is finished
 Plug 'Konfekt/FastFold'                 " Optimise folding for speed
@@ -90,9 +90,12 @@ set showcmd
 " Enable syntax highlighting
 syntax enable
 
+" Enable 24-bit True Color
+set termguicolors
+
 " Use the Solarized light colour scheme
 set background=light
-colorscheme solarized
+colorscheme solarized8
 
 " Highlight the first character exceeding a linewidth of 80
 " (needs to be after any colorscheme specification to work)
