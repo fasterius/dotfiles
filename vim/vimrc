@@ -3,7 +3,7 @@
 "  URL:     https://github.com/fasterius/dotfiles
 "
 "  This file is heavily commented with documentation explaining each setting and
-"  its functionality, but you can always check the help pages for more info.
+"  its functionality; you can always check the help (:h <thing>) for more info.
 
 " Use vi-noncompatibility (this is redundant in most cases but setting it here
 " explicitly for clarity over using the implicit default behaviour)
