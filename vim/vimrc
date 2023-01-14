@@ -512,7 +512,10 @@ nmap s <plug>(SubversiveSubstitute)
 
 " Substitite word under cursor within motion with user input
 " Useful with e.g. `ie` motion, `inner entire buffer`
-nmap <leader>s <plug>(SubversiveSubstituteWordRange)
+nmap <leader>s <plug>(SubversiveSubstituteRange)
+xmap <leader>s <plug>(SubversiveSubstituteRange)
+
+nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 
 " Do not move cursor after substituting
 let g:subversivePreserveCursorPosition = 1
