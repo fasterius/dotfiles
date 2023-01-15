@@ -222,9 +222,7 @@ tnoremap <C-k> <C-w><C-k>
 tnoremap <C-l> <C-w><C-l>
 tnoremap <C-h> <C-w><C-h>
 
-" Move and indent visual selection
-vnoremap <silent> <S-j> :m '>+1 <CR> gv
-vnoremap <silent> <S-k> :m '<-2 <CR> gv
+" Keep selection after indenting in visual mode
 vnoremap > >gv
 vnoremap < <gv
 
@@ -267,7 +265,7 @@ function! s:on_lsp_buffer_enabled() abort
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gh <plug>(lsp-hover)
+    nmap <buffer> K <plug>(lsp-hover)
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nnoremap <buffer> <expr><C-f> lsp#scroll(+4)
