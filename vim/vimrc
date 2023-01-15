@@ -508,7 +508,7 @@ nmap <localleader>f :call FindFunction()<CR><plug>SlimeRegionSend<CR>
 " Substitute motion with register content
 nmap s <plug>(SubversiveSubstitute)
 
-" Substitite word under cursor within motion with user input
+" Substitite motion within motion with user input
 " Useful with e.g. `ie` motion, `inner entire buffer`
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
