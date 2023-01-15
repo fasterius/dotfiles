@@ -25,7 +25,7 @@ tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 # Vim & NeoVim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
-ln -sfn ~/.dotfiles/vim/init.vim ~/.config/nvim/init.vim
+ln -sfn ~/.dotfiles/nvim/init.lua ~/.config/nvim/init.lua
 
 # Directory for storing Vim's history and backups
 mkdir -p ~/.tmp
