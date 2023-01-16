@@ -189,13 +189,19 @@ vim.o.undodir = '~/.tmp,/var/tmp,/tmp'   -- Store undofiles in these directories
 -- Show completion popup even with only one match and do not select a match automatically
 vim.o.completeopt = 'menuone,noselect'
 
--- Start terminals in INSERT mode
-vim.api.nvim_create_autocmd({'TermOpen'}, {
-    pattern = {'*'},
+-- Go to INSERT mode when moving to a terminal pane
+vim.api.nvim_create_autocmd({'TermOpen', 'BufEnter', 'BufWinEnter'}, {
+    pattern = {'term://*'},
     command = ':startinsert'
 })
 
--- Bypass `Process exited <exit-code>` prompt after closing a terminal
+-- Go to NORMAL mode when moving from a terminal pane
+vim.api.nvim_create_autocmd({'BufLeave', 'BufWinLeave'}, {
+    pattern = {'term://*'},
+    command = ':stopinsert'
+})
+
+-- Bypass [Process exited 0] prompt after closing a terminal
 vim.api.nvim_create_autocmd({'TermClose'}, {
     pattern = {'*'},
     command = ':call feedkeys("i")'
@@ -213,17 +219,17 @@ vim.keymap.set('n', '<leader>v', ':source $MYVIMRC <CR>')
 -- Open `init.lua` for editing
 vim.keymap.set('n', '<leader><S-v>', ':sp <CR> :e $MYVIMRC <CR>')
 
--- Move around splits using Ctrl + hjkl
+-- Movement in splits
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
--- -- Movement to/from terminals
--- vim.keymap.set('t', '<C-h>' '<C-\><C-N><C-w>h')
--- vim.keymap.set('t', '<C-j>' '<C-\><C-N><C-w>j')
--- vim.keymap.set('t', '<C-k>' '<C-\><C-N><C-w>k')
--- vim.keymap.set('t', '<C-l>' '<C-\><C-N><C-w>l')
+-- Movement in terminals
+vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h')
+vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j')
+vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k')
+vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l')
 
 -- Move by visual lines instead of physical lines
 vim.keymap.set('n', 'j', 'gj')
@@ -233,7 +239,6 @@ vim.keymap.set('n', 'k', 'gk')
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 
--- }}}1
 -- Plugin settings {{{1
 
 -- Comment {{{2
@@ -575,6 +580,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- }}}2
 
+-- }}}1
 -- Modeline {{{1
 
 -- Set foldmethod to `marker` inside this file using the modeline
