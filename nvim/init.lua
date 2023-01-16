@@ -88,6 +88,10 @@ require('packer').startup(function(use)
     -- Integrations
     use 'whiteinge/diffconflicts'         -- Working with Git merge conflicts
     use 'airblade/vim-gitgutter'          -- Show Git-changed code in the signcolumn
+    use 'vim-pandoc/vim-pandoc'           -- Working with markdown documents
+    use 'vim-pandoc/vim-pandoc-syntax'    -- Syntax for markdown documents
+    use 'quarto-dev/quarto-vim'           -- Working with Quarto documents
+    use 'vim-pandoc/vim-rmarkdown'        -- Working with R Markdown documents
     use 'alexghergh/nvim-tmux-navigation' -- Movement between NeoVim and Tmux
 
     -- Formatting
@@ -141,13 +145,8 @@ vim.o.termguicolors = true
 vim.o.background = 'light'
 vim.cmd [[colorscheme solarized]]
 
--- Don't show mode, (it's in the statusline)
+-- Don't show mode (it's in the statusline)
 vim.o.showmode = false
-
--- " Highlight the first character exceeding a linewidth of 80
--- " (needs to be after any colorscheme specification to work)
--- highlight ColorColumn guibg=#93a1a1 guifg=white
--- call matchadd('ColorColumn', '\%81v.', 100)
 
 -- Visually indent wrapped lines
 vim.o.breakindent = true
@@ -157,11 +156,6 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
     pattern = {'*'},
     command = ':setlocal nonumber norelativenumber'
 })
-
--- " Highlight the first character exceeding a linewidth of 80
--- " (needs to be after any colorscheme specification to work)
--- highlight ColorColumn guibg=#93a1a1 guifg=white
--- call matchadd('ColorColumn', '\%81v.', 100)
 
 -- General settings {{{1
 
@@ -431,6 +425,23 @@ require('overlength').setup({
     -- Highlight only the column itself
     highlight_to_eol = false
 })
+
+-- Pandoc {{{2
+
+-- Do not use default mappings
+vim.g.pandoc_keyboard_use_default_mappings = 0
+
+-- Wrap pandoc lines at 80 characters
+vim.g.pandoc_formatting_textwidth = 80
+
+-- Use expression folding
+vim.g.pandoc_folding_mode = 'expr'
+
+-- Fold the YAML header
+vim.g.pandoc_folding_fold_yaml = 1
+
+-- Fold R code chunks
+vim.g.pandoc_folding_fold_fenced_codeblocks = 1
 
 -- Slime TODO {{{2
 
