@@ -91,7 +91,6 @@ require('packer').startup(function(use)
 
     -- Formatting
     use 'jiangmiao/auto-pairs'            -- Automatically insert bracket (etc.) pairs
-    -- use 'ntpeters/vim-better-whitespace'  -- Working with whitespace
     use 'numToStr/Comment.nvim'           -- Commenting code with Treesitter-support
     use 'tpope/vim-repeat'                -- Allow additional motions to be repeated
     use 'svermeulen/vim-subversive'       -- Add operators for substitutions
@@ -165,8 +164,9 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
 
 -- General settings {{{1
 
--- Wrap lines at 80 characters
+-- Wrap lines at 80 characters (formatoptions = defaults + t)
 vim.o.textwidth = 80
+vim.o.formatoptions = 'jcroqlt'
 
 -- Use the system clipboard when not specifying a register
 vim.o.clipboard = 'unnamed'
