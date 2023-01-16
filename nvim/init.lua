@@ -91,7 +91,7 @@ require('packer').startup(function(use)
 
     -- Formatting
     use 'jiangmiao/auto-pairs'            -- Automatically insert bracket (etc.) pairs
-    use 'ntpeters/vim-better-whitespace'  -- Working with whitespace
+    -- use 'ntpeters/vim-better-whitespace'  -- Working with whitespace
     use 'numToStr/Comment.nvim'           -- Commenting code with Treesitter-support
     use 'tpope/vim-repeat'                -- Allow additional motions to be repeated
     use 'svermeulen/vim-subversive'       -- Add operators for substitutions
@@ -201,8 +201,11 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
 })
 vim.api.nvim_create_autocmd({'TermClose'}, {
     pattern = {'*'},
-    command = ':stopinsert'
+    command = "execute! 'bdelete! ' . expand('<abuf>'); :stopinsert"
 })
+
+-- vim.api.nvim_create_autocmd({'TermClose'
+-- :autocmd TermClose * execute 'bdelete! ' . expand('<abuf>')
 
 -- General key maps {{{1
 
@@ -221,8 +224,6 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
-
-
 
 -- -- Movement to/from terminals
 -- vim.keymap.set('t', '<C-h>' '<C-\><C-N><C-w>h')
@@ -424,18 +425,18 @@ vim.keymap.set('n', '<leader>t', ':NERDTreeToggle <CR>')
 
 -- Subversive {{{2
 
--- -- Substitute motion with register content
--- vim.keymaps.set('n', 's', '<plug>(SubversiveSubstitute)')
---
--- -- Substitite word under cursor within motion with user input
--- vim.keymaps.set('n', '<leader>s', '<plug>(SubversiveSubstituteRange)')
--- vim.keymaps.set('x', '<leader>s', '<plug>(SubversiveSubstituteRange)')
---
--- -- Substitute word under curser within motion with user input
--- vim.keymaps.set('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRange)')
---
--- -- Do not move cursor after substituting
--- vim.g.subversivePreserveCursorPosition = 1
+-- Substitute motion with register content
+vim.keymap.set('n', 's', '<plug>(SubversiveSubstitute)')
+
+-- Substitite word under cursor within motion with user input
+vim.keymap.set('n', '<leader>s', '<plug>(SubversiveSubstituteRange)')
+vim.keymap.set('x', '<leader>s', '<plug>(SubversiveSubstituteRange)')
+
+-- Substitute word under curser within motion with user input
+vim.keymap.set('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRange)')
+
+-- Do not move cursor after substituting
+vim.g.subversivePreserveCursorPosition = 1
 
 -- Telescope {{{2
 require('telescope').setup {
