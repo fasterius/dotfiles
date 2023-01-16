@@ -145,8 +145,8 @@ git_branch() {
 }
 
 # Build prompt
-export PS1='\[\e[0;95m\]$(conda_env)' # Conda environment (purple)
-export PS1=$PS1'\[\e[m\][\[\e[1;36m\]\h: ' # Hostname (bold grey)
-export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]' # Current directory (blue)
+export PS1='\[\e[0;95m\]$(conda_env)'      # Conda environment (purple)
+export PS1=$PS1'\[\e[m\][\h: '             # Hostname (grey)
+export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'   # Current directory (blue)
 export PS1=$PS1'\[\e[0;36m\]$(git_branch)' # Git branch (teal)
-export PS1=$PS1'\[\e[m\]$ ' # End (grey)
+export PS1=$PS1'\[\e[m\]$ '                # End (grey)
