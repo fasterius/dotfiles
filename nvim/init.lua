@@ -189,18 +189,17 @@ vim.o.undodir = '~/.tmp,/var/tmp,/tmp'   -- Store undofiles in these directories
 -- Show completion popup even with only one match and do not select a match automatically
 vim.o.completeopt = 'menuone,noselect'
 
--- Start terminals in insert and go to normal mode upon exiting
+-- Start terminals in INSERT mode
 vim.api.nvim_create_autocmd({'TermOpen'}, {
     pattern = {'*'},
     command = ':startinsert'
 })
+
+-- Bypass `Process exited <exit-code>` prompt after closing a terminal
 vim.api.nvim_create_autocmd({'TermClose'}, {
     pattern = {'*'},
-    command = "execute! 'bdelete! ' . expand('<abuf>'); :stopinsert"
+    command = ':call feedkeys("i")'
 })
-
--- vim.api.nvim_create_autocmd({'TermClose'
--- :autocmd TermClose * execute 'bdelete! ' . expand('<abuf>')
 
 -- General key maps {{{1
 
