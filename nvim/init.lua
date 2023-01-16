@@ -78,8 +78,9 @@ require('packer').startup(function(use)
     use 'romainl/vim-cool'             -- Disable search highlight after search is finished
     use 'wellle/context.vim'           -- Display the context of the currently visible buffer content, e.g. function definitions
     use 'junegunn/goyo.vim'            -- Distraction-free writing
-    use 'ishan9299/nvim-solarized-lua' -- Lua port of Solarized8 colour scheme
     use 'nvim-lualine/lualine.nvim'    -- Fancier statusline
+    use 'lcheylus/overlength.nvim'     -- Highlight text with width > textwidth
+    use 'ishan9299/nvim-solarized-lua' -- Lua port of Solarized8 colour scheme
 
     -- File exploration
     use 'scrooloose/nerdtree' -- File tree browser
@@ -419,6 +420,17 @@ mason_lspconfig.setup_handlers {
 
 vim.g.NERDTreeQuitOnOpen = true
 vim.keymap.set('n', '<leader>t', ':NERDTreeToggle <CR>')
+
+-- Overlength {{{2
+
+require('overlength').setup({
+
+    -- Solarized colour: cursorline
+    bg = '#EEE8D5',
+
+    -- Highlight only the column itself
+    highlight_to_eol = false
+})
 
 -- Slime TODO {{{2
 
