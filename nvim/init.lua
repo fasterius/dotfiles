@@ -6,13 +6,17 @@
 
 -- Packer auto-installation {{{2
 
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    is_bootstrap = true
-    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+local packer_bootstrap = ensure_packer()
 
 -- }}}2
 
@@ -114,15 +118,14 @@ require('packer').startup(function(use)
     use 'jpalardy/vim-slime' -- An all-purpose REPL for sending code to a terminal
 
     -- Text objects
-    use 'wellle/targets.vim'      -- Several additional text objects
-    use 'kana/vim-textobj-entire' -- Text object: entire buffer
-    use 'kana/vim-textobj-indent' -- Text object: indentation
-    use 'kana/vim-textobj-line'   -- Text object: line
-    use 'kana/vim-textobj-user'   -- Framework for creating text objects
+    use 'wellle/targets.vim'
+    use { 'kana/vim-textobj-entire', requires = { 'kana/vim-textobj-user' } }
+    use { 'kana/vim-textobj-indent', requires = { 'kana/vim-textobj-user' } }
+    use { 'kana/vim-textobj-line',   requires = { 'kana/vim-textobj-user' } }
 
     -- Packer bootstrapping {{{2
     -- First-time installation of all plugins on bootstrapping
-    if is_bootstrap then
+    if packer_bootstrap then
         require('packer').sync()
     end
 end)
@@ -513,9 +516,11 @@ require'nvim-tmux-navigation'.setup {
 
 -- Treesitter {{{2
 require('nvim-treesitter.configs').setup {
+
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'lua', 'python', 'r', 'markdown', 'help', 'vim' },
 
+    -- General settings
     highlight = { enable = true },
     indent = { enable = true, disable = { 'python' } },
     incremental_selection = {
@@ -542,7 +547,7 @@ require('nvim-treesitter.configs').setup {
             },
         },
         move = {
-    enable = true,
+            enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
                 [']m'] = '@function.outer',
