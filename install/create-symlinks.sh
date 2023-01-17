@@ -22,12 +22,15 @@ tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
 tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 
-# Vim & NeoVim
+# Vim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
+
+# NeoVim
+mkdir -p ~/.config/nvim
 ln -sfn ~/.dotfiles/nvim/init.lua ~/.config/nvim/init.lua
 
-# Directory for storing Vim's history and backups
+# Directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
 
 # Alacritty
