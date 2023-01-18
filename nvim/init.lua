@@ -4,8 +4,9 @@
 
 -- Load plugins {{{1
 
--- Packer auto-installation {{{2
+-- Packer configuration {{{2
 
+-- Function for bootstrapping
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -18,9 +19,18 @@ local ensure_packer = function()
 end
 local packer_bootstrap = ensure_packer()
 
+-- Shorthands for downstream ease-of-use
+local packer = require('packer')
+local util = require('packer.util')
+
+-- Do not put `packer_compiled.lua` in the same directory as `init.lua`
+packer.init {
+    compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin', 'packer_compiled.lua')
+}
+
 -- }}}2
 
-require('packer').startup(function(use)
+packer.startup(function(use)
 
     -- Package manager
     use 'wbthomason/packer.nvim'
@@ -40,14 +50,8 @@ require('packer').startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         requires = {
-            -- Automatically install LSPs to stdpath for Neovim
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
 
-            -- Useful status/progress updates for LSP while running
-            'j-hui/fidget.nvim',
-
-            -- Additional lua configuration, good for Lua development/nvim configs
+            -- Additional lua configuration; good for Lua development/nvim configs
             'folke/neodev.nvim',
         }
     }
@@ -92,17 +96,9 @@ require('packer').startup(function(use)
     use 'scrooloose/nerdtree' -- File tree browser
 
     -- Integrations
-    use 'whiteinge/diffconflicts'         -- Working with Git merge conflicts
-    use 'airblade/vim-gitgutter'          -- Show Git-changed code in the signcolumn
-    -- use 'vim-pandoc/vim-pandoc'           -- Working with markdown documents
-    -- use 'vim-pandoc/vim-pandoc-syntax'    -- Syntax for markdown documents
-    -- use 'vim-pandoc/vim-rmarkdown'        -- Working with R Markdown documents
-    use { 'quarto-dev/quarto-nvim',
-        requires = {
-            'jmbuhr/otter.nvim',
-            'neovim/nvim-lspconfig'
-        }
-    }
+    use 'whiteinge/diffconflicts'                                        -- Working with Git merge conflicts
+    use 'airblade/vim-gitgutter'                                         -- Show Git-changed code in the signcolumn
+    use { 'quarto-dev/quarto-nvim', requires = { 'jmbuhr/otter.nvim' } } -- Working with Quarto files
 
     use 'alexghergh/nvim-tmux-navigation' -- Movement between NeoVim and Tmux
 
@@ -118,16 +114,17 @@ require('packer').startup(function(use)
     use 'jpalardy/vim-slime' -- An all-purpose REPL for sending code to a terminal
 
     -- Text objects
-    use 'wellle/targets.vim'
-    use { 'kana/vim-textobj-entire', requires = { 'kana/vim-textobj-user' } }
-    use { 'kana/vim-textobj-indent', requires = { 'kana/vim-textobj-user' } }
-    use { 'kana/vim-textobj-line',   requires = { 'kana/vim-textobj-user' } }
+    use 'wellle/targets.vim'                                      -- Various text objects
+    use 'kana/vim-textobj-user'                                   -- Text object framework
+    use { 'kana/vim-textobj-entire', after = 'vim-textobj-user' } -- Entire buffer
+    use { 'kana/vim-textobj-indent', after = 'vim-textobj-user' } -- Indentation
+    use { 'kana/vim-textobj-line',   after = 'vim-textobj-user' } -- Lines
 
-    -- Packer bootstrapping {{{2
-    -- First-time installation of all plugins on bootstrapping
+    -- Packer bootstrapping {{{3
     if packer_bootstrap then
         require('packer').sync()
     end
+    -- }}}3
 end)
 
 -- }}}2
@@ -154,7 +151,7 @@ vim.o.termguicolors = true
 
 -- Use the Solarized light colour scheme
 vim.o.background = 'light'
-vim.cmd [[colorscheme solarized]]
+vim.cmd [[silent! colorscheme solarized]]
 
 -- Don't show mode (it's in the statusline)
 vim.o.showmode = false
@@ -258,8 +255,8 @@ require('Comment').setup()
 
 -- Completion {{{2
 
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 
 cmp.setup {
     snippet = {
@@ -299,7 +296,7 @@ cmp.setup {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'otter' }
-    },
+    }
 }
 
 -- Cool {{{2
@@ -311,10 +308,6 @@ vim.g.cool_total_matches = true
 
 vim.keymap.set('n', 'ga', '<plug>(EasyAlign)')
 vim.keymap.set('x', 'ga', '<plug>(EasyAlign)')
-
--- Fidget {{{2
-
-require('fidget').setup()
 
 -- Goyo {{{2
 
@@ -335,16 +328,18 @@ local on_attach = function(_, bufnr)
     end
 
     -- LSP keymaps
-    nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    nmap('gd',         vim.lsp.buf.definition, '[G]oto [D]efinition')
-    nmap('gr',         require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-    nmap('gI',         vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+    nmap('<leader>rn', vim.lsp.buf.rename,          '[R]e[n]ame')
+    nmap('<leader>ca', vim.lsp.buf.code_action,     '[C]ode [A]ction')
+    nmap('gd',         vim.lsp.buf.definition,      '[G]oto [D]efinition')
+    nmap('gI',         vim.lsp.buf.implementation,  '[G]oto [I]mplementation')
     nmap('<leader>D',  vim.lsp.buf.type_definition, 'Type [D]efinition')
-    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('K',          vim.lsp.buf.hover,           'Hover Documentation')
+    nmap('gD',         vim.lsp.buf.declaration,     '[G]oto [D]eclaration')
+
+    -- Telescope keymaps
+    nmap('gr',         require('telescope.builtin').lsp_references,                '[G]oto [R]eferences')
+    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,          '[D]ocument [S]ymbols')
     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-    nmap('K',          vim.lsp.buf.hover, 'Hover Documentation')
-    nmap('gD',         vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
     -- Create the LSP-local `:Format` command
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -352,12 +347,57 @@ local on_attach = function(_, bufnr)
     end, { desc = 'Format current buffer with LSP' })
 end
 
--- Setup Neovim Lua configuration
-require('neodev').setup()
-
 -- Broadcast additional nvim-cmp completeion capabilities to language servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+-- Language server setups {{{3
+
+require('lspconfig')['r_language_server'].setup {
+    on_attach = on_attach
+}
+require('lspconfig')['pyright'].setup {
+    on_attach = on_attach,
+    python = {
+        analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true
+        }
+    }
+}
+
+require('lspconfig')['bashls'].setup {
+    on_attach = on_attach
+}
+
+require('lspconfig')['marksman'].setup {
+    on_attach = on_attach
+}
+
+require('lspconfig')['sumneko_lua'].setup {
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            runtime         = { version = 'LuaJIT' },
+            diagnostics     = { globals = {'vim'} },
+            telemetry       = { enable  = false },
+            workspace       = {
+                library         = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false
+            }
+        }
+    }
+}
+
+require('lspconfig')['vimls'].setup {
+    on_attach = on_attach
+}
+
+-- Neodev setup for LSPs inside Neovim Lua config-related files
+require('neodev').setup()
+
+-- }}}3
 
 -- Lualine {{{2
 
@@ -368,42 +408,6 @@ require('lualine').setup {
         component_separators = '|',
         section_separators   = '',
     },
-}
-
--- Mason {{{2
-
-require('mason').setup()
-
--- List desired servers
-local servers = {
-    pyright = {
-        filetypes = { 'python' }
-    },
-    r_language_server = {
-        filetypes = { 'r', 'rmd' }
-    },
-    sumneko_lua = {
-        Lua = {
-            workspace   = { checkThirdParty = false },
-            telemetry   = { enable = false },
-            diagnostics = { globals = {'vim'} }
-        },
-    },
-}
-
--- Ensure the desired servers are installed
-local mason_lspconfig = require 'mason-lspconfig'
-mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
-}
-mason_lspconfig.setup_handlers {
-    function(server_name)
-        require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach    = on_attach,
-            settings     = servers[server_name],
-        }
-    end,
 }
 
 -- NERDTree {{{2
@@ -422,26 +426,9 @@ require('overlength').setup({
     highlight_to_eol = false
 })
 
--- Pandoc NOT USED {{{2
-
--- -- Do not use default mappings
--- vim.g.pandoc_keyboard_use_default_mappings = 0
---
--- -- Wrap pandoc lines at 80 characters
--- vim.g.pandoc_formatting_textwidth = 80
---
--- -- Use expression folding
--- vim.g.pandoc_folding_mode = 'expr'
---
--- -- Fold the YAML header
--- vim.g.pandoc_folding_fold_yaml = 1
---
--- -- Fold R code chunks
--- vim.g.pandoc_folding_fold_fenced_codeblocks = 1
-
 -- Quarto {{{2
 
-require'quarto'.setup{
+require('quarto').setup {
     lspFeatures = {
         enabled     = true,
         languages   = { 'r', 'python' },
@@ -485,12 +472,12 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- Keymaps
-vim.keymap.set('n', '<leader>?',       require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sf',      require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh',      require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>?',       require('telescope.builtin').oldfiles,    { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers,     { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>sf',      require('telescope.builtin').find_files,  { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh',      require('telescope.builtin').help_tags,   { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw',      require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg',      require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sg',      require('telescope.builtin').live_grep,   { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd',      require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>/', function()
     -- You can pass additional configuration to telescope to change theme, layout, etc.
