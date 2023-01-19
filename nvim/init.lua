@@ -19,18 +19,9 @@ local ensure_packer = function()
 end
 local packer_bootstrap = ensure_packer()
 
--- Shorthands for downstream ease-of-use
-local packer = require('packer')
-local util = require('packer.util')
-
--- Do not put `packer_compiled.lua` in the same directory as `init.lua`
-packer.init {
-    compile_path = util.join_paths(vim.fn.stdpath('data'), 'plugin', 'packer_compiled.lua')
-}
-
 -- }}}2
 
-packer.startup(function(use)
+require('packer').startup(function(use)
 
     -- Package manager
     use 'wbthomason/packer.nvim'
@@ -212,7 +203,7 @@ vim.api.nvim_create_autocmd({'BufLeave', 'BufWinLeave'}, {
 -- Bypass [Process exited 0] prompt after closing a terminal
 vim.api.nvim_create_autocmd({'TermClose'}, {
     pattern = {'*'},
-    command = ':call feedkeys("i")'
+    command = ':execute "bdelete! " . expand("<abuf>")'
 })
 
 -- General key maps {{{1
@@ -437,9 +428,6 @@ require('quarto').setup {
     }
 }
 
--- Slime TODO {{{2
-
-
 -- Subversive {{{2
 
 -- Substitute motion with register content
@@ -463,8 +451,9 @@ require('telescope').setup {
             i = {
                 ['<C-u>'] = false,
                 ['<C-d>'] = false,
+                ["<esc>"] = require("telescope.actions").close
             }
-        }
+        },
     }
 }
 
@@ -472,24 +461,19 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- Keymaps
-vim.keymap.set('n', '<leader>?',       require('telescope.builtin').oldfiles,    { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers,     { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>sf',      require('telescope.builtin').find_files,  { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh',      require('telescope.builtin').help_tags,   { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw',      require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg',      require('telescope.builtin').live_grep,   { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd',      require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>/', function()
-    -- You can pass additional configuration to telescope to change theme, layout, etc.
-    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-    })
-end, { desc = '[/] Fuzzily search in current buffer]' })
+vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files,                 { desc = '[F]ind [G]it files' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files,                { desc = '[F]ind [F]iles' })
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers,                   { desc = '[F]ind existing [B]uffers' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles,                  { desc = '[F]ind [R]ecently opened files' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,                 { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,               { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep,                 { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,               { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>/',  require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- Tmux-navigation {{{2
 
-require'nvim-tmux-navigation'.setup {
+require('nvim-tmux-navigation').setup {
     keybindings = {
         left        = "<C-h>",
         down        = "<C-j>",
