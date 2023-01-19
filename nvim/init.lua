@@ -212,11 +212,13 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- Re-source `init.lua`
-vim.keymap.set('n', '<leader>v', ':source $MYVIMRC <CR>')
+-- Move by visual lines instead of physical lines
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
 
--- Open `init.lua` for editing
-vim.keymap.set('n', '<leader><S-v>', ':sp <CR> :e $MYVIMRC <CR>')
+--  Keep selection after indenting in visual mode
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
 
 -- Movement in splits
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -230,13 +232,17 @@ vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j')
 vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l')
 
--- Move by visual lines instead of physical lines
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
---  Keep selection after indenting in visual mode
-vim.keymap.set('v', '>', '>gv')
-vim.keymap.set('v', '<', '<gv')
+-- Re-source `init.lua`
+vim.keymap.set('n', '<leader>v', ':source $MYVIMRC <CR>')
+
+-- Open `init.lua` for editing
+vim.keymap.set('n', '<leader><S-v>', ':sp <CR> :e $MYVIMRC <CR>')
 
 -- Plugin settings {{{1
 
@@ -504,9 +510,8 @@ require('nvim-treesitter.configs').setup {
     textobjects = {
         select = {
             enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true, -- Jump forward to textobj
             keymaps = {
-                -- You can use the capture groups defined in textobjects.scm
                 ['aa'] = '@parameter.outer',
                 ['ia'] = '@parameter.inner',
                 ['af'] = '@function.outer',
@@ -517,7 +522,7 @@ require('nvim-treesitter.configs').setup {
         },
         move = {
             enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
+            set_jumps = true, -- Add jumps to jumplist
             goto_next_start = {
                 [']m'] = '@function.outer',
                 [']]'] = '@class.outer',
@@ -546,12 +551,6 @@ require('nvim-treesitter.configs').setup {
         },
     },
 }
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- }}}2
 
