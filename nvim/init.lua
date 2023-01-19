@@ -8,14 +8,14 @@
 
 -- Function for bootstrapping
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
 local packer_bootstrap = ensure_packer()
 
@@ -478,9 +478,7 @@ require('nvim-tmux-navigation').setup {
         left        = "<C-h>",
         down        = "<C-j>",
         up          = "<C-k>",
-        right       = "<C-l>",
-        last_active = "<C-\\>",
-        next        = "<C-Space>",
+        right       = "<C-l>"
     },
     disable_when_zoomed = true, -- Disable movement when zoomed in to a pane
 }
@@ -497,10 +495,10 @@ require('nvim-treesitter.configs').setup {
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            node_decremental = '<c-backspace>',
+            init_selection = '<C-Space>',
+            node_incremental = '<C-Space>',
+            scope_incremental = '<C-s>',
+            node_decremental = '<C-Backspace>',
         },
     },
     textobjects = {
