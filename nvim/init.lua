@@ -557,11 +557,11 @@ require('nvim-treesitter.configs').setup {
 -- }}}1
 -- Modeline {{{1
 
--- Override Treesitter folding in `init.lua` when sourcing
-vim.api.nvim_create_autocmd({'SourcePost'}, {
-    pattern = {'init.lua'},
-    command = 'set foldmethod=marker'
-})
+-- -- Override Treesitter folding in `init.lua` when sourcing
+-- vim.api.nvim_create_autocmd({'SourcePost'}, {
+--     pattern = {'init.lua'},
+--     command = 'setlocal foldmethod=marker'
+-- })
 
 -- Set foldmethod to `marker` inside this file using the modeline
 vim.o.modelines = 1

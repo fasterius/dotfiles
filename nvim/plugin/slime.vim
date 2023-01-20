@@ -108,5 +108,3 @@ nmap <localleader>q :call CloseTerminal()<CR>
 nmap <localleader>h :call PrintHead()<CR>
 nmap <localleader>C :SlimeSend0 "\x03"<CR>
 nmap <localleader>f :call FindFunction()<CR><plug>SlimeRegionSend<CR>
-
-" vim: foldmethod=marker
