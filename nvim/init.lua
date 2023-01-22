@@ -27,8 +27,7 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Autocompletion and snippets {{{2
-    use {
-        'hrsh7th/nvim-cmp',
+    use { 'hrsh7th/nvim-cmp',
         requires = {
             'hrsh7th/cmp-buffer',      -- Buffer source for nvim-cmp
             'hrsh7th/cmp-nvim-lsp',    -- Builtin LSP source for nvim-cmp
@@ -38,10 +37,8 @@ require('packer').startup(function(use)
     }
 
     -- LSP {{{2
-    use {
-        'neovim/nvim-lspconfig',
+    use { 'neovim/nvim-lspconfig',
         requires = {
-
             -- Additional lua configuration; good for Lua development/nvim configs
             'folke/neodev.nvim',
         }
@@ -59,20 +56,17 @@ require('packer').startup(function(use)
         run  = 'make',
         cond = vim.fn.executable 'make' == 1
     }
-
     -- Treesitter {{{2
-    use {
-        'nvim-treesitter/nvim-treesitter',
+    use { 'nvim-treesitter/nvim-treesitter',
         run = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end
     }
 
-    use { -- Additional text objects via Treesitter
-        'nvim-treesitter/nvim-treesitter-textobjects',
+    -- Additional text objects via Treesitter
+    use { 'nvim-treesitter/nvim-treesitter-textobjects',
         after = 'nvim-treesitter'
     }
-
     -- }}}2
 
     -- Appearance
@@ -111,14 +105,13 @@ require('packer').startup(function(use)
     use { 'kana/vim-textobj-indent', after = 'vim-textobj-user' } -- Indentation
     use { 'kana/vim-textobj-line',   after = 'vim-textobj-user' } -- Lines
 
-    -- Packer bootstrapping {{{3
+    -- Packer bootstrapping {{{2
     if packer_bootstrap then
         require('packer').sync()
     end
-    -- }}}3
-end)
+    -- }}}2
 
--- }}}2
+end)
 
 -- Appearance {{{1
 
@@ -156,7 +149,58 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
     command = ':setlocal nonumber norelativenumber'
 })
 
--- General settings {{{1
+-- Keymaps {{{1
+
+-- Set leaders
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+
+-- Move by visual lines instead of physical lines
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
+--  Keep selection after indenting in visual mode
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
+
+-- Center cursor in screen when scrolling
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- Movement in splits
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+
+-- Movement in terminals
+vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h')
+vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j')
+vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k')
+vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l')
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- Re-source Neovim config
+-- Function is a workaround for preserving marker-based folding in files inside
+-- the dotfiles repository while using treesitter-based folding everywhere else.
+function SourceConfig()
+    if vim.fn.match(vim.fn.expand('%:p'), 'dotfiles') > -1 then
+        vim.cmd('source $MYVIMRC | setlocal foldmethod=marker')
+    else
+        vim.cmd('source $MYVIMRC')
+    end
+end
+vim.keymap.set('n', '<leader>v', ':lua SourceConfig() <CR>')
+
+-- Open Neovim config for editing
+vim.keymap.set('n', '<leader><S-v>', ':sp <CR> :e $MYVIMRC <CR>')
+
+-- Options {{{1
 
 -- Wrap lines at 80 characters (formatoptions = defaults + t)
 vim.o.textwidth = 80
@@ -206,49 +250,7 @@ vim.api.nvim_create_autocmd({'TermClose'}, {
     command = ':execute "bdelete! " . expand("<abuf>")'
 })
 
--- General key maps {{{1
-
--- Set leaders
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
-
--- Move by visual lines instead of physical lines
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
-
---  Keep selection after indenting in visual mode
-vim.keymap.set('v', '>', '>gv')
-vim.keymap.set('v', '<', '<gv')
-
--- Center cursor in screen when scrolling
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
--- Movement in splits
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
-
--- Movement in terminals
-vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h')
-vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j')
-vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k')
-vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
--- Re-source `init.lua`
-vim.keymap.set('n', '<leader>v', ':source $MYVIMRC <CR>')
-
--- Open `init.lua` for editing
-vim.keymap.set('n', '<leader><S-v>', ':sp <CR> :e $MYVIMRC <CR>')
-
--- Plugin settings {{{1
+-- Plugins {{{1
 
 -- Comment {{{2
 
@@ -584,15 +586,5 @@ require('nvim-treesitter.configs').setup {
 
 -- }}}2
 
--- }}}1
 -- Modeline {{{1
-
--- -- Override Treesitter folding in `init.lua` when sourcing
--- vim.api.nvim_create_autocmd({'SourcePost'}, {
---     pattern = {'init.lua'},
---     command = 'setlocal foldmethod=marker'
--- })
-
--- Set foldmethod to `marker` inside this file using the modeline
-vim.o.modelines = 1
 -- vim: foldmethod=marker
