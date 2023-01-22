@@ -12,7 +12,7 @@ set nocompatible
 " Load Plugins: {{{1
 
 " Use vim-plug for plugin management; auto-install if missing
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
     silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
@@ -387,13 +387,9 @@ let g:pandoc#folding#fastfolds = 1
 
 " Slime: {{{2
 
-" Use either Vim or Neovim terminal, as appropriate
-if has('nvim')
-    let g:slime_target = "neovim"
-else
-    let g:slime_target = "vimterminal"
-    let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
-endif
+" Use the Vim terminal
+let g:slime_target = "vimterminal"
+let g:slime_vimterminal_config = { "term_finish": "close", "vertical": 1 }
 
 " Function: get the appropriate language for the current filetype {{{3
 function! GetLanguage()
@@ -418,16 +414,10 @@ function! OpenTerminal() abort
     let language = GetLanguage()
 
     " Open a terminal with appropriate language and move back to starting window
-    if has('nvim')
-        :execute ':vsplit term://' . language
-        let t:term_id = b:terminal_job_id
-        :execute starting_window 'wincmd w'
-        :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
-    else
-        :execute ':vertical terminal ++close ++norestore ' . language
-        :execute starting_window 'wincmd w'
-        :SlimeConfig
-    endif
+    :execute ':vertical terminal ++close ++norestore ' . language
+    :execute starting_window 'wincmd w'
+    :SlimeConfig
+
 endfunction
 
 " }}}3
