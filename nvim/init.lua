@@ -146,8 +146,28 @@ vim.o.breakindent = true
 -- Disable line numbers in terminals
 vim.api.nvim_create_autocmd({'TermOpen'}, {
     pattern = {'*'},
-    command = ':setlocal nonumber norelativenumber'
+    command = ':setlocal nonumber norelativenumber nocursorline'
 })
+
+-- Store Solarized colours for use in downstream plugin configuration
+local colors = {
+    base3   =  '#002b36',
+    base2   =  '#073642',
+    base1   =  '#586e75',
+    base0   =  '#657b83',
+    base00  =  '#839496',
+    base01  =  '#93a1a1',
+    base02  =  '#eee8d5',
+    base03  =  '#fdf6e3',
+    yellow  =  '#b58900',
+    orange  =  '#cb4b16',
+    red     =  '#dc322f',
+    magenta =  '#d33682',
+    violet  =  '#6c71c4',
+    blue    =  '#268bd2',
+    cyan    =  '#2aa198',
+    green   =  '#859900',
+}
 
 -- Keymaps {{{1
 
@@ -178,6 +198,7 @@ vim.keymap.set('t', '<C-h>', '<C-\\><C-N><C-w>h')
 vim.keymap.set('t', '<C-j>', '<C-\\><C-N><C-w>j')
 vim.keymap.set('t', '<C-k>', '<C-\\><C-N><C-w>k')
 vim.keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l')
+vim.keymap.set('t', '<Esc>', '<C-\\><C-N>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
@@ -185,9 +206,9 @@ vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
--- Re-source Neovim config
--- Function is a workaround for preserving marker-based folding in files inside
--- the dotfiles repository while using treesitter-based folding everywhere else.
+-- Function to re-source the Neovim config with a workaround for preserving
+-- marker-based folding for files inside the dotfiles repository while using
+-- treesitter-based folding everywhere else
 function SourceConfig()
     if vim.fn.match(vim.fn.expand('%:p'), 'dotfiles') > -1 then
         vim.cmd('source $MYVIMRC | setlocal foldmethod=marker')
@@ -262,19 +283,29 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 cmp.setup {
+    -- Completion sources
+    sources = {
+        { name = 'buffer' },   -- Buffer
+        { name = 'nvim_lsp' }, -- Neovim's built-in LSP
+        { name = 'luasnip' },  -- LuaSnips
+        { name = 'otter' }     -- For Quarto documents
+    },
+    -- Borders around completion popups
+    window = {
+        completion    = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    -- Snippets from LuaSnip
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
-        end,
+        end
     },
+    -- Keymaps
     mapping = cmp.mapping.preset.insert {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        },
+        ['<CR>']  = cmp.mapping.confirm { select = false, },
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -293,12 +324,6 @@ cmp.setup {
                 fallback()
             end
         end, { 'i', 's' }),
-    },
-    sources = {
-        { name = 'buffer' },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'otter' }
     }
 }
 
@@ -309,6 +334,7 @@ vim.g.cool_total_matches = true
 
 -- EasyAlign {{{2
 
+-- Use easyalign in normal and visual modes
 vim.keymap.set('n', 'ga', '<plug>(EasyAlign)')
 vim.keymap.set('x', 'ga', '<plug>(EasyAlign)')
 
@@ -331,23 +357,20 @@ local on_attach = function(_, bufnr)
     end
 
     -- LSP keymaps
-    nmap('<leader>rn', vim.lsp.buf.rename,          '[R]e[n]ame')
-    nmap('<leader>ca', vim.lsp.buf.code_action,     '[C]ode [A]ction')
-    nmap('gd',         vim.lsp.buf.definition,      '[G]oto [D]efinition')
-    nmap('gI',         vim.lsp.buf.implementation,  '[G]oto [I]mplementation')
-    nmap('<leader>D',  vim.lsp.buf.type_definition, 'Type [D]efinition')
-    nmap('K',          vim.lsp.buf.hover,           'Hover Documentation')
-    nmap('gD',         vim.lsp.buf.declaration,     '[G]oto [D]eclaration')
+    local lsp = vim.lsp.buf
+    nmap('gd',         lsp.definition,      '[G]oto [D]efinition')
+    nmap('gD',         lsp.declaration,     '[G]oto [D]eclaration')
+    nmap('gI',         lsp.implementation,  '[G]oto [I]mplementation')
+    nmap('K',          lsp.hover,           '[H]over Documentation')
+    nmap('<leader>rn', lsp.rename,          '[R]e[n]ame')
+    nmap('<leader>ca', lsp.code_action,     '[C]ode [A]ction')
+    nmap('<leader>D',  lsp.type_definition, 'Type [D]efinition')
 
     -- Telescope keymaps
-    nmap('gr',         require('telescope.builtin').lsp_references,                '[G]oto [R]eferences')
-    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,          '[D]ocument [S]ymbols')
-    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-    -- Create the LSP-local `:Format` command
-    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-        vim.lsp.buf.format()
-    end, { desc = 'Format current buffer with LSP' })
+    local telescope = require('telescope.builtin')
+    nmap('gr',         telescope.lsp_references,                '[G]oto [R]eferences')
+    nmap('<leader>ds', telescope.lsp_document_symbols,          '[D]ocument [S]ymbols')
+    nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end
 
 -- Broadcast additional nvim-cmp completeion capabilities to language servers
@@ -404,25 +427,7 @@ require('neodev').setup()
 
 -- Lualine {{{2
 
--- Customise Solarized theme
-local colors = {
-    base3   =  '#002b36',
-    base2   =  '#073642',
-    base1   =  '#586e75',
-    base0   =  '#657b83',
-    base00  =  '#839496',
-    base01  =  '#93a1a1',
-    base02  =  '#eee8d5',
-    base03  =  '#fdf6e3',
-    yellow  =  '#b58900',
-    orange  =  '#cb4b16',
-    red     =  '#dc322f',
-    magenta =  '#d33682',
-    violet  =  '#6c71c4',
-    blue    =  '#268bd2',
-    cyan    =  '#2aa198',
-    green   =  '#859900',
-}
+-- Customise Solarized colour theme
 local solarized = require('lualine.themes.solarized')
 solarized.normal.a.bg = colors.base2   -- Black NORMAL mode
 solarized.insert.a.bg = colors.blue    -- Blue INSERT mode
@@ -449,6 +454,7 @@ require('lualine').setup {
 
 -- NERDTree {{{2
 
+-- Quite NERDTree after opening a file
 vim.g.NERDTreeQuitOnOpen = true
 vim.keymap.set('n', '<leader>t', ':NERDTreeToggle <CR>')
 
@@ -456,7 +462,7 @@ vim.keymap.set('n', '<leader>t', ':NERDTreeToggle <CR>')
 
 require('overlength').setup({
 
-    -- Solarized colour: cursorline
+    -- Solarized colour: same as cursorline
     bg = '#EEE8D5',
 
     -- Highlight only the column itself
@@ -495,27 +501,36 @@ require('telescope').setup {
     defaults = {
         mappings = {
             i = {
+                -- Disable scrolling inside preview windows
                 ['<C-u>'] = false,
                 ['<C-d>'] = false,
+                -- Make a single <Esc> exit Telescope
                 ["<esc>"] = require("telescope.actions").close
             }
-        },
+        }
     }
 }
 
--- Enable telescope fzf native, if installed
+-- Change colour of search results
+vim.api.nvim_set_hl(0, 'TelescopeMatching', { fg = colors.blue })
+
+-- Enable telescope fzf native (if installed)
 pcall(require('telescope').load_extension, 'fzf')
 
 -- Keymaps
-vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files,                 { desc = '[F]ind [G]it files' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files,                { desc = '[F]ind [F]iles' })
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers,                   { desc = '[F]ind existing [B]uffers' })
-vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles,                  { desc = '[F]ind [R]ecently opened files' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,                 { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,               { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep,                 { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics,               { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>/',  require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer]' })
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fg', telescope.git_files,                 { desc = '[F]ind files inside [G]it repository' })
+vim.keymap.set('n', '<leader>ff', telescope.find_files,                { desc = '[F]ind [F]iles in the current working directory' })
+vim.keymap.set('n', '<leader>fb', telescope.buffers,                   { desc = '[F]ind existing [B]uffers' })
+vim.keymap.set('n', '<leader>sh', telescope.help_tags,                 { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sd', telescope.diagnostics,               { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>/',  telescope.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer]' })
+vim.keymap.set('n', '<leader>sg', function()
+    telescope.live_grep{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }
+end, { desc = "[S]earch inside [G]it repository "})
+vim.keymap.set('n', '<leader>sw', function()
+    telescope.grep_string{ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] }
+end, { desc = '[S]earch current [W]ord inside Git repository' })
 
 -- Tmux-navigation {{{2
 
@@ -532,7 +547,7 @@ require('nvim-tmux-navigation').setup {
 -- Treesitter {{{2
 require('nvim-treesitter.configs').setup {
 
-    -- Add languages to be installed here that you want installed for treesitter
+    -- Languages to always be installed
     ensure_installed = { 'lua', 'python', 'r', 'bash', 'markdown', 'help', 'vim' },
 
     -- General settings
@@ -541,10 +556,10 @@ require('nvim-treesitter.configs').setup {
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = '<C-Space>',
-            node_incremental = '<C-Space>',
+            init_selection    = '<C-Space>',
+            node_incremental  = '<C-Space>',
             scope_incremental = '<C-s>',
-            node_decremental = '<C-Backspace>',
+            node_decremental  = '<C-Backspace>',
         },
     },
     textobjects = {

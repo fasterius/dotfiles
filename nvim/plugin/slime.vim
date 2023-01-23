@@ -28,16 +28,11 @@ function! OpenTerminal() abort
     let language = GetLanguage()
 
     " Open a terminal with appropriate language and move back to starting window
-    if has('nvim')
-        :execute ':vsplit term://' . language
-        let t:term_id = b:terminal_job_id
-        :execute starting_window 'wincmd w'
-        :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
-    else
-        :execute ':vertical terminal ++close ++norestore ' . language
-        :execute starting_window 'wincmd w'
-        :SlimeConfig
-    endif
+    :execute ':vsplit term://' . language
+    let t:term_id = b:terminal_job_id
+    let terminal_window = bufwinnr(bufname('%'))
+    :execute starting_window .. 'wincmd w'
+    :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
 endfunction
 
 " Function: exit REPL windows {{{1
@@ -109,4 +104,4 @@ nmap <localleader>h :call PrintHead()<CR>
 nmap <localleader>C :SlimeSend0 "\x03"<CR>
 nmap <localleader>f :call FindFunction()<CR><plug>SlimeRegionSend<CR>
 
-" vim: setlocal foldmethod=marker
+" vim: foldmethod=marker
