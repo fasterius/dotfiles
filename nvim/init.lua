@@ -435,8 +435,16 @@ require('lualine').setup {
         icons_enabled        = false,
         theme                = 'solarized',
         component_separators = '|',
-        section_separators   = '',
+        section_separators   = ''
     },
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch' },
+        lualine_c = { { 'filename', file_status = false } , 'diff', },
+        lualine_x = { { 'diagnostics', sources = {'nvim_lsp'}}, 'filetype' } ,
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+    }
 }
 
 -- NERDTree {{{2
