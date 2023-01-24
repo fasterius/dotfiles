@@ -17,7 +17,10 @@ window:
 #   $ defaults write -g AppleFontSmoothing -int 0
 font:
   normal:
-    family: Menlo
+    # Meslo is a modified version of Apple's Menlo; this version is patched with
+    # Nerd Fonts (see https://github.com/ryanoasis/nerd-fonts for details). It
+    # can be installed using `brew install --cask font-meslo-lg-nerd-font`.
+    family: MesloLGS Nerd Font Mono
     style: Regular
   bold:
     style: Bold
@@ -26,6 +29,8 @@ font:
   bold_italic:
     style: Bold Italic
   size: 14.0
+  offset:
+    y: -2
 
 # Solarized-light colour scheme
 colors:

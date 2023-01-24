@@ -29,10 +29,13 @@ require('packer').startup(function(use)
     -- Autocompletion and snippets {{{2
     use { 'hrsh7th/nvim-cmp',
         requires = {
-            'hrsh7th/cmp-buffer',      -- Buffer source for nvim-cmp
-            'hrsh7th/cmp-nvim-lsp',    -- Builtin LSP source for nvim-cmp
-            'L3MON4D3/LuaSnip',        -- Snippet engine in Lua
-            'saadparwaiz1/cmp_luasnip' -- Snippet source for nvim-cmp
+            'hrsh7th/cmp-buffer',         -- Buffer source for nvim-cmp
+            'hrsh7th/cmp-nvim-lsp',       -- Builtin LSP source for nvim-cmp
+            'hrsh7th/cmp-path',           -- System paths source for nvim-cmp
+            'saadparwaiz1/cmp_luasnip',   -- Snippet source for nvim-cmp
+            'L3MON4D3/LuaSnip',           -- Snippet engine in Lua
+            'onsails/lspkind.nvim',       -- Shows devicons in completion entry types
+            'nvim-tree/nvim-web-devicons' -- Icons for use with patched fonts
         },
     }
 
@@ -295,6 +298,19 @@ cmp.setup {
         completion    = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+    formatting = {
+        format = function(entry, vim_item)
+            if vim.tbl_contains({ 'path' }, entry.source.name) then
+                local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+                if icon then
+                    vim_item.kind = icon
+                    vim_item.kind_hl_group = hl_group
+                    return vim_item
+                end
+            end
+            return require('lspkind').cmp_format({ with_text = true })(entry, vim_item)
+        end
+    },
     -- Snippets from LuaSnip
     snippet = {
         expand = function(args)
@@ -437,7 +453,7 @@ solarized.replace.a.bg = colors.orange -- Orange REPLACE mode
 -- Lualine setup
 require('lualine').setup {
     options = {
-        icons_enabled        = false,
+        icons_enabled        = true,
         theme                = 'solarized',
         component_separators = '|',
         section_separators   = ''
@@ -545,14 +561,18 @@ require('nvim-tmux-navigation').setup {
 }
 
 -- Treesitter {{{2
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
 
     -- Languages to always be installed
     ensure_installed = { 'lua', 'python', 'r', 'bash', 'markdown', 'help', 'vim' },
 
     -- General settings
-    highlight = { enable = true },
-    indent = { enable = true, disable = { 'python' } },
+    highlight = {
+        enable = true
+    },
+    indent = {
+        enable = true
+    },
     incremental_selection = {
         enable = true,
         keymaps = {
@@ -560,7 +580,7 @@ require('nvim-treesitter.configs').setup {
             node_incremental  = '<C-Space>',
             scope_incremental = '<C-s>',
             node_decremental  = '<C-Backspace>',
-        },
+        }
     },
     textobjects = {
         select = {
@@ -573,7 +593,7 @@ require('nvim-treesitter.configs').setup {
                 ['if'] = '@function.inner',
                 ['ac'] = '@class.outer',
                 ['ic'] = '@class.inner',
-            },
+            }
         },
         move = {
             enable = true,
@@ -593,7 +613,7 @@ require('nvim-treesitter.configs').setup {
             goto_previous_end = {
                 ['[M'] = '@function.outer',
                 ['[]'] = '@class.outer',
-            },
+            }
         },
         swap = {
             enable = true,
@@ -602,10 +622,10 @@ require('nvim-treesitter.configs').setup {
             },
             swap_previous = {
                 ['<leader>A'] = '@parameter.inner',
-            },
-        },
-    },
-}
+            }
+        }
+    }
+})
 
 -- }}}2
 
