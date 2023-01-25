@@ -298,6 +298,7 @@ cmp.setup {
         completion    = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
+    -- Show devicons in completion menu
     formatting = {
         format = function(entry, vim_item)
             if vim.tbl_contains({ 'path' }, entry.source.name) then
@@ -445,10 +446,12 @@ require('neodev').setup()
 
 -- Customise Solarized colour theme
 local solarized = require('lualine.themes.solarized')
-solarized.normal.a.bg = colors.base2   -- Black NORMAL mode
-solarized.insert.a.bg = colors.blue    -- Blue INSERT mode
-solarized.visual.a.bg = colors.cyan    -- Cyan VISUAL mode
-solarized.replace.a.bg = colors.orange -- Orange REPLACE mode
+solarized.normal.a.bg   = colors.base2  -- Black NORMAL mode
+solarized.insert.a.bg   = colors.blue   -- Blue INSERT mode
+solarized.visual.a.bg   = colors.cyan   -- Cyan VISUAL mode
+solarized.replace.a.bg  = colors.orange -- Orange REPLACE mode
+solarized.inactive.c.bg = colors.base02 -- Inactive statusline
+-- solarized.inactive.c.fg = colors.base02 -- Inactive statusline
 
 -- Lualine setup
 require('lualine').setup {
@@ -465,6 +468,14 @@ require('lualine').setup {
         lualine_x = { { 'diagnostics', sources = {'nvim_lsp'}}, 'filetype' } ,
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { { 'filename', file_status = false } },
+        lualine_x = { 'filetype' },
+        lualine_y = {},
+        lualine_z = {}
     }
 }
 
