@@ -4,117 +4,110 @@
 
 -- Load plugins {{{1
 
--- Packer configuration {{{2
+-- Bootstrap lazy.nvim {{{2
 
--- Function for bootstrapping
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath
+    })
 end
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
 -- }}}2
 
-require('packer').startup(function(use)
-
-    -- Package manager
-    use 'wbthomason/packer.nvim'
+require("lazy").setup({
 
     -- Autocompletion and snippets {{{2
-    use { 'hrsh7th/nvim-cmp',
-        requires = {
+     { 'hrsh7th/nvim-cmp',
+        dependencies = {
             'hrsh7th/cmp-buffer',         -- Buffer source for nvim-cmp
             'hrsh7th/cmp-nvim-lsp',       -- Builtin LSP source for nvim-cmp
             'hrsh7th/cmp-path',           -- System paths source for nvim-cmp
             'saadparwaiz1/cmp_luasnip',   -- Snippet source for nvim-cmp
             'L3MON4D3/LuaSnip',           -- Snippet engine in Lua
             'onsails/lspkind.nvim',       -- Shows devicons in completion entry types
-            'nvim-tree/nvim-web-devicons' -- Icons for use with patched fonts
-        },
-    }
+            'nvim-tree/nvim-web-devicons' -- Icons for with patched fonts
+        }
+    },
 
     -- LSP {{{2
-    use { 'neovim/nvim-lspconfig',
-        requires = {
+    { 'neovim/nvim-lspconfig',
+        dependencies = {
             -- Additional lua configuration; good for Lua development/nvim configs
-            'folke/neodev.nvim',
+            'folke/neodev.nvim'
         }
-    }
+    },
 
     -- Telescope {{{2
-    use { 'nvim-telescope/telescope.nvim',
+    { 'nvim-telescope/telescope.nvim',
         branch   = '0.1.x',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
 
-    -- Fuzzy Finder algorithm which requires local dependencies to be built
+    -- Fuzzy Finder algorithm which dependencies local dependencies to be built
     -- (only load if `make` is available)
-    use { 'nvim-telescope/telescope-fzf-native.nvim',
-        run  = 'make',
+    { 'nvim-telescope/telescope-fzf-native.nvim',
+        build  = 'make',
         cond = vim.fn.executable 'make' == 1
-    }
+    },
     -- Treesitter {{{2
-    use { 'nvim-treesitter/nvim-treesitter',
-        run = function()
+    { 'nvim-treesitter/nvim-treesitter',
+        build = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
-        end
-    }
+        end,
+        dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
+    },
 
     -- Additional text objects via Treesitter
-    use { 'nvim-treesitter/nvim-treesitter-textobjects',
-        after = 'nvim-treesitter'
-    }
     -- }}}2
 
     -- Appearance
-    use 'romainl/vim-cool'             -- Disable search highlight after search is finished
-    use 'wellle/context.vim'           -- Display the context of the currently visible buffer content, e.g. function definitions
-    use 'junegunn/goyo.vim'            -- Distraction-free writing
-    use 'nvim-lualine/lualine.nvim'    -- Fancier statusline
-    use 'lcheylus/overlength.nvim'     -- Highlight text with width > textwidth
-    use 'ishan9299/nvim-solarized-lua' -- Lua port of Solarized8 colour scheme
+    'romainl/vim-cool',             -- Disable search highlight after search is finished
+    'wellle/context.vim',           -- Display the context of the currently visible buffer content, e.g. function definitions
+    'junegunn/goyo.vim',            -- Distraction-free writing
+    'nvim-lualine/lualine.nvim',    -- Fancier statusline
+    'lcheylus/overlength.nvim',     -- Highlight text with width > textwidth
+    'ishan9299/nvim-solarized-lua', -- Lua port of Solarized8 colour scheme
 
     -- File exploration
-    use 'scrooloose/nerdtree' -- File tree browser
+    'scrooloose/nerdtree', -- File tree browser
 
     -- Integrations
-    use 'whiteinge/diffconflicts'                                        -- Working with Git merge conflicts
-    use 'airblade/vim-gitgutter'                                         -- Show Git-changed code in the signcolumn
-    use { 'quarto-dev/quarto-nvim', requires = { 'jmbuhr/otter.nvim' } } -- Working with Quarto files
+    'whiteinge/diffconflicts',                                        -- Working with Git merge conflicts
+    'airblade/vim-gitgutter',                                         -- Show Git-changed code in the signcolumn
+    { 'quarto-dev/quarto-nvim',
+        dependencies =  'jmbuhr/otter.nvim'
+    },
 
-    use 'alexghergh/nvim-tmux-navigation' -- Movement between NeoVim and Tmux
+    'alexghergh/nvim-tmux-navigation', -- Movement between NeoVim and Tmux
 
     -- Formatting
-    use 'jiangmiao/auto-pairs'            -- Automatically insert bracket (etc.) pairs
-    use 'numToStr/Comment.nvim'           -- Commenting code with Treesitter-support
-    use 'tpope/vim-repeat'                -- Allow additional motions to be repeated
-    use 'svermeulen/vim-subversive'       -- Add operators for substitutions
-    use 'tpope/vim-surround'              -- Surround with brackets, parentheses, quotes, etc.
-    use 'junegunn/vim-easy-align'         -- Alignment around user-based input
+    'jiangmiao/auto-pairs',            -- Automatically insert bracket (etc.) pairs
+    'numToStr/Comment.nvim',           -- Commenting code with Treesitter-support
+    'tpope/vim-repeat',                -- Allow additional motions to be repeated
+    'svermeulen/vim-subversive',       -- Add operators for substitutions
+    'tpope/vim-surround',              -- Surround with brackets, parentheses, quotes, etc.
+    'junegunn/vim-easy-align',         -- Alignment around user-based input
 
     -- REPL and terminal
-    use 'jpalardy/vim-slime' -- An all-purpose REPL for sending code to a terminal
+    'jpalardy/vim-slime', -- An all-purpose REPL for sending code to a terminal
 
     -- Text objects
-    use 'wellle/targets.vim'                                      -- Various text objects
-    use 'kana/vim-textobj-user'                                   -- Text object framework
-    use { 'kana/vim-textobj-entire', after = 'vim-textobj-user' } -- Entire buffer
-    use { 'kana/vim-textobj-indent', after = 'vim-textobj-user' } -- Indentation
-    use { 'kana/vim-textobj-line',   after = 'vim-textobj-user' } -- Lines
-
-    -- Packer bootstrapping {{{2
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-    -- }}}2
-
-end)
+    'wellle/targets.vim',                                      -- Various text objects
+    { 'kana/vim-textobj-user',                                   -- Text object framework
+        dependencies = {
+            'kana/vim-textobj-entire',
+            'kana/vim-textobj-indent',
+            'kana/vim-textobj-line'
+        }
+    }
+})
 
 -- Appearance {{{1
 
