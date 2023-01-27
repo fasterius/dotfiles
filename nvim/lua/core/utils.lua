@@ -9,8 +9,8 @@ function SourceCoreConfigs()
 
     -- Reload each relevant config module with `dofile()`
     local modules = { 'autocommands', 'keymaps', 'options', 'utils' }
-    for idx, module in ipairs(modules) do
-        filepath = core_path .. module .. '.lua'
+    for _, module in ipairs(modules) do
+        local filepath = core_path .. module .. '.lua'
         dofile(filepath)
     end
     print('Config reloaded')
