@@ -1,7 +1,7 @@
 -- Work with Quarto files
 return {
     'quarto-dev/quarto-nvim',
-    ft = 'quarto',
+    ft = { 'quarto', 'markdown' },
     dependencies = 'jmbuhr/otter.nvim',
     config = function()
         require('quarto').setup {

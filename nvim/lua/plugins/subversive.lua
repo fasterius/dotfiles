@@ -1,17 +1,19 @@
--- Add operators for substitution
+-- Add operators for substitutions
 return {
     'svermeulen/vim-subversive',
-    config = function()
+    keys = {
 
         -- Substitute motion with register content
-        vim.keymap.set('n', 's', '<plug>(SubversiveSubstitute)')
+        { 's', '<plug>(SubversiveSubstitute)', mode = 'n', desc = 'Subversive' },
 
         -- Substitite word under cursor within motion with user input
-        vim.keymap.set('n', '<leader>s', '<plug>(SubversiveSubstituteRange)')
-        vim.keymap.set('x', '<leader>s', '<plug>(SubversiveSubstituteRange)')
+        { '<leader>s', '<plug>(SubversiveSubstituteRange)', mode = {'n', 'x' }, desc = 'Subversive range' },
 
         -- Substitute word under curser within motion with user input
-        vim.keymap.set('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRange)')
+        { '<leader>ss', '<plug>(SubversiveSubstituteWordRange)', mode = 'n', desc = 'Subversive word range' }
+
+    },
+    config = function()
 
         -- Do not move cursor after substituting
         vim.g.subversivePreserveCursorPosition = 1

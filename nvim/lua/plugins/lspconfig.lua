@@ -1,6 +1,5 @@
 return {
     'neovim/nvim-lspconfig',
-    lazy = true,
     dependencies = {
         'folke/neodev.nvim' -- Additional lua configuration
     },
@@ -26,19 +25,11 @@ return {
             nmap('<leader>rn', lsp.rename, '[R]e[n]ame')
             nmap('<leader>ca', lsp.code_action, '[C]ode [A]ction')
             nmap('<leader>D', lsp.type_definition, 'Type [D]efinition')
-
-            -- Telescope keymaps
-            local telescope = require('telescope.builtin')
-            nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
-            nmap('<leader>ds', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
-            nmap('<leader>ws', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
         end
 
         -- Broadcast additional nvim-cmp completeion capabilities to language servers
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-        -- Language server setups {{{3
 
         require('lspconfig')['r_language_server'].setup {
             on_attach = on_attach
