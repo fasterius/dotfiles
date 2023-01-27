@@ -5,6 +5,7 @@ vim.g.maplocalleader = ','
 -- Move by visual lines instead of physical lines
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('n', 'ö', ':echo "bla"<CR>')
 
 --  Keep selection after indenting in visual mode
 vim.keymap.set('v', '>', '>gv')
@@ -32,18 +33,3 @@ vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d',        vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-
--- Function to re-source the Neovim config with a workaround for preserving
--- marker-based folding for files inside the dotfiles repository while using
--- treesitter-based folding everywhere else
-
--- function SourceConfig()
---     if vim.fn.match(vim.fn.expand('%:p'), 'dotfiles') > -1 then
---         vim.cmd('source $MYVIMRC | setlocal foldmethod=marker')
---     else
---         vim.cmd('source $MYVIMRC')
---     end
--- end
--- vim.keymap.set('n', '<leader>v', ':lua SourceConfig() <CR>')
-
-vim.keymap.set('n', '<leader>v', ':source $MYVIMRC <CR>')
