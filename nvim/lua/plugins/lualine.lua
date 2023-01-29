@@ -4,7 +4,7 @@ return {
     config = function()
 
         -- Solarized colours
-        colours = {
+        local colours = {
             base3   =  '#002b36',
             base2   =  '#073642',
             base1   =  '#586e75',

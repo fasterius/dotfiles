@@ -4,6 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-        vim.cmd [[colorscheme solarized]]
+        vim.o.background = 'light'
+        vim.cmd [[ colorscheme solarized ]]
     end
 }

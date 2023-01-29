@@ -3,13 +3,16 @@ return {
     build = function()
         pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
-    dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-context',    -- Code context
+        'nvim-treesitter/nvim-treesitter-textobjects' -- Text objects
+    },
     config = function()
 
         require('nvim-treesitter.configs').setup({
 
             -- Languages to always be installed
-            ensure_installed = { 'lua', 'python', 'r', 'bash', 'markdown', 'help', 'vim' },
+            ensure_installed = { 'lua', 'python', 'r', 'bash', 'markdown', 'help', 'vim', 'yaml' },
 
             -- General settings
             highlight = {
@@ -73,5 +76,8 @@ return {
                 }
             }
         })
+
+        -- Add underline to Context bar
+        vim.cmd [[ hi TreesitterContextBottom gui=underline guisp=Grey ]]
     end
 }

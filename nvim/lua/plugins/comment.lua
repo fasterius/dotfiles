@@ -1,7 +1,7 @@
 -- Commenting code with Treesitter-support
 return { 'numToStr/Comment.nvim',
     keys = {
-        { 'gc' },
+        { 'gc', mode = { 'n', 'x'} },
     },
     config = function()
         require('Comment').setup()

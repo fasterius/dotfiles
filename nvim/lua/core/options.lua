@@ -18,9 +18,6 @@ vim.o.showmode = false
 -- Enable 24-bit True Colour
 vim.o.termguicolors = true
 
--- Use a light background
-vim.o.background = 'light'
-
 -- Visually indent wrapped lines
 vim.o.breakindent = true
 
@@ -33,6 +30,10 @@ vim.o.smartcase = true
 
 -- Show completion popup even with only one match and do not select a match automatically
 vim.o.completeopt = 'menuone,noselect'
+
+-- Disable the default Neovim file tree browser `netwr` in favour of plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- [[ Split settings ]]
 vim.o.splitbelow = true -- Create horizontal splits below
