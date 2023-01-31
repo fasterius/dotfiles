@@ -8,9 +8,9 @@ vim.o.number = true
 -- Add background highlight to current line
 vim.o.cursorline = true
 
--- Wrap lines at 80 characters (formatoptions = defaults + t)
+-- Wrap lines at 80 characters
 vim.o.textwidth = 80
-vim.o.formatoptions = 'jcroqlt'
+vim.o.formatoptions = vim.o.formatoptions .. 't'
 
 -- Don't show mode (it's in the statusline)
 vim.o.showmode = false
