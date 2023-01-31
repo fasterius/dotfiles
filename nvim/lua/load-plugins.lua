@@ -15,10 +15,4 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 -- Setup lazy.nvim modules
-require('lazy').setup(
-    'plugins',
-    { defaults = {
-            -- lazy = true
-        }
-    }
-)
+require('lazy').setup('plugins')

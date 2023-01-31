@@ -24,6 +24,9 @@ vim.o.breakindent = true
 -- Use the system clipboard when not specifying a register
 vim.o.clipboard = 'unnamed'
 
+-- Disable mouse
+vim.o.mouse = false
+
 -- Use case-insensitive searches, except when using capital letters
 vim.o.ignorecase = true
 vim.o.smartcase = true
