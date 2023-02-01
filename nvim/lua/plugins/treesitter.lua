@@ -12,7 +12,17 @@ return {
         require('nvim-treesitter.configs').setup({
 
             -- Languages to always be installed
-            ensure_installed = { 'lua', 'python', 'r', 'bash', 'markdown', 'help', 'vim', 'yaml' },
+            ensure_installed = {
+                'bash',
+                'help',
+                'lua',
+                'markdown',
+                'markdown_inline',
+                'python',
+                'r',
+                'vim',
+                'yaml'
+            },
 
             -- General settings
             highlight = {
