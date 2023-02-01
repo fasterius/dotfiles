@@ -10,7 +10,13 @@ vim.o.cursorline = true
 
 -- Wrap lines at 80 characters
 vim.o.textwidth = 80
-vim.o.formatoptions = vim.o.formatoptions .. 't'
+
+-- Formatoptions:
+--   Auto-wrap comments using 'textwidth' (c)
+--   Allow `gq`-formatting of comments (q)
+--   Auto-wrap text using 'textwidth' (t)
+--   Remove comment leader when joining lines (j)
+vim.o.formatoptions = 'cjqt'
 
 -- Don't show mode (it's in the statusline)
 vim.o.showmode = false
