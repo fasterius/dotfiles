@@ -5,6 +5,8 @@ return {
     },
     config = function()
 
+        local lspconfig = require('lspconfig')
+
         -- Function that runs when an LSP connects to a buffer
         local on_attach = function(_, bufnr)
 
@@ -27,15 +29,20 @@ return {
             nmap('<leader>D', lsp.type_definition, 'Type [D]efinition')
         end
 
+
         -- Broadcast additional nvim-cmp completeion capabilities to language servers
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-        require('lspconfig')['r_language_server'].setup {
-            on_attach = on_attach
-        }
-        require('lspconfig')['pyright'].setup {
+        lspconfig.r_language_server.setup {
             on_attach = on_attach,
+            capabilities = capabilities
+        }
+        lspconfig.pyright.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+
             python = {
                 analysis = {
                     autoSearchPaths = true,
@@ -44,17 +51,17 @@ return {
                 }
             }
         }
-
-        require('lspconfig')['bashls'].setup {
-            on_attach = on_attach
-        }
-
-        require('lspconfig')['marksman'].setup {
-            on_attach = on_attach
-        }
-
-        require('lspconfig')['sumneko_lua'].setup {
+        lspconfig.bashls.setup {
             on_attach = on_attach,
+            capabilities = capabilities,
+        }
+        lspconfig.marksman.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }
+        lspconfig.sumneko_lua.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
             settings = {
                 Lua = {
                     runtime     = { version = 'LuaJIT' },
@@ -67,9 +74,9 @@ return {
                 }
             }
         }
-
-        require('lspconfig')['vimls'].setup {
-            on_attach = on_attach
+        lspconfig.vimls.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
         }
 
         -- Neodev setup for LSPs inside Neovim Lua config-related files
