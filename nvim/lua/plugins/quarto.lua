@@ -9,7 +9,9 @@ return {
                 enabled     = true,
                 languages   = { 'r', 'python' },
                 diagnostics = { enabled = true, triggers = { "BufWrite" } },
-                cmpSource   = { enabled = true }
+            },
+            completion = {
+                enabled = true
             }
         }
 

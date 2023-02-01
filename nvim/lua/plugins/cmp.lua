@@ -18,10 +18,10 @@ return {
 
         cmp.setup {
             sources = {
-                { name = 'buffer' },   -- Buffer
+                { name = 'buffer'   }, -- Buffer
+                { name = 'luasnip'  }, -- LuaSnips
                 { name = 'nvim_lsp' }, -- Neovim's built-in LSP
-                { name = 'luasnip' },  -- LuaSnips
-                { name = 'otter' }     -- For Quarto documents
+                { name = 'otter'    }, -- For Quarto documents
             },
             window = { -- Borders around completion popups
                 completion    = cmp.config.window.bordered(),
