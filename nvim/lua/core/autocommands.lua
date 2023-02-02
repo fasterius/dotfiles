@@ -1,3 +1,13 @@
+-- Set formatoptions globally (overrides filetype-specific settings)
+--   Auto-wrap comments using 'textwidth' (c)
+--   Allow `gq`-formatting of comments (q)
+--   Auto-wrap text using 'textwidth' (t)
+--   Remove comment leader when joining lines (j)
+vim.api.nvim_create_autocmd({'FileType'}, {
+    pattern = '*',
+    command = ':set formatoptions=cjqt',
+})
+
 -- Go to INSERT mode when moving to a terminal pane
 vim.api.nvim_create_autocmd({'TermOpen', 'BufEnter', 'BufWinEnter'}, {
     pattern = {'term://*'},
