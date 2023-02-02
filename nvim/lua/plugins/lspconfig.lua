@@ -1,7 +1,9 @@
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
-        'folke/neodev.nvim' -- Additional lua configuration
+        { 'folke/neodev.nvim', config = true }, -- Additional lua configuration
+        { 'williamboman/mason.nvim', config = true},
+        { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = false } },
     },
     config = function()
 
@@ -33,7 +35,7 @@ return {
         -- Broadcast additional nvim-cmp completeion capabilities to language servers
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+        capabilities.textDocument.completion.completionItem.snippetSupport = true
 
         lspconfig.r_language_server.setup {
             on_attach = on_attach,
@@ -50,6 +52,11 @@ return {
                     useLibraryCodeForTypes = true
                 }
             }
+        }
+        lspconfig.groovyls.setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { 'groovy', 'nextflow' }
         }
         lspconfig.bashls.setup {
             on_attach = on_attach,
@@ -78,9 +85,6 @@ return {
             on_attach = on_attach,
             capabilities = capabilities,
         }
-
-        -- Neodev setup for LSPs inside Neovim Lua config-related files
-        require('neodev').setup()
 
     end
 }
