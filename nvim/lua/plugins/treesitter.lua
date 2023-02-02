@@ -4,8 +4,9 @@ return {
         pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
     dependencies = {
-        'nvim-treesitter/nvim-treesitter-context',    -- Code context
-        'nvim-treesitter/nvim-treesitter-textobjects' -- Text objects
+        'nvim-treesitter/nvim-treesitter-context',     -- Code context
+        'nvim-treesitter/nvim-treesitter-textobjects', -- Text objects
+        'JoosepAlviste/nvim-ts-context-commentstring'  -- Context-based comments
     },
     config = function()
 
@@ -22,6 +23,11 @@ return {
                 'r',
                 'vim',
                 'yaml'
+            },
+
+            -- Context-based commenting with `nvim-ts-context-commentstring`
+            context_commentstring = {
+                enable = true
             },
 
             -- General settings
@@ -89,5 +95,6 @@ return {
 
         -- Add underline to Context bar
         vim.cmd [[ hi TreesitterContextBottom gui=underline guisp=Grey ]]
+
     end
 }
