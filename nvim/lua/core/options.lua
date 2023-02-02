@@ -53,7 +53,8 @@ vim.o.directory = '~/.tmp,/var/tmp,/tmp' -- Store swapfiles in these directories
 vim.o.undofile = true                    -- Keep undofiles
 vim.o.undodir = '~/.tmp,/var/tmp,/tmp'   -- Store undofiles in these directories
 
--- Folding using Treesitter
-vim.o.foldenable = true
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+-- [[ Folding ]]
+vim.o.foldlevel      = 10                           -- No more than 10 folds
+vim.o.foldlevelstart = 0                            -- Start with folds closed
+vim.o.foldmethod     = 'expr'                       -- Expression folding ...
+vim.o.foldexpr       = 'nvim_treesitter#foldexpr()' -- ... with Treesitter
