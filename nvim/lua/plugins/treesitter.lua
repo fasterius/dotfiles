@@ -16,7 +16,6 @@ return {
             ensure_installed = {
                 'bash',
                 'dockerfile',
-                'gitcommit',
                 'gitignore',
                 'help',
                 'lua',
@@ -39,15 +38,6 @@ return {
             },
             indent = {
                 enable = true
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection    = '<C-Space>',
-                    node_incremental  = '<C-Space>',
-                    scope_incremental = '<C-s>',
-                    node_decremental  = '<C-Backspace>',
-                }
             },
 
             -- Settings for additional text objects
