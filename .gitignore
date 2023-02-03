@@ -3,4 +3,3 @@
 .netrwhist
 plugged/
 autoload/
-nvim/plugin/packer_compiled.lua
