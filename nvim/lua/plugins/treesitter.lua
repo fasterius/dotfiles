@@ -15,6 +15,9 @@ return {
             -- Languages to always be installed
             ensure_installed = {
                 'bash',
+                'dockerfile',
+                'gitcommit',
+                'gitignore',
                 'help',
                 'lua',
                 'markdown',
