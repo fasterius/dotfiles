@@ -1,15 +1,15 @@
--- Autocompletion and snippets
 return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-        'hrsh7th/cmp-buffer', -- Buffer source for nvim-cmp
-        'hrsh7th/cmp-nvim-lsp', -- Builtin LSP source for nvim-cmp
-        'hrsh7th/cmp-path', -- System paths source for nvim-cmp
-        'saadparwaiz1/cmp_luasnip', -- Snippet source for nvim-cmp
-        'L3MON4D3/LuaSnip', -- Snippet engine in Lua
-        'onsails/lspkind.nvim', -- Shows devicons in completion entry types
-        'nvim-tree/nvim-web-devicons' -- Icons for with patched fonts
+        'hrsh7th/cmp-buffer',           -- Buffer source for nvim-cmp
+        'hrsh7th/cmp-nvim-lsp',         -- Builtin LSP source for nvim-cmp
+        'hrsh7th/cmp-path',             -- System paths source for nvim-cmp
+        'saadparwaiz1/cmp_luasnip',     -- Snippet source for nvim-cmp
+        'L3MON4D3/LuaSnip',             -- Snippet engine in Lua
+        'rafamadriz/friendly-snippets', -- Snippet collection
+        'onsails/lspkind.nvim',         -- Shows devicons in completion types
+        'nvim-tree/nvim-web-devicons'   -- Icons for with patched fonts
     },
     config = function()
 
@@ -18,16 +18,20 @@ return {
 
         cmp.setup {
             sources = {
-                { name = 'buffer'   }, -- Buffer
-                { name = 'luasnip'  }, -- LuaSnips
+                { name = 'buffer'   },
+                { name = 'luasnip'  },
                 { name = 'nvim_lsp' }, -- Neovim's built-in LSP
                 { name = 'otter'    }, -- For Quarto documents
             },
-            window = { -- Borders around completion popups
+
+            -- Borders around completion popups
+            window = {
                 completion    = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
             },
-            formatting = { -- Show devicons in completion menu
+
+            -- Show devicons in completion menu
+            formatting = {
                 format = function(entry, vim_item)
                     if vim.tbl_contains({ 'path' }, entry.source.name) then
                         local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
@@ -40,12 +44,9 @@ return {
                     return require('lspkind').cmp_format({ with_text = true })(entry, vim_item)
                 end
             },
-            snippet = { -- Snippets from LuaSnip
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end
-            },
-            mapping = cmp.mapping.preset.insert { -- Keymaps
+
+            -- Keymaps
+            mapping = cmp.mapping.preset.insert {
                 ['<C-d>']   = cmp.mapping.scroll_docs(-4),
                 ['<C-f>']   = cmp.mapping.scroll_docs(4),
                 ['<CR>']    = cmp.mapping.confirm { select = false, },
@@ -67,7 +68,31 @@ return {
                         fallback()
                     end
                 end, { 'i', 's' }),
+            },
+
+            -- Snippet completion from Luasnips
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end
             }
         }
+
+        luasnip.setup {
+
+            -- Base lazy loading of snippets on cursor position
+            ft_func = require('luasnip.extras.filetype_functions').from_cursor_pos,
+
+            -- Include extra language snippets for specific filetypes
+            load_ft_func =
+                require('luasnip.extras.filetype_functions').extend_load_ft {
+                    rmd    = { 'markdown', 'r' },
+                    quarto = { 'markdown', 'r', 'python' },
+                }
+        }
+
+        -- Lazy-load snippets from Friendly Snippets collection
+        require("luasnip/loaders/from_vscode").lazy_load()
+
     end
 }
