@@ -8,10 +8,13 @@ return {
             lspFeatures = {
                 enabled     = true,
                 languages   = { 'r', 'python' },
-                diagnostics = { enabled = true, triggers = { "BufWrite" } },
-            },
-            completion = {
-                enabled = true
+                diagnostics = {
+                    enabled = true,
+                    triggers = { "BufWrite" }
+                },
+                completion = {
+                    enabled = true
+                }
             }
         }
 
