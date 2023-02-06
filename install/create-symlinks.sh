@@ -27,7 +27,7 @@ ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
 
 # NeoVim
-mkdir -p ~/.config/nvim
+mkdir -p ~/.config
 ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 
 # Directory for storing (Neo)vim's history and backups
