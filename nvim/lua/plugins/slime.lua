@@ -24,24 +24,24 @@ return {
         -- Get the appopriate language from the YAML header in Quarto files
         vim.cmd [[
             function! GetQuartoLanguage() abort
-                " Parse the YAML header and find the chosen kernel
+                " Parse the YAML header and find the chosen language
                 let current_position = getpos('.')
                 normal! gg
-                let line = search('^kernel\|jupyter: .*$', 'W')
+                let line = search('^knitr:\|^jupyter:', 'W')
                 call setpos('.', current_position)
-                " Check for existance of kernel specification
-                try
-                    let kernel = matchlist(getline(line), '^kernel\|jupyter: \(.*\)')[1]
-                catch
-                    echoerr "No kernel specification found; aborting"
-                endtry
-                " Get the language based on specified kernel
-                if (kernel == "python3")
-                    return "python"
-                elseif (kernel == "knitr")
-                    return "r"
+                " Check for Knitr
+                if (split(getline(line))[0] == 'knitr:')
+                    return 'r'
                 else
-                    return "r"
+                    " Check for Jupyter kernel
+                    let kernel = matchlist(getline(line), '^jupyter: \(.*\)')[1]
+                    if (kernel == 'python3')
+                        return 'python'
+                    elseif (kernel == 'r')
+                        return 'r'
+                    else
+                        return 'r'
+                    endif
                 endif
             endfunction
         ]]
@@ -123,6 +123,7 @@ return {
                     endif
                 else
                     :echo "Error: can only render R Markdown or Quarto documents"
+                endif
             endfunction
         ]]
 
