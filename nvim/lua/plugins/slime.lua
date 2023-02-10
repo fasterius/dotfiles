@@ -63,10 +63,10 @@ return {
 
         -- Open a REPL with appropriate language and move back to starting window
         vim.cmd [[
-            function! OpenTerminal() abort
+            function! OpenTerminal(split) abort
                 let starting_window = bufwinnr(bufname('%'))
                 let language = GetLanguage()
-                :execute ':vsplit term://' . language
+                :execute ':' . a:split . ' term://' . language
                 let t:term_id = b:terminal_job_id
                 let terminal_window = bufwinnr(bufname('%'))
                 :execute starting_window .. 'wincmd w'
@@ -137,7 +137,8 @@ return {
         ]]
 
         -- Function mappings
-        vim.keymap.set('n', '<localleader>r', ':call OpenTerminal() <CR>')
+        vim.keymap.set('n', '<localleader>r', ':call OpenTerminal("vsplit") <CR>')
+        vim.keymap.set('n', '<localleader>R', ':call OpenTerminal("split") <CR>')
         vim.keymap.set('n', '<localleader>q', ':call CloseTerminal() <CR>')
         vim.keymap.set('n', '<localleader>h', ':call PrintHead() <CR>')
         vim.keymap.set('n', '<localleader>k', ':call RenderDocument()<CR>')
