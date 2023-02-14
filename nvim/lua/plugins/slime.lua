@@ -114,11 +114,11 @@ return {
                 elseif &ft == "quarto" || &ft == "markdown"
                     let language = GetLanguage()
                     if language == "r"
-                        :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . " --to html')\n"
+                        :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . "')\n"
                         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
                     elseif language == "python"
                         :SlimeSend0 "import os\n"
-                        :SlimeSend0 "os.system('quarto render " . expand("%:p") . " --to html')\n"
+                        :SlimeSend0 "os.system('quarto render " . expand("%:p") . "')\n"
                         :SlimeSend0 "os.system('open " . expand("%:p:r") . ".html')\n"
                     endif
                 else
