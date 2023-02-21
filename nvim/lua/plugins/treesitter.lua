@@ -16,7 +16,6 @@ return {
             ensure_installed = {
                 'bash',
                 'dockerfile',
-                'gitignore',
                 'help',
                 'lua',
                 'markdown',
