@@ -1,6 +1,7 @@
 # Load more recent module versions
 module load git/2.16.1
-module load tmux/2.5
+module load ABINIT   # Needed for libevent below
+module load libevent # Needed for person Tmux build
 
 # Aliases for Bianca @ Uppmax
 alias transit='ssh erikfas@transit.uppmax.uu.se'
