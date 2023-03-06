@@ -1,5 +1,6 @@
 # Load more recent module versions
 module load git/2.16.1
+module load bioinfo-tools Nextflow/22.10.2
 module load ABINIT   # Needed for libevent below
 module load libevent # Needed for person Tmux build
 
