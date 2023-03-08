@@ -1,8 +1,12 @@
 # Load more recent module versions
 module load git/2.16.1
+module load tmux/3.3a
 module load bioinfo-tools Nextflow/22.10.1
-module load ABINIT   # Needed for libevent below
-module load libevent # Needed for person Tmux build
+
+# Add to path
+export PATH="$HOME/opt/vim/bin:$PATH"
+export PATH="$HOME/opt/neovim/bin:$PATH"
+export PATH="$HOME/opt/ripgrep:$PATH"
 
 # Aliases for Bianca @ Uppmax
 alias transit='ssh erikfas@transit.uppmax.uu.se'
