@@ -12,6 +12,9 @@ else
     export PATH="/usr/local/opt/libxml2/bin:$PATH"
     export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
     export PATH="/usr/local/opt/ruby@2.6/bin:$PATH"
+
+    # Add Homebrew's envs
+    eval $(/opt/homebrew/bin/brew shellenv)
 fi
 
 # Add to PATH
@@ -55,7 +58,6 @@ if hash gls 2>/dev/null; then
     LL=$LL' --hide=Desktop'
     LL=$LL' --hide=Documents'
     LL=$LL' --hide=Downloads'
-    LL=$LL' --hide=Dropbox'
     LL=$LL' --hide=Library'
     LL=$LL' --hide=Movies'
     LL=$LL' --hide=Music'

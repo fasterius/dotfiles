@@ -16,7 +16,6 @@ mkdir home
 DIRS='Desktop'
 DIRS=$DIRS' Documents'
 DIRS=$DIRS' Downloads'
-DIRS=$DIRS' Dropbox'
 DIRS=$DIRS' Library'
 DIRS=$DIRS' Movies'
 DIRS=$DIRS' Music'
