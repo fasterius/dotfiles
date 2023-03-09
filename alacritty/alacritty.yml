@@ -2,6 +2,9 @@
 # Author: Erik Fasterius <erik dot fasterius at outlook dot com>
 # URL:    https://github.com/fasterius/dotfiles
 
+shell:
+  program: /opt/homebrew/bin/bash
+
 env:
   TERM: xterm-256color
 
