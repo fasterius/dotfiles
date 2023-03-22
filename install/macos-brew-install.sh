@@ -9,9 +9,12 @@ brew install \
     bat \
     black \
     coreutils \
+    gawk \
     gcc \
     git \
+    gnu-sed \
     graphviz \
+    gzip \
     imagemagick \
     neovim \
     openjdk@17 \
