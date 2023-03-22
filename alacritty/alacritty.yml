@@ -15,7 +15,7 @@ window:
   padding:
     x: 5
     y: 5
-  decorations: buttonless
+  decorations: none
   startup_mode: Maximized
 
 # The `use_thin_strokes` setting for MacOS is deprecated; use the following in
