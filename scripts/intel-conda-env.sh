@@ -18,7 +18,7 @@
 CONDA_SUBDIR=osx-64 "$@"
 
 # Abort if specified command failed
-if [ $? -ge 0 ]; then
+if [ $? -gt 0 ]; then
     exit 1
 fi
 
