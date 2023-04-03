@@ -9,12 +9,13 @@ else
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
     # Local paths
-    export PATH="/usr/local/opt/libxml2/bin:$PATH"
-    export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
-    export PATH="/usr/local/opt/ruby@2.6/bin:$PATH"
+    PATH="/usr/local/bin:$PATH"
 
     # Add Homebrew's envs
     eval $(/opt/homebrew/bin/brew shellenv)
+
+    # Turn off auto-update for Homebrew
+    export HOMEBREW_NO_AUTO_UPDATE=1
 fi
 
 # Add to PATH
@@ -36,9 +37,6 @@ export EDITOR=nvim
 
 # Config file location for `bat`
 export BAT_CONFIG_PATH="$HOME/.dotfiles/bat/bat.conf"
-
-# Turn off auto-update for Homebrew
-export HOMEBREW_NO_AUTO_UPDATE=1
 
 # List command ----------------------------------------------------------------
 
