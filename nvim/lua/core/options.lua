@@ -37,6 +37,9 @@ vim.o.completeopt = 'menuone,noselect'
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Use bash as default shell
+vim.o.shell = 'bash'
+
 -- [[ Split settings ]]
 vim.o.splitbelow = true -- Create horizontal splits below
 vim.o.splitright = true -- Create vertical splits to the right
