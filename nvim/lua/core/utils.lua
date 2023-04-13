@@ -16,3 +16,9 @@ function SourceCoreConfigs()
     print('Config reloaded')
 end
 vim.keymap.set('n', '<leader>v', SourceCoreConfigs)
+
+-- Replace word under cursor in quickfix list
+function ReplaceInQuickfix()
+    return ':cdo %s/' .. vim.fn.expand("<cword>") .. '//g<left><left>'
+end
+vim.keymap.set('n', 'gs', ReplaceInQuickfix, { expr = true })
