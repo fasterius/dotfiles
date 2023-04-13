@@ -15,4 +15,4 @@ function SourceCoreConfigs()
     end
     print('Config reloaded')
 end
-vim.keymap.set('n', '<leader>v', ':lua SourceCoreConfigs() <CR>')
+vim.keymap.set('n', '<leader>v', SourceCoreConfigs)
