@@ -28,6 +28,7 @@ return {
     },
     config = function()
 
+        local actions = require('telescope.actions')
         require('telescope').setup {
             defaults = {
                 mappings = {
@@ -36,7 +37,9 @@ return {
                         ['<C-u>'] = false,
                         ['<C-d>'] = false,
                         -- Make a single <Esc> exit Telescope
-                        ["<esc>"] = require("telescope.actions").close
+                        ['<Esc>'] = actions.close,
+                        -- Send selected/whole list to quickfix list
+                        ['<C-q>'] = actions.smart_send_to_qflist,
                     }
                 }
             }
