@@ -1,16 +1,20 @@
 -- Work with Quarto files
 return {
     'quarto-dev/quarto-nvim',
-    ft = { 'quarto', 'markdown' },
-    dependencies = 'jmbuhr/otter.nvim',
+    dependencies = {
+        { 'hrsh7th/nvim-cmp'  },
+        { 'jmbuhr/otter.nvim' },
+    },
     config = function()
         require('quarto').setup {
+            closePreviewOnExit = true,
             lspFeatures = {
-                enabled     = true,
-                languages   = { 'r', 'python' },
+                enabled = true,
+                languages = { 'r', 'python', 'bash' },
+                chunks = 'curly',
                 diagnostics = {
                     enabled = true,
-                    triggers = { "BufWrite" }
+                    triggers = { "BufWritePost" }
                 },
                 completion = {
                     enabled = true

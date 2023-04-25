@@ -53,7 +53,7 @@ return {
                     return "r"
                 elseif &ft == "python"
                     return "python"
-                elseif &ft == "quarto" || &ft == "markdown"
+                elseif &ft == "quarto"
                     return GetQuartoLanguage()
                 else
                     return "bash"

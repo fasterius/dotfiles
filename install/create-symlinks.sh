@@ -30,6 +30,10 @@ ln -sfn ~/.vim/vimrc ~/.vimrc
 mkdir -p ~/.config
 ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 
+# Marksman LSP (used by Neovim)
+mkdir -p ~/.config/marksman
+ln -sfn ~/.dotfiles/marksman/config.toml ~/.config/marksman/config.toml
+
 # Directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
 
