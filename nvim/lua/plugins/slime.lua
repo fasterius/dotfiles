@@ -66,6 +66,10 @@ return {
             function! OpenTerminal(split) abort
                 let starting_window = bufwinnr(bufname('%'))
                 let language = GetLanguage()
+                if executable(language) == 0
+                    echo "Error: language `" . language . "` not installed"
+                    return 1
+                endif
                 :execute ':' . a:split . ' term://' . language
                 let t:term_id = b:terminal_job_id
                 let terminal_window = bufwinnr(bufname('%'))
