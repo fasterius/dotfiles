@@ -212,9 +212,10 @@ nmap <leader>v :source $MYVIMRC <CR>
 
 " Movement: {{{1
 
+" Store relative line number movement larger than 1 in the jumplist
 " Move by visual lines instead of physical lines
-nnoremap j gj
-nnoremap k gk
+nnoremap <expr> j v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " Also use CTRL-<hjkl> to move to/from Vim terminals
 tnoremap <C-j> <C-w><C-j>

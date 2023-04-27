@@ -2,10 +2,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
+-- Store relative line number movement larger than 1 in the jumplist
 -- Move by visual lines instead of physical lines
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
-vim.keymap.set('n', 'ö', ':echo "bla"<CR>')
+vim.keymap.set('n', 'j', [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']], { expr = true })
+vim.keymap.set('n', 'k', [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk']], { expr = true })
 
 --  Keep selection after indenting in visual mode
 vim.keymap.set('v', '>', '>gv')
