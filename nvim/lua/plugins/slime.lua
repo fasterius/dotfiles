@@ -3,6 +3,7 @@ return {
     'jpalardy/vim-slime',
     keys = {
         { '<localleader>r' },
+        { '<localleader>C' },
         { '<localleader>P' }
     },
     config = function()
@@ -147,5 +148,14 @@ return {
         vim.keymap.set('n', '<localleader>h', ':call PrintHead() <CR>')
         vim.keymap.set('n', '<localleader>k', ':call RenderDocument()<CR>')
         vim.keymap.set('n', '<localleader>P', ':call QuartoPreview()<CR>')
+
+        -- Insert Quarto code chunks based on document language
+        vim.cmd [[
+            function! InsertQuartoCodeChunk() abort
+                let language = GetLanguage()
+                :call feedkeys("i```{" . language . "}\n\n```\<UP>")
+            endfunction
+        ]]
+        vim.keymap.set('n', '<localleader>C', ':call InsertQuartoCodeChunk()<CR>')
     end
 }
