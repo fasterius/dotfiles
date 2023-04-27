@@ -216,6 +216,8 @@ nmap <leader>v :source $MYVIMRC <CR>
 " Move by visual lines instead of physical lines
 nnoremap <expr> j v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk'
+nnoremap 0 g0
+nnoremap $ g$
 
 " Also use CTRL-<hjkl> to move to/from Vim terminals
 tnoremap <C-j> <C-w><C-j>

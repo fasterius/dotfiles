@@ -6,6 +6,8 @@ vim.g.maplocalleader = ','
 -- Move by visual lines instead of physical lines
 vim.keymap.set('n', 'j', [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']], { expr = true })
 vim.keymap.set('n', 'k', [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk']], { expr = true })
+vim.keymap.set('n', '0', 'g0')
+vim.keymap.set('n', '$', 'g$')
 
 --  Keep selection after indenting in visual mode
 vim.keymap.set('v', '>', '>gv')
