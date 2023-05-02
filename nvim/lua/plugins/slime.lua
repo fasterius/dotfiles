@@ -109,6 +109,21 @@ return {
             endfunction
         ]]
 
+        -- Print column names of a pandas/R dataframe
+        vim.cmd [[
+            function! PrintNames() abort
+                let language = GetLanguage()
+                let current_word = expand("<cword>")
+                if language == "r"
+                    :SlimeSend0 "names(" . current_word . ")\n"
+                elseif language == "python"
+                    :SlimeSend0 "list(" . current_word . ")\n"
+                else
+                    :echo "Error: requires Python or R"
+                endif
+            endfunction
+        ]]
+
         -- Render R Markdown and Quarto documents
         vim.cmd [[
             function! RenderDocument() abort
@@ -142,10 +157,11 @@ return {
         ]]
 
         -- Function mappings
-        vim.keymap.set('n', '<localleader>r', ':call OpenTerminal("vsplit") <CR>')
-        vim.keymap.set('n', '<localleader>R', ':call OpenTerminal("split") <CR>')
-        vim.keymap.set('n', '<localleader>q', ':call CloseTerminal() <CR>')
-        vim.keymap.set('n', '<localleader>h', ':call PrintHead() <CR>')
+        vim.keymap.set('n', '<localleader>r', ':call OpenTerminal("vsplit")<CR>')
+        vim.keymap.set('n', '<localleader>R', ':call OpenTerminal("split")<CR>')
+        vim.keymap.set('n', '<localleader>q', ':call CloseTerminal()<CR>')
+        vim.keymap.set('n', '<localleader>h', ':call PrintHead()<CR>')
+        vim.keymap.set('n', '<localleader>n', ':call PrintNames()<CR>')
         vim.keymap.set('n', '<localleader>k', ':call RenderDocument()<CR>')
         vim.keymap.set('n', '<localleader>P', ':call QuartoPreview()<CR>')
 
