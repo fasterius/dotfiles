@@ -6,9 +6,11 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 # Install formulae
 brew install \
     bash \
+    bash-completion \
     bat \
     black \
     coreutils \
+    docker-completion \
     gawk \
     gcc \
     git \

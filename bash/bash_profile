@@ -22,6 +22,12 @@ fi
 export PATH="$HOME/opt:$PATH"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
+# Bash and Docker completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
+    && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+[[ -r "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker" ]] \
+    && . "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker"
+
 # Source Conda
 source "$HOME/opt/miniconda3/etc/profile.d/conda.sh"
 
