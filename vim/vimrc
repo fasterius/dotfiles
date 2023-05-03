@@ -189,12 +189,17 @@ set incsearch   " Search as characters are entered
 set hlsearch    " Highlight searches
 set ignorecase  " Case-insensitive searches ...
 set smartcase   " ... except when using capital letters
+
+" Make all searches center window on current line and open relevant folds
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap * *zzzv
 nnoremap # #zzzv
 nnoremap g* g*zzzv
 nnoremap g# g#zzzv
+
+" Clear search highlights
+nnoremap <CR> :noh<CR>
 
 " Backup, swap and undo settings
 set backup                           " Keep backup files

@@ -2,6 +2,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
+-- Clear search highlights
+vim.keymap.set('n', '<CR>', ':noh<CR>')
+
 -- Store relative line number movement larger than 1 in the jumplist
 -- Move by visual lines instead of physical lines
 vim.keymap.set('n', 'j', [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']], { expr = true })
