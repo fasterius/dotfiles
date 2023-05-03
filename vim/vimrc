@@ -189,6 +189,12 @@ set incsearch   " Search as characters are entered
 set hlsearch    " Highlight searches
 set ignorecase  " Case-insensitive searches ...
 set smartcase   " ... except when using capital letters
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap g* g*zzzv
+nnoremap g# g#zzzv
 
 " Backup, swap and undo settings
 set backup                           " Keep backup files
