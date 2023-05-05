@@ -9,3 +9,7 @@
 	defaultBranch = main
 [pull]
 	ff = only
+[format]
+    pretty = format:%C(yellow)commit %H %C(auto)%d %nAuthor: %C(cyan)%aN %C(italic reset)(%ae) %nDate:   %C(blue)%ar %C(italic reset)(%ai) %n%n%C(bold reset)%w(0,6,6)%s%n%C(reset)%+b
+[pretty]
+    line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s
