@@ -37,7 +37,7 @@ return {
                     " Check for Jupyter kernel
                     let kernel = matchlist(getline(line), '^jupyter: \(.*\)')[1]
                     if (kernel == 'python3')
-                        return 'python'
+                        return 'python3'
                     elseif (kernel == 'r')
                         return 'r'
                     else
@@ -53,7 +53,7 @@ return {
                 if &ft == "r" || &ft == "rmd"
                     return "r"
                 elseif &ft == "python"
-                    return "python"
+                    return "python3"
                 elseif &ft == "quarto"
                     return GetQuartoLanguage()
                 else
@@ -86,7 +86,7 @@ return {
                 " Close terminal using the appropriate command
                 if language == "r"
                     :SlimeSend1 quit(save = "no")
-                elseif language == "python"
+                elseif language == "python3"
                     :SlimeSend1 exit()
                 else
                     :SlimeSend1 exit
@@ -136,7 +136,7 @@ return {
                     if language == "r"
                         :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . "')\n"
                         :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-                    elseif language == "python"
+                    elseif language == "python3"
                         :SlimeSend0 "import os\n"
                         :SlimeSend0 "os.system('quarto render " . expand("%:p") . "')\n"
                         :SlimeSend0 "os.system('open " . expand("%:p:r") . ".html')\n"
