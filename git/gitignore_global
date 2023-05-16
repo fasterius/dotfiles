@@ -1,5 +1,7 @@
-# R files
+# Mac files
 **/.DS_Store
+
+# R files
 **/.Rhistory
 
 # Vim undo history and swap-files
@@ -20,3 +22,6 @@
 # Nextflow files
 **/.nextflow*
 work/*
+
+# Workflow testing
+**/run.sh
