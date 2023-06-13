@@ -2,6 +2,7 @@
 channels:
   - conda-forge
   - bioconda
+  - defaults
 
 # Use strict channel priorities
 channel_priority: strict
