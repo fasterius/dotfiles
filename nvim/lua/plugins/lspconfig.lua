@@ -108,5 +108,12 @@ return {
             capabilities = capabilities,
         }
 
+        -- Change diagnostic icon to a circle instead of a square
+        vim.diagnostic.config {
+            virtual_text = {
+                prefix = '● ',
+            }
+        }
+
     end
 }
