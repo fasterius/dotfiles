@@ -33,6 +33,7 @@
   "overlength.nvim": { "branch": "master", "commit": "3715b66d10ae0a68667e50c650c2ef3e5ab9f1e7" },
   "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
   "quarto-nvim": { "branch": "main", "commit": "d8ea8f7dbe5fb9747073a67ac1ad609ecf097bc8" },
+  "reticle.nvim": { "branch": "main", "commit": "7290f2649684415a9d3da98957ea44f5421f4f2a" },
   "substitute.nvim": { "branch": "main", "commit": "14eea5563234424e9a732cba2e8acb2e4e1f9bb4" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "580b6c48651cabb63455e97d7e131ed557b8c7e2" },
