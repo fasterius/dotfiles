@@ -6,5 +6,6 @@ return {
     config = function()
         vim.o.background = 'light'
         vim.cmd [[ colorscheme solarized ]]
+        vim.api.nvim_set_hl(0, 'SpellBad', {fg="#CB4B16", underline=true})
     end
 }
