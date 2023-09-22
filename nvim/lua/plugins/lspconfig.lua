@@ -2,8 +2,6 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
         { 'folke/neodev.nvim', config = true }, -- Additional lua configuration
-        { 'williamboman/mason.nvim', config = true },
-        { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = false } },
     },
     config = function()
 

@@ -18,12 +18,19 @@ brew install \
     graphviz \
     gzip \
     imagemagick \
+    lua-language-server \
+    marksman \
     neovim \
     openjdk@17 \
     pandoc \
+    prettier \
+    pyright \
+    python@3.11 \
+    r@4.3 \
     readline \
     ripgrep \
     tmux \
+    tree \
     tree-sitter \
     vim \
     wget
@@ -31,3 +38,6 @@ brew install \
 # Install casks
 brew install --cask \
     font-meslo-lg-nerd-font
+
+# Install R language server non-interactively
+R -e 'install.packages("languageserver", repos="http://lib.stat.cmu.edu/R/CRAN")'
