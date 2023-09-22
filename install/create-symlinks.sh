@@ -2,6 +2,9 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
+# Alacritty
+ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
+
 # Bash
 ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
 ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
@@ -13,8 +16,17 @@ ln -sfn ~/.dotfiles/conda/condarc ~/.condarc
 ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
 ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 
-# Tmux
-ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+# Language servers
+mkdir -p ~/.config/marksman
+ln -sfn ~/.dotfiles/lsp/marksman/config.toml ~/.config/marksman/config.toml
+ln -sfn ~/.dotfiles/lsp/lintr/lintr ~/.lintr
+
+# NeoVim
+mkdir -p ~/.config
+ln -sfn ~/.dotfiles/nvim ~/.config/nvim
+
+# Temporary directory for storing (Neo)vim's history and backups
+mkdir -p ~/.tmp
 
 # Terminfo
 cp -r ~/.dotfiles/terminfo ~/.terminfo
@@ -22,21 +34,9 @@ tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
 tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
 tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
 
+# Tmux
+ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
+
 # Vim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
-
-# NeoVim
-mkdir -p ~/.config
-ln -sfn ~/.dotfiles/nvim ~/.config/nvim
-
-# Language servers
-mkdir -p ~/.config/marksman
-ln -sfn ~/.dotfiles/lsp/marksman/config.toml ~/.config/marksman/config.toml
-ln -sfn ~/.dotfiles/lsp/lintr/lintr ~/.lintr
-
-# Directory for storing (Neo)vim's history and backups
-mkdir -p ~/.tmp
-
-# Alacritty
-ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
