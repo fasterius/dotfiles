@@ -4,8 +4,35 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+
+        -- Light Solarized theme
         vim.o.background = 'light'
         vim.cmd [[ colorscheme solarized ]]
+
+        -- Misspelled words are red and underlined
         vim.api.nvim_set_hl(0, 'SpellBad', {fg="#CB4B16", underline=true})
+
+        -- Fix issue with @parameter highlight overriding cursorline colour
+        vim.api.nvim_set_hl(0, '@parameter', {fg="#586E75"})
+
     end
 }
+
+-- Solarized colour reference chart
+-- See https://ethanschoonover.com/solarized/ for details
+-- Base03:    #002B36;
+-- Base02:    #073642;
+-- Base01:    #586E75;
+-- Base00:    #657B83;
+-- Base0:     #839496;
+-- base1:     #93A1A1;
+-- base2:     #EEE8D5;
+-- base3:     #FDF6E3;
+-- yellow:    #B58900;
+-- orange:    #CB4B16;
+-- red:       #DC322F;
+-- magenta:   #D33682;
+-- violet:    #6C71C4;
+-- blue:      #268BD2;
+-- cyan:      #2AA198;
+-- green:     #859900;
