@@ -28,12 +28,6 @@ ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 # Temporary directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
 
-# Terminfo
-cp -r ~/.dotfiles/terminfo ~/.terminfo
-tic -o ~/.terminfo ~/.terminfo/tmux.terminfo
-tic -o ~/.terminfo ~/.terminfo/tmux-256color.terminfo
-tic -o ~/.terminfo ~/.terminfo/xterm-256color.terminfo
-
 # Tmux
 ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
