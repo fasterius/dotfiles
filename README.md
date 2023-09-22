@@ -14,15 +14,17 @@ git clone git@github.com:fasterius/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles/install
 ./hide-macos-directories.sh
 ./create-symlinks.sh
+./macos-brew-install.sh
 ```
 
 In order to simplify usage of this repo, you can execute the scripts contained
 in the `install/` directory. The `hide-macos-directories.sh` script hides the
 default MacOS home directories (*i.e.* "Desktop", "Download", *etc.*) from
 Finder and creates symbolic links in a new `~/home/` directory for easy access
-without cluttering up the default home directory, while the
-`create-symlinks.sh` creates all the symbolic links needed for all the various
-profiles and configs contained in this repository.
+without cluttering up the default home directory; `create-symlinks.sh` creates
+all the symbolic links needed for all the various profiles and configs contained
+in this repository; `macos-brew-install.sh` installs various software packages
+using the [Homebrew](https://brew.sh/) package manager for MacOS.
 
 ## Contents
 
@@ -44,13 +46,20 @@ profiles and configs contained in this repository.
    containing a git username and email, as well as the path to the global
    gitignore file.
 
+ * `lsp/`: Configuration files for language server protocols.
+
+ * `scripts/`: Some convenience scripts for running common tasks, including
+   creating Apptainer images from local Docker images; creating AMD/Intel-based
+   Conda environments on ARM-platforms; and starting new TMUX sessions with a
+   default pane layout.
+
  * `tmux/`: The `tmux.conf` file contains general configuration for [Tmux][6],
    including functionality to make it play well with Vim (*e.g.* moving between
    Vim splits any Tmux panes in the same way).
 
- * `vim/` and `nvim/`: Settings for Vim and Neovim, respective. You can read
+ * `vim/` and `nvim/`: Settings for Vim and Neovim, respectively. You can read
    more about what the different directories do in this [great overview][7] over
-   at [Learn Vimscript the Hard way][8], which is an excellent vim resource in
+   at [Learn Vimscript the Hard Way][8], which is an excellent vim resource in
    general.
 
 [3]: https://github.com/alacritty/alacritty
