@@ -12,8 +12,11 @@ return {
         -- Misspelled words are red and underlined
         vim.api.nvim_set_hl(0, 'SpellBad', {fg="#CB4B16", underline=true})
 
-        -- Fix issue with @parameter highlight overriding cursorline colour
-        vim.api.nvim_set_hl(0, '@parameter', {fg="#586E75"})
+        -- Fix issues with treesitter highlights overriding background colours
+        vim.api.nvim_set_hl(0, '@parameter',             { fg="#586E75"})
+        vim.api.nvim_set_hl(0, '@text.emphasis',         { fg="#586E75", bold=true})
+        vim.api.nvim_set_hl(0, '@punctuation.delimiter', { fg="#657B83", bold=true})
+        vim.api.nvim_set_hl(0, '@label',                 { fg="#657B83", bold=true})
 
     end
 }
