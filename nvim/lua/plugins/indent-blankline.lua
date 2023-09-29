@@ -1,14 +1,21 @@
 return {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-        require('indent_blankline').setup {
+        require('ibl').setup {
 
-            -- Show current indent context with different colour
-            show_current_context = true,
+            -- Do not show scope
+            scope = { enabled = false },
 
             -- Colours
-            vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg="#EEE8D5"}),
-            vim.api.nvim_set_hl(0, 'IndentBlanklineContextChar', {fg="#93A1A1"})
+            vim.api.nvim_set_hl(0, 'IblIndent', {fg="#EEE8D5"}),
+
         }
+
+        -- Hide first indentation level
+        local hooks = require("ibl.hooks")
+        hooks.register(
+            hooks.type.WHITESPACE,
+            hooks.builtin.hide_first_space_indent_level
+        )
     end
 }

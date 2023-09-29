@@ -6,7 +6,7 @@ return {
 
             -- Solarized colour: same as cursorline
             -- TODO: not hard-coded
-            bg = '#EEE8D5',
+            colors = { bg = '#EEE8D5' },
 
             -- Highlight only the column itself
             highlight_to_eol = false
