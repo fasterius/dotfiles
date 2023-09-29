@@ -1,5 +1,5 @@
 -- Commenting code with Treesitter-support
-return { 'fasterius/Comment.nvim',
+return { 'numToStr/Comment.nvim',
     keys = {
         { 'gc', mode = { 'n', 'x'} },
     },
