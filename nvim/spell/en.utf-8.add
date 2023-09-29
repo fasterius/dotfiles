@@ -196,3 +196,5 @@ ncol
 tbl
 Adelie
 Gentoo
+.nvim
+plugin
