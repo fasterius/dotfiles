@@ -135,6 +135,9 @@ alias rackham2='ssh erikfas@rackham2.uppmax.uu.se'
 alias rackham3='ssh erikfas@rackham3.uppmax.uu.se'
 alias rackham4='ssh erikfas@rackham4.uppmax.uu.se'
 
+# Bamse @ Mats Nilsson's group
+alias bamse='ssh external@130.237.251.237'
+
 # Prompt ---------------------------------------------------------------------
 
 # Function to get conda env if in an activated environment
