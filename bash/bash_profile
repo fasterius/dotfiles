@@ -31,6 +31,9 @@ export PATH="$HOME/.dotfiles/scripts:$PATH"
 # Source Conda
 source "$HOME/opt/miniconda3/etc/profile.d/conda.sh"
 
+# Explicitly add path for Java installation (fixes issues with Java/Nextflow)
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+
 # Files to ignore for tab-completion
 export FIGNORE="$FIGNORE:.un~:DS_Store"
 
