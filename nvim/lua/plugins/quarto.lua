@@ -26,7 +26,7 @@ return {
         vim.cmd [[
             function! QuartoPreview()
                 :w!
-                :terminal quarto preview %:p --to html
+                :terminal quarto preview %:p
                 :call feedkeys('<Esc>')
                 :bprev
             endfunction
