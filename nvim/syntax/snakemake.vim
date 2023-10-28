@@ -1,0 +1,1 @@
+../../vim/syntax/snakemake.vim
