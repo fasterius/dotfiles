@@ -14,8 +14,10 @@ return {
 
         -- Fix issues with treesitter highlights overriding background colours
         vim.api.nvim_set_hl(0, '@parameter',             { fg="#586E75"})
-        vim.api.nvim_set_hl(0, '@text.emphasis',         { fg="#586E75", bold=true})
+        vim.api.nvim_set_hl(0, '@text.emphasis',         { fg="#586E75", italic=true})
         vim.api.nvim_set_hl(0, '@text.quote',            { fg="#657B83"})
+        vim.api.nvim_set_hl(0, '@text.strong',           { fg="#657B83", bold=true})
+        vim.api.nvim_set_hl(0, '@label',                 { fg="#657B83", bold=true})
         vim.api.nvim_set_hl(0, '@punctuation.delimiter', { fg="#657B83", bold=true})
         vim.api.nvim_set_hl(0, '@label',                 { fg="#657B83", bold=true})
 
