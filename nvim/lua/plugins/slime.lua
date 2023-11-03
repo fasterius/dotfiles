@@ -28,10 +28,18 @@ return {
                 " Parse the YAML header and find the chosen language
                 let current_position = getpos('.')
                 normal! gg
-                let line = search('^knitr:\|^jupyter:', 'W')
+                let line = search('^knitr:\|^jupyter:\|^engine:', 'W')
                 call setpos('.', current_position)
+                let line = split(getline(line))
+                " Check for engine
+                if (line[0] == 'engine:')
+                    if (line[1] == 'knitr')
+                        return 'r'
+                    else
+                        return 'python3'
+                    endif
                 " Check for Knitr
-                if (split(getline(line))[0] == 'knitr:')
+                elseif (line[0] == 'knitr:')
                     return 'r'
                 else
                     " Check for Jupyter kernel
