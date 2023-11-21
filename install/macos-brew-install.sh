@@ -11,6 +11,7 @@ brew install \
     black \
     coreutils \
     docker-completion \
+    fd \
     gawk \
     gcc \
     git \
