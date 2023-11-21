@@ -1,0 +1,17 @@
+snippet library "Import a library"
+	library("${0:package}")
+
+snippet readtab "Read a tab-delimited file"
+	${1:data} <- read.table("${2:file.txt}",
+					   sep              = "\t",
+					   header           = TRUE,
+					   stringsAsFactors = FALSE)
+
+snippet argument_parser "Add an argument parser"
+	# Argument parser
+	suppressPackageStartupMessages(library("argparse"))
+	parser <- ArgumentParser()
+	parser$add_argument("${1:argument_1}",
+						type    = "${2:character}",
+						help    = "${3:Argument help string}")
+	args <- parser$parse_args()

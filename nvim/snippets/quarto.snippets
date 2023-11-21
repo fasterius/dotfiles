@@ -1,0 +1,33 @@
+extends markdown, r, python
+
+snippet html "Initialise an empty Quarto HTML document"
+	---
+	title: "${1:title}"
+	author: "Erik Fasterius"
+	date: today
+	format:
+		html:
+			code-fold: true
+			code-tools: true
+			embed-resources: true
+			smooth-scroll: true
+			toc-depth: 2
+			toc-location: left
+			toc: true
+			warning: false
+	engine: ${2:knitr}
+	---
+
+snippet revealjs "Initialise an empty Quarto reveal.js document"
+	---
+	title: "${1:title}"
+	author: "Erik Fasterius"
+	format:
+		revealjs:
+			code-line-numbers: false
+			embed-resources: true
+			slide-level: 2
+			slide-number: false
+	---
+
+	## ${2:First slide}

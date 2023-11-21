@@ -7,7 +7,6 @@ return {
         'hrsh7th/cmp-path',             -- System paths source for nvim-cmp
         'saadparwaiz1/cmp_luasnip',     -- Snippet source for nvim-cmp
         'L3MON4D3/LuaSnip',             -- Snippet engine in Lua
-        'rafamadriz/friendly-snippets', -- Snippet collection
         'onsails/lspkind.nvim',         -- Shows devicons in completion types
         'nvim-tree/nvim-web-devicons'   -- Icons for with patched fonts
     },
@@ -70,7 +69,7 @@ return {
                 end, { 'i', 's' }),
             },
 
-            -- Snippet completion from Luasnips
+            -- Snippet completion from LuaSnip
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -78,21 +77,15 @@ return {
             }
         }
 
+        -- Snippets via LuaSnip
         luasnip.setup {
 
-            -- Base lazy loading of snippets on cursor position
-            ft_func = require('luasnip.extras.filetype_functions').from_cursor_pos,
-
-            -- Include extra language snippets for specific filetypes
-            load_ft_func =
-                require('luasnip.extras.filetype_functions').extend_load_ft {
-                    rmd    = { 'markdown', 'r' },
-                    quarto = { 'markdown', 'r', 'python' },
-                }
+            -- Update repeated placeholders while writing
+            update_events = 'TextChanged,TextChangedI'
         }
 
-        -- Lazy-load snippets from Friendly Snippets collection
-        require("luasnip/loaders/from_vscode").lazy_load()
+        -- Load snippets lazily
+        require("luasnip.loaders.from_snipmate").lazy_load()
 
     end
 }
