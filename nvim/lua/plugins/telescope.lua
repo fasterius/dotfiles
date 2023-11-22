@@ -7,6 +7,7 @@ return {
         '<leader>fg',
         '<leader>fb',
         '<leader>sg',
+        '<leader>st',
         '<leader>sw',
         '<leader>sd',
         '<leader>sh',
@@ -73,6 +74,7 @@ return {
         vim.keymap.set('n', '<leader>sd', builtin.diagnostics,                   { desc = '[S]earch [D]iagnostics'                        })
         vim.keymap.set('n', '<leader>si', builtin.highlights,                    { desc = '[S]earch h[I]ghlights'                         })
         vim.keymap.set('n', '<leader>/',  builtin.current_buffer_fuzzy_find,     { desc = '[/] Fuzzily search in current buffer]'         })
+        vim.keymap.set('n', '<leader>st', "<CMD>TodoTelescope<CR>",              { desc = '[S]earch h[I]ghlights'                         })
 
         -- LSP
         vim.keymap.set('n', '<leader>ds', builtin.lsp_document_symbols,          { desc = '[D]ocument [S]ymbols'  })
