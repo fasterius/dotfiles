@@ -1,3 +1,4 @@
+-- Disable cursorline for inactive splits
 return {
     'tummetott/reticle.nvim',
     config = function()

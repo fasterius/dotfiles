@@ -1,3 +1,4 @@
+-- Add vertical indentation lines
 return {
     'lukas-reineke/indent-blankline.nvim',
     config = function()

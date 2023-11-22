@@ -1,3 +1,4 @@
+-- Add number of matches and other information to searches
 return {
     'kevinhwang91/nvim-hlslens',
     keys = {

@@ -1,3 +1,4 @@
+-- Autocompletion with various sources
 return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',

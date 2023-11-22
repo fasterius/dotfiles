@@ -1,3 +1,4 @@
+-- Fast syntax parsing
 return {
     'nvim-treesitter/nvim-treesitter',
     build = function()

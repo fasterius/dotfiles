@@ -1,3 +1,4 @@
+-- Highlight colour codes with the actual colours
 return {
     'NvChad/nvim-colorizer.lua',
     cmd = {

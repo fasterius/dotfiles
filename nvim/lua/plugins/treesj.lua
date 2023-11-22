@@ -1,3 +1,4 @@
+-- Join/split operations with Treesitter syntax
 return {
     'Wansmer/treesj',
     keys = {

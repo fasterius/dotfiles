@@ -1,3 +1,4 @@
+-- Configure the built-in LSP
 return {
     'neovim/nvim-lspconfig',
     dependencies = {
