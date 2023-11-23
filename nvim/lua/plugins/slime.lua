@@ -2,22 +2,34 @@
 return {
     'jpalardy/vim-slime',
     keys = {
-        { '<localleader>r' },
         { '<localleader>C' },
-        { '<localleader>P' }
+        { '<localleader>P' },
+        { '<localleader>c' },
+        { '<localleader>l' },
+        { '<localleader>r' },
+        { '<localleader>s' },
+        { '<localleader>v' },
     },
     config = function()
 
-        -- Use the Neovim terminal
-        vim.api.nvim_set_var('slime_target', 'neovim')
+        -- Use Tmux as target
+        vim.g.slime_target = "tmux"
+
+        -- Pre-fill configuration with default socket and pane 1
+        vim.g.slime_default_config = {
+            socket_name = "default",
+            target_pane = "1"
+        }
+
+        -- Do not use default mappings
+        vim.api.nvim_set_var('slime_no_mappings', 1)
 
         -- Use triple brackets as cell delimiters
-        vim.api.nvim_set_var('slime_cell_delimiter', '```')
+        vim.g.slime_cell_delimiter = "```"
 
         -- General mappings
         vim.keymap.set('n', '<localleader>s', '<plug>SlimeMotionSend')
         vim.keymap.set('n', '<localleader>l', '<plug>SlimeLineSend')
-        vim.keymap.set('n', '<localleader>p', '<plug>SlimeParagraphSend')
         vim.keymap.set('x', '<localleader>v', '<plug>SlimeRegionSend')
         vim.keymap.set('n', '<localleader>c', '<plug>SlimeSendCell')
         vim.keymap.set('n', '<localleader>C', ':SlimeSend0 "\\x03"<CR>')
@@ -66,38 +78,6 @@ return {
                     return GetQuartoLanguage()
                 else
                     return "bash"
-                endif
-            endfunction
-        ]]
-
-        -- Open a REPL with appropriate language and move back to starting window
-        vim.cmd [[
-            function! OpenTerminal(split) abort
-                let starting_window = bufwinnr(bufname('%'))
-                let language = GetLanguage()
-                if executable(language) == 0
-                    echo "Error: language `" . language . "` not installed"
-                    return 1
-                endif
-                :execute ':' . a:split . ' term://' . language
-                let t:term_id = b:terminal_job_id
-                let terminal_window = bufwinnr(bufname('%'))
-                :execute starting_window .. 'wincmd w'
-                :execute 'let b:slime_config = {"jobid": "' . t:term_id . '"}'
-            endfunction
-        ]]
-
-         -- Exit a REPL window
-        vim.cmd [[
-            function! CloseTerminal() abort
-                let language = GetLanguage()
-                " Close terminal using the appropriate command
-                if language == "r"
-                    :SlimeSend1 quit(save = "no")
-                elseif language == "python3"
-                    :SlimeSend1 exit()
-                else
-                    :SlimeSend1 exit
                 endif
             endfunction
         ]]
@@ -165,21 +145,10 @@ return {
         ]]
 
         -- Function mappings
-        vim.keymap.set('n', '<localleader>r', ':call OpenTerminal("vsplit")<CR>')
-        vim.keymap.set('n', '<localleader>R', ':call OpenTerminal("split")<CR>')
-        vim.keymap.set('n', '<localleader>q', ':call CloseTerminal()<CR>')
         vim.keymap.set('n', '<localleader>h', ':call PrintHead()<CR>')
         vim.keymap.set('n', '<localleader>n', ':call PrintNames()<CR>')
         vim.keymap.set('n', '<localleader>k', ':call RenderDocument()<CR>')
         vim.keymap.set('n', '<localleader>P', ':call QuartoPreview()<CR>')
 
-        -- Insert Quarto code chunks based on document language
-        vim.cmd [[
-            function! InsertQuartoCodeChunk() abort
-                let language = GetLanguage()
-                :call feedkeys("i```{" . language . "}\n\n```\<UP>")
-            endfunction
-        ]]
-        vim.keymap.set('n', '<localleader>C', ':call InsertQuartoCodeChunk()<CR>')
     end
 }
