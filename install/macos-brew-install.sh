@@ -15,6 +15,7 @@ brew install \
     gawk \
     gcc \
     git \
+    gh \
     gnu-sed \
     graphviz \
     gzip \
