@@ -17,6 +17,7 @@ brew install \
     git \
     gh \
     gnu-sed \
+    gnu-tar \
     graphviz \
     gzip \
     imagemagick \
