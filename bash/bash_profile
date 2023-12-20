@@ -14,6 +14,13 @@ else
     # Add Homebrew's envs
     eval $(/opt/homebrew/bin/brew shellenv)
 
+    # Add Homebrew paths to PATH
+    export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
+    export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+
+    # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
+    export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
+
     # Turn off auto-update for Homebrew
     export HOMEBREW_NO_AUTO_UPDATE=1
 fi
@@ -21,7 +28,6 @@ fi
 # Add to PATH
 export PATH="$HOME/opt:$PATH"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
-export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
 
 # Bash and Docker completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
@@ -31,9 +37,6 @@ export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
 
 # Source Conda
 source "$HOME/opt/miniconda3/etc/profile.d/conda.sh"
-
-# Explicitly add path for Java installation (fixes issues with Java/Nextflow)
-export JAVA_HOME="/opt/homebrew/opt/openjdk@17"
 
 # Files to ignore for tab-completion
 export FIGNORE="$FIGNORE:.un~:DS_Store"
@@ -91,11 +94,6 @@ alias tl='tmux ls'
 # Conda aliases
 alias coac='conda activate'
 alias code='conda deactivate'
-
-# Python versions
-alias python2='/usr/bin/python'
-alias python='python3'
-alias py='python3'
 
 # Move upwards multiple directories
 alias ..='cd ..'
