@@ -28,7 +28,6 @@ brew install \
     pandoc \
     prettier \
     pyright \
-    python@3.11 \
     r@4.3 \
     readline \
     ripgrep \

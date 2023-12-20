@@ -14,8 +14,10 @@ else
     # Add Homebrew's envs
     eval $(/opt/homebrew/bin/brew shellenv)
 
+    # Set PATH for Python 3.12
+    export PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"
+
     # Add Homebrew paths to PATH
-    export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
 
     # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
