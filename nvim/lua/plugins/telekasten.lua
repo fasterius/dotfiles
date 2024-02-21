@@ -1,9 +1,6 @@
 -- Zettelkasten through Telescope
 return {
-    -- Use own fork of plugin for now, which includes the `enable_create_new`
-    -- config settings. PR: https://github.com/renerocksai/telekasten.nvim/pull/302
-    'fasterius/telekasten.nvim',
-    -- 'renerocksai/telekasten.nvim',
+    'renerocksai/telekasten.nvim',
     dependencies = {
         'nvim-telescope/telescope.nvim'
     },
