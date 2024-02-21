@@ -40,6 +40,10 @@ vim.g.loaded_netrwPlugin = 1
 -- Use bash as default shell
 vim.o.shell = 'bash'
 
+-- Use concealment when applicable; only show in inser/visual modes
+vim.o.conceallevel = 2
+vim.o.concealcursor = 'nc'
+
 -- [[ Split settings ]]
 vim.o.splitbelow = true -- Create horizontal splits below
 vim.o.splitright = true -- Create vertical splits to the right
