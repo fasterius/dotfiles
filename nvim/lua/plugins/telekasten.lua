@@ -25,10 +25,7 @@ return {
             show_tags_theme = "dropdown",
 
             -- Note filenames are named after UUID and the title
-            new_note_filename = "uuid-title",
-
-            -- Substitute spaces in filesnames with dashes
-            filename_space_subst = '-',
+            new_note_filename = "title-uuid",
 
             -- Do not create new notes with Ctrl-n in note finder picker
             enable_create_new = false,
