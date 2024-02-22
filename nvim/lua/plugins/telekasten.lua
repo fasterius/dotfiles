@@ -43,7 +43,7 @@ return {
         vim.keymap.set("n", "<leader>zr", "<cmd>Telekasten rename_note<CR>")
 
         -- Call insert link automatically when typing double brackets
-        vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
+        vim.keymap.set("i", "[[", "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>")
 
         -- Launch Telekasten panel if nothing more is typed after the prefix
         vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
