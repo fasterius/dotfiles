@@ -25,7 +25,7 @@ return {
             show_tags_theme = "dropdown",
 
             -- Note filenames are named after UUID and the title
-            new_note_filename = "title-uuid",
+            new_note_filename = "title",
 
             -- Do not create new notes with Ctrl-n in note finder picker
             enable_create_new = false,
