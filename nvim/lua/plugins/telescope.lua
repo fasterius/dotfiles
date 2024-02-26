@@ -26,6 +26,7 @@ return {
             build  = 'make',
             cond = vim.fn.executable 'make' == 1
         },
+        { 'nvim-telescope/telescope-bibtex.nvim' },
     },
     config = function()
 
@@ -43,8 +44,22 @@ return {
                         ['<C-q>'] = actions.smart_send_to_qflist,
                     }
                 }
+            },
+            extensions = {
+                bibtex = {
+                    custom_formats = {
+                        -- Custom format for Zettelkasten with Telekasten plugin
+                        { id = 'telekasten', cite_marker = '@%s' }
+                    },
+                    citation_format = "[[^@{{label}}]]: {{author}} ({{year}}), _{{title}}_.",
+                    -- Wrap long lines inside previewer
+                    wrap = true,
+                }
             }
         }
+
+        -- Load BibTeX extension
+        require('telescope').load_extension('bibtex')
 
         -- Change colour of search results
         -- TODO: don't hard-code
