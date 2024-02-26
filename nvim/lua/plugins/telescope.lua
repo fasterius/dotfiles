@@ -43,7 +43,12 @@ return {
                         -- Send selected/whole list to quickfix list
                         ['<C-q>'] = actions.smart_send_to_qflist,
                     }
-                }
+                },
+                -- Ignore Zettelkasten-related files
+                file_ignore_patterns = {
+                    "templates/new_note.md",
+                    "zettelkasten.bib",
+                },
             },
             extensions = {
                 bibtex = {
