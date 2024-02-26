@@ -45,6 +45,18 @@ return {
         -- Telescope BibTeX extension mapping
         vim.keymap.set("n", "<leader>zB", "<cmd>Telescope bibtex<CR>")
 
+        -- Function to delete note under cursor
+        vim.cmd[[
+            fun! RemoveFile()
+                let file = expand("%:p")
+                let choice = confirm("Remove file " .. file .. "?", "&Yes\n&No", 1)
+                if choice == 1
+                    call delete(file) | bdelete!
+                endif
+            endfun
+        ]]
+        vim.keymap.set("n", "<leader>zR", ":call RemoveFile()<CR>")
+
         -- Call insert link automatically when typing double brackets
         vim.keymap.set("i", "[[", "<ESC>:lua require('telekasten').insert_link({ i=true })<CR>")
 
