@@ -63,5 +63,13 @@ return {
         -- Launch Telekasten panel if nothing more is typed after the prefix
         vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
 
+        -- Colour highlight
+        vim.cmd[[hi link tkBrackets Strikethrough]] -- Grey
+        vim.cmd[[hi link tkLink Directory]]         -- Blue
+        vim.cmd[[hi link tkAliasedLink Directory]]  -- Blue
+
+        -- Remove semantic token which interfered with above highlights
+        vim.api.nvim_set_hl(0, '@lsp.type.class.telekasten', {})
+
     end
 }
