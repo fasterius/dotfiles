@@ -3,9 +3,10 @@
 --   Allow `gq`-formatting of comments (q)
 --   Auto-wrap text using 'textwidth' (t)
 --   Remove comment leader when joining lines (j)
+--   Auto-wrap lists to follow list element indentation (n)
 vim.api.nvim_create_autocmd({'FileType'}, {
     pattern = '*',
-    command = ':set formatoptions=cjqt',
+    command = ':set formatoptions=cjqtn',
 })
 
 -- Go to INSERT mode when moving to a terminal pane
