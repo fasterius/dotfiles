@@ -33,7 +33,7 @@
   "reticle.nvim": { "branch": "main", "commit": "7290f2649684415a9d3da98957ea44f5421f4f2a" },
   "substitute.nvim": { "branch": "main", "commit": "89dbe55cccee36bcb5e2be8c2d92ff8716601734" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
-  "telekasten.nvim": { "branch": "main", "commit": "d2b7c2c4d4727f31bb0676ed90e7ecdc8f67ae12" },
+  "telekasten.nvim": { "branch": "main", "commit": "a684d6ebe7026944b0a5323219d5f5364511e5b2" },
   "telescope-bibtex.nvim": { "branch": "master", "commit": "4aec823bd757347763a01fd87908d1dacfa54ca0" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "54930e1abfc94409e1bb9266e752ef8379008592" },
