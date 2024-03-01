@@ -7,6 +7,21 @@ return {
             -- Do not show scope
             scope = { enabled = false },
 
+            -- Exclude default filetypes + telekasten filetype
+            exclude = {
+                filetypes = {
+                    "lspinfo",
+                    "packer",
+                    "checkhealth",
+                    "help",
+                    "man",
+                    "gitcommit",
+                    "TelescopePrompt",
+                    "TelescopeResults",
+                    "telekasten",
+                },
+            },
+
             -- Colours
             vim.api.nvim_set_hl(0, 'IblIndent', {fg="#EEE8D5"}),
 
