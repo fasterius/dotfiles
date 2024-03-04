@@ -33,6 +33,9 @@ return {
         local actions = require('telescope.actions')
         require('telescope').setup {
             defaults = {
+                layout_config = {
+                    width = 0.9
+                },
                 mappings = {
                     i = {
                         -- Disable scrolling inside preview windows
