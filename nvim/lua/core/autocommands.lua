@@ -9,6 +9,15 @@ vim.api.nvim_create_autocmd({'FileType'}, {
     command = ':set formatoptions=cjqtn',
 })
 
+-- Conceal when in `telekasten` filetype
+vim.api.nvim_create_autocmd({'FileType'}, {
+    pattern = 'telekasten',
+    callback = function()
+        vim.o.conceallevel = 2
+        vim.o.concealcursor = 'nc'
+    end
+})
+
 -- Go to INSERT mode when moving to a terminal pane
 vim.api.nvim_create_autocmd({'TermOpen', 'BufEnter', 'BufWinEnter'}, {
     pattern = {'term://*'},
