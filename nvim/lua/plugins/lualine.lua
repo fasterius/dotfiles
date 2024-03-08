@@ -31,6 +31,15 @@ return {
         solarized.replace.a.bg  = colours.orange -- Orange REPLACE mode
         solarized.inactive.c.bg = colours.base02 -- Inactive statusline
 
+        -- Function to check for being "zoomed in" (see lua/core/utils.lua)
+        local function IsZoomedIn()
+            if vim.t.zoom == nil then
+                return ''
+            elseif vim.t.zoom == 'zoom' then
+                return '󰍉'
+            end
+        end
+
         -- Lualine setup
         require('lualine').setup {
             options = {
@@ -42,8 +51,15 @@ return {
             sections = {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch' },
-                lualine_c = { { 'filename', file_status = false }, 'diff', },
-                lualine_x = { { 'diagnostics', sources = { 'nvim_lsp' } }, 'filetype' },
+                lualine_c = {
+                    { 'filename', file_status = false },
+                    { 'diff' },
+                    { IsZoomedIn, color = { fg = colours.blue } },
+                },
+                lualine_x = {
+                    { 'diagnostics', sources = { 'nvim_lsp' } },
+                    { 'filetype' },
+                },
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' }
             },
