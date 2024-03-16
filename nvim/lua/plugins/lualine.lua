@@ -31,11 +31,11 @@ return {
         solarized.replace.a.bg  = colours.orange -- Orange REPLACE mode
         solarized.inactive.c.bg = colours.base02 -- Inactive statusline
 
-        -- Function to check for being "zoomed in" (see lua/core/utils.lua)
+        -- Function to check for zoom status of the `simple-zoom.lua` plugin
         local function IsZoomedIn()
-            if vim.t.zoom == nil then
+            if vim.t['simple-zoom'] == nil then
                 return ''
-            elseif vim.t.zoom == 'zoom' then
+            elseif vim.t['simple-zoom']== 'zoom' then
                 return '󰍉'
             end
         end
