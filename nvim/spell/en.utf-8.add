@@ -250,9 +250,6 @@ Heteroscedasticity
 heteroscedastic
 heteroscedasticity
 homoscedastic
-#voom_
-#voom_
-#voom_
 voom
 Limma
 DESeq2
@@ -264,7 +261,6 @@ Benfeitas
 Rui
 Kaplain
 DEA
-#ifferential expression in
 SD
 CLT
 VST
@@ -293,9 +289,14 @@ metatables
 metatable
 tabline
 zen
-lua
 keymap
 regexes
 in situ
 Statusline
 statusline
+screencast
+keymaps
+.lua
+globals
+screencasts
+lua
