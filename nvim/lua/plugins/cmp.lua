@@ -17,6 +17,7 @@ return {
         local luasnip = require('luasnip')
 
         cmp.setup {
+
             sources = {
                 { name = 'buffer'   },
                 { name = 'luasnip'  },
@@ -42,7 +43,7 @@ return {
                         end
                     end
                     return require('lspkind').cmp_format({ with_text = true })(entry, vim_item)
-                end
+                end,
             },
 
             -- Keymaps
@@ -50,24 +51,6 @@ return {
                 ['<C-d>']   = cmp.mapping.scroll_docs(-4),
                 ['<C-f>']   = cmp.mapping.scroll_docs(4),
                 ['<CR>']    = cmp.mapping.confirm { select = false, },
-                ['<Tab>']   = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    elseif luasnip.expand_or_jumpable() then
-                        luasnip.expand_or_jump()
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
-                ['<S-Tab>'] = cmp.mapping(function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
-                    else
-                        fallback()
-                    end
-                end, { 'i', 's' }),
             },
 
             -- Snippet completion from LuaSnip
@@ -75,13 +58,12 @@ return {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
                 end
-            }
+            },
+
         }
 
-        -- Snippets via LuaSnip
+        -- Snippets via LuaSnip: update repeated placeholders while writing
         luasnip.setup {
-
-            -- Update repeated placeholders while writing
             update_events = 'TextChanged,TextChangedI'
         }
 
