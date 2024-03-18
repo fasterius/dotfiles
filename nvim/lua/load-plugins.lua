@@ -14,5 +14,12 @@ end
 -- Prepend runtimepath with path to lazy.nvim
 vim.opt.runtimepath:prepend(lazypath)
 
+-- Configuration
+local opts = {
+    change_detection = {
+        notify = false
+    }
+}
+
 -- Setup lazy.nvim modules
-require('lazy').setup('plugins')
+require('lazy').setup('plugins', opts)
