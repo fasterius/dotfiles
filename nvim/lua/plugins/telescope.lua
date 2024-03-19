@@ -59,7 +59,7 @@ return {
                         -- Custom format for Zettelkasten with Telekasten plugin
                         { id = "telekasten", cite_marker = "@%s" },
                     },
-                    citation_format = "[[^@{{label}}]]: {{author}} ({{year}}), _{{title}}_.",
+                    citation_format = "{{author}} (**{{year}}**), _{{title}}_. [^@{{label}}]",
                     -- Wrap long lines inside previewer
                     wrap = true,
                 },
