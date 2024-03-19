@@ -21,6 +21,9 @@ mkdir -p ~/.config/marksman
 ln -sfn ~/.dotfiles/lsp/marksman/config.toml ~/.config/marksman/config.toml
 ln -sfn ~/.dotfiles/lsp/lintr/lintr ~/.lintr
 
+# Code formatting
+ln -sfn ~/.dotfiles/stylua/stylua.toml ~/.stylua.toml
+
 # NeoVim
 mkdir -p ~/.config
 ln -sfn ~/.dotfiles/nvim ~/.config/nvim
