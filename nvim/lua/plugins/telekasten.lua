@@ -1,24 +1,23 @@
 -- Zettelkasten through Telescope
 return {
-    'renerocksai/telekasten.nvim',
+    "renerocksai/telekasten.nvim",
     dependencies = {
-        'nvim-telescope/telescope.nvim'
+        "nvim-telescope/telescope.nvim",
     },
     keys = {
         { "<leader>z" },
     },
     config = function()
-
         -- Home directory for Zettelkasten
         local home = vim.fn.expand("~/docs/zettelkasten")
 
-        require('telekasten').setup({
+        require("telekasten").setup({
 
             -- Home directory
             home = home,
 
             -- Template for new notes
-            template_new_note = home .. '/templates/new_note.md',
+            template_new_note = home .. "/templates/new_note.md",
 
             -- Use dropdown menus for relevant commands
             command_palette_theme = "dropdown",
@@ -46,7 +45,7 @@ return {
         vim.keymap.set("n", "<leader>zB", "<cmd>Telescope bibtex<CR>")
 
         -- Function to delete note under cursor
-        vim.cmd[[
+        vim.cmd([[
             fun! RemoveFile()
                 let file = expand("%:p")
                 let choice = confirm("Remove file " .. file .. "?", "&Yes\n&No", 1)
@@ -54,7 +53,7 @@ return {
                     call delete(file) | bdelete!
                 endif
             endfun
-        ]]
+        ]])
         vim.keymap.set("n", "<leader>zR", ":call RemoveFile()<CR>")
 
         -- Call insert link automatically when typing double brackets
@@ -64,12 +63,11 @@ return {
         vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
 
         -- Colour highlight
-        vim.cmd[[hi link tkBrackets Strikethrough]] -- Grey
-        vim.cmd[[hi link tkLink Directory]]         -- Blue
-        vim.cmd[[hi link tkAliasedLink Directory]]  -- Blue
+        vim.cmd([[hi link tkBrackets Strikethrough]]) -- Grey
+        vim.cmd([[hi link tkLink Directory]]) -- Blue
+        vim.cmd([[hi link tkAliasedLink Directory]]) -- Blue
 
         -- Remove semantic token which interfered with above highlights
-        vim.api.nvim_set_hl(0, '@lsp.type.class.telekasten', {})
-
-    end
+        vim.api.nvim_set_hl(0, "@lsp.type.class.telekasten", {})
+    end,
 }

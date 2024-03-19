@@ -3,22 +3,21 @@
 -- statements contained therein (which will just use the cache from the initial
 -- opening of the buffer); explicit use of `dofile()` ignores cache.
 function SourceCoreConfigs()
-
     -- Find absolute path to the `lua/core/` directory
-    local core_path = vim.fn.expand('$MYVIMRC'):match("(.*/)") .. 'lua/core/'
+    local core_path = vim.fn.expand("$MYVIMRC"):match("(.*/)") .. "lua/core/"
 
     -- Reload each relevant config module with `dofile()`
-    local modules = { 'autocommands', 'keymaps', 'options', 'utils' }
+    local modules = { "autocommands", "keymaps", "options", "utils" }
     for _, module in ipairs(modules) do
-        local filepath = core_path .. module .. '.lua'
+        local filepath = core_path .. module .. ".lua"
         dofile(filepath)
     end
-    print('Config reloaded')
+    print("Config reloaded")
 end
-vim.keymap.set('n', '<leader>v', SourceCoreConfigs)
+vim.keymap.set("n", "<leader>v", SourceCoreConfigs)
 
 -- Replace word under cursor in quickfix list
 function ReplaceInQuickfix()
-    return ':cdo %s/' .. vim.fn.expand("<cword>") .. '//g<left><left>'
+    return ":cdo %s/" .. vim.fn.expand("<cword>") .. "//g<left><left>"
 end
-vim.keymap.set('n', 'gs', ReplaceInQuickfix, { expr = true })
+vim.keymap.set("n", "gs", ReplaceInQuickfix, { expr = true })

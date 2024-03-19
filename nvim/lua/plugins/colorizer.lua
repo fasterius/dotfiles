@@ -1,16 +1,16 @@
 -- Highlight colour codes with the actual colours
 return {
-    'NvChad/nvim-colorizer.lua',
+    "NvChad/nvim-colorizer.lua",
     cmd = {
-        'ColorizerAttachToBuffer',
-        'ColorizerToggle'
+        "ColorizerAttachToBuffer",
+        "ColorizerToggle",
     },
     config = function()
-        require('colorizer').setup {
+        require("colorizer").setup({
             -- Don't colour e.g. `red` or `blue`
             user_default_options = {
-                names = false
-            }
-        }
-    end
+                names = false,
+            },
+        })
+    end,
 }

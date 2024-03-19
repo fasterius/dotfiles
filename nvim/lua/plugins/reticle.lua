@@ -1,10 +1,10 @@
 -- Disable cursorline for inactive splits
 return {
-    'tummetott/reticle.nvim',
+    "tummetott/reticle.nvim",
     config = function()
-        require('reticle').setup {
+        require("reticle").setup({
             -- Do not disable cursorline in insert mode
             disable_in_insert = false,
-        }
-    end
+        })
+    end,
 }

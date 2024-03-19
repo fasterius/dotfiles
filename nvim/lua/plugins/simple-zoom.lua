@@ -1,13 +1,13 @@
 -- Emulates Tmux zoom functionality
 return {
-    'fasterius/simple-zoom.nvim',
+    "fasterius/simple-zoom.nvim",
     keys = {
-        { '<localleader>z', ':SimpleZoomToggle<CR>' }
+        { "<localleader>z", ":SimpleZoomToggle<CR>" },
     },
-    cmd = 'SimpleZoomToggle',
+    cmd = "SimpleZoomToggle",
     config = function()
-        require('simple-zoom').setup {
-            hide_tabline = true
-        }
-    end
+        require("simple-zoom").setup({
+            hide_tabline = true,
+        })
+    end,
 }

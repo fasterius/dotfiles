@@ -1,8 +1,8 @@
 -- Work with Git merge conflicts inside Vim
 return {
-    'sindrets/diffview.nvim',
+    "sindrets/diffview.nvim",
     cmd = {
-        'DiffviewOpen',
-        'DiffviewFileHistory',
-    }
+        "DiffviewOpen",
+        "DiffviewFileHistory",
+    },
 }

@@ -1,7 +1,7 @@
 -- Alignment around arbitrary characters
 return {
-    'junegunn/vim-easy-align',
+    "junegunn/vim-easy-align",
     keys = {
-        { 'ga', '<plug>(EasyAlign)', mode = {'n', 'x'}, desc = 'EasyAlign' },
-    }
+        { "ga", "<plug>(EasyAlign)", mode = { "n", "x" }, desc = "EasyAlign" },
+    },
 }

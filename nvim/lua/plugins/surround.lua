@@ -1,13 +1,13 @@
 -- Surround with brackets, parentheses, quotes, etc. with Treesitter-support
 return {
-    'kylechui/nvim-surround',
+    "kylechui/nvim-surround",
     keys = {
-        { 'ys' },
-        { 'ds' },
-        { 'cs' }
+        { "ys" },
+        { "ds" },
+        { "cs" },
     },
     config = function()
-        require('nvim-surround').setup({
+        require("nvim-surround").setup({
 
             -- Aliases to conform to how `targets.vim` work
             aliases = {
@@ -16,7 +16,7 @@ return {
             },
 
             -- Do not highlight selection
-            highlight = { false }
+            highlight = { false },
         })
-    end
+    end,
 }

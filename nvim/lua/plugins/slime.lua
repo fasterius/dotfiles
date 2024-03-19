@@ -1,41 +1,40 @@
 -- An all-purpose REPL for sending code to a terminal
 return {
-    'jpalardy/vim-slime',
+    "jpalardy/vim-slime",
     keys = {
-        { '<localleader>C' },
-        { '<localleader>P' },
-        { '<localleader>c' },
-        { '<localleader>l' },
-        { '<localleader>r' },
-        { '<localleader>s' },
-        { '<localleader>v' },
+        { "<localleader>C" },
+        { "<localleader>P" },
+        { "<localleader>c" },
+        { "<localleader>l" },
+        { "<localleader>r" },
+        { "<localleader>s" },
+        { "<localleader>v" },
     },
     config = function()
-
         -- Use Tmux as target
         vim.g.slime_target = "tmux"
 
         -- Pre-fill configuration with default socket and pane 1
         vim.g.slime_default_config = {
             socket_name = "default",
-            target_pane = "1"
+            target_pane = "1",
         }
 
         -- Do not use default mappings
-        vim.api.nvim_set_var('slime_no_mappings', 1)
+        vim.api.nvim_set_var("slime_no_mappings", 1)
 
         -- Use triple brackets as cell delimiters
         vim.g.slime_cell_delimiter = "```"
 
         -- General mappings
-        vim.keymap.set('n', '<localleader>s', '<plug>SlimeMotionSend')
-        vim.keymap.set('n', '<localleader>l', '<plug>SlimeLineSend')
-        vim.keymap.set('x', '<localleader>v', '<plug>SlimeRegionSend')
-        vim.keymap.set('n', '<localleader>c', '<plug>SlimeSendCell')
-        vim.keymap.set('n', '<localleader>C', ':SlimeSend0 "\\x03"<CR>')
+        vim.keymap.set("n", "<localleader>s", "<plug>SlimeMotionSend")
+        vim.keymap.set("n", "<localleader>l", "<plug>SlimeLineSend")
+        vim.keymap.set("x", "<localleader>v", "<plug>SlimeRegionSend")
+        vim.keymap.set("n", "<localleader>c", "<plug>SlimeSendCell")
+        vim.keymap.set("n", "<localleader>C", ':SlimeSend0 "\\x03"<CR>')
 
         -- Get the appopriate language from the YAML header in Quarto files
-        vim.cmd [[
+        vim.cmd([[
             function! GetQuartoLanguage() abort
                 " Parse the YAML header and find the chosen language
                 let current_position = getpos('.')
@@ -65,10 +64,10 @@ return {
                     endif
                 endif
             endfunction
-        ]]
+        ]])
 
         -- Get the appropriate language for the current filetype
-        vim.cmd [[
+        vim.cmd([[
             function! GetLanguage() abort
                 if &ft == "r" || &ft == "rmd"
                     return "r"
@@ -80,10 +79,10 @@ return {
                     return "bash"
                 endif
             endfunction
-        ]]
+        ]])
 
         -- Print the head of a pandas/R dataframe
-        vim.cmd [[
+        vim.cmd([[
             function! PrintHead() abort
                 let language = GetLanguage()
                 let current_word = expand("<cword>")
@@ -95,10 +94,10 @@ return {
                     :echo "Error: requires Python or R"
                 endif
             endfunction
-        ]]
+        ]])
 
         -- Print column names of a pandas/R dataframe
-        vim.cmd [[
+        vim.cmd([[
             function! PrintNames() abort
                 let language = GetLanguage()
                 let current_word = expand("<cword>")
@@ -110,10 +109,10 @@ return {
                     :echo "Error: requires Python or R"
                 endif
             endfunction
-        ]]
+        ]])
 
         -- Render R Markdown and Quarto documents
-        vim.cmd [[
+        vim.cmd([[
             function! RenderDocument() abort
                 :w!
                 if &ft == "rmd"
@@ -133,22 +132,21 @@ return {
                     :echo "Error: can only render R Markdown or Quarto documents"
                 endif
             endfunction
-        ]]
+        ]])
 
         -- Quarto preview in hidden buffer
-        vim.cmd [[
+        vim.cmd([[
             function! QuartoPreview()
                 :w!
                 :terminal ++curwin quarto preview %:p --to html
                 :bprevious
             endfunction
-        ]]
+        ]])
 
         -- Function mappings
-        vim.keymap.set('n', '<localleader>h', ':call PrintHead()<CR>')
-        vim.keymap.set('n', '<localleader>n', ':call PrintNames()<CR>')
-        vim.keymap.set('n', '<localleader>k', ':call RenderDocument()<CR>')
-        vim.keymap.set('n', '<localleader>P', ':call QuartoPreview()<CR>')
-
-    end
+        vim.keymap.set("n", "<localleader>h", ":call PrintHead()<CR>")
+        vim.keymap.set("n", "<localleader>n", ":call PrintNames()<CR>")
+        vim.keymap.set("n", "<localleader>k", ":call RenderDocument()<CR>")
+        vim.keymap.set("n", "<localleader>P", ":call QuartoPreview()<CR>")
+    end,
 }
