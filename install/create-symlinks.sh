@@ -9,6 +9,9 @@ ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
 ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
 ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
 
+# Btop
+ln -sfn ~/.dotfiles/btop/btop.conf ~/.config/btop/btop.conf
+
 # Conda
 ln -sfn ~/.dotfiles/conda/condarc ~/.condarc
 
