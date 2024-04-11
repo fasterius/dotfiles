@@ -9,18 +9,20 @@ brew install \
     bash-completion \
     bat \
     black \
+    btop \
     coreutils \
     docker-completion \
     fd \
     gawk \
     gcc \
-    git \
     gh \
+    git \
     gnu-sed \
     gnu-tar \
     graphviz \
     gzip \
     imagemagick \
+    lua \
     lua-language-server \
     marksman \
     neovim \
@@ -28,9 +30,11 @@ brew install \
     pandoc \
     prettier \
     pyright \
+    python@3.12 \
     r@4.3 \
     readline \
     ripgrep \
+    ruff \
     tmux \
     tree \
     tree-sitter \
@@ -39,7 +43,8 @@ brew install \
 
 # Install casks
 brew install --cask \
-    font-meslo-lg-nerd-font
+    font-meslo-lg-nerd-font \
+    keycastr
 
 # Install R language server non-interactively
 R -e 'install.packages("languageserver", repos="http://lib.stat.cmu.edu/R/CRAN")'
