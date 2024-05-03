@@ -14,6 +14,10 @@ vim.opt.fillchars = { eob = " " }
 -- Wrap lines at 80 characters
 vim.o.textwidth = 80
 
+-- Always show a minimum number of lines when scrolling
+vim.o.scrolloff = 10
+vim.o.sidescrolloff = 10
+
 -- Don't show mode (it's in the statusline)
 vim.o.showmode = false
 
