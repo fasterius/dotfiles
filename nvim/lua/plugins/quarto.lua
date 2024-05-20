@@ -5,6 +5,7 @@ return {
         { "hrsh7th/nvim-cmp" },
         { "jmbuhr/otter.nvim" },
     },
+    ft = "quarto",
     config = function()
         require("quarto").setup({
             closePreviewOnExit = true,
