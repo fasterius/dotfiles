@@ -31,7 +31,7 @@ vim.o.breakindent = true
 vim.o.clipboard = "unnamed"
 
 -- Disable mouse
-vim.o.mouse = false
+vim.o.mouse = ""
 
 -- Use case-insensitive searches, except when using capital letters
 vim.o.ignorecase = true
