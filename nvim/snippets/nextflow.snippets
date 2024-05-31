@@ -2,8 +2,8 @@ snippet workflow "Initialise a Nextflow workflow"
 	#!/usr/bin/env nextflow
 
 	// Default parameters
-	params.resultsdir = "results/"
-	params.workdir = "work/"
+	params.outdir       = "results/"
+	params.workdir      = "work/"
 	params.publish_mode = "copy"
 
 	// Show workflow parameters before execution
@@ -11,7 +11,7 @@ snippet workflow "Initialise a Nextflow workflow"
 		==================
 
 		Workflow parameters
-			Results directory       : ${params.resultsdir}
+			Results directory       : ${params.outdir}
 			Work directory          : ${params.workdir}
 			Resume                  : ${workflow.resume}
 			Profile                 : ${workflow.profile}
@@ -25,7 +25,7 @@ snippet workflow "Initialise a Nextflow workflow"
 	// First process
 	process PROCESS_01 {
 		tag "${input}"
-		publishDir "${params.resultsdir}/",
+		publishDir "${params.outdir}/",
 			mode: params.publish_mode
 
 		input:
@@ -43,7 +43,7 @@ snippet workflow "Initialise a Nextflow workflow"
 snippet process "Add a new Nextflow process"
 	process PROCESS_01 {
 		tag "${input}"
-		publishDir "${params.resultsdir}/",
+		publishDir "${params.outdir}/",
 			mode: params.publish_mode
 
 		input:
@@ -69,7 +69,7 @@ snippet config "Initialise a Nextflow config file"
 
 	// Parameters
 	params {
-		resultsdir   = "results/"
+		outdir       = "results/"
 		workdir      = "work/"
 		publish_mode = "copy"
 	}
