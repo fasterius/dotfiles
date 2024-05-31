@@ -2,9 +2,9 @@ snippet workflow "Initialise a Nextflow workflow"
 	#!/usr/bin/env nextflow
 
 	// Default parameters
-	params.outdir       = "results/"
-	params.workdir      = "work/"
-	params.publish_mode = "copy"
+	params.outdir           = "results/"
+	params.workdir          = "work/"
+	params.publish_dir_mode = "copy"
 
 	// Show workflow parameters before execution
 	log.info("""    NBIS support #${1:0000}
@@ -26,7 +26,7 @@ snippet workflow "Initialise a Nextflow workflow"
 	process PROCESS_01 {
 		tag "${input}"
 		publishDir "${params.outdir}/",
-			mode: params.publish_mode
+			mode: params.publish_dir_mode
 
 		input:
 		path(ch_input)
@@ -44,7 +44,7 @@ snippet process "Add a new Nextflow process"
 	process PROCESS_01 {
 		tag "${input}"
 		publishDir "${params.outdir}/",
-			mode: params.publish_mode
+			mode: params.publish_dir_mode
 
 		input:
 		path(ch_input)
@@ -69,9 +69,9 @@ snippet config "Initialise a Nextflow config file"
 
 	// Parameters
 	params {
-		outdir       = "results/"
-		workdir      = "work/"
-		publish_mode = "copy"
+		outdir           = "results/"
+		workdir          = "work/"
+		publish_dir_mode = "copy"
 	}
 
 	// Workflow profiles
