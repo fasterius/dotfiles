@@ -32,7 +32,7 @@
   "plenary.nvim": { "branch": "master", "commit": "9ce85b0f7dcfe5358c0be937ad23e456907d410b" },
   "quarto-nvim": { "branch": "main", "commit": "b349b7e54f5f5543b6104bfbad0e7d09d4f7c564" },
   "reticle.nvim": { "branch": "main", "commit": "7290f2649684415a9d3da98957ea44f5421f4f2a" },
-  "simple-zoom.nvim": { "branch": "main", "commit": "33e42b142fc92d69223d1ee65024a410e3b87ffd" },
+  "simple-zoom.nvim": { "branch": "main", "commit": "318aef7c894aab4bc90dfbe82fee01b130540afd" },
   "substitute.nvim": { "branch": "main", "commit": "89dbe55cccee36bcb5e2be8c2d92ff8716601734" },
   "targets.vim": { "branch": "master", "commit": "642d3a4ce306264b05ea3219920b13ea80931767" },
   "telekasten.nvim": { "branch": "main", "commit": "a684d6ebe7026944b0a5323219d5f5364511e5b2" },
