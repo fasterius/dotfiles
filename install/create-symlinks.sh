@@ -8,6 +8,7 @@ ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
 # Bash
 ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
 ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
+ln -sfn ~/.dotfiles/bash/inputrc ~/.inputrc
 
 # Btop
 ln -sfn ~/.dotfiles/btop/btop.conf ~/.config/btop/btop.conf

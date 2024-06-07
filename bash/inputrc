@@ -1,0 +1,7 @@
+# Use Vi mode
+set editing-mode vi
+
+# Change cursor color depending on current mode
+set show-mode-in-prompt on
+set vi-ins-mode-string \1\e[2 q\e]12;#586E75\a\2
+set vi-cmd-mode-string \1\e[2 q\e]12;#2AA198\a\2
