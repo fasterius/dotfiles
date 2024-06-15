@@ -2,20 +2,24 @@ snippet workflow "Initialise a Nextflow workflow"
 	#!/usr/bin/env nextflow
 
 	// Default parameters
-	params.outdir           = "results/"
-	params.workdir          = "work/"
+	params.outdir           = "results"
+	params.workdir          = "work"
 	params.publish_dir_mode = "copy"
 
-	// Show workflow parameters before execution
-	log.info("""    NBIS support #${1:0000}
-		==================
+	log.info(
+	"""------------------------------------------------------
 
-		Workflow parameters
-			Results directory       : ${params.outdir}
-			Work directory          : ${params.workdir}
-			Resume                  : ${workflow.resume}
-			Profile                 : ${workflow.profile}
-		""")
+	NBIS support #7154
+	==================
+
+	Core workflow options
+	    Output directory : ${params.outdir}
+	    Work directory   : ${params.workdir}
+	    Resume           : ${workflow.resume}
+	    Profile          : ${workflow.profile}
+
+	------------------------------------------------------
+	""")
 
 	// Main workflow
 	workflow {
@@ -69,8 +73,8 @@ snippet config "Initialise a Nextflow config file"
 
 	// Parameters
 	params {
-		outdir           = "results/"
-		workdir          = "work/"
+		outdir           = "results"
+		workdir          = "work"
 		publish_dir_mode = "copy"
 	}
 
