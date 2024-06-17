@@ -67,11 +67,11 @@ return {
             },
         })
 
-        lspconfig.groovyls.setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            filetypes = { "groovy", "nextflow" },
-        })
+        -- lspconfig.groovyls.setup({
+        --     on_attach = on_attach,
+        --     capabilities = capabilities,
+        --     filetypes = { "groovy", "nextflow" },
+        -- })
 
         lspconfig.bashls.setup({
             on_attach = on_attach,
