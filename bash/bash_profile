@@ -29,6 +29,7 @@ fi
 
 # Add to PATH
 export PATH="$HOME/opt:$PATH"
+export PATH="$HOME/opt/pixi/bin:$PATH"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 # Bash and Docker completion
