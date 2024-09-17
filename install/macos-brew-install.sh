@@ -5,6 +5,7 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 
 # Install formulae
 brew install \
+    act \
     bash \
     bash-completion \
     bat \
