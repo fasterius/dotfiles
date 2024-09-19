@@ -1,7 +1,7 @@
 snippet dockerfile "Initialise a new Dockerfile" b
 FROM condaforge/miniforge3:24.3.0-0
-LABEL description = "Dockerfile for the #${1:0000} NBIS support project"
-MAINTAINER "Erik Fasterius" erik.fasterius@nbis.se
+LABEL org.opencontainers.image.authors="erik.fasterius@nbis.se"
+LABEL org.opencontainers.image.description="Dockerfile for the #${1:0000} NBIS support project"
 
 # Use bash as shell
 SHELL ["/bin/bash", "-c"]
