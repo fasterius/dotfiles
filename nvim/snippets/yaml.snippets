@@ -14,23 +14,21 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
         branches:
           - main
         paths:
-          - 'modules/local/*/Dockerfile'
-          - 'modules/local/*/environment.yml'
+          - "modules/local/*/Dockerfile"
+          - "modules/local/*/environment.yml"
 
     env:
       REGISTRY: ghcr.io
-      INCLUDE_DIR: 'modules/local'
+      INCLUDE_DIR: "modules/local"
       REPOSITORY: ${{ github.repository }}
 
     jobs:
-
       changed-directories:
         name: Get last directory name of changed files
         runs-on: ubuntu-latest
         outputs:
           matrix: ${{ steps.changed-files.outputs.all_changed_files }}
         steps:
-
           - name: Checkout
             uses: actions/checkout@v4
             with:
@@ -59,7 +57,6 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
           contents: read
           packages: write
         steps:
-
           - name: Checkout
             uses: actions/checkout@v4
 
