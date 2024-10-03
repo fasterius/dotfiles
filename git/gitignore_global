@@ -8,7 +8,9 @@
 **/*.un*
 **/*.swp*
 
-# Open Word/Powerpoint documents
+# Open Excel/Word/Powerpoint documents
+**/*~$*.xlsx
+**/*~$*.xls
 **/*~$*.docx
 **/*~$*.doc
 **/*~$*.pptx
