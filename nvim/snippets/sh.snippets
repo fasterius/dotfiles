@@ -1,0 +1,36 @@
+snippet lint "Git pre-commit hook for general linting"
+	#!/bin/bash
+
+	# Prevent commit on failed EditorConfig, Ruff or Prettier
+
+	exit_function() {
+	    echo "The \`\$1\` linting failed; will not commit."
+	    exit 1
+	}
+
+	editorconfig-checker || exit_function "editorconfig"
+	npx prettier --check . || exit_function "prettier"
+	ruff . || exit_function "ruff"
+
+snippet lint-nfcore "Git pre-push hook for nf-core linting"
+	#!/bin/bash
+
+	# Prevent push on failed nf-core linting
+
+	linting_function() {
+
+	    # Makes Git run in an interative environment, required for input
+	    exec </dev/tty
+
+	    # Get user choice
+	    echo "Linting failed, do you still wish to push?"
+	    select CHOICE in "Yes" "No"; do
+	        case \${CHOICE} in
+	            Yes ) echo "Ignored failed linting and pushing" ; break ;;
+	            No ) echo "The linting failed; will not push" ; exit 1 ;;
+	        esac
+	    done
+
+	}
+
+	nf-core lint || linting_function
