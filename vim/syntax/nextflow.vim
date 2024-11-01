@@ -26,6 +26,7 @@ syn keyword nextflowType      set tuple file val env path from fromPath first
 syn keyword nextflowType      fromFilePairs toList splitCsv map view out mix
 syn keyword nextflowType      groupTuple splitText ifEmpty unique join branch
 syn keyword nextflowType      filter collect combine collectFile concat
+syn keyword nextflowType      transpose
 syn keyword nextflowKeyword   into as nextflow params
 syn keyword nextflowBoolean   true false
 syn keyword nextflowSpecial   include Channel channel launchDir process workflow
