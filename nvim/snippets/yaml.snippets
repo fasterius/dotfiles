@@ -21,6 +21,7 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
       REGISTRY: ghcr.io
       INCLUDE_DIR: "modules/local"
       REPOSITORY: ${{ github.repository }}
+      PLATFORMS: "linux/amd64,linux/arm64"
 
     jobs:
       changed-directories:
@@ -52,7 +53,6 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
           fail-fast: false
           matrix:
             name: ${{ fromJSON(needs.changed-directories.outputs.matrix) }}
-            platform: [linux/amd64, linux/arm64]
         permissions:
           contents: read
           packages: write
@@ -87,4 +87,4 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
               context: ${{ env.INCLUDE_DIR }}/${{ matrix.name }}
               push: true
               tags: ${{ steps.meta.outputs.tags }}
-              platforms: ${{ matrix.platform }}
+              platforms: ${{ env.PLATFORM }}
