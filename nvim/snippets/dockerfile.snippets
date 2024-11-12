@@ -11,9 +11,9 @@ snippet dockerfile "Initialise a new Dockerfile"
 
 	# Copy and install the Conda environment
 	COPY environment.yml ./
-	RUN conda config --set channel_priority strict \
-		&& conda env update --name base --file environment.yml \
-		&& conda clean --all --force-pkgs-dirs --yes
+	RUN conda config --set channel_priority strict && \
+		conda env update --name base --file environment.yml && \
+		conda clean --all --force-pkgs-dirs --yes
 
 	# Start Bash shell by default
 	CMD /bin/bash
