@@ -1,7 +1,51 @@
+snippet dockerfile-conda-pack "Initialise a new Dockerfile with conda-pack"
+	#
+	# First stage: Conda environment
+	#
+	FROM condaforge/miniforge3:24.7.1-0
+	LABEL org.opencontainers.image.authors="erik.fasterius@nbis.se"
+	LABEL org.opencontainers.image.description="Dockerfile for the #${1:0000} NBIS support project"
+
+	# Install conda-pack
+	RUN conda install --yes --name base conda-pack
+
+	# Copy and install the Conda environment
+	COPY environment.yml ./
+	RUN conda config --set channel_priority strict && \
+		conda env update --name base --file environment.yml && \
+		conda clean --all --force-pkgs-dirs --yes
+
+	# Package the new environment into /env
+	RUN conda-pack -n env -o /tmp/env.tar && \
+		mkdir /env && \
+		tar -xf /tmp/env.tar -C /env && \
+		rm /tmp/env.tar && \
+		/env/bin/conda-unpack
+
+	#
+	# Second stage: final image
+	#
+	FROM ubuntu:20.04
+	COPY --from=conda /env /env
+
+	# Set working directory
+	WORKDIR /work
+
+	# Use Bash as shell
+	SHELL ["/bin/bash", "-c"]
+
+	RUN echo "source /env/bin/activate" >> ~/.bashrc
+
+	# Start Bash shell by default
+	CMD /bin/bash
+
 snippet dockerfile "Initialise a new Dockerfile"
 	FROM condaforge/miniforge3:24.7.1-0
 	LABEL org.opencontainers.image.authors="erik.fasterius@nbis.se"
 	LABEL org.opencontainers.image.description="Dockerfile for the #${1:0000} NBIS support project"
+
+	# Use bash as shell
+	SHELL ["/bin/bash", "-c"]
 
 	# Set working directory
 	WORKDIR /work
