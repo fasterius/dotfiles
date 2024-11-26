@@ -1,0 +1,11 @@
+# Do not add pixi shell to PS1
+change-ps1 = false
+
+# Add conda-forge and bioconda to default channels
+default-channels = ["conda-forge", "bioconda"]
+
+# Use the mirrors from the creators of Pixi in order to use sharded repodata
+[mirrors]
+"https://conda.anaconda.org" = [
+    "https://prefix.dev/"
+]

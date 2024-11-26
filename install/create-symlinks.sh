@@ -32,6 +32,9 @@ ln -sfn ~/.dotfiles/stylua/stylua.toml ~/.stylua.toml
 mkdir -p ~/.config
 ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 
+# Pixi
+ln -sfn ~/.dotfiles/pixi ~/.pixi
+
 # Temporary directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
 
