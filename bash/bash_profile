@@ -25,6 +25,9 @@ else
 
     # Turn off auto-update for Homebrew
     export HOMEBREW_NO_AUTO_UPDATE=1
+
+    # Autocompletion for Pixi
+    eval "$(pixi completion --shell bash)"
 fi
 
 # Add to PATH
