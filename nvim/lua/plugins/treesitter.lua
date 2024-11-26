@@ -22,6 +22,7 @@ return {
                 "markdown_inline",
                 "python",
                 "r",
+                "toml",
                 "vim",
                 "yaml",
             },
