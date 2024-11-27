@@ -27,3 +27,7 @@ work/*
 
 # Workflow testing
 **/run.sh
+
+# Pixi environments
+**/.pixi
+**/*.egg-info
