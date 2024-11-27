@@ -33,7 +33,7 @@ mkdir -p ~/.config
 ln -sfn ~/.dotfiles/nvim ~/.config/nvim
 
 # Pixi
-ln -sfn ~/.dotfiles/pixi ~/.pixi
+ln -sfn ~/.dotfiles/pixi/config.toml ~/.pixi/config.toml
 
 # Temporary directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
