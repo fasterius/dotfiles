@@ -7,7 +7,7 @@ snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
 	LABEL org.opencontainers.image.description="Dockerfile for the #${1:0000} NBIS support project"
 
 	# Copy the environment toml
-	COPY pixi.toml /
+	COPY pixi.toml pixi.lock /
 
 	# Install the Pixi environment as 'default'
 	RUN pixi install
