@@ -67,11 +67,15 @@ return {
             },
         })
 
-        -- lspconfig.groovyls.setup({
-        --     on_attach = on_attach,
-        --     capabilities = capabilities,
-        --     filetypes = { "groovy", "nextflow" },
-        -- })
+        lspconfig.nextflow_ls.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            cmd = {
+                "java",
+                "-jar",
+                vim.fn.expand("$HOME/opt/nextflow-language-server/build/libs/language-server-all.jar"),
+            },
+        })
 
         lspconfig.bashls.setup({
             on_attach = on_attach,
