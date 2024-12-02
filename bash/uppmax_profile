@@ -1,7 +1,7 @@
 # Load more recent module versions
-module load git/2.16.1
+module load git
 module load tmux/3.3a
-module load bioinfo-tools Nextflow/22.10.1
+module load bioinfo-tools Nextflow
 
 # Add to path
 export PATH="$HOME/opt/vim/bin:$PATH"
@@ -12,7 +12,7 @@ export PATH="$HOME/opt/ripgrep:$PATH"
 alias transit='ssh erikfas@transit.uppmax.uu.se'
 alias bianca-molba='ssh -A erikfas-sens2020519@bianca.uppmax.uu.se'
 alias bianca-pbmc='ssh -A erikfas-sens2020543@bianca.uppmax.uu.se'
-alias bianca='ssh -A erikfas-sens2020023@bianca.uppmax.uu.se'
+alias bianca-kidney='ssh -A erikfas-sens2022505@bianca.uppmax.uu.se'
 
 # Alias for Irma @ Uppmax
 alias irma='ssh erikfas@irma.uppmax.uu.se'
