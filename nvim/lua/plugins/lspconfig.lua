@@ -8,7 +8,7 @@ return {
         local lspconfig = require("lspconfig")
 
         -- Function that runs when an LSP connects to a buffer
-        local on_attach = function(_, bufnr)
+        local on_attach = function(client, bufnr)
             -- Generic function for implementing keymaps in attach functions
             local nmap = function(keys, func, desc)
                 if desc then
@@ -26,6 +26,11 @@ return {
             nmap("<leader>rn", lsp.rename, "[R]e[n]ame")
             nmap("<leader>ca", lsp.code_action, "[C]ode [A]ction")
             nmap("<leader>D", lsp.type_definition, "Type [D]efinition")
+
+            -- Disable autoformatting for Nextflow language server
+            if client.name == "nextflow_ls" then
+                client.server_capabilities.documentFormattingProvider = false
+            end
         end
 
         -- Marksman-specific attach function for Quarto, which doesn't `gd` and
@@ -74,6 +79,13 @@ return {
                 "java",
                 "-jar",
                 vim.fn.expand("$HOME/opt/nextflow-language-server/build/libs/language-server-all.jar"),
+            },
+            settings = {
+                nextflow = {
+                    formatting = {
+                        harshilAlignment = true,
+                    },
+                },
             },
         })
 
