@@ -3,6 +3,9 @@ channels:
   - conda-forge
   - bioconda
 
+denylist_channels:
+  - defaults
+
 # Use strict channel priorities
 channel_priority: strict
 
