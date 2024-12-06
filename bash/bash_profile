@@ -1,3 +1,8 @@
+# Add to PATH
+export PATH="$HOME/opt:$PATH"
+export PATH="$HOME/.pixi/bin:$PATH"
+export PATH="$HOME/.dotfiles/scripts:$PATH"
+
 # Source custom uppmax_profile if in a SSH session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 
@@ -29,11 +34,6 @@ else
     # Autocompletion for Pixi
     eval "$(pixi completion --shell bash)"
 fi
-
-# Add to PATH
-export PATH="$HOME/opt:$PATH"
-export PATH="$HOME/.pixi/bin:$PATH"
-export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 # Bash and Docker completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
