@@ -42,7 +42,7 @@ fi
     && . "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker"
 
 # Source Conda
-source "$HOME/opt/miniconda3/etc/profile.d/conda.sh"
+source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
 # Files to ignore for tab-completion
 export FIGNORE="$FIGNORE:.un~:DS_Store"
