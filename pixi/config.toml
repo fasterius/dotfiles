@@ -6,6 +6,4 @@ default-channels = ["conda-forge", "bioconda"]
 
 # Use the mirrors from the creators of Pixi in order to use sharded repodata
 [mirrors]
-"https://conda.anaconda.org" = [
-    "https://prefix.dev/"
-]
+"https://conda.anaconda.org" = ["https://prefix.dev/"]
