@@ -82,6 +82,7 @@ return {
             },
             settings = {
                 nextflow = {
+                    suppressFutureWarnings = true,
                     formatting = {
                         harshilAlignment = true,
                     },
