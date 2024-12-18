@@ -15,12 +15,18 @@ snippet readcsv "Read a comma-delimited file"
 		stringsAsFactors = FALSE
 	)
 
-snippet argument_parser "Add an argument parser"
+snippet argparse_add_parser "Add an argument parser"
 	# Argument parser
 	suppressPackageStartupMessages(library("argparse"))
 	parser <- ArgumentParser()
-	parser$add_argument("${1:argument_1}",
+	parser\$add_argument("${1:argument_1}",
 		type    = "${2:character}",
 		help    = "${3:Argument help string}"
 	)
 	args <- parser$parse_args()
+
+snippet argparse_add_argument "Add an argument to argparse"
+	parser\$add_argument("${1:argument}",
+	    type    = "${2:character}",
+	    help    = "${3:Help text}"
+	)
