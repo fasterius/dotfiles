@@ -9,7 +9,6 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
     name: Create and publish Docker images
 
     on:
-      workflow_dispatch:
       push:
         branches:
           - main
@@ -20,6 +19,7 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
     env:
       REGISTRY: ghcr.io
       INCLUDE_DIR: "modules/local"
+      MAX_DEPTH: "3"
       REPOSITORY: ${{ github.repository }}
       PLATFORMS: "linux/amd64,linux/arm64"
 
@@ -44,6 +44,7 @@ snippet gha-docker-build "GitHub Actions docker build workflow"
               path: ${{ env.INCLUDE_DIR }}
               dir_names_include_files: ${{ env.INCLUDE_DIR }}
               dir_names_exclude_current_dir: true
+              dir_names_max_depth: ${{ env.MAX_DEPTH }}
 
       build-and-push-image:
         name: Build and push Docker images
