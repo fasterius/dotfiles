@@ -10,6 +10,8 @@ return {
 
             -- Highlight only the column itself
             highlight_to_eol = false,
+
+            disable_ft = { "c" },
         })
     end,
 }
