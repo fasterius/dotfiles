@@ -1,0 +1,10 @@
+snippet pixi_project "Initialise a Pixi project"
+	[project]
+	authors = ["Erik Fasterius <erik.fasterius@nbis.se>"]
+	channels = ["conda-forge", "bioconda"]
+	description = "${1:description}"
+	name = "${2:name}"
+	platforms = ["osx-arm64", "linux-64"]
+
+	[dependencies]
+	${3:package} = "${4:version}"
