@@ -19,9 +19,9 @@ snippet dockerfile-pixi "Initialise a new Dockerfile with Pixi"
 	RUN echo 'exec "\$@"' >> /shell-hook.sh
 
 	#
-	# Last stage: final image
+	# Second stage: final image
 	#
-	FROM ubuntu:20.04 AS work
+	FROM ubuntu:22.04 AS work
 	WORKDIR /work
 
 	# Copy over environment and shell-hook script from build stage
@@ -59,7 +59,7 @@ snippet dockerfile-conda-pack "Initialise a new Dockerfile with conda-pack"
 	#
 	# Second stage: final image
 	#
-	FROM ubuntu:20.04
+	FROM ubuntu:22.04 AS work
 	COPY --from=conda /env /env
 
 	# Set working directory
