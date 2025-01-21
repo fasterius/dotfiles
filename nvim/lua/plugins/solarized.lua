@@ -18,6 +18,7 @@ return {
         vim.api.nvim_set_hl(0, "@text.strong", { fg = "#657B83", bold = true })
         vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "#657B83", bold = true })
         vim.api.nvim_set_hl(0, "@label", { fg = "#657B83", bold = true })
+        vim.api.nvim_set_hl(0, "@variable.parameter.r", { fg = "#657B83" })
     end,
 }
 
