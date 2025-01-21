@@ -27,11 +27,6 @@ return {
                 "yaml",
             },
 
-            -- Context-based commenting with `nvim-ts-context-commentstring`
-            context_commentstring = {
-                enable = true,
-            },
-
             -- General settings
             highlight = {
                 enable = true,
