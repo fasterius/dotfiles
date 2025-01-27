@@ -27,8 +27,8 @@ return {
             nmap("<leader>ca", lsp.code_action, "[C]ode [A]ction")
             nmap("<leader>D", lsp.type_definition, "Type [D]efinition")
 
-            -- Disable autoformatting for Nextflow language server
-            if client.name == "nextflow_ls" then
+            -- Disable autoformatting for Nextflow/R language servers
+            if client.name == "nextflow_ls" or client.name == "r_language_server" then
                 client.server_capabilities.documentFormattingProvider = false
             end
         end
