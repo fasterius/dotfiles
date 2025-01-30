@@ -44,3 +44,6 @@ ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 # Vim
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
+
+# XQuartz
+ln -sfn ~/.dotfiles/x11/xinitrc.d ~/.xinitrc.d
