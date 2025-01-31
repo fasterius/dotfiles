@@ -11,7 +11,7 @@ return {
             closePreviewOnExit = true,
             lspFeatures = {
                 enabled = true,
-                languages = { "r", "python", "bash" },
+                languages = { "r", "python", "bash", "ojs" },
                 chunks = "curly",
                 diagnostics = {
                     enabled = true,
@@ -20,6 +20,13 @@ return {
                 completion = {
                     enabled = true,
                 },
+            },
+        })
+
+        -- Add Observable as JavaScript for LSP and Treesitter
+        vim.filetype.add({
+            extension = {
+                ojs = "javascript",
             },
         })
 

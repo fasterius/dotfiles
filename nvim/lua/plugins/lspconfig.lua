@@ -122,6 +122,12 @@ return {
             capabilities = capabilities,
         })
 
+        lspconfig.ts_ls.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "javascript", "typescript", "ojs" },
+        })
+
         -- Change diagnostic icon to a circle instead of a square
         vim.diagnostic.config({
             virtual_text = {
