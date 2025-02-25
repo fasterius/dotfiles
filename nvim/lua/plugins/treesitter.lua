@@ -34,6 +34,9 @@ return {
             },
             indent = {
                 enable = true,
+                disable = {
+                    "markdown", -- Treesitter is worse than Vim list formatting
+                },
             },
 
             -- Settings for additional text objects

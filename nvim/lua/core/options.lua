@@ -37,6 +37,10 @@ vim.o.mouse = ""
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Add additional format list pattern; first pattern is the default, the second
+-- will also allow formatting of lists starting with [-*+].
+vim.o.formatlistpat = "^\\s*\\d\\+[\\]:.)}\t ]\\s*\\|^\\s*[-*+]\\s\\+"
+
 -- Show completion popup even with only one match and do not select a match automatically
 vim.o.completeopt = "menuone,noselect"
 
