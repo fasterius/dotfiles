@@ -63,7 +63,7 @@ colors:
     white:      '#fdf6e3'
 
 # Required to get the right Solarized colours for bold fonts
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 # Allow Alt-dependant characters on Swedish keyboards to be typed correctly
 # (default behaviour is to send ESC (\x1b) when using Alt)
