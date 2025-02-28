@@ -155,8 +155,14 @@ conda_env() {
 }
 
 # Function to get branch if inside a git repository
+# Also shortens detached HEAD states from `HEAD detached at <hash>` to just
+# `detached`, for easier use with Jujutsu.
 git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+     git branch 2> /dev/null \
+        | sed -e '/^[^*]/d' \
+        | sed -e 's/* \(.*\)/ (\1)/' \
+        | sed -e 's/(HEAD //' \
+        | sed -e 's/ at .*/)/'
 }
 
 # Build prompt
