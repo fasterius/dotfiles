@@ -20,6 +20,9 @@ ln -sfn ~/.dotfiles/conda/condarc ~/.condarc
 ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
 ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 
+# Jujutstu
+ln -sfn ~/.dotfiles/jj/jjconfig.toml ~/.jjconfig.toml
+
 # Language servers
 mkdir -p ~/.config/marksman
 ln -sfn ~/.dotfiles/lsp/marksman/config.toml ~/.config/marksman/config.toml

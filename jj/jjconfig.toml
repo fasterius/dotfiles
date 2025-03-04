@@ -1,0 +1,29 @@
+[user]
+name = "Erik Fasterius"
+email = "erik.fasterius@outlook.com"
+
+[ui]
+default-command = 'log'
+
+[colors]
+"bookmark" = "bright magenta"
+"bookmarks" = "bright magenta"
+"change_id" = "blue"
+"commit_id" = "cyan"
+"diff token" = {underline = false}
+"email" = "bright blue"
+"empty description placeholder" = "yellow"
+"empty" = "yellow"
+"git_head" = "yellow"
+"git_refsl" = "yellow"
+"node working_copy" = { fg = "yellow", bold = true }
+"rest" = "bright green"
+"root" = "yellow"
+"timestamp" = "bright cyan"
+"working copy bookmarks" = "bright magenta"
+"working_copy bookmark" = "bright magenta"
+"working_copy change_id" = "blue"
+"working_copy commit_id" = "cyan"
+"working_copy empty description placeholder" = "yellow"
+"working_copy empty" = "yellow"
+"working_copy timestamp" = "bright cyan"
