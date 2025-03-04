@@ -12,6 +12,7 @@ brew install \
     black \
     btop \
     coreutils \
+    diffr \
     docker-completion \
     fd \
     gawk \

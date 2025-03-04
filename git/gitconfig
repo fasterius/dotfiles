@@ -17,3 +17,5 @@
     branch = bold blue
     remoteBranch = bold brightred
     HEAD = bold cyan
+[pager]
+    diff = diffr
