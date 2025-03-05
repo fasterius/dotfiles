@@ -5,6 +5,9 @@ email = "erik.fasterius@outlook.com"
 [ui]
 default-command = 'log'
 
+[git]
+subprocess = true
+
 [colors]
 "bookmark" = "bright magenta"
 "bookmarks" = "bright magenta"
