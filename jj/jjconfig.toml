@@ -3,30 +3,33 @@ name = "Erik Fasterius"
 email = "erik.fasterius@outlook.com"
 
 [ui]
-default-command = 'log'
+default-command = ["log", "-T", "my_log_comfortable"]
 
 [git]
 subprocess = true
 
 [colors]
-"bookmark" = "bright magenta"
-"bookmarks" = "bright magenta"
+"bookmarks" = "yellow"
 "change_id" = "blue"
 "commit_id" = "cyan"
 "diff token" = {underline = false}
-"email" = "bright blue"
-"empty description placeholder" = "yellow"
-"empty" = "yellow"
+"author" = "cyan"
+"email" = "cyan"
+"description" = {bold = true}
+"description placeholder" = {fg = "bright red", bold = false, italic = true}
+"empty description placeholder" = {fg = "bright red", bold = false, italic = true}
+"empty" = {fg = "bright red", bold = false, italic = true}
 "git_head" = "yellow"
 "git_refsl" = "yellow"
 "node working_copy" = { fg = "yellow", bold = true }
-"rest" = "bright green"
+"rest" = "bright cyan"
 "root" = "yellow"
-"timestamp" = "bright cyan"
-"working copy bookmarks" = "bright magenta"
-"working_copy bookmark" = "bright magenta"
+"timestamp" = "blue"
+"working_copy author" = "cyan"
+"working_copy bookmarks" = "yellow"
 "working_copy change_id" = "blue"
 "working_copy commit_id" = "cyan"
-"working_copy empty description placeholder" = "yellow"
-"working_copy empty" = "yellow"
-"working_copy timestamp" = "bright cyan"
+"working_copy description placeholder" = {fg = "yellow", bold = true, italic = true}
+"working_copy empty description placeholder" = {fg = "yellow", bold = true, italic = true}
+"working_copy empty" = {fg = "yellow", bold = true, italic = true}
+"working_copy timestamp" = "blue"
