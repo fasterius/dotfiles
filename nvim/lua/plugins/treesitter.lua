@@ -25,6 +25,7 @@ return {
                 "r",
                 "toml",
                 "vim",
+                "vimdoc",
                 "yaml",
             },
 
