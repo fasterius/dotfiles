@@ -5,6 +5,9 @@ email = "erik.fasterius@outlook.com"
 [ui]
 default-command = ["log", "-T", "my_log_comfortable"]
 
+[aliases]
+l = ["log", "-T", "my_log_comfortable", "-r", ".."]
+
 [git]
 subprocess = true
 
