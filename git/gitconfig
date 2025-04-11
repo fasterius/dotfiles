@@ -1,21 +1,44 @@
+# General settings
 [user]
 	name = Erik Fasterius
 	email = erik.fasterius@outlook.com
 [core]
 	excludesfile = ~/.gitignore_global
-[fetch]
-	prune = true
 [init]
 	defaultBranch = main
+
+# Automatically fetch/push tags
+[fetch]
+	prune = true
+[push]
+    followtags = true
+
+# Only allow fast-forward merges when pulling
 [pull]
 	ff = only
+
+# Use a better diff algorithm
+[diff]
+    algorithm = histogram
+
+# Remember conflict resolutions
+[rerere]
+    enabled = true
+
+# Change the default formatting of Git log
 [format]
     pretty = format:%C(yellow)commit %H %C(auto)%d %nAuthor: %C(cyan)%aN %C(italic reset)(%ae) %nDate:   %C(blue)%ar %C(italic reset)(%ai) %n%n%C(bold reset)%w(0,6,6)%s%n%C(reset)%+b
+
+# Add `line` custom format for use in `glo` alias (see `bash_profile`)
 [pretty]
     line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s
+
+# Log colours
 [color "decorate"]
     branch = bold blue
     remoteBranch = bold brightred
     HEAD = bold cyan
+
+# Diff colours
 [pager]
-    diff = diffr
+    diff = diffr | less -RFX
