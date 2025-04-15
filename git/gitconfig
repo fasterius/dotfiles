@@ -20,6 +20,7 @@
 # Use a better diff algorithm
 [diff]
     algorithm = histogram
+    colorMoved = plain
 
 # Remember conflict resolutions
 [rerere]
@@ -41,4 +42,4 @@
 
 # Diff colours
 [pager]
-    diff = diffr | less -RFX
+    diff = diff-highlight | less

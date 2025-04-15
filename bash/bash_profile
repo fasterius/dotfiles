@@ -24,6 +24,7 @@ else
 
     # Add Homebrew paths to PATH
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+    export PATH="`brew --prefix git`/share/git-core/contrib/diff-highlight/:$PATH"
 
     # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
     export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
