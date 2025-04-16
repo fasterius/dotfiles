@@ -1,38 +1,65 @@
-# General settings
+# User settings
 [user]
 	name = Erik Fasterius
 	email = erik.fasterius@outlook.com
+
+# Global gitignore
 [core]
 	excludesfile = ~/.gitignore_global
+
+# Use `main` as default branch instead of `master`
 [init]
 	defaultBranch = main
 
-# Automatically fetch/push tags
+# Include diff when writing commit messages
+[commit]
+    verbose = true
+
+# Sort branches by commit date instead of alphabetically
+[branch]
+    sort = -committerdate
+
+# Automatically remove local branches/tags no longer on the remote
 [fetch]
 	prune = true
-[push]
-    followtags = true
+    pruneTags = true
 
 # Only allow fast-forward merges when pulling
 [pull]
 	ff = only
 
-# Use a better diff algorithm
-[diff]
-    algorithm = histogram
-    colorMoved = plain
+[push]
+    # Automatically push tags
+    followTags = true
+    # Automatically setup remote branch tracking if missing
+    autoSetupRemote = true
 
-# Remember conflict resolutions
+[diff]
+    # Use a better diff algorithm
+    algorithm = histogram
+    # Colour moved lines differently than added/removed lines
+    colorMoved = plain
+    # Use i/w mnemonic (index/workdir) prefix instead of a/b for file versions
+    mnemonicPrefix = true
+
+[rebase]
+    # Automatically squash `!fixup` commits into their target commits
+    autoSquash = true
+    # Automatically stash local changes when rebasing from a remote
+    autoStash = true
+
+# Remember conflict resolutions and automatically stage them
 [rerere]
     enabled = true
+    autoUpdate = true
 
-# Change the default formatting of Git log
-[format]
-    pretty = format:%C(yellow)commit %H %C(auto)%d %nAuthor: %C(cyan)%aN %C(italic reset)(%ae) %nDate:   %C(blue)%ar %C(italic reset)(%ai) %n%n%C(bold reset)%w(0,6,6)%s%n%C(reset)%+b
+# Sort tags numerically
+[tag]
+    sort = version:refname
 
-# Add `line` custom format for use in `glo` alias (see `bash_profile`)
-[pretty]
-    line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s
+# Word highlighting for diffs
+[pager]
+    diff = diff-highlight | less
 
 # Log colours
 [color "decorate"]
@@ -41,5 +68,14 @@
     HEAD = bold cyan
 
 # Diff colours
-[pager]
-    diff = diff-highlight | less
+[color "diff"]
+    oldMoved = magenta
+    newMoved = cyan
+
+# Change the default formatting of Git log
+[format]
+    pretty = format:%C(yellow)commit %H %C(auto)%d %nAuthor: %C(cyan)%aN %C(italic reset)(%ae) %nDate:   %C(blue)%ar %C(italic reset)(%ai) %n%n%C(bold reset)%w(0,6,6)%s%n%C(reset)%+b
+
+# Add `line` custom format for use in `glo` alias (see `bash_profile`)
+[pretty]
+    line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s
