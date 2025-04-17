@@ -4,6 +4,7 @@ return {
     dependencies = {
         { "hrsh7th/nvim-cmp" },
         { "jmbuhr/otter.nvim" },
+        { "nvim-treesitter/nvim-treesitter" },
     },
     ft = "quarto",
     config = function()
