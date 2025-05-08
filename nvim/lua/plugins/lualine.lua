@@ -39,6 +39,25 @@ return {
             end
         end
 
+        -- Function to get the current filename: if the current filename equals
+        -- `main.nf` also include the parent directory, otherwise just return
+        -- the filename itself (useful for working with nf-core).
+        -- The filename modifiers used are:
+        --     :t   - "Tail", just the filename
+        --     :p   - "Path", the full file path
+        --     :h   - "Head", the everything except the filename
+        --     :h:t - A combination that gets only the parent directory
+        local function get_filename()
+            local filename = vim.fn.expand("%:t")
+            if filename == "main.nf" then
+                local filepath = vim.fn.expand("%:p")
+                local parent_dir = vim.fn.fnamemodify(filepath, ":h:t")
+                return parent_dir .. "/" .. filename
+            else
+                return filename
+            end
+        end
+
         -- Lualine setup
         require("lualine").setup({
             options = {
@@ -51,7 +70,7 @@ return {
                 lualine_a = { "mode" },
                 lualine_b = { "branch" },
                 lualine_c = {
-                    { "filename", file_status = false },
+                    { get_filename, file_status = false },
                     { "diff" },
                     { IsZoomedIn, color = { fg = colours.blue } },
                 },
