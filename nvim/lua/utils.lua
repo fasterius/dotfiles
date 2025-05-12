@@ -3,11 +3,11 @@
 -- statements contained therein (which will just use the cache from the initial
 -- opening of the buffer); explicit use of `dofile()` ignores cache.
 function SourceCoreConfigs()
-    -- Find absolute path to the `lua/core/` directory
-    local core_path = vim.fn.expand("$MYVIMRC"):match("(.*/)") .. "lua/core/"
+    -- Find absolute path to the `lua/` directory
+    local core_path = vim.fn.expand("$MYVIMRC"):match("(.*/)") .. "lua/"
 
     -- Reload each relevant config module with `dofile()`
-    local modules = { "autocommands", "keymaps", "options", "utils" }
+    local modules = { "autocommands", "keymaps", "lsp", "options", "utils" }
     for _, module in ipairs(modules) do
         local filepath = core_path .. module .. ".lua"
         dofile(filepath)
