@@ -134,19 +134,9 @@ return {
             endfunction
         ]])
 
-        -- Quarto preview in hidden buffer
-        vim.cmd([[
-            function! QuartoPreview()
-                :w!
-                :terminal ++curwin quarto preview %:p --to html
-                :bprevious
-            endfunction
-        ]])
-
         -- Function mappings
         vim.keymap.set("n", "<localleader>h", ":call PrintHead()<CR>")
         vim.keymap.set("n", "<localleader>n", ":call PrintNames()<CR>")
         vim.keymap.set("n", "<localleader>k", ":call RenderDocument()<CR>")
-        vim.keymap.set("n", "<localleader>P", ":call QuartoPreview()<CR>")
     end,
 }
