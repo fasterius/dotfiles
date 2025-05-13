@@ -9,6 +9,8 @@ return {
         { "<localleader>r" },
         { "<localleader>s" },
         { "<localleader>v" },
+        { "<localleader>h" },
+        { "<localleader>n" },
     },
     config = function()
         -- Use Tmux as target
@@ -33,110 +35,88 @@ return {
         vim.keymap.set("n", "<localleader>c", "<plug>SlimeSendCell")
         vim.keymap.set("n", "<localleader>C", ':SlimeSend0 "\\x03"<CR>')
 
-        -- Get the appopriate language from the YAML header in Quarto files
-        vim.cmd([[
-            function! GetQuartoLanguage() abort
-                " Parse the YAML header and find the chosen language
-                let current_position = getpos('.')
-                normal! gg
-                let line = search('^knitr:\|^jupyter:\|^engine:', 'W')
-                call setpos('.', current_position)
-                let line = split(getline(line))
-                " Check for engine
-                if (line[0] == 'engine:')
-                    if (line[1] == 'knitr')
-                        return 'r'
-                    else
-                        return 'python3'
-                    endif
-                " Check for Knitr
-                elseif (line[0] == 'knitr:')
-                    return 'r'
-                else
-                    " Check for Jupyter kernel
-                    let kernel = matchlist(getline(line), '^jupyter: \(.*\)')[1]
-                    if (kernel == 'python3')
-                        return 'python3'
-                    elseif (kernel == 'r')
-                        return 'r'
-                    else
-                        return 'r'
-                    endif
-                endif
-            endfunction
-        ]])
+        local function getQuartoLanguage()
+            -- Store the current cursor position for later repositioning
+            local current_position = vim.api.nvim_win_get_cursor(0)
 
-        -- Get the appropriate language for the current filetype
-        vim.cmd([[
-            function! GetLanguage() abort
-                if &ft == "r" || &ft == "rmd"
+            -- Parse the YAML header and get the line with language information
+            vim.api.nvim_command("normal! gg")
+            local line_number = vim.fn.search("^knitr:\\|^jupyter:\\|^engine:", "W")
+
+            -- Reposition cursor to original position
+            vim.api.nvim_win_set_cursor(0, current_position)
+
+            -- Handle non-existant matches
+            if line_number == 0 then
+                return nil
+            end
+
+            -- Parse language information line and get document language
+            local line = vim.split(vim.fn.getline(line_number), "%s+")
+            if line[1] == "engine:" then
+                if line[2] == "knitr" then
                     return "r"
-                elseif &ft == "python"
-                    return "python3"
-                elseif &ft == "quarto"
-                    return GetQuartoLanguage()
                 else
-                    return "bash"
-                endif
-            endfunction
-        ]])
+                    return "python"
+                end
+            elseif line[1] == "knitr:" then
+                return "r"
+            elseif line[1] == "jupyter:" then
+                local kernel = string.match(vim.fn.getline(line_number), "^jupyter: (.*)")
+                if kernel == "python" or kernel == "r" then
+                    return kernel
+                end
+            else
+                return nil
+            end
+        end
 
-        -- Print the head of a pandas/R dataframe
-        vim.cmd([[
-            function! PrintHead() abort
-                let language = GetLanguage()
-                let current_word = expand("<cword>")
-                if language == "r"
-                    :SlimeSend0 "head(" . current_word . ")\n"
-                elseif language == "python"
-                    :SlimeSend0 current_word . ".head()\n"
-                else
-                    :echo "Error: requires Python or R"
-                endif
-            endfunction
-        ]])
+        local function getLanguage()
+            -- Access the filetype of the current buffer
+            local filetype = vim.bo.filetype
 
-        -- Print column names of a pandas/R dataframe
-        vim.cmd([[
-            function! PrintNames() abort
-                let language = GetLanguage()
-                let current_word = expand("<cword>")
-                if language == "r"
-                    :SlimeSend0 "names(" . current_word . ")\n"
-                elseif language == "python"
-                    :SlimeSend0 "list(" . current_word . ")\n"
-                else
-                    :echo "Error: requires Python or R"
-                endif
-            endfunction
-        ]])
+            -- Check the filetype and return corresponding language
+            if filetype == "r" or filetype == "rmd" then
+                return "r"
+            elseif filetype == "python" then
+                return "python"
+            elseif filetype == "quarto" then
+                return getQuartoLanguage()
+            else
+                return nil
+            end
+        end
 
-        -- Render R Markdown and Quarto documents
-        vim.cmd([[
-            function! RenderDocument() abort
-                :w!
-                if &ft == "rmd"
-                    :SlimeSend0 "rmarkdown::render('" . expand("%:p") . "')\n"
-                    :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-                elseif &ft == "quarto" || &ft == "markdown"
-                    let language = GetLanguage()
-                    if language == "r"
-                        :SlimeSend0 "system2('quarto', 'render " . expand("%:p") . "')\n"
-                        :SlimeSend0 "system2('open', '" . expand("%:p:r") . ".html')\n"
-                    elseif language == "python3"
-                        :SlimeSend0 "import os\n"
-                        :SlimeSend0 "os.system('quarto render " . expand("%:p") . "')\n"
-                        :SlimeSend0 "os.system('open " . expand("%:p:r") . ".html')\n"
-                    endif
-                else
-                    :echo "Error: can only render R Markdown or Quarto documents"
-                endif
-            endfunction
-        ]])
+        local function printHead()
+            -- Get the current word under the cursor
+            local current_word = vim.fn.expand("<cword>")
+            -- Print the language-dependent head of the current word
+            local language = getLanguage()
+            if language == "r" then
+                vim.cmd('SlimeSend0 "head(' .. current_word .. ')\\n"')
+            elseif language == "python" then
+                vim.cmd('SlimeSend0 "' .. current_word .. '.head()\\n"')
+            else
+                print("Error: requires Python or R")
+            end
+        end
+
+        local function printNames()
+            -- Get the current word under the cursor
+            local current_word = vim.fn.expand("<cword>")
+            -- Print the language-dependent column names of the current word
+            local language = getLanguage()
+            if language == "r" then
+                vim.cmd('SlimeSend0 "names(' .. current_word .. ')\\n"')
+            elseif language == "python" then
+                vim.cmd('SlimeSend0 "list(' .. current_word .. ')\\n"')
+            else
+                print("Error: requires Python or R")
+            end
+        end
 
         -- Function mappings
-        vim.keymap.set("n", "<localleader>h", ":call PrintHead()<CR>")
-        vim.keymap.set("n", "<localleader>n", ":call PrintNames()<CR>")
-        vim.keymap.set("n", "<localleader>k", ":call RenderDocument()<CR>")
+        vim.keymap.set("n", "<localleader>h", printHead)
+        vim.keymap.set("n", "<localleader>n", printNames)
     end,
 }
