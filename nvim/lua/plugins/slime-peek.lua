@@ -11,6 +11,9 @@ return {
     },
     config = function()
         local peek = require("slime-peek")
+        peek.setup({
+            use_yaml_language = false,
+        })
         vim.keymap.set("n", "<localleader>h", peek.peek_head)
         vim.keymap.set("n", "<localleader>T", peek.peek_tail)
         vim.keymap.set("n", "<localleader>n", peek.peek_names)
