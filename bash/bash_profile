@@ -102,6 +102,9 @@ alias tl='tmux ls'
 alias coac='conda activate'
 alias code='conda deactivate'
 
+# Do not save workspace when exiting R
+alias r='r --no-save'
+
 # Move upwards multiple directories
 alias ..='cd ..'
 alias ...='cd ../..'
