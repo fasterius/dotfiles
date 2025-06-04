@@ -1,4 +1,5 @@
 linters: linters_with_defaults(
     indentation_linter(indent = 4L, hanging_indent_style = "tidy"),
-    object_usage_linter = NULL
+    object_usage_linter = NULL,
+    return_linter = NULL
   )
