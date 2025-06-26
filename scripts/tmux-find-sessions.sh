@@ -22,8 +22,10 @@ FZF_WIDTH=$((MAX_LENGTH + 6 < MIN_WIDTH ? MIN_WIDTH : MAX_LENGTH + 6))
 
 # Solarized colours for fzf-tmux
 COLOURS="hl:#268BD2"               # Highlight: blue
+COLOURS="$COLOURS,fg:#93A1A1"      # Foreground: light grey
+COLOURS="$COLOURS,bg:#FDF6E3"      # Foreground: white
 COLOURS="$COLOURS,fg+:#586E75"     # Selected foreground: grey
-COLOURS="$COLOURS,bg+:#EEE8D5"     # Selected background: white
+COLOURS="$COLOURS,bg+:#EEE8D5"     # Selected background: dark white
 COLOURS="$COLOURS,hl+:#2AA198"     # Selected highlight: cyan
 COLOURS="$COLOURS,prompt:#268BD2"  # Prompt: blue
 COLOURS="$COLOURS,pointer:#2AA198" # Pointer: cyan
