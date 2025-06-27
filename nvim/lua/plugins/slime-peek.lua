@@ -8,6 +8,7 @@ return {
         { "<localleader>n" },
         { "<localleader>d" },
         { "<localleader>t" },
+        { "<localleader>H" },
     },
     config = function()
         local peek = require("slime-peek")
@@ -19,5 +20,6 @@ return {
         vim.keymap.set("n", "<localleader>n", peek.peek_names)
         vim.keymap.set("n", "<localleader>d", peek.peek_dimensions)
         vim.keymap.set("n", "<localleader>t", peek.peek_types)
+        vim.keymap.set("n", "<localleader>H", peek.peek_help)
     end,
 }
