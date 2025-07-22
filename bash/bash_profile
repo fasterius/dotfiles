@@ -8,16 +8,24 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 
     # Source Uppmax-specific profile
     source "$HOME/.dotfiles/bash/uppmax_profile"
-else
+fi
+
+# Linux-specific settings
+if [[ "$(uname)" == "Linux" ]]; then
+    export PATH="$PATH:/usr/share/git-core/contrib"
+fi
+
+# MacOS-specific settings
+if [[ "$(uname)" == "Darwin" ]]; then
 
     # Silence the OS X zsh message
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
-    # Local paths
-    PATH="/usr/local/bin:$PATH"
-
     # Add Homebrew's envs
     eval $(/opt/homebrew/bin/brew shellenv)
+
+    # Local paths
+    PATH="/usr/local/bin:$PATH"
 
     # Set PATH for Python 3.12
     export PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"
@@ -32,9 +40,19 @@ else
     # Turn off auto-update for Homebrew
     export HOMEBREW_NO_AUTO_UPDATE=1
 
-    # Autocompletion for Pixi
-    eval "$(pixi completion --shell bash)"
+    # Bash and Docker completion
+    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
+        && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+    [[ -r "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker" ]] \
+        && . "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker"
+
+    # Files to ignore for tab-completion
+    export FIGNORE="$FIGNORE:.un~:DS_Store"
+
 fi
+
+# Autocompletion for Pixi
+eval "$(pixi completion --shell bash)"
 
 # Enable fzf and change default colours
 eval "$(fzf --bash)"
@@ -50,17 +68,8 @@ FZF_COLOURS="$FZF_COLOURS,info:#93A1A1"    # Info elements: light grey
 FZF_COLOURS="$FZF_COLOURS,border:#657B83"  # Border: grey
 export FZF_DEFAULT_OPTS="--color=$FZF_COLOURS"
 
-# Bash and Docker completion
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
-    && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-[[ -r "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker" ]] \
-    && . "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker"
-
 # Source Conda
 source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
-
-# Files to ignore for tab-completion
-export FIGNORE="$FIGNORE:.un~:DS_Store"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
