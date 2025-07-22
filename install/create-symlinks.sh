@@ -3,7 +3,7 @@
 # Script that creates symbolic links for all relevant files in the repository
 
 # Alacritty
-ln -sfn ~/.dotfiles/alacritty/alacritty.yml ~/.alacritty.yml
+ln -sfn ~/.dotfiles/alacritty ~/.config
 
 # Bash
 ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
@@ -11,7 +11,7 @@ ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
 ln -sfn ~/.dotfiles/bash/inputrc ~/.inputrc
 
 # Btop
-ln -sfn ~/.dotfiles/btop/btop.conf ~/.config/btop/btop.conf
+ln -sfn ~/.dotfiles/btop ~/.config
 
 # Conda
 ln -sfn ~/.dotfiles/conda/condarc ~/.condarc
@@ -21,22 +21,20 @@ ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
 ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 
 # Jujutstu
-ln -sfn ~/.dotfiles/jj/jjconfig.toml ~/.jjconfig.toml
+ln -sfn ~/.dotfiles/jj ~/.config
 
 # Language servers
-mkdir -p ~/.config/marksman
-ln -sfn ~/.dotfiles/lsp/marksman/config.toml ~/.config/marksman/config.toml
+ln -sfn ~/.dotfiles/lsp/marksman ~/.config
 ln -sfn ~/.dotfiles/lsp/lintr/lintr ~/.lintr
 
 # Code formatting
-ln -sfn ~/.dotfiles/stylua/stylua.toml ~/.stylua.toml
+ln -sfn ~/.dotfiles/stylua ~/.config
 
 # NeoVim
-mkdir -p ~/.config
-ln -sfn ~/.dotfiles/nvim ~/.config/nvim
+ln -sfn ~/.dotfiles/nvim ~/.config
 
 # Pixi
-ln -sfn ~/.dotfiles/pixi/config.toml ~/.pixi/config.toml
+ln -sfn ~/.dotfiles/pixi ~/.config
 
 # Temporary directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
@@ -48,5 +46,7 @@ ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
 
-# XQuartz
-ln -sfn ~/.dotfiles/x11/xinitrc.d ~/.xinitrc.d
+# XQuartz (MacOS only)
+if [[ "$(uname)" == "Darwin" ]]; then
+	ln -sfn ~/.dotfiles/x11/xinitrc.d ~/.xinitrc.d
+fi
