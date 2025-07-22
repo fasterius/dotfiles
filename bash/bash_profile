@@ -1,6 +1,6 @@
 # Add to PATH
-export PATH="$HOME/opt:$PATH"
-export PATH="$HOME/.pixi/bin:$PATH"
+export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.dotfiles/scripts:$PATH"
 
 # Source custom uppmax_profile if in a SSH session
@@ -49,6 +49,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Files to ignore for tab-completion
     export FIGNORE="$FIGNORE:.un~:DS_Store"
 
+    # Source Conda
+    source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
+
 fi
 
 # Autocompletion for Pixi
@@ -67,9 +70,6 @@ FZF_COLOURS="$FZF_COLOURS,pointer:#2AA198" # Pointer: cyan
 FZF_COLOURS="$FZF_COLOURS,info:#93A1A1"    # Info elements: light grey
 FZF_COLOURS="$FZF_COLOURS,border:#657B83"  # Border: grey
 export FZF_DEFAULT_OPTS="--color=$FZF_COLOURS"
-
-# Source Conda
-source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
 # Locale
 export LC_ALL=en_GB.UTF-8
