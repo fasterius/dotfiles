@@ -28,7 +28,7 @@ vim.o.termguicolors = true
 vim.o.breakindent = true
 
 -- Use the system clipboard when not specifying a register
-vim.o.clipboard = "unnamed"
+vim.o.clipboard = "unnamedplus"
 
 -- Disable mouse
 vim.o.mouse = ""
