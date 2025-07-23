@@ -20,14 +20,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Open Telescope's `find_files` or `git_files` when Neovim is called
 -- without a specific file to open
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
+vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         if next(vim.fn.argv()) == nil then
-            if os.execute("git rev-parse --is-inside-work-tree >> /dev/null 2>&1") == 0 then
-                require("telescope.builtin").git_files()
-            else
-                require("telescope.builtin").find_files()
-            end
+            vim.schedule(function()
+                local telescope = require("telescope.builtin")
+                if os.execute("git rev-parse --is-inside-work-tree >> /dev/null 2>&1") == 0 then
+                    telescope.git_files()
+                else
+                    telescope.find_files()
+                end
+            end)
         end
     end,
 })
