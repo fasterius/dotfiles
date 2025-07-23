@@ -17,7 +17,6 @@ return {
                 "bash",
                 "dockerfile",
                 "javascript",
-                "help",
                 "lua",
                 "markdown",
                 "markdown_inline",
