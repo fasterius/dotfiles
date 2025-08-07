@@ -2,8 +2,6 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
-OS="$(uname)"
-
 # Alacritty
 ln -sfn ~/.dotfiles/alacritty ~/.config
 
@@ -38,11 +36,6 @@ ln -sfn ~/.dotfiles/nvim ~/.config
 # Pixi
 ln -sfn ~/.dotfiles/pixi ~/.config
 
-# Run-or-raise (Linux only)
-if [[ "$OS" == "Linux" ]]; then
-    ln -sfn ~/.dotfiles/run-or-raise ~/.config
-fi
-
 # Temporary directory for storing (Neo)vim's history and backups
 mkdir -p ~/.tmp
 
@@ -53,7 +46,21 @@ ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -sfn ~/.dotfiles/vim ~/.vim
 ln -sfn ~/.vim/vimrc ~/.vimrc
 
-# XQuartz (MacOS only)
-if [[ "$OS" == "Darwin" ]]; then
+# MacOS-only software
+if [[ "$(uname)" == "Darwin" ]]; then
+
+    # XQuartz
 	ln -sfn ~/.dotfiles/x11/xinitrc.d ~/.xinitrc.d
+
+fi
+
+# Linux-only software
+if [[ "$(uname)" == "Linux" ]]; then
+
+    # Run-or-raise
+    ln -sfn ~/.dotfiles/run-or-raise ~/.config
+
+    # Feh
+    ln -sfn ~/.dotfiles/feh ~/.config
+
 fi

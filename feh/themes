@@ -1,0 +1,5 @@
+# Alter the default theme `feh` with the following options:
+#  - Automatically zoom/stretch image to window size
+#  - Black background
+#  - Start in full screen
+feh --auto-zoom --image-bg black --fullscreen

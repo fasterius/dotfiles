@@ -1,0 +1,4 @@
+# Image navigation
+next_img Right f
+prev_img Left  d
+quit     C-q   Escape
