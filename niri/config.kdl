@@ -1,0 +1,180 @@
+// This config is in the KDL format: https://kdl.dev
+
+// -------------------------------- General -----------------------------------
+
+// Startup utilities (should go before startup applications)
+spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
+spawn-at-startup "waybar"
+spawn-at-startup "xwayland-satellite"
+
+// Startup applications
+spawn-at-startup "dropbox" "start"
+spawn-at-startup "firefox"
+spawn-at-startup "steam"
+
+// Set X11 display to use the Xwayland instance launched by xwayland-satellite
+environment { DISPLAY ":0"; }
+
+// Don't show hotkey overlay at startup
+hotkey-overlay { skip-at-startup; }
+
+// Save screenshots in `downloads` directory
+screenshot-path "~/downloads/screenshot-%Y%m%d-%H-%M-%S.png"
+
+// No animations
+animations { off; }
+
+// --------------------------------- Inputs -----------------------------------
+
+input {
+
+    keyboard {
+        // Track keyboard layouts globally instead of per window
+        track-layout "global"
+        // English (US) and Swedish (SE) keyboard layout
+        xkb {
+            layout "us,se"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        scroll-method "two-finger"
+    }
+
+}
+
+// --------------------------------- Layout -----------------------------------
+
+layout {
+
+    // No gaps around windows
+    gaps 0
+
+    // No ring around focused window
+    focus-ring { off; }
+
+    // No border around windows
+    border { off; }
+
+}
+
+// ------------------------------ Window rules --------------------------------
+
+// Global window rules
+window-rule {
+    // Open all windows maximised by default
+    open-maximized true
+    // Corner rounding
+    geometry-corner-radius 2
+    clip-to-geometry true
+}
+
+// Open Steam games in fullscreen with VRR enabled (if applicable)
+window-rule {
+    match app-id=r#"^steam_app"#
+    open-fullscreen true
+    variable-refresh-rate true
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// -------------------------------- Keybinds -----------------------------------
+
+binds {
+
+    // Mod-Shift-/, which is usually the same as Mod-?,
+    // shows a list of important hotkeys.
+    Super+Shift+Slash { show-hotkey-overlay; }
+
+    // Pure application launching
+    // TODO: lock screen, login screen
+    Super+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+
+    // Run-or-raise functionality through custom script
+    // TODO: other apps: LibreOffice, Obsidian
+    Super+A hotkey-overlay-title="Run or raise Alacritty" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "alacritty"; }
+    Super+C hotkey-overlay-title="Run or raise Calendar" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "gnome-calendar"; }
+    Super+F hotkey-overlay-title="Run or raise Firefox" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "firefox"; }
+    Super+N hotkey-overlay-title="Run or raise Nautilus" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "nautilus"; }
+    Super+Y hotkey-overlay-title="Run or raise Spotify" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "spotify" \
+            "flatpak run com.spotify.Client"; }
+    Super+S hotkey-overlay-title="Run or raise Steam" \
+        { spawn "~/.config/niri/niri-run-or-raise.sh" "steam"; }
+
+    // Switch between keyboard layouts
+    Super+Space hotkey-overlay-title="Switch keyboard layout" \
+        { "switch-layout" "next"; }
+
+    // Volume and mic controls
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";   }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";   }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";   }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    // Spotify-specific media controls
+    XF86AudioPlay allow-when-locked=true \
+        { spawn "playerctl" "--player" "spotify" "play-pause"; }
+    XF86AudioNext allow-when-locked=true \
+        { spawn "playerctl" "--player" "spotify" "next"; }
+    XF86AudioPrev allow-when-locked=true \
+        { spawn "playerctl" "--player" "spotify" "previous"; }
+    XF86AudioStop allow-when-locked=true \
+        { spawn "playerctl" "--player" "spotify" "stop"; }
+
+    // Open/close the Overview: a zoomed-out view of workspaces and windows. You
+    // can also move the mouse into the top-left hot corner, or do a four-finger
+    // swipe up on a touchpad.
+    Super+O repeat=false { toggle-overview; }
+
+    // Quit currently focused window
+    Super+Q { close-window; }
+
+    // Change focus
+    Super+Left  { focus-column-left;  }
+    Super+Down  { focus-window-down;  }
+    Super+Up    { focus-window-up;    }
+    Super+Right { focus-column-right; }
+
+    // Move window to another monitor
+    Super+Shift+H { move-window-to-monitor-left;  }
+    Super+Shift+J { move-window-to-monitor-down;  }
+    Super+Shift+K { move-window-to-monitor-up;    }
+    Super+Shift+L { move-window-to-monitor-right; }
+
+    // Screenshots
+    Print      { screenshot;        }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print  { screenshot-window; }
+
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here so
+    // they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor, so a
+    // buggy application can't hold your session hostage. The
+    // allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is
+    // active.
+    Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // Quit Niri, with confirmation
+    Super+Shift+E   { quit; }
+    Ctrl+Alt+Delete { quit; }
+
+    // Turn off monitors
+    Super+Shift+P { power-off-monitors; }
+}
