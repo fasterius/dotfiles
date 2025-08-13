@@ -2,8 +2,9 @@
 
 // -------------------------------- General -----------------------------------
 
-// Startup utilities (should go before startup applications)
+// Startup utilities
 spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
+spawn-at-startup "mako"
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
 

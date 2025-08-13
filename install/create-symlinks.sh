@@ -63,6 +63,9 @@ if [[ "$(uname)" == "Linux" ]]; then
     # GNOME Run-or-raise extension
     ln -sfn ~/.dotfiles/run-or-raise ~/.config
 
+    # Mako
+    ln -sfn ~/.dotfiles/mako ~/.config
+
     # Niri
     ln -sfn ~/.dotfiles/niri ~/.config
 

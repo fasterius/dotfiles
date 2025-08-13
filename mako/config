@@ -1,0 +1,25 @@
+# Size and position
+max-visible=5
+anchor=top-right
+margin=10,10
+padding=14
+
+# Border
+border-size=1
+border-radius=8
+
+# Colors
+# Last two characters control opacity: FF = 100%, 00 = fully transparent
+background-color=#1A1A1AFF
+text-color=#CCCCCCFF
+border-color=#999999FF
+
+# Font
+font=sans-serif 13
+
+# Timeout
+default-timeout=0
+
+# Icons
+icon-location=left
+max-icon-size=64
