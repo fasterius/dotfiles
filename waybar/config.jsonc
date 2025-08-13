@@ -1,0 +1,137 @@
+{
+
+    // Note:
+    // Usage of spans to specify Font Awesome fonts is to get full size icons,
+    // which otherwise will be smaller than the available space.
+
+    // General
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+
+    // Reload CSS style when changed
+    // (Use `killall -SIGUSR2 waybar` to reload configuration)
+    "reload_style_on_change": true,
+
+    // Modules
+    "modules-left": [],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "network",
+        "niri/language",
+        "battery",
+        "power-profiles-daemon",
+        "idle_inhibitor",
+        "clock",
+        "group/group-power"
+    ],
+
+    // System tray for e.g. Steam, Dropbox, etc.
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    // Audio indicator; left click to switch between speakers/headphone (uses
+    // the `~/.config/waybar/toggle-audio.sh` script), right click to enter
+    // audio settings through `pavucontrol`, scroll to change volume
+    "pulseaudio": {
+        "format": "<span font-family='Font Awesome 6 Free'>{icon}</span> {volume}%",
+        "format-bluetooth": "<span font-family='Font Awesome 6 Free'>{icon} </span> {volume}%",
+        "format-muted": "<span font-family='Font Awesome 6 Free'></span>",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "default": ""
+        },
+        "scroll-step": 1,
+        "on-click": "~/.config/waybar/toggle-audio.sh",
+        "on-click-right": "pavucontrol",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "<span font-family='Font Awesome 6 Free'></span> {signalStrength}%",
+        "format-ethernet": "<span font-family='Font Awesome 6 Free'></span>",
+        "format-disconnected": "<span font-family='Font Awesome 6 Free'></span>",
+        "tooltip": false
+    },
+
+    "niri/language": {
+        "format-en": "US",
+        "format-sv": "SE"
+    },
+
+    "battery": {
+        "format": "{capacity}% <span font-family='Font Awesome 6 Free'>{icon}</span>",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "power-profiles-daemon": {
+        "format": "<span font-family='Font Awesome 6 Free'>{icon}</span>",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "",
+            "performance": "",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": false
+    },
+
+    // Datetime in `Weekday date Month hour:minute` format
+    "clock": {
+        "format": "{:%A %d %B %H:%M}",
+        "tooltip": false
+    },
+
+    // Drawer with power, reboot, lock and logout
+    "group/group-power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "custom/power",
+            "custom/logout",
+            "custom/lock",
+            "custom/reboot",
+        ]
+    },
+    // TODO: Icons on all but `custom/power` are small, even with span
+    "custom/logout": {
+        "format": "<span font-family='Font Awesome 6 Free'>󰗼</span>",
+        "tooltip": false,
+        "on-click": "niri msg action quit"
+    },
+    "custom/lock": {
+        "format": "<span font-family='Font Awesome 6 Free'>󰍁</span>",
+        "tooltip": false,
+        "on-click": "swaylock"
+    },
+    "custom/reboot": {
+        "format": "<span font-family='Font Awesome 6 Free'>󰜉</span>",
+        "tooltip": false,
+        "on-click": "reboot"
+    },
+    "custom/power": {
+        "format": "<span font-family='Font Awesome 6 Free'></span>",
+        "tooltip": false,
+        "on-click": "shutdown now"
+    }
+
+}

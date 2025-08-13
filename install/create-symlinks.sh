@@ -57,13 +57,16 @@ fi
 # Linux-only software
 if [[ "$(uname)" == "Linux" ]]; then
 
-    # Run-or-raise extension for GNOME
-    ln -sfn ~/.dotfiles/run-or-raise ~/.config
-
     # Feh
     ln -sfn ~/.dotfiles/feh ~/.config
 
+    # GNOME Run-or-raise extension
+    ln -sfn ~/.dotfiles/run-or-raise ~/.config
+
     # Niri
     ln -sfn ~/.dotfiles/niri ~/.config
+
+    # Waybar
+    ln -sfn ~/.dotfiles/waybar ~/.config
 
 fi
