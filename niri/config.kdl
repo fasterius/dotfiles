@@ -2,11 +2,17 @@
 
 // -------------------------------- General -----------------------------------
 
+// N.B.
+// The `spawn` (and the related `spawn-at-startup`) command does not execute
+// inside a shell by default, and thus cannot expand e.g. `~` UNLESS it is for
+// the special case of `~` being the very first character.
+
 // Startup utilities
 spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "sh" "-c" "swaybg --image ~/Dropbox/wallpaper.jpg --mode fill"
 
 // Startup applications
 spawn-at-startup "dropbox" "start"
