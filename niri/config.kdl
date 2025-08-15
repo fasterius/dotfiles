@@ -8,15 +8,16 @@
 // the special case of `~` being the very first character.
 
 // Startup utilities
-spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "sh" "-c" "swaybg --image ~/Dropbox/wallpaper.jpg --mode fill"
+spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
+spawn-at-startup "~/.dotfiles/swayidle/idle.sh"
 
 // Startup applications
 spawn-at-startup "dropbox" "start"
-spawn-at-startup "firefox"
+// spawn-at-startup "firefox"
 spawn-at-startup "steam"
 
 // Set X11 display to use the Xwayland instance launched by xwayland-satellite
@@ -103,9 +104,10 @@ binds {
     Super+Shift+Slash { show-hotkey-overlay; }
 
     // Pure application launching
-    // TODO: lock screen, login screen
-    Super+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+D hotkey-overlay-title="Run an Application: fuzzel" \
+        { spawn "fuzzel"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock-effects" \
+        { spawn "~/.dotfiles/swaylock-effects/lock.sh"; }
 
     // Run-or-raise functionality through custom script
     // TODO: other apps: LibreOffice, Obsidian
