@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 WALLPAPER="$HOME/Dropbox/wallpaper.jpg"
 
