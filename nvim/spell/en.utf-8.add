@@ -504,6 +504,7 @@ MPX
 PNA
 Trello
 half-assed
+<<<<<<< Updated upstream
 flatpak
 Flathub
 AppIndicator
@@ -520,3 +521,20 @@ Broadcom
 Flatpaks
 Glorious Eggroll
 laggy
+=======
+HTSeq
+Kallisto
+BUStools
+MALAT1
+MNN
+CCA
+LLM
+LLMs
+>>>>>>> Stashed changes
+X11
+XQuartz
+TTY
+Niri
+Solarized
+fzf
+Meslo LGS
