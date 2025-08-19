@@ -2,4 +2,6 @@
 #  - Automatically zoom/stretch image to window size
 #  - Black background
 #  - Start in full screen
-feh --auto-zoom --image-bg black --fullscreen
+#  - Sort by filename
+#  - Sort numbers naturally (10 comes after 2, etc.)
+feh --auto-zoom --image-bg black --fullscreen --sort name --version-sort
