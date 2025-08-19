@@ -1,0 +1,12 @@
+[submodule "scripts/conda-intel-env"]
+	path = scripts/conda-intel-env
+	url = git@github.com:fasterius/conda-intel-env.git
+[submodule "scripts/docker-X11-interactive"]
+	path = scripts/docker-X11-interactive
+	url = git@github.com:fasterius/docker-X11-interactive.git
+[submodule "scripts/niri-run-or-raise"]
+	path = scripts/niri-run-or-raise
+	url = git@github.com:fasterius/niri-run-or-raise.git
+[submodule "scripts/tmux-find-sessions"]
+	path = scripts/tmux-find-sessions
+	url = git@github.com:fasterius/tmux-find-sessions.git

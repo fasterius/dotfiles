@@ -10,7 +10,7 @@ This is my collection of `dotfiles`, covering everything from Bash to Vim.
 ## Installation
 
 ```bash
-git clone git@github.com:fasterius/dotfiles.git ~/.dotfiles
+git clone --recursive git@github.com:fasterius/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles/install
 ./hide-macos-directories.sh
 ./create-symlinks.sh
