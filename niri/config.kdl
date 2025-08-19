@@ -112,18 +112,18 @@ binds {
     // Run-or-raise functionality through custom script
     // TODO: other apps: LibreOffice, Obsidian
     Super+A hotkey-overlay-title="Run or raise Alacritty" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "alacritty"; }
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "alacritty"; }
     Super+C hotkey-overlay-title="Run or raise Calendar" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "gnome-calendar"; }
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "gnome-calendar"; }
     Super+F hotkey-overlay-title="Run or raise Firefox" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "firefox"; }
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "firefox"; }
     Super+N hotkey-overlay-title="Run or raise Nautilus" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "nautilus"; }
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "nautilus"; }
     Super+Y hotkey-overlay-title="Run or raise Spotify" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "spotify" \
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "spotify" \
             "flatpak run com.spotify.Client"; }
     Super+S hotkey-overlay-title="Run or raise Steam" \
-        { spawn "~/scripts/niri-run-or-raise.sh" "steam"; }
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "steam"; }
 
     // Switch between keyboard layouts
     Super+Space hotkey-overlay-title="Switch keyboard layout" \
