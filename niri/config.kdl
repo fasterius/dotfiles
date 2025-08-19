@@ -12,8 +12,8 @@ spawn-at-startup "mako"
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "sh" "-c" "swaybg --image ~/Dropbox/wallpaper.jpg --mode fill"
-spawn-at-startup "~/.config/niri/niri-set-socket-env.sh"
-spawn-at-startup "~/.dotfiles/swayidle/idle.sh"
+spawn-at-startup "~/.dotfiles/scripts/niri-set-socket-env.sh"
+spawn-at-startup "~/.dotfiles/scripts/swayidle-idle.sh"
 
 // Startup applications
 spawn-at-startup "dropbox" "start"
@@ -107,23 +107,23 @@ binds {
     Super+D hotkey-overlay-title="Run an Application: fuzzel" \
         { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock-effects" \
-        { spawn "~/.dotfiles/swaylock-effects/lock.sh"; }
+        { spawn "~/.dotfiles/scripts/swaylock-lock.sh"; }
 
     // Run-or-raise functionality through custom script
     // TODO: other apps: LibreOffice, Obsidian
     Super+A hotkey-overlay-title="Run or raise Alacritty" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "alacritty"; }
+        { spawn "~/scripts/niri-run-or-raise.sh" "alacritty"; }
     Super+C hotkey-overlay-title="Run or raise Calendar" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "gnome-calendar"; }
+        { spawn "~/scripts/niri-run-or-raise.sh" "gnome-calendar"; }
     Super+F hotkey-overlay-title="Run or raise Firefox" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "firefox"; }
+        { spawn "~/scripts/niri-run-or-raise.sh" "firefox"; }
     Super+N hotkey-overlay-title="Run or raise Nautilus" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "nautilus"; }
+        { spawn "~/scripts/niri-run-or-raise.sh" "nautilus"; }
     Super+Y hotkey-overlay-title="Run or raise Spotify" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "spotify" \
+        { spawn "~/scripts/niri-run-or-raise.sh" "spotify" \
             "flatpak run com.spotify.Client"; }
     Super+S hotkey-overlay-title="Run or raise Steam" \
-        { spawn "~/.config/niri/niri-run-or-raise.sh" "steam"; }
+        { spawn "~/scripts/niri-run-or-raise.sh" "steam"; }
 
     // Switch between keyboard layouts
     Super+Space hotkey-overlay-title="Switch keyboard layout" \

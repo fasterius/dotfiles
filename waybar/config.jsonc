@@ -35,8 +35,8 @@
     },
 
     // Audio indicator; left click to switch between speakers/headphone (uses
-    // the `~/.config/waybar/toggle-audio.sh` script), right click to enter
-    // audio settings through `pavucontrol`, scroll to change volume
+    // the `~/.dotfiles/scripts/waybar-toggle-audio.sh` script), right click to
+    // enter audio settings through `pavucontrol`, scroll to change volume
     "pulseaudio": {
         "format": "<span font-family='Font Awesome 6 Free'>{icon}</span> {volume}%",
         "format-bluetooth": "<span font-family='Font Awesome 6 Free'>{icon} </span> {volume}%",
@@ -48,7 +48,7 @@
             "default": ""
         },
         "scroll-step": 1,
-        "on-click": "~/.config/waybar/toggle-audio.sh",
+        "on-click": "~/.dotfiles/scripts/waybar-toggle-audio.sh",
         "on-click-right": "pavucontrol",
         "tooltip": false
     },

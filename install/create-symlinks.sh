@@ -50,7 +50,7 @@ ln -sfn ~/.vim/vimrc ~/.vimrc
 if [[ "$(uname)" == "Darwin" ]]; then
 
     # XQuartz
-	ln -sfn ~/.dotfiles/x11/xinitrc.d ~/.xinitrc.d
+	ln -sfn ~/.dotfiles/scripts/xinitrc.d ~/.xinitrc.d
 
 fi
 
