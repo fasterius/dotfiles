@@ -6,13 +6,13 @@
 #
 # Examples:
 #   `Conda create` with a name:
-#   $ intel-conda-env.sh conda create -n my-env python=3.10
+#   $ conda-intel-env.sh conda create -n my-env python=3.10
 #
 #   `Mamba env create` with prefix and custom YAML:
-#   $ intel-conda-env.sh mamba env create -p my-env -f my-env.yml
+#   $ conda-intel-env.sh mamba env create -p my-env -f my-env.yml
 #
 #   `Mamba env create` with name inside default YAML (environment.yml):
-#   $ intel-conda-env.sh mamba env create
+#   $ conda-intel-env.sh mamba env create
 
 # Create a new Intel-based Conda environment
 CONDA_SUBDIR=osx-64 "$@"
