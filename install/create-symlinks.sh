@@ -2,89 +2,77 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
-# Alacritty
-ln -sfn ~/.dotfiles/alacritty ~/.config
+# ------------------------------- XDG Configs ----------------------------------
 
-# Bash
-ln -sfn ~/.dotfiles/bash/bashrc ~/.bashrc
-ln -sfn ~/.dotfiles/bash/bash_profile ~/.bash_profile
-ln -sfn ~/.dotfiles/bash/inputrc ~/.inputrc
+# Make sure `~/.config` exists
+mkdir -p ~/.config
 
-# Btop
-ln -sfn ~/.dotfiles/btop ~/.config
-
-# Conda
-ln -sfn ~/.dotfiles/conda/condarc ~/.condarc
-
-# Git
-ln -sfn ~/.dotfiles/git/gitconfig ~/.gitconfig
-ln -sfn ~/.dotfiles/git/gitignore_global ~/.gitignore_global
-
-# Jujutstu
-ln -sfn ~/.dotfiles/jj ~/.config
-
-# Language servers
-ln -sfn ~/.dotfiles/lsp/marksman ~/.config
-ln -sfn ~/.dotfiles/lsp/lintr/lintr ~/.lintr
-
-# Code formatting
-ln -sfn ~/.dotfiles/stylua ~/.config
-
-# NeoVim
-ln -sfn ~/.dotfiles/nvim ~/.config
-
-# Pixi
-ln -sfn ~/.dotfiles/pixi ~/.config
-
-# Temporary directory for storing (Neo)vim's history and backups
+# Make sure a temporary directory for storing (Neo)vim's history/backups exists
 mkdir -p ~/.tmp
 
-# Tmux
-ln -sfn ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-
-# Vim
-ln -sfn ~/.dotfiles/vim ~/.vim
-ln -sfn ~/.vim/vimrc ~/.vimrc
-
-# MacOS-only software
-if [[ "$(uname)" == "Darwin" ]]; then
-
-    # XQuartz
-	ln -sfn ~/.dotfiles/scripts/xinitrc.d ~/.xinitrc.d
-
-fi
+# List config files to be symlinked into XDG-compliant directories
+CONFIGS=(
+    alacritty
+    btop
+    jj
+    marksman
+    stylua
+    nvim
+    pixi
+    vim
+)
 
 # Linux-only software
 if [[ "$(uname)" == "Linux" ]]; then
-
-    # Feh
-    ln -sfn ~/.dotfiles/feh ~/.config
-
-    # GNOME Run-or-raise extension
-    ln -sfn ~/.dotfiles/run-or-raise ~/.config
-
-    # Mako
-    ln -sfn ~/.dotfiles/mako ~/.config
-
-    # Niri
-    ln -sfn ~/.dotfiles/niri ~/.config
-
-    # Waybar
-    ln -sfn ~/.dotfiles/waybar ~/.config
-
+    CONFIGS+=(
+        feh
+        gnome/run-or-raise
+        mako
+        niri
+        waybar
+    )
 fi
 
-# --------------------------------- Scripts -----------------------------------
+# Create symlinks in `$HOME/.config`
+for CONFIG in ${CONFIGS[@]}; do
+    ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.config
+done
+
+# ------------------------------ Home configs ----------------------------------
+
+# List config files to be symlinked into $HOME
+CONFIGS_HOME=(
+    bash/bashrc
+    bash/bash_profile
+    bash/inputrc
+    conda/condarc
+    git/gitconfig
+    git/gitignore_global
+    lintr/lintr
+    tmux/tmux.conf
+)
+
+# MacOS-only software
+if [[ "$(uname)" == "Darwin" ]]; then
+    CONFIGS_HOME+=(scripts/xinitrc.d)
+fi
+
+# Create symlinks in home directory
+for CONFIG in ${CONFIGS_HOME[@]}; do
+    ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.$(basename $CONFIG)
+done
+
+# ---------------------------------- Scripts ----------------------------------
 
 # Make sure that `~/.local/bin` exists
 mkdir -p ~/.local/bin
 
 # List scripts to be symlinked
 SCRIPTS=(
-    "apptainer-in-docker.sh"
-    "conda-intel-env/conda-intel-env.sh"
-    "docker-X11-interactive/docker-X11-interactive.sh"
-    "tmux-new.sh"
+    apptainer-in-docker.sh
+    conda-intel-env/conda-intel-env.sh
+    docker-X11-interactive/docker-X11-interactive.sh
+    tmux-new.sh
 )
 
 # Symlink all scripts into `~/.local/bin`
