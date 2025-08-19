@@ -73,3 +73,21 @@ if [[ "$(uname)" == "Linux" ]]; then
     ln -sfn ~/.dotfiles/waybar ~/.config
 
 fi
+
+# --------------------------------- Scripts -----------------------------------
+
+# Make sure that `~/.local/bin` exists
+mkdir -p ~/.local/bin
+
+# List scripts to be symlinked
+SCRIPTS=(
+    "apptainer-in-docker.sh"
+    "conda-intel-env/conda-intel-env.sh"
+    "docker-X11-interactive/docker-X11-interactive.sh"
+    "tmux-new.sh"
+)
+
+# Symlink all scripts into `~/.local/bin`
+for SCRIPT in ${SCRIPTS[@]}; do
+    ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" ~/.local/bin
+done
