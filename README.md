@@ -35,3 +35,17 @@ I use both MacOS and Linux, so some of these scripts are only applicable to
 _e.g._ Macs, as evidenced by their name. The scripts without a platform in their
 name are written to work on either platform, where _e.g._ MacOS-specific
 software is only symlinked on MacOS, and _vice versa_.
+
+## Included software
+
+Some software included here live in their respective repositories and are
+installed as submodules:
+
+- [`conda-intel-env.sh`](https://github.com/fasterius/conda-intel-env): A helper
+  script for creating Intel-based Conda environments on MacOS ARM64.
+- [`docker-X11-interactive`](https://github.com/fasterius/docker-X11-interactive):
+  A helper script for interactive plotting inside Docker containers on MacOS.
+- [`niri-run-or-raise`](https://github.com/fasterius/niri-run-or-raise): A
+  run-or-raise-style script for the Niri window manager on Linux.
+- [`tmux-find-sessions`](https://github.com/fasterius/tmux-find-sessions): A
+  fzf-powered helper script for listing and selecting Tmux sessions.
