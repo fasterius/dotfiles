@@ -54,7 +54,7 @@ CONFIGS_HOME=(
 
 # MacOS-only software
 if [[ "$(uname)" == "Darwin" ]]; then
-    CONFIGS_HOME+=(scripts/xinitrc.d)
+    CONFIGS_HOME+=(scripts/docker-X11-interactive/xinitrc.d)
 fi
 
 # Create symlinks in home directory
