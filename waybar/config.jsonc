@@ -20,6 +20,7 @@
         "tray",
         "pulseaudio",
         "network",
+        "bluetooth",
         "niri/language",
         "battery",
         "power-profiles-daemon",
@@ -58,6 +59,14 @@
         "format-ethernet": "<span font-family='Font Awesome 6 Free'></span>",
         "format-disconnected": "<span font-family='Font Awesome 6 Free'></span>",
         "tooltip": false
+    },
+
+    // TODO: Add more advanced features, e.g. turning on/off, scanning, etc.
+    "bluetooth": {
+        "format-on": "󰂯",
+        "format-off": "󰂲",
+        "format-connected": "󰂱 {num_connections}",
+        "format-disabled": "",
     },
 
     "niri/language": {
