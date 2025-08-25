@@ -56,10 +56,4 @@ startup_mode = "Maximized"
 
 [window.padding]
 x = 5
-y = 5
-
-[window.position]
-x = 0
-y = 0
-
-[terminal]
+y = 7
