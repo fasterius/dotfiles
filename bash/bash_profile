@@ -2,11 +2,13 @@
 export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
 export PATH="$HOME/.local/bin:$PATH"
 
-# Source custom uppmax_profile if in a SSH session
+# Source custom HPC profile if in a SSH session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-
-    # Source Uppmax-specific profile
-    source "$HOME/.dotfiles/bash/uppmax_profile"
+    if $(uname -n | grep -q "uppmax") ; then
+        source "$HOME/.dotfiles/bash/uppmax_profile"
+    else
+        source "$HOME/.dotfiles/bash/pdc_profile"
+    fi
 fi
 
 # Linux-specific settings

@@ -1,0 +1,8 @@
+# Load more recent module versions
+module load git
+module load tmux
+module load bioinfo-tools Nextflow
+
+# Add custom software to PATH
+export PATH="$HOME/opt/neovim/bin:$PATH"
+export PATH="$HOME/opt/ripgrep:$PATH"
