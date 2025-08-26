@@ -57,9 +57,10 @@
 [tag]
     sort = version:refname
 
-# Word highlighting for diffs
+# Word highlighting for diffs with `diff-highlight` and `cat` as fallback
+# Does not paginate if output fits on one screen (`less -F` flag)
 [pager]
-    diff = diff-highlight | less
+    diff = sh -c 'command -v diff-highlight > /dev/null && diff-highlight || cat' | less -F
 
 # Log colours
 [color "decorate"]
