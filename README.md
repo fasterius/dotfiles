@@ -41,11 +41,14 @@ software is only symlinked on MacOS, and _vice versa_.
 Some software included here live in their respective repositories and are
 installed as submodules:
 
-- [`conda-intel-env.sh`](https://github.com/fasterius/conda-intel-env): A helper
+- [`conda-intel-env`](https://github.com/fasterius/conda-intel-env): A helper
   script for creating Intel-based Conda environments on MacOS ARM64.
 - [`docker-X11-interactive`](https://github.com/fasterius/docker-X11-interactive):
   A helper script for interactive plotting inside Docker containers on MacOS.
 - [`niri-run-or-raise`](https://github.com/fasterius/niri-run-or-raise): A
   run-or-raise-style script for the Niri window manager on Linux.
+- [`quick-whisper`](https://github.com/fasterius/quick-whisper): A
+  cross-platform script for local speech-to-text transcription using
+  `whisper.cpp`.
 - [`tmux-find-sessions`](https://github.com/fasterius/tmux-find-sessions): A
   fzf-powered helper script for listing and selecting Tmux sessions.
