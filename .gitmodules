@@ -10,3 +10,6 @@
 [submodule "scripts/tmux-find-sessions"]
 	path = scripts/tmux-find-sessions
 	url = git@github.com:fasterius/tmux-find-sessions.git
+[submodule "scripts/quick-whisper"]
+	path = scripts/quick-whisper
+	url = https://github.com/fasterius/quick-whisper
