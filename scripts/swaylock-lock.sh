@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
+# Ensure environment variables are set correctly
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
+
+# Wallpaper
 WALLPAPER="$HOME/Dropbox/wallpaper.jpg"
 
+# Run swaylock
 swaylock \
     --daemonize \
     --clock \
