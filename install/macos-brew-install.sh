@@ -12,8 +12,10 @@ brew install \
     black \
     btop \
     coreutils \
+    cmake \
     docker-completion \
     fd \
+    ffmpeg \
     gawk \
     gcc \
     gh \
@@ -37,6 +39,7 @@ brew install \
     readline \
     ripgrep \
     ruff \
+    sox \
     tmux \
     tree \
     tree-sitter \
