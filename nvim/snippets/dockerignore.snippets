@@ -2,6 +2,10 @@ snippet dockerignore "Initialise a new .dockerignore file"
 	# Ignore everything
 	*
 
-	# Except the Conda environment file
+	# Except environment files
 	!environment.yml
 	!env/environment.yml
+    !pixi.toml
+    !pixi.lock
+    !env/pixi.toml
+    !env/pixi.lock
