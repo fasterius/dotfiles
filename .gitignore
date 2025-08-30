@@ -1,5 +1,9 @@
+# Vim files
 *.un~
 .viminfo
 .netrwhist
 plugged/
 autoload/
+
+# OS-specific symlink for Alacritty
+alacritty/alacritty.toml

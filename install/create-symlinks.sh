@@ -2,6 +2,9 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
+# Get current OS
+OS="$(uname)"
+
 # ------------------------------- XDG Configs ----------------------------------
 
 # Make sure `~/.config` exists
@@ -23,7 +26,7 @@ CONFIGS=(
 )
 
 # Linux-only software
-if [[ "$(uname)" == "Linux" ]]; then
+if [[ "$OS" == "Linux" ]]; then
     CONFIGS+=(
         feh
         gnome/run-or-raise
@@ -37,6 +40,20 @@ fi
 for CONFIG in ${CONFIGS[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.config
 done
+
+# -------------------------------- Alacritty -----------------------------------
+
+# Different font sizes are required for different OSs for Alacritty, which is
+# managed by symlinking the specific OS's config file to `alacritty.toml`
+if [[ "$OS" == "Linux" ]]; then
+    ln -sfn \
+        ~/.dotfiles/alacritty/alacritty-linux.toml \
+        ~/.dotfiles/alacritty/alacritty.toml
+else
+    ln -sfn \
+        ~/.dotfiles/alacritty/alacritty-darwin.toml \
+        ~/.dotfiles/alacritty/alacritty.toml
+fi
 
 # ------------------------------ Home configs ----------------------------------
 
@@ -53,7 +70,7 @@ CONFIGS_HOME=(
 )
 
 # MacOS-only software
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OS" == "Darwin" ]]; then
     CONFIGS_HOME+=(scripts/docker-X11-interactive/xinitrc.d)
 fi
 

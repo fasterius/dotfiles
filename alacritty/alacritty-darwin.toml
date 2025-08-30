@@ -1,0 +1,9 @@
+[general]
+import = ["alacritty-common.toml"]
+
+[font]
+size = 17.0
+
+[window.padding]
+x = 5
+y = 5

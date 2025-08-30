@@ -28,9 +28,6 @@ foreground = "#586e75"
 [env]
 TERM = "xterm-256color"
 
-[font]
-size = 17.0
-
 [font.bold]
 style = "Bold"
 
@@ -53,7 +50,3 @@ program = "bash"
 [window]
 decorations = "none"
 startup_mode = "Maximized"
-
-[window.padding]
-x = 5
-y = 7
