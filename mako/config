@@ -1,4 +1,5 @@
 # Size and position
+width=400
 max-visible=5
 anchor=top-right
 margin=10,10
