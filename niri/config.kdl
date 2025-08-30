@@ -70,6 +70,10 @@ layout {
 
 // ------------------------------ Window rules --------------------------------
 
+// Persistent workspaces
+workspace "default" {}
+workspace "browser" {}
+
 // Global window rules
 window-rule {
     // Open all windows maximised by default
@@ -77,6 +81,8 @@ window-rule {
     // Corner rounding
     geometry-corner-radius 2
     clip-to-geometry true
+    // Open on the `default` workspace
+    open-on-workspace "default"
 }
 
 // Open Steam games in fullscreen with VRR enabled (if applicable)
@@ -86,6 +92,16 @@ window-rule {
     variable-refresh-rate true
 }
 
+// Open all Firefox windows on the `browser` workspace (to facilitate easier
+// browsing of all open browser windows using the overlay)
+window-rule {
+    match app-id=r#"firefox$"#
+    open-maximized true
+    geometry-corner-radius 2
+    clip-to-geometry true
+    open-on-workspace "browser"
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
@@ -93,6 +109,9 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+    geometry-corner-radius 2
+    clip-to-geometry true
+    open-on-workspace "browser"
 }
 
 // -------------------------------- Keybinds -----------------------------------
