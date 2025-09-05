@@ -21,9 +21,6 @@ return {
                     "telekasten",
                 },
             },
-
-            -- Colours
-            vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EEE8D5" }),
         })
 
         -- Hide first indentation level

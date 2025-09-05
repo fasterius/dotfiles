@@ -3,6 +3,10 @@ return {
     "ishan9299/nvim-solarized-lua",
     lazy = false,
     priority = 1000,
+    -- Only use this on Darwin systems
+    cond = function()
+        return vim.uv.os_uname().sysname == "Darwin"
+    end,
     config = function()
         -- Light Solarized theme
         vim.o.background = "light"
@@ -22,6 +26,15 @@ return {
         vim.api.nvim_set_hl(0, "@markup.italic", { fg = "#657B83", italic = true })
         vim.api.nvim_set_hl(0, "@markup.strong", { fg = "#657B83", bold = true })
         vim.api.nvim_set_hl(0, "@variable.parameter", { fg = "#657B83" })
+
+        -- Colours for `indent-blankline.lua`
+        vim.api.nvim_set_hl(0, "IblIndent", { fg = "#EEE8D5" })
+
+        -- Colours for the sign column and Git signs
+        vim.api.nvim_set_hl(0, "SignColumn", { bg = "#eee8d5" })
+        vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "#eee8d5", fg = "#859900" })
+        vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "#eee8d5", fg = "#b58900" })
+        vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "#eee8d5", fg = "#dc322f" })
     end,
 }
 
