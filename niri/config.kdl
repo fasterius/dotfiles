@@ -148,6 +148,10 @@ binds {
     Super+Space hotkey-overlay-title="Switch keyboard layout" \
         { "switch-layout" "next"; }
 
+    // Toggle second monitor on/off
+    Super+Shift+M hotkey-overlay-title="Toggle second monitor on/off" \
+        { spawn "~/.dotfiles/scripts/toggle-monitor.sh"; }
+
     // Volume and mic controls
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";   }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";   }
