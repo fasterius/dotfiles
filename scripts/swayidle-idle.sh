@@ -2,6 +2,5 @@
 
 swayidle -w \
 	timeout 300 '~/.dotfiles/scripts/swaylock-lock.sh' \
-    timeout 600 'wlopm --off *' \
-        resume 'wlopm --on *' \
+    timeout 600 'systemctl suspend' \
 	before-sleep '~/.dotfiles/scripts/swaylock-lock.sh'
