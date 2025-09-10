@@ -41,20 +41,6 @@ for CONFIG in ${CONFIGS[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.config
 done
 
-# -------------------------------- Alacritty -----------------------------------
-
-# Different font sizes are required for different OSs for Alacritty, which is
-# managed by symlinking the specific OS's config file to `alacritty.toml`
-if [[ "$OS" == "Linux" ]]; then
-    ln -sfn \
-        ~/.dotfiles/alacritty/alacritty-linux.toml \
-        ~/.dotfiles/alacritty/alacritty.toml
-else
-    ln -sfn \
-        ~/.dotfiles/alacritty/alacritty-darwin.toml \
-        ~/.dotfiles/alacritty/alacritty.toml
-fi
-
 # ------------------------------ Home configs ----------------------------------
 
 # List config files to be symlinked into $HOME
@@ -79,7 +65,31 @@ for CONFIG in ${CONFIGS_HOME[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.$(basename $CONFIG)
 done
 
-# ---------------------------------- Scripts ----------------------------------
+# --------------------------- OS-specific configs -----------------------------
+
+# Some configs requires symlinking different files depending on the current OS,
+# usually because of the desired colour scheme or font size.
+
+OS_CONFIGS=(
+    alacritty.toml
+    btop.conf
+)
+
+for OS_CONFIG in ${OS_CONFIGS[@]}; do
+    APP="${OS_CONFIG/.*/}"
+    EXT="${OS_CONFIG/*./}"
+    if [[ "$OS" == "Linux" ]]; then
+        ln -sfn \
+            ~/.dotfiles/${APP}/${APP}-linux.${EXT} \
+            ~/.dotfiles/${APP}/${APP}.${EXT}
+    else
+        ln -sfn \
+            ~/.dotfiles/${APP}/${APP}-darwin.${EXT} \
+            ~/.dotfiles/${APP}/${APP}.${EXT}
+    fi
+done
+
+# --------------------------------- Scripts -----------------------------------
 
 # Make sure that `~/.local/bin` exists
 mkdir -p ~/.local/bin

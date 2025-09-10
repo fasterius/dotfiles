@@ -5,5 +5,9 @@
 plugged/
 autoload/
 
-# OS-specific symlink for Alacritty
+# Btop log files
+btop/btop.log
+
+# OS-specific symlinks
 alacritty/alacritty.toml
+btop/btop.conf
