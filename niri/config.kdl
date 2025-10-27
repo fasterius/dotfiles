@@ -145,6 +145,9 @@ binds {
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "firefox"; }
     Super+N hotkey-overlay-title="Run or raise Nautilus" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "nautilus"; }
+    Super+O hotkey-overlay-title="Run or raise Obsidian" \
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "obsidian" \
+            "flatpak run md.obsidian.Obsidian"; }
     Super+Y hotkey-overlay-title="Run or raise Spotify" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "spotify" \
             "flatpak run com.spotify.Client"; }
@@ -178,7 +181,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows. You
     // can also move the mouse into the top-left hot corner, or do a four-finger
     // swipe up on a touchpad.
-    Super+O repeat=false { toggle-overview; }
+    Super+Shift+O repeat=false { toggle-overview; }
 
     // Quit currently focused window
     Super+Q { close-window; }
