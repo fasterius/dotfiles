@@ -1,5 +1,5 @@
 # Do not add pixi shell to PS1
-change-ps1 = false
+shell.change-ps1 = false
 
 # Add conda-forge and bioconda to default channels
 default-channels = ["conda-forge", "bioconda"]
