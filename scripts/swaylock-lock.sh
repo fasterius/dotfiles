@@ -10,10 +10,8 @@ WALLPAPER="$HOME/Dropbox/wallpaper.jpg"
 # Run swaylock
 swaylock \
     --daemonize \
-    --clock \
     --image "$WALLPAPER" \
     --scaling fill \
-    --indicator \
     --indicator-caps-lock \
     --indicator-idle-visible \
     --inside-color 000000cc \
@@ -29,5 +27,3 @@ swaylock \
     --text-color ffffffcc \
     --text-ver-color ffffffcc \
     --text-wrong-color ffffffcc \
-    --effect-blur 7x5 \
-    --effect-vignette 0.4:0.8 \
