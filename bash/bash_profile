@@ -75,6 +75,9 @@ export LANG=en_GB.UTF-8
 # Default editor
 export EDITOR=nvim
 
+# Manpager
+export MANPAGER='nvim +Man!'
+
 # Config file location for `bat`
 export BAT_CONFIG_PATH="$HOME/.dotfiles/bat/bat.conf"
 

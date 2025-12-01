@@ -22,6 +22,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- without a specific file to open
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
+        -- Don't run if the filetype is `man` (Neovim used as a manpager)
+        if vim.bo.filetype == "man" then
+            return
+        end
+
         if next(vim.fn.argv()) == nil then
             vim.schedule(function()
                 local telescope = require("telescope.builtin")
