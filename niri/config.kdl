@@ -15,7 +15,6 @@ spawn-at-startup "lxpolkit"
 spawn-at-startup "sh" "-c" "swaybg --image ~/Dropbox/wallpaper.jpg --mode fill"
 spawn-at-startup "~/.dotfiles/scripts/niri-set-socket-env.sh"
 spawn-at-startup "~/.dotfiles/scripts/swayidle-idle.sh"
-spawn-at-startup "~/.dotfiles/scripts/volume-monitor.sh"
 
 // Startup applications
 spawn-at-startup "dropbox" "start"
@@ -163,11 +162,10 @@ binds {
     Super+Shift+M hotkey-overlay-title="Toggle second monitor on/off" \
         { spawn "~/.dotfiles/scripts/toggle-monitor.sh"; }
 
-    // Volume and mic controls
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";   }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";   }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";   }
-    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    // Volume controls
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "~/.dotfiles/scripts/volume-control.sh" "up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "~/.dotfiles/scripts/volume-control.sh" "down"; }
+    XF86AudioMute        allow-when-locked=true { spawn "~/.dotfiles/scripts/volume-control.sh" "mute"; }
 
     // Spotify-specific media controls
     XF86AudioPlay allow-when-locked=true \
