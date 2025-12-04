@@ -29,6 +29,7 @@ CONFIGS=(
 if [[ "$OS" == "Linux" ]]; then
     CONFIGS+=(
         feh
+        fuzzel
         gnome/run-or-raise
         mako
         niri
