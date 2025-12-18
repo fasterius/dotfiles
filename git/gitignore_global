@@ -24,6 +24,7 @@
 # Nextflow files
 **/.nextflow*
 work/*
+conf/local.config
 
 # Workflow testing
 **/run.sh
