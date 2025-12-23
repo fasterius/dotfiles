@@ -19,17 +19,20 @@ git clone --recursive git@github.com:fasterius/dotfiles.git ~/.dotfiles
 In order to simplify usage of this repo, you can execute the scripts contained
 in the `install/` directory:
 
+- `install-wrapper.sh`: Runs all the subsequent scripts in an OS-dependent
+  manner (you would usually want to run this, unless you're specifically only
+  interested in a single one of the other scripts).
+- `create-symlinks.sh`: Creates all the symbolic links needed for all the
+  various profiles and configs contained in this repository.
+- `install-software.sh`: Installs software that isn't installable by a package
+  manager, _e.g._ Pixi, Nextflow and nf-test.
+- `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
 - `macos-brew-install.sh`: Installs various software packages using the
   [Homebrew](https://brew.sh/) package manager for MacOS.
 - `hide-macos-directories.sh`: Script hides the default MacOS home directories
   (_i.e._ "Desktop", "Download", _etc._) from Finder and creates symbolic links
   in a new `~/home/` directory for easy access without cluttering up the default
   home directory.
-- `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
-- `install-software.sh`: Installs software that isn't installable by a package
-  manager, _e.g._ Pixi, Nextflow and nf-test.
-- `create-symlinks.sh`: Creates all the symbolic links needed for all the
-  various profiles and configs contained in this repository.
 
 I use both MacOS and Linux, so some of these scripts are only applicable to
 _e.g._ Macs, as evidenced by their name. The scripts without a platform in their
