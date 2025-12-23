@@ -2,8 +2,6 @@
 
 # Script to install Meslo LGS Nerd Font Mono
 
-echo "Installing Meslo LGS Nerd Font Mono ..."
-
 OS="$(uname)"
 if [[ "$OS" == "Linux" ]]; then
     FONT_PATH="~/.local/share/fonts/"
@@ -15,11 +13,12 @@ fi
 FONT_NAME="MesloLGSNerdFontMono"
 FONT_FILES=("$FONT_PATH"/$FONT_NAME-{Regular,Bold,BoldItalic,Italic}.ttf)
 if (( ${#FONT_FILES[@]} == 4 )); then
-    echo "Font already installed"
+    echo "$FONT_NAME already installed"
     exit 0
 fi
 
 # Download and install font
+echo "Installing $FONT_NAME ..."
 mkdir -p "$FONT_PATH"
 mkdir meslo
 curl -o meslo.tar.xz \

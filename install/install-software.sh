@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Script for installing software that is installed through bash instead of a
+# package manager.
+
 LOCAL="$HOME/.local"
 BIN="$HOME/.local/bin"
 mkdir -p "$BIN"
