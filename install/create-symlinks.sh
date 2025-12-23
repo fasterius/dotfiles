@@ -39,6 +39,7 @@ if [[ "$OS" == "Linux" ]]; then
 fi
 
 # Create symlinks in `$HOME/.config`
+echo "Creating XDG-compliant symlinks ..."
 for CONFIG in ${CONFIGS[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.config
 done
@@ -63,6 +64,7 @@ if [[ "$OS" == "Darwin" ]]; then
 fi
 
 # Create symlinks in home directory
+echo "Creating home directory symlinks ..."
 for CONFIG in ${CONFIGS_HOME[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.$(basename $CONFIG)
 done
@@ -77,6 +79,7 @@ OS_CONFIGS=(
     btop.conf
 )
 
+echo "Creating other symlinks ..."
 for OS_CONFIG in ${OS_CONFIGS[@]}; do
     APP="${OS_CONFIG/.*/}"
     EXT="${OS_CONFIG/*./}"
@@ -105,6 +108,7 @@ SCRIPTS=(
 )
 
 # Symlink all scripts into `~/.local/bin`
+echo "Creating script symlinks ..."
 for SCRIPT in ${SCRIPTS[@]}; do
     ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" ~/.local/bin
 done
