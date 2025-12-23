@@ -77,8 +77,6 @@ workspace "browser" {}
 
 // Global window rules
 window-rule {
-    // Open all windows maximised by default
-    open-maximized true
     // Corner rounding
     geometry-corner-radius 2
     clip-to-geometry true
@@ -86,20 +84,32 @@ window-rule {
     open-on-workspace "default"
 }
 
-// Open Steam games in fullscreen with VRR enabled (if applicable)
+// Open various apps in maximised mode
 window-rule {
-    match app-id=r#"^steam_app"#
-    open-fullscreen true
-    variable-refresh-rate true
+    match app-id=r#"^Alacritty$"#
+    match app-id=r#"^*Calendar$"#
+    match app-id=r#"^org.qbittorrent.qBittorrent$"#
+    match app-id=r#"^libreoffice-*"#
+    match app-id=r#"^*Lutris$"#
+    match app-id=r#"^*Nautilus$"#
+    match app-id=r#"^obsidian$"#
+    match app-id=r#"^Spotify$"#
+    match app-id=r#"^steam$"# title="Steam"
+    open-maximized true
+}
+
+// Open various windows in floating mode
+window-rule {
+    match app-id="LiveSplitOne" title="LiveSplit One"
+    match app-id=r#"^steam$"# title="Steam Settings"
+    open-floating true
 }
 
 // Open all Firefox windows on the `browser` workspace (to facilitate easier
-// browsing of all open browser windows using the overlay)
+// browsing of all open browser windows using the overlay), maximised
 window-rule {
     match app-id=r#"firefox$"#
     open-maximized true
-    geometry-corner-radius 2
-    clip-to-geometry true
     open-on-workspace "browser"
 }
 
@@ -110,15 +120,14 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
-    geometry-corner-radius 2
-    clip-to-geometry true
     open-on-workspace "browser"
 }
 
-// Open LiveSplitOne as floating by default
+// Open Steam games in fullscreen with VRR enabled (if applicable)
 window-rule {
-    match app-id="LiveSplitOne" title="LiveSplit One"
-    open-floating true
+    match app-id=r#"^steam_app"#
+    open-fullscreen true
+    variable-refresh-rate true
 }
 
 // -------------------------------- Keybinds -----------------------------------
