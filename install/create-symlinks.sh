@@ -16,6 +16,7 @@ mkdir -p ~/.tmp
 # List config files to be symlinked into XDG-compliant directories
 CONFIGS=(
     alacritty
+    bat
     btop
     jj
     marksman

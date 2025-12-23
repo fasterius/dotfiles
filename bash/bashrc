@@ -15,6 +15,7 @@ fi
 
 # Linux-specific settings
 if [[ "$(uname)" == "Linux" ]]; then
+    # Specify location of diff-highlight (included in Git core)
     export PATH="$PATH:/usr/share/git-core/contrib"
 fi
 
@@ -74,9 +75,6 @@ export EDITOR=nvim
 
 # Manpager
 export MANPAGER='nvim +Man!'
-
-# Config file location for `bat`
-export BAT_CONFIG_PATH="$HOME/.dotfiles/bat/bat.conf"
 
 # List command ----------------------------------------------------------------
 
