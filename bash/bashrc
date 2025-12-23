@@ -40,9 +40,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
     export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
 
-    # Turn off auto-update for Homebrew
-    export HOMEBREW_NO_AUTO_UPDATE=1
-
     # Bash and Docker completion
     [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
         && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
