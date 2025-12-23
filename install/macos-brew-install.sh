@@ -1,15 +1,27 @@
 #!/bin/bash
 
+# Script for installing Homebrew itself as well as software installed by it on
+# MacOS systems. Does not install anything on non-Darwin systems.
+
+# Check for MacOS
+if [[ ! "$(uname)" == "Darwin" ]]; then
+    echo "Not on MacOS; not installing Homebrew"
+    exit 0
+fi
+
 # Install Homebrew non-interactively
-NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [[ $(command -v brew) == "" ]]; then
+    echo "Installing Homebrew ..."
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 # Install formulae
+echo "Installing brew formulae ..."
 brew install \
     act \
     bash \
     bash-completion \
     bat \
-    black \
     btop \
     coreutils \
     cmake \
@@ -33,9 +45,6 @@ brew install \
     openjdk@17 \
     pandoc \
     prettier \
-    pyright \
-    python@3.12 \
-    r@4.3 \
     readline \
     ripgrep \
     ruff \
@@ -47,9 +56,6 @@ brew install \
     wget
 
 # Install casks
+echo "Installing brew casks ..."
 brew install --cask \
-    font-meslo-lg-nerd-font \
     keycastr
-
-# Install R language server non-interactively
-R -e 'install.packages("languageserver", repos="http://lib.stat.cmu.edu/R/CRAN")'
