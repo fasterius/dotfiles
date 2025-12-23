@@ -22,7 +22,6 @@ CONFIGS=(
     marksman
     stylua
     nvim
-    pixi
     vim
 )
 
@@ -68,6 +67,17 @@ echo "Creating home directory symlinks ..."
 for CONFIG in ${CONFIGS_HOME[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.$(basename $CONFIG)
 done
+
+# ---------------------------------- Pixi -------------------------------------
+
+# Pixi can only use XDG-compliant directories for both the config and the global
+# manifest on Linux, while using $HOME/.pixi works on both systems, so a
+# specific setup is used here.
+
+echo "Creating Pixi symlinks ..."
+mkdir -p $HOME/.pixi/manifests
+ln -sfn $HOME/.dotfiles/pixi/config.toml $HOME/.pixi
+ln -sfn $HOME/.dotfiles/pixi/manifests/pixi-global.toml $HOME/.pixi/manifests
 
 # --------------------------- OS-specific configs -----------------------------
 
