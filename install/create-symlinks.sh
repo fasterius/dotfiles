@@ -28,6 +28,7 @@ CONFIGS=(
 # Linux-only software
 if [[ "$OS" == "Linux" ]]; then
     CONFIGS+=(
+        eww
         feh
         fuzzel
         gnome/run-or-raise

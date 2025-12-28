@@ -26,7 +26,7 @@
         "power-profiles-daemon",
         "idle_inhibitor",
         "clock",
-        "group/group-power"
+        "custom/eww-power"
     ],
 
     // System tray for e.g. Steam, Dropbox, etc.
@@ -106,41 +106,11 @@
         "tooltip": false
     },
 
-    // Drawer with power, reboot, lock and logout
-    "group/group-power": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "not-power",
-            "transition-left-to-right": false,
-        },
-        "modules": [
-            "custom/power",
-            "custom/logout",
-            "custom/lock",
-            "custom/reboot",
-        ]
-    },
-    // TODO: Icons on all but `custom/power` are small, even with span
-    "custom/logout": {
-        "format": "<span font-family='Font Awesome 6 Free'>󰗼</span>",
-        "tooltip": false,
-        "on-click": "niri msg action quit"
-    },
-    "custom/lock": {
-        "format": "<span font-family='Font Awesome 6 Free'>󰍁</span>",
-        "tooltip": false,
-        "on-click": "swaylock"
-    },
-    "custom/reboot": {
-        "format": "<span font-family='Font Awesome 6 Free'>󰜉</span>",
-        "tooltip": false,
-        "on-click": "reboot"
-    },
-    "custom/power": {
+    // Power options using a eww widget
+    "custom/eww-power": {
         "format": "<span font-family='Font Awesome 6 Free'></span>",
         "tooltip": false,
-        "on-click": "shutdown now"
+        "on-click": "eww open --toggle powermenu"
     }
 
 }

@@ -10,6 +10,7 @@
 // Startup utilities
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
+spawn-at-startup "eww" "daemon"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "lxpolkit"
 spawn-at-startup "sh" "-c" "swaybg --image ~/Dropbox/wallpaper.jpg --mode fill"

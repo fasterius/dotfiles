@@ -1,0 +1,39 @@
+(defwindow powermenu
+  :geometry (geometry :width "150px"
+                      :height "150px"
+                      :anchor "top right"
+  )
+  :monitor 0
+  :exclusive false
+  :focusable false
+  :stacking "fg"
+
+  (box
+    :class "powermenu"
+    :orientation "vertical"
+
+    (button
+      :class "entry"
+      :onclick "systemctl suspend; eww open --toggle powermenu"
+      "Sleep"
+    )
+
+    (button
+      :class "entry"
+      :onclick "niri msg action quit -s; eww open --toggle powermenu"
+      "Logout"
+    )
+
+    (button
+      :class "entry"
+      :onclick "systemctl reboot; eww open --toggle powermenu"
+      "Restart"
+    )
+
+    (button
+      :class "entry"
+      :onclick "systemctl poweroff; eww open --toggle powermenu"
+      "Power Off"
+    )
+  )
+)
