@@ -69,10 +69,6 @@ return {
         -- Load BibTeX extension
         require("telescope").load_extension("bibtex")
 
-        -- Change colour of search results
-        -- TODO: don't hard-code
-        vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#268bd2" })
-
         -- Enable telescope fzf native (if installed)
         pcall(require("telescope").load_extension, "fzf")
 
@@ -87,12 +83,7 @@ return {
 
         -- Finding files
         vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "[F]ind files inside [G]it repository" })
-        vim.keymap.set(
-            "n",
-            "<leader>ff",
-            builtin.find_files,
-            { desc = "[F]ind [F]iles in the current working directory" }
-        )
+        vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles in the current working directory" })
         vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
 
         -- Searching
@@ -101,12 +92,7 @@ return {
         vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
         vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
         vim.keymap.set("n", "<leader>si", builtin.highlights, { desc = "[S]earch h[I]ghlights" })
-        vim.keymap.set(
-            "n",
-            "<leader>/",
-            builtin.current_buffer_fuzzy_find,
-            { desc = "[/] Fuzzily search in current buffer]" }
-        )
+        vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer]" })
 
         -- LSP
         vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })

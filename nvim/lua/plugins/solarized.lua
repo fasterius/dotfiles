@@ -35,6 +35,9 @@ return {
         vim.api.nvim_set_hl(0, "GitSignsAdd", { bg = "#eee8d5", fg = "#859900" })
         vim.api.nvim_set_hl(0, "GitSignsChange", { bg = "#eee8d5", fg = "#b58900" })
         vim.api.nvim_set_hl(0, "GitSignsDelete", { bg = "#eee8d5", fg = "#dc322f" })
+
+        -- Telescope colours
+        vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#268BD2", bold = true })
     end,
 }
 
