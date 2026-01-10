@@ -131,6 +131,12 @@ window-rule {
     variable-refresh-rate true
 }
 
+// Open Steam friends list with set window size
+window-rule {
+    match app-id=r#"^steam$"# title="Friends List"
+    default-column-width { fixed 360; }
+}
+
 // -------------------------------- Keybinds -----------------------------------
 
 binds {
