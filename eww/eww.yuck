@@ -2,6 +2,8 @@
   :geometry (geometry :width "150px"
                       :height "150px"
                       :anchor "top right"
+                      :x "8px"
+                      :y "7px"
   )
   :monitor 0
   :exclusive false
