@@ -19,7 +19,7 @@ spawn-at-startup "~/.dotfiles/scripts/swayidle-idle.sh"
 
 // Startup applications
 spawn-at-startup "dropbox" "start"
-// spawn-at-startup "firefox"
+spawn-at-startup "firefox"
 spawn-at-startup "steam"
 
 // Set X11 display to use the Xwayland instance launched by xwayland-satellite
