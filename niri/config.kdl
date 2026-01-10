@@ -88,6 +88,7 @@ window-rule {
 window-rule {
     match app-id=r#"^Alacritty$"#
     match app-id=r#"^*Calendar$"#
+    match app-id=r#"^discord$"#
     match app-id=r#"^org.qbittorrent.qBittorrent$"#
     match app-id=r#"^libreoffice-*"#
     match app-id=r#"^*Lutris$"#
@@ -149,6 +150,8 @@ binds {
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "alacritty"; }
     Super+C hotkey-overlay-title="Run or raise Calendar" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "gnome-calendar"; }
+    Super+I hotkey-overlay-title="Run or raise Discord" \
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "Discord"; }
     Super+F hotkey-overlay-title="Run or raise Firefox" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "firefox"; }
     Super+N hotkey-overlay-title="Run or raise Nautilus" \
