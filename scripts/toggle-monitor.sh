@@ -3,7 +3,7 @@
 # Script that toggles a monitor on/off
 
 # Monitor name
-MONITOR="DP-3"
+MONITOR="DP-2"
 
 # Check if monitor is on/off and toggle
 if wlr-randr | grep -A6 "$MONITOR" | grep "Enabled" | grep -q "yes"; then
