@@ -17,6 +17,13 @@ fi
 if [[ "$(uname)" == "Linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
     export PATH="$PATH:/usr/share/git-core/contrib"
+
+    # Icon locations
+    export XDG_ICON_DIRS="/usr/share/icons:/usr/local/share/icons:$HOME/.local/share/icons"
+
+    # Use GNOME as default XDG desktop; gtk as fallback
+    export XDG_CURRENT_DESKTOP=GNOME
+    export QT_QPA_PLATFORMTHEME=gtk
 fi
 
 # MacOS-specific settings
