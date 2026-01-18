@@ -34,6 +34,7 @@ if [[ "$OS" == "Linux" ]]; then
         gnome/run-or-raise
         mako
         niri
+        quickshell
         waybar
     )
 fi
