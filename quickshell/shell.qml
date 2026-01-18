@@ -88,7 +88,10 @@ Scope {
 					IconImage {
                         source: root.muted
                             ? Quickshell.iconPath("audio-volume-muted")
-                            : Quickshell.iconPath("audio-volume-high")
+                            : Quickshell.iconPath(root.volume > 0
+                                ? "audio-volume-high"
+                                : "player-volume"
+                            )
 						implicitSize: 30
 					}
 
