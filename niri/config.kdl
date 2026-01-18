@@ -10,6 +10,7 @@
 // Startup utilities
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
+spawn-at-startup "quickshell"
 spawn-at-startup "eww" "daemon"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "lxpolkit"
@@ -181,11 +182,11 @@ binds {
 
     // Volume controls
     XF86AudioRaiseVolume allow-when-locked=true \
-        { spawn "~/.dotfiles/scripts/volume-control.sh" "up"; }
+        { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true \
-        { spawn "~/.dotfiles/scripts/volume-control.sh" "down"; }
-    XF86AudioMute        allow-when-locked=true \
-        { spawn "~/.dotfiles/scripts/volume-control.sh" "mute"; }
+        { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute allow-when-locked=true \
+        { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
 
     // Spotify-specific media controls
     XF86AudioPlay allow-when-locked=true \
