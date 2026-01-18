@@ -14,18 +14,26 @@ Scope {
 		objects: [ Pipewire.defaultAudioSink ]
 	}
 
-	Connections {
-		target: Pipewire.defaultAudioSink?.audio
-
-        // Show widget for `hideTimer.interval` milliseconds on volume change
-		function onVolumeChanged() {
-			root.shouldShowOsd = true;
-			hideTimer.restart();
-		}
-	}
+    // Get volume and muted status from the default audio sink
+    property real volume: Pipewire.defaultAudioSink?.audio.volume ?? 0
+    property bool muted: Pipewire.defaultAudioSink?.audio.muted ?? false
 
     // Do not show widget by default
 	property bool shouldShowOsd: false
+
+	Connections {
+		target: Pipewire.defaultAudioSink?.audio
+
+        // Show widget on volume/mute status change
+		function onVolumeChanged() {
+			root.shouldShowOsd = true
+			hideTimer.restart()
+		}
+        function onMutedChanged() {
+            root.shouldShowOsd = true
+            hideTimer.restart()
+        }
+	}
 
     // Specify for how long the widget should be shown
 	Timer {
@@ -68,6 +76,7 @@ Scope {
                 // This is the final container that contains a row-layout of
                 // multiple elements: the icon and the volume bar itself
 				RowLayout {
+                    spacing: 13
 					anchors {
 						fill: parent
 						leftMargin: 20
@@ -77,19 +86,21 @@ Scope {
                     // Icon pack is specified at the top of the file with the
                     // `@ pragma IconTheme <icon-theme>` line
 					IconImage {
-						source: Quickshell.iconPath("audio-volume-high")
+                        source: root.muted
+                            ? Quickshell.iconPath("audio-volume-muted")
+                            : Quickshell.iconPath("audio-volume-high")
 						implicitSize: 30
 					}
 
                     // The background of the volume bar, i.e. the "non-filled"
                     // part of the bar
 					Rectangle {
-						// Stretches to fill all left-over space
-						Layout.fillWidth: true
-
 						implicitHeight: 11
 						radius: 20
 						color: "#50ffffff"
+
+						// Stretches to fill all horizontal left-over space
+						Layout.fillWidth: true
 
                         // The foreground of the volume bar, i.e. the "filled"
                         // part of the bar
@@ -100,7 +111,10 @@ Scope {
 								bottom: parent.bottom
 							}
 							radius: parent.radius
-							implicitWidth: parent.width * (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+                            implicitWidth: parent.width *
+                                (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+                            // Colour bar white or grey depending on muted status
+                            color: root.muted ? "#50ffffff" : "#ffffffff"
 						}
 					}
 				}
