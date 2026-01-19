@@ -10,6 +10,7 @@ return {
         nextflow = {
             files = { exclude = { ".git", ".nf-test", "work" } },
             suppressFutureWarnings = false,
+            errorReportingMode = "paranoid",
             formatting = { harshilAlignment = true },
         },
     },
