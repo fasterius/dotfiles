@@ -2,7 +2,7 @@ return {
     cmd = {
         "java",
         "-jar",
-        vim.fn.expand("$HOME/opt/nextflow-language-server/build/libs/language-server-all.jar"),
+        vim.fn.expand("$HOME/opt/nextflow-language-server-all.jar"),
     },
     filetypes = { "nextflow" },
     root_markers = { "nextflow.config", ".git" },
