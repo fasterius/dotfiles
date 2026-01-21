@@ -61,6 +61,7 @@
 # Does not paginate if output fits on one screen (`less -F` flag)
 [pager]
     diff = sh -c 'command -v diff-highlight > /dev/null && diff-highlight || cat' | less -F
+    branch = false
 
 # Log colours
 [color "decorate"]
