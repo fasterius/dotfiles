@@ -28,6 +28,7 @@ conf/local.config
 
 # Workflow testing
 **/run.sh
+**/run-sbatch.sh
 
 # Pixi environments
 **/.pixi
