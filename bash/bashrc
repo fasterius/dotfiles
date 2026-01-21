@@ -67,10 +67,10 @@ eval "$(pixi completion --shell bash)"
 
 # Enable fzf and change default colours
 eval "$(fzf --bash)"
-if [ "$(uname)" == "Darwin" ]; then
-    source ~/.dotfiles/bash/fzf-colours-darwin.sh
-elif [ "$(uname)" == "Linux" ]; then
-    source ~/.dotfiles/bash/fzf-colours-linux.sh
+if [ "$(hostname)" == "sajberspace" ]; then
+    source ~/.dotfiles/bash/fzf-colours-everforest.sh
+else
+    source ~/.dotfiles/bash/fzf-colours-solarized.sh
 fi
 
 # Locale

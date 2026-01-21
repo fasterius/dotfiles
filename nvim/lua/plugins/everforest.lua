@@ -4,7 +4,7 @@ return {
     priority = 1000,
     -- Only use this on Linux systems
     cond = function()
-        return vim.uv.os_uname().sysname == "Linux"
+        return vim.uv.os_gethostname() == "sajberspace"
     end,
     config = function()
         -- Plugin config

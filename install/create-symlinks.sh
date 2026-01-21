@@ -25,8 +25,8 @@ CONFIGS=(
     vim
 )
 
-# Linux-only software
-if [[ "$OS" == "Linux" ]]; then
+# Home PC-only software
+if [[ "$HOST" == "sajberspace" ]]; then
     CONFIGS+=(
         eww
         feh
@@ -83,25 +83,25 @@ ln -sfn $HOME/.dotfiles/pixi/manifests/pixi-global.toml $HOME/.pixi/manifests
 
 # --------------------------- OS-specific configs -----------------------------
 
-# Some configs requires symlinking different files depending on the current OS,
-# usually because of the desired colour scheme or font size.
+# Some configs requires symlinking different files depending on the current
+# hostname, usually because of the desired colour scheme or font size.
 
-OS_CONFIGS=(
+HOST_CONFIGS=(
     alacritty.toml
     btop.conf
 )
 
 echo "Creating other symlinks ..."
-for OS_CONFIG in ${OS_CONFIGS[@]}; do
-    APP="${OS_CONFIG/.*/}"
-    EXT="${OS_CONFIG/*./}"
-    if [[ "$OS" == "Linux" ]]; then
+for HOST_CONFIG in ${HOST_CONFIGS[@]}; do
+    APP="${HOST_CONFIG/.*/}"
+    EXT="${HOST_CONFIG/*./}"
+    if [[ "$HOST" == "sajberspace" ]]; then
         ln -sfn \
-            ~/.dotfiles/${APP}/${APP}-linux.${EXT} \
+            ~/.dotfiles/${APP}/${APP}-everforest.${EXT} \
             ~/.dotfiles/${APP}/${APP}.${EXT}
     else
         ln -sfn \
-            ~/.dotfiles/${APP}/${APP}-darwin.${EXT} \
+            ~/.dotfiles/${APP}/${APP}-solarized.${EXT} \
             ~/.dotfiles/${APP}/${APP}.${EXT}
     fi
 done

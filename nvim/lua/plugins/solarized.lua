@@ -5,7 +5,7 @@ return {
     priority = 1000,
     -- Only use this on Darwin systems
     cond = function()
-        return vim.uv.os_uname().sysname == "Darwin"
+        return vim.uv.os_gethostname() ~= "sajberspace"
     end,
     config = function()
         -- Light Solarized theme
