@@ -2,8 +2,9 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
-# Get current OS
+# Get current OS and host
 OS="$(uname)"
+HOST="$(hostname)"
 
 # ------------------------------- XDG Configs ----------------------------------
 
