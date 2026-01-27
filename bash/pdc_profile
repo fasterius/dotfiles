@@ -7,3 +7,8 @@ module load PDC/24.11 apptainer/1.4.0-cpeGNU-24.11
 # Add custom software to PATH
 export PATH="$HOME/opt/nvim/bin:$PATH"
 export PATH="$HOME/opt/ripgrep:$PATH"
+
+# Set Nextflow-related environment variables
+export NXF_HOME=~/nbis-testing/erikfas/.nextflow
+export NXF_APPTAINER_CACHEDIR=~/nbis-testing/erikfas/.apptainer
+export NXF_SINGULARITY_CACHEDIR=~/nbis-testing/erikfas/.singularity
