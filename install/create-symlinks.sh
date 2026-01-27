@@ -116,6 +116,7 @@ SCRIPTS=(
     apptainer-in-docker.sh
     conda-intel-env/conda-intel-env.sh
     docker-X11-interactive/docker-X11-interactive.sh
+    tmux-find-sessions/tmux-find-sessions.sh
     tmux-new.sh
 )
 
