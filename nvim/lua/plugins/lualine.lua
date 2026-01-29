@@ -84,7 +84,7 @@ return {
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = { { "filename", file_status = false } },
+                lualine_c = { { get_filename, file_status = false } },
                 lualine_x = { "filetype" },
                 lualine_y = {},
                 lualine_z = {},
