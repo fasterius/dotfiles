@@ -8,4 +8,4 @@ exposed = { vim-language-server = "vim-language-server" }
 [envs.quarto]
 channels = ["conda-forge", "bioconda"]
 dependencies = { quarto = "*", python = "*", pandas = "*", palmerpenguins = "*", pyright = "*", r-base = "*", r-languageserver = "*", r-palmerpenguins = "*", r-rmarkdown = "*", r-tidyverse = "*" }
-exposed = { python = "python", quarto = "quarto",  R = "R" }
+exposed = { python = "python", quarto = "quarto",  R = "R", Rscript = "Rscript"}
