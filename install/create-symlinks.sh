@@ -6,12 +6,13 @@
 OS="$(uname)"
 HOST="$(hostname)"
 
+# Make sure a temporary directory for storing (Neo)vim's history/backups exists
+mkdir -p $HOME/.tmp
+
 # ------------------------------- XDG Configs ----------------------------------
 
-# Make sure required directories exist
-mkdir -p ~/.config
-mkdir -p ~/.ssh/sockets
-mkdir -p ~/.tmp
+# Make sure XDG config directory exists
+mkdir -p $HOME/.config
 
 # List config files to be symlinked into XDG-compliant directories
 CONFIGS=(
@@ -105,19 +106,16 @@ for HOST_CONFIG in ${HOST_CONFIGS[@]}; do
     EXT="${HOST_CONFIG/*./}"
     if [[ "$HOST" == "sajberspace" ]]; then
         ln -sfn \
-            ~/.dotfiles/${APP}/${APP}-everforest.${EXT} \
-            ~/.dotfiles/${APP}/${APP}.${EXT}
+            $HOME/.dotfiles/${APP}/${APP}-everforest.${EXT} \
+            $HOME/.dotfiles/${APP}/${APP}.${EXT}
     else
         ln -sfn \
-            ~/.dotfiles/${APP}/${APP}-solarized.${EXT} \
-            ~/.dotfiles/${APP}/${APP}.${EXT}
+            $HOME/.dotfiles/${APP}/${APP}-solarized.${EXT} \
+            $HOME/.dotfiles/${APP}/${APP}.${EXT}
     fi
 done
 
 # --------------------------------- Scripts -----------------------------------
-
-# Make sure that `~/.local/bin` exists
-mkdir -p ~/.local/bin
 
 # List scripts to be symlinked
 SCRIPTS=(
@@ -128,8 +126,10 @@ SCRIPTS=(
     tmux-new.sh
 )
 
-# Symlink all scripts into `~/.local/bin`
+mkdir -p $HOME/.local/bin
+
+# Symlink all scripts into `$HOME/.local/bin`
 echo "Creating script symlinks ..."
 for SCRIPT in ${SCRIPTS[@]}; do
-    ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" ~/.local/bin
+    ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" $HOME/.local/bin
 done
