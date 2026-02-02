@@ -8,10 +8,9 @@ HOST="$(hostname)"
 
 # ------------------------------- XDG Configs ----------------------------------
 
-# Make sure `~/.config` exists
+# Make sure required directories exist
 mkdir -p ~/.config
-
-# Make sure a temporary directory for storing (Neo)vim's history/backups exists
+mkdir -p ~/.ssh/sockets
 mkdir -p ~/.tmp
 
 # List config files to be symlinked into XDG-compliant directories
@@ -21,8 +20,8 @@ CONFIGS=(
     btop
     jj
     marksman
-    stylua
     nvim
+    stylua
     vim
 )
 
@@ -71,16 +70,24 @@ for CONFIG in ${CONFIGS_HOME[@]}; do
     ln -sfn $HOME/.dotfiles/$CONFIG $HOME/.$(basename $CONFIG)
 done
 
-# ---------------------------------- Pixi -------------------------------------
+# ----------------------------- Custom configs --------------------------------
+
+echo "Creating custom symlinks ..."
 
 # Pixi can only use XDG-compliant directories for both the config and the global
 # manifest on Linux, while using $HOME/.pixi works on both systems, so a
 # specific setup is used here.
 
-echo "Creating Pixi symlinks ..."
 mkdir -p $HOME/.pixi/manifests
 ln -sfn $HOME/.dotfiles/pixi/config.toml $HOME/.pixi
 ln -sfn $HOME/.dotfiles/pixi/manifests/pixi-global.toml $HOME/.pixi/manifests
+
+# The SSH config should be tracked by dotfiles, but not the `$HOME/.ssh` directory
+# itself, as that is written to by the system.
+
+mkdir -p $HOME/.ssh/sockets
+ln -sfn $HOME/.dotfiles/ssh/config $HOME/.ssh
+
 
 # --------------------------- OS-specific configs -----------------------------
 
