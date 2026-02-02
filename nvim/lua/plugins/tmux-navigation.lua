@@ -12,6 +12,6 @@ return {
         vim.cmd([[ let g:tmux_navigator_disable_when_zoomed = 1 ]])
 
         -- Disable edge wrapping
-        vim.cmd([[ let  g:tmux_navigator_no_wrap = 1 ]])
+        vim.cmd([[ let g:tmux_navigator_no_wrap = 1 ]])
     end,
 }
