@@ -37,5 +37,6 @@ return {
         vim.keymap.set("n", "<localleader>c", "<plug>SlimeSendCell")
         vim.keymap.set("n", "<localleader>C", ':SlimeSend0 "\\x03"<CR>')
         vim.keymap.set("n", "<localleader>q", ':SlimeSend0 "q"<CR>')
+        vim.keymap.set("n", "<localleader>r", ':SlimeSend0 "\\n\\n"<CR>')
     end,
 }
