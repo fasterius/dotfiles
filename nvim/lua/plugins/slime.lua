@@ -26,6 +26,10 @@ return {
         -- Use triple brackets as cell delimiters
         vim.g.slime_cell_delimiter = "```"
 
+        -- Use bracketed paste mode to help with Python indentation; more
+        -- details at https://cirw.in/blog/bracketed-paste
+        vim.g.slime_bracketed_paste = 1
+
         -- General mappings
         vim.keymap.set("n", "<localleader>s", "<plug>SlimeMotionSend")
         vim.keymap.set("n", "<localleader>l", "<plug>SlimeLineSend")
