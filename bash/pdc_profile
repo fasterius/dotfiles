@@ -12,3 +12,6 @@ export PATH="$HOME/opt/ripgrep:$PATH"
 export NXF_HOME=~/nbis-testing/erikfas/.nextflow
 export NXF_APPTAINER_CACHEDIR=~/nbis-testing/erikfas/.apptainer
 export NXF_SINGULARITY_CACHEDIR=~/nbis-testing/erikfas/.singularity
+
+# Alias to check personal storage
+alias storage='lfs quota -hp $UID /cfs/klemming'
