@@ -37,3 +37,6 @@ results-*
 
 # Apptainer
 **/.apptainer
+
+# SLURM
+**/slurm-*.out
