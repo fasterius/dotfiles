@@ -19,6 +19,7 @@ fi
 echo "Installing brew formulae ..."
 brew install \
     act \
+    badgeify \
     bash \
     bash-completion \
     bat \
