@@ -82,6 +82,10 @@ return {
 
             -- Update repeated placeholders while writing
             update_events = "TextChanged,TextChangedI",
+
+            -- Clean up old snippets when leaving them
+            region_check_events = "InsertEnter",
+            delete_check_events = "InsertLeave",
         })
 
         -- Load snippets lazily
