@@ -7,5 +7,5 @@ exposed = { vim-language-server = "vim-language-server" }
 
 [envs.quarto]
 channels = ["conda-forge", "bioconda"]
-dependencies = { quarto = "*", python = "*", IPython = "*", jupyter = "*", pandas = "*", palmerpenguins = "*", papermill = "*", pyright = "*", r-base = "*", r-languageserver = "*", r-palmerpenguins = "*", r-rmarkdown = "*", r-tidyverse = "*", scanpy = "*", harmonypy = "*", leidenalg = "*"}
+dependencies = { quarto = "*", python = "3.12.*", IPython = "*", jupyter = "*", pandas = "*", palmerpenguins = "*", papermill = "*", pyright = "*", r-base = "*", r-languageserver = "*", r-palmerpenguins = "*", r-rmarkdown = "*", r-tidyverse = "*", scanpy = "*", harmonypy = "*", leidenalg = "*", spatialdata = "*", zarr = ">=2.16,<3", scanorama = "*"}
 exposed = { python = "python", quarto = "quarto",  R = "R", Rscript = "Rscript"}
