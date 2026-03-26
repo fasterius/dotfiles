@@ -53,6 +53,11 @@ return {
                 local filepath = vim.fn.expand("%:p")
                 local parent_dir = vim.fn.fnamemodify(filepath, ":h:t")
                 return parent_dir .. "/" .. filename
+            elseif filename == "main.nf.test" then
+                local filepath = vim.fn.expand("%:p")
+                local grandparent_dir = vim.fn.fnamemodify(filepath, ":h:h:t")
+                local parent_dir = vim.fn.fnamemodify(filepath, ":h:t")
+                return grandparent_dir .. "/" .. parent_dir .. "/" .. filename
             else
                 return filename
             end
