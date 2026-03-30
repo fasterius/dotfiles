@@ -29,7 +29,7 @@ results-*
 
 # Workflow testing
 **/run.sh
-**/run-sbatch.sh
+**/run-*.sh
 
 # Pixi environments
 **/.pixi
