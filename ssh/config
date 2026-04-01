@@ -2,7 +2,11 @@ Host *
   ControlMaster auto
   ControlPath ~/.ssh/sockets/%r@%h-%p
   ControlPersist 600
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Host dardel
+  IdentityFile ~/.ssh/dardel
 
 Host github.com
-  AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/github
