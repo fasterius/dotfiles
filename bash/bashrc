@@ -189,12 +189,53 @@ conda_env() {
 
 # Function to get branch if inside a git repository
 git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+
+    # Start in current directory without knowing where the Git directory is
+    local DIR="$PWD"
+    local GIT_DIR=""
+
+    # Loop until the Git directory is found
+    while [[ -n "$DIR" ]]; do
+
+        # If Git directory is found, break loop
+        if [[ -d "$DIR/.git" ]]; then
+            GIT_DIR="$DIR/.git"
+            break
+
+        # Handle git-worktrees, which are files pointing to the Git directory
+        elif [[ -f "$DIR/.git" ]]; then
+            read -r GIT_DIR < "$DIR/.git"
+            GIT_DIR="${GIT_DIR#gitDIR: }"
+            break
+        fi
+
+        # Stop if we've reached the system root
+        [[ "$DIR" == "/" ]] && break
+
+        # Move up one level in the directory hierarchy
+        DIR="${DIR%/*}"
+    done
+
+    # Only proceed if we find both the Git directory and HEAD
+    if [[ -n "$GIT_DIR" && -f "$GIT_DIR/HEAD" ]]; then
+        # Read in HEAD, which either contains e.g. `ref: refs/heads/<branch>` on
+        # a branch, or the full SHA when HEAD is detached
+        read -r HEAD < "$GIT_DIR/HEAD"
+        case "$HEAD" in
+            ref:\ refs/heads/*)
+                printf '(%s)' "${HEAD#ref: refs/heads/}"
+                ;;
+            *)
+                # Truncate to the standard 7 characters for full SHAs
+                printf '(HEAD detached at %.7s)' "$HEAD"
+                ;;
+        esac
+    fi
 }
 
 # Build prompt
 export PS1='\[\e[0;95m\]$(conda_env)'      # Conda environment (purple)
 export PS1=$PS1'\[\e[m\][\h: '             # Hostname (grey)
 export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'   # Current directory (blue)
-export PS1=$PS1'\[\e[0;36m\]$(git_branch)' # Git branch (teal)
+export PS1=$PS1'\[\e[0;36m\] $(git_branch)' # Git branch (teal)
 export PS1=$PS1'\[\e[m\]$ '                # End (grey)
