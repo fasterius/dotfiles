@@ -1,6 +1,10 @@
 -- Show changed code in the signcolumn and other Git functionality
 return {
     "lewis6991/gitsigns.nvim",
+    cond = function()
+        local hostname = vim.uv.os_gethostname()
+        return not hostname:match("login1")
+    end,
     config = function()
         require("gitsigns").setup({
             signs = {
