@@ -62,10 +62,10 @@ vim.o.shiftwidth = 4 -- Use 4 spaces when indenting
 
 -- [[ Backup, swap and undo settings ]]
 vim.o.backup = true -- Keep backup files
-vim.o.backupdir = "~/.tmp,/var/tmp,/tmp" -- Store backups in these directories
-vim.o.directory = "~/.tmp,/var/tmp,/tmp" -- Store swapfiles in these directories
+vim.o.backupdir = "/tmp"
+vim.o.directory = "/tmp"
 vim.o.undofile = true -- Keep undofiles
-vim.o.undodir = "~/.tmp,/var/tmp,/tmp" -- Store undofiles in these directories
+vim.o.undodir = "/tmp"
 
 -- [[ Folding ]]
 vim.o.foldlevel = 10 -- No more than 10 folds
