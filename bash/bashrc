@@ -201,12 +201,6 @@ git_branch() {
         if [[ -d "$DIR/.git" ]]; then
             GIT_DIR="$DIR/.git"
             break
-
-        # Handle git-worktrees, which are files pointing to the Git directory
-        elif [[ -f "$DIR/.git" ]]; then
-            read -r GIT_DIR < "$DIR/.git"
-            GIT_DIR="${GIT_DIR#gitDIR: }"
-            break
         fi
 
         # Stop if we've reached the system root
@@ -223,6 +217,7 @@ git_branch() {
         read -r HEAD < "$GIT_DIR/HEAD"
         case "$HEAD" in
             ref:\ refs/heads/*)
+                # Remove `ref: refs/heads/` when on a branch
                 printf '(%s)' "${HEAD#ref: refs/heads/}"
                 ;;
             *)
@@ -234,8 +229,8 @@ git_branch() {
 }
 
 # Build prompt
-export PS1='\[\e[0;95m\]$(conda_env)'      # Conda environment (purple)
-export PS1=$PS1'\[\e[m\][\h: '             # Hostname (grey)
-export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'   # Current directory (blue)
+export PS1='\[\e[0;95m\]$(conda_env)'       # Conda environment (purple)
+export PS1=$PS1'\[\e[m\][\h: '              # Hostname (grey)
+export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'    # Current directory (blue)
 export PS1=$PS1'\[\e[0;36m\] $(git_branch)' # Git branch (teal)
-export PS1=$PS1'\[\e[m\]$ '                # End (grey)
+export PS1=$PS1'\[\e[m\]$ '                 # End (grey)
