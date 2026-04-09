@@ -1,3 +1,6 @@
+-- Enable the fast loading experimental feature
+vim.loader.enable()
+
 require("autocommands")
 require("keymaps")
 require("lsp")
