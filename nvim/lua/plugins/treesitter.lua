@@ -1,93 +1,53 @@
 -- Fast syntax parsing
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
-    build = function()
-        pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-    end,
+    build = ":TSUpdate",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-context", -- Code context
         "nvim-treesitter/nvim-treesitter-textobjects", -- Text objects
         "JoosepAlviste/nvim-ts-context-commentstring", -- Context-based comments
     },
     config = function()
-        require("nvim-treesitter.configs").setup({
+        require("nvim-treesitter").setup()
 
-            -- Languages to always be installed
-            ensure_installed = {
-                "bash",
-                "dockerfile",
-                "javascript",
-                "jsonc",
-                "lua",
-                "markdown",
-                "markdown_inline",
-                "python",
-                "r",
-                "toml",
-                "vim",
-                "vimdoc",
-                "yaml",
-            },
+        require("nvim-treesitter").install({
+            "bash",
+            "dockerfile",
+            "javascript",
+            "lua",
+            "markdown",
+            "markdown_inline",
+            "python",
+            "r",
+            "toml",
+            "vim",
+            "vimdoc",
+            "yaml",
+        })
 
-            -- General settings
-            highlight = {
-                enable = true,
-            },
-            indent = {
-                enable = true,
-                disable = {
-                    "markdown", -- Treesitter is worse than Vim list formatting
-                },
-            },
-
-            -- Settings for additional text objects
-            textobjects = {
-                select = {
-                    enable = true,
-                    lookahead = true, -- Jump forward to textobj
-                    keymaps = {
-                        ["aa"] = "@parameter.outer",
-                        ["ia"] = "@parameter.inner",
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@class.inner",
-                    },
-                },
-                move = {
-                    enable = true,
-                    set_jumps = true, -- Add jumps to jumplist
-                    goto_next_start = {
-                        ["]m"] = "@function.outer",
-                        ["]]"] = "@class.outer",
-                    },
-                    goto_next_end = {
-                        ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
-                    },
-                    goto_previous_start = {
-                        ["[m"] = "@function.outer",
-                        ["[["] = "@class.outer",
-                    },
-                    goto_previous_end = {
-                        ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
-                    },
-                },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["<leader>a"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["<leader>A"] = "@parameter.inner",
-                    },
-                },
-            },
+        -- Enable highlighting and indentation support
+        vim.api.nvim_create_autocmd("FileType", {
+            callback = function()
+                -- Enable treesitter highlighting and disable regex syntax
+                pcall(vim.treesitter.start)
+                -- Enable treesitter-based indentation
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
         })
 
         -- Add underline to Context bar
         vim.cmd([[ hi TreesitterContextBottom gui=underline guisp=Grey ]])
+
+        -- Make `ts_context_commentstring` work with native Neovim commenting;
+        -- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#native-commenting-in-neovim-010
+        -- for details.
+        require("ts_context_commentstring").setup({
+            enable_autocmd = false,
+        })
+        local get_option = vim.filetype.get_option
+        vim.filetype.get_option = function(filetype, option)
+            return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+                or get_option(filetype, option)
+        end
     end,
 }

@@ -1,7 +1,6 @@
 -- Fuzzy finding with Telescope
 return {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
     keys = {
         "<leader>ff",
         "<leader>fg",
