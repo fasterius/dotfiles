@@ -30,15 +30,6 @@ return {
         solarized.replace.a.bg = colours.orange -- Orange REPLACE mode
         solarized.inactive.c.bg = colours.base02 -- Inactive statusline
 
-        -- Function to check for zoom status of the `simple-zoom.lua` plugin
-        local function IsZoomedIn()
-            if vim.t["simple-zoom"] == nil then
-                return ""
-            elseif vim.t["simple-zoom"] == "zoom" then
-                return "󰍉"
-            end
-        end
-
         -- Function to get the current filename: if the current filename equals
         -- `main.nf` also include the parent directory, otherwise just return
         -- the filename itself (useful for working with nf-core).
@@ -63,6 +54,23 @@ return {
             end
         end
 
+        local function get_filename_is_zoomed_in()
+            local filename = get_filename()
+            if vim.t["simple-zoom"] == nil then
+                return filename
+            elseif vim.t["simple-zoom"] == "zoom" then
+                return filename .. " 󰍉"
+            end
+        end
+
+        local function get_colour_zoomed_in()
+            if vim.t["simple-zoom"] == "zoom" then
+                return { bg = colours.blue, fg = colours.base03 }
+            else
+                return { bg = colours.base02 }
+            end
+        end
+
         -- Lualine setup
         require("lualine").setup({
             options = {
@@ -75,9 +83,12 @@ return {
                 lualine_a = { "mode" },
                 lualine_b = {},
                 lualine_c = {
-                    { get_filename, file_status = false },
+                    {
+                        get_filename_is_zoomed_in,
+                        file_status = false,
+                        color = get_colour_zoomed_in,
+                    },
                     { "diff" },
-                    { IsZoomedIn, color = { fg = colours.blue } },
                 },
                 lualine_x = {
                     { "diagnostics", sources = { "nvim_lsp" } },
