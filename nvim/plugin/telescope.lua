@@ -1,0 +1,112 @@
+-- Fuzzy finding with Telescope
+
+-- Fuzzy Finder algorithm which dependencies local dependencies to be
+-- built (only load if `make` is available) automatically on install/update
+vim.api.nvim_create_autocmd("PackChanged", {
+    callback = function(ev)
+        if (ev.data.spec.name == "telescope-fzf-native.nvim") and ((ev.data.kind == "install") or (ev.data.kind == "update")) then
+            if not ev.data.active then
+                vim.cmd.packadd("telescope-fzf-native.nvim")
+            end
+
+            vim.system({ "make" }, { cwd = ev.data.path })
+        end
+    end,
+})
+
+vim.pack.add({
+    { src = "https://github.com/nvim-telescope/telescope.nvim", version = "0.1.x" },
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
+})
+
+-- branch = "0.1.x",
+
+-- keys = {
+--     "<leader>ff",
+--     "<leader>fg",
+--     "<leader>fb",
+--     "<leader>sg",
+--     "<leader>st",
+--     "<leader>sw",
+--     "<leader>sd",
+--     "<leader>sh",
+--     "<leader>si",
+--     "<leader>/",
+--     "<leader>ds",
+--     "<leader>ws",
+--     "gr",
+-- },
+
+-- dependencies = {
+-- { "nvim-telescope/telescope-bibtex.nvim" },
+-- },
+
+local actions = require("telescope.actions")
+require("telescope").setup({
+    defaults = {
+        layout_config = {
+            width = 0.9,
+        },
+        mappings = {
+            i = {
+                -- Disable scrolling inside preview windows
+                ["<C-u>"] = false,
+                ["<C-d>"] = false,
+                -- Make a single <Esc> exit Telescope
+                ["<Esc>"] = actions.close,
+                -- Send selected/whole list to quickfix list
+                ["<C-q>"] = actions.smart_send_to_qflist,
+            },
+        },
+        -- Ignore Zettelkasten-related files
+        file_ignore_patterns = {
+            "templates/new_note.md",
+            "zettelkasten.bib",
+        },
+    },
+    extensions = {
+        bibtex = {
+            custom_formats = {
+                -- Custom format for Zettelkasten with Telekasten plugin
+                { id = "telekasten", cite_marker = "@%s" },
+            },
+            citation_format = "{{author}} (**{{year}}**), _{{title}}_. [^@{{label}}]",
+            -- Wrap long lines inside previewer
+            wrap = true,
+        },
+    },
+})
+
+-- -- Load BibTeX extension
+-- require("telescope").load_extension("bibtex")
+
+-- Enable telescope fzf native (if installed)
+pcall(require("telescope").load_extension, "fzf")
+
+-- Functions for keymaps
+local builtin = require("telescope.builtin")
+local function _live_grep()
+    builtin.live_grep({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] })
+end
+local function _grep_string()
+    builtin.grep_string({ cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] })
+end
+
+-- Finding files
+vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "[F]ind files inside [G]it repository" })
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles in the current working directory" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind existing [B]uffers" })
+
+-- Searching
+vim.keymap.set("n", "<leader>sg", _live_grep, { desc = "[S]earch inside [G]it repository " })
+vim.keymap.set("n", "<leader>sw", _grep_string, { desc = "[S]earch current [W]ord inside Git repository" })
+vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+vim.keymap.set("n", "<leader>si", builtin.highlights, { desc = "[S]earch h[I]ghlights" })
+vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzily search in current buffer]" })
+
+-- LSP
+vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
+vim.keymap.set("n", "<leader>ws", builtin.lsp_dynamic_workspace_symbols, { desc = "[W]orkspace [S]ymbols" })
+vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[G]oto [R]eferences" })
