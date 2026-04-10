@@ -31,6 +31,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client.name == "nextflow-ls" or client.name == "r-ls" then
             client.server_capabilities.documentFormattingProvider = false
         end
+
+        -- Disable semantic tokens for Nextflow
+        if client.name == "nextflow-ls" then
+            client.server_capabilities.semanticTokensProvider = false
+        end
     end,
 })
 
