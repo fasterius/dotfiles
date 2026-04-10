@@ -71,4 +71,4 @@ vim.o.undodir = "/tmp"
 vim.o.foldlevel = 10 -- No more than 10 folds
 vim.o.foldlevelstart = 0 -- Start with folds closed
 vim.o.foldmethod = "expr" -- Expression folding ...
-vim.o.foldexpr = "nvim_treesitter#foldexpr()" -- ... with Treesitter
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- ... with Treesitter
