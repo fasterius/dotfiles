@@ -166,19 +166,6 @@ alias gw='git switch'
 alias gwc='git switch --create'
 alias gwd='git switch --detach'
 
-# Aliases to log into Rackham @ Uppmax
-alias rackham='ssh erikfas@rackham.uppmax.uu.se'
-alias rackham1='ssh erikfas@rackham1.uppmax.uu.se'
-alias rackham2='ssh erikfas@rackham2.uppmax.uu.se'
-alias rackham3='ssh erikfas@rackham3.uppmax.uu.se'
-alias rackham4='ssh erikfas@rackham4.uppmax.uu.se'
-
-# Bamse @ Mats Nilsson's group
-alias bamse='ssh external@130.237.251.237'
-
-# Dardel @ PDC
-alias dardel='ssh erikfas@dardel.pdc.kth.se'
-
 # Prompt ---------------------------------------------------------------------
 
 # Function to get conda env if in an activated environment
@@ -188,6 +175,8 @@ conda_env() {
 }
 
 # Function to get branch if inside a git repository
+# This is more efficient than doing `git branch` and parsing the output on
+# systems like Dardel (using Lustre), where `git` commands can be slow.
 git_branch() {
 
     # Start in current directory without knowing where the Git directory is

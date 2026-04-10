@@ -6,6 +6,8 @@ Host *
   UseKeychain yes
 
 Host dardel
+  User erikfas
+  Hostname dardel.pdc.kth.se
   IdentityFile ~/.ssh/dardel
 
 Host github.com
