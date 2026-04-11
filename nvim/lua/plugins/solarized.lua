@@ -1,4 +1,4 @@
--- Lua port of Solarized8 colour scheme
+-- Lua port of Solarized colour scheme
 return {
     "ishan9299/nvim-solarized-lua",
     lazy = false,
