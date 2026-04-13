@@ -91,7 +91,7 @@ return {
                     { "diff" },
                 },
                 lualine_x = {
-                    { "diagnostics", sources = { "nvim_lsp" } },
+                    { "diagnostics" },
                     { "filetype" },
                 },
                 lualine_y = { "progress" },
