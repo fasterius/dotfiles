@@ -35,6 +35,15 @@ return {
             end,
         })
 
+        -- Disable indentation support in Markdown and Quarto files
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "markdown", "quarto" },
+            callback = function()
+                pcall(vim.treesitter.start)
+                vim.bo.indentexpr = ""
+            end,
+        })
+
         -- Add underline to Context bar
         vim.cmd([[ hi TreesitterContextBottom gui=underline guisp=Grey ]])
 
