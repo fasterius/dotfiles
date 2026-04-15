@@ -1,9 +1,3 @@
-# Add to PATH
-export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.dotfiles/scripts:$PATH"
-export PATH="$HOME/.pixi/bin:$PATH"
-
 # Source custom HPC profile if in a SSH session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     if $(uname -n | grep -q "uppmax") ; then
@@ -38,8 +32,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Local paths
     PATH="/usr/local/bin:$PATH"
 
-    # Set PATH for Python 3.12
-    export PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"
+    # Set PATH for Python 3.12 (last in PATH, as a fallback)
+    export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.12/bin"
 
     # Add Homebrew paths to PATH
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
@@ -61,6 +55,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
     source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
 fi
+
+# Add to PATH
+export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.dotfiles/scripts:$PATH"
+export PATH="$HOME/.pixi/bin:$PATH"
 
 # Autocompletion for Pixi
 eval "$(pixi completion --shell bash)"
