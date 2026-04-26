@@ -210,11 +210,11 @@ git_branch() {
         case "$HEAD" in
             ref:\ refs/heads/*)
                 # Remove `ref: refs/heads/` when on a branch
-                printf '(%s)' "${HEAD#ref: refs/heads/}"
+                printf ' (%s)' "${HEAD#ref: refs/heads/}"
                 ;;
             *)
                 # Truncate to the standard 7 characters for full SHAs
-                printf '(HEAD detached at %.7s)' "$HEAD"
+                printf ' (HEAD detached at %.7s)' "$HEAD"
                 ;;
         esac
     fi
@@ -224,5 +224,5 @@ git_branch() {
 export PS1='\[\e[0;95m\]$(conda_env)'       # Conda environment (purple)
 export PS1=$PS1'\[\e[m\][\h: '              # Hostname (grey)
 export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'    # Current directory (blue)
-export PS1=$PS1'\[\e[0;36m\] $(git_branch)' # Git branch (teal)
+export PS1=$PS1'\[\e[0;36m\]$(git_branch)' # Git branch (teal)
 export PS1=$PS1'\[\e[m\] \$ '               # End (grey)
