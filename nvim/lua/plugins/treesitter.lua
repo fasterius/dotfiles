@@ -2,10 +2,11 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    branch = "main",
     dependencies = {
-        "nvim-treesitter/nvim-treesitter-context", -- Code context
-        "nvim-treesitter/nvim-treesitter-textobjects", -- Text objects
-        "JoosepAlviste/nvim-ts-context-commentstring", -- Context-based comments
+        "nvim-treesitter/nvim-treesitter-context",
+        { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
+        "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
         require("nvim-treesitter").setup()
