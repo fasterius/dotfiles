@@ -2,33 +2,21 @@
 return {
     "nvim-lualine/lualine.nvim",
     config = function()
-        -- Solarized colours
-        local colours = {
-            base3 = "#002b36",
-            base2 = "#073642",
-            base1 = "#586e75",
-            base0 = "#657b83",
-            base00 = "#839496",
-            base01 = "#93a1a1",
-            base02 = "#eee8d5",
-            base03 = "#fdf6e3",
-            yellow = "#b58900",
-            orange = "#cb4b16",
-            red = "#dc322f",
-            magenta = "#d33682",
-            violet = "#6c71c4",
-            blue = "#268bd2",
-            cyan = "#2aa198",
-            green = "#859900",
-        }
-
-        -- Change MODE and inactive colours
-        local solarized = require("lualine.themes.solarized")
-        solarized.normal.a.bg = colours.base2 -- Black NORMAL mode
-        solarized.insert.a.bg = colours.blue -- Blue INSERT mode
-        solarized.visual.a.bg = colours.cyan -- Cyan VISUAL mode
-        solarized.replace.a.bg = colours.orange -- Orange REPLACE mode
-        solarized.inactive.c.bg = colours.base02 -- Inactive statusline
+        if vim.uv.os_gethostname() == "sajberspace" then
+            -- Everforest colours
+            colours = {
+                unzoomed_bg = "#414b50",
+                zoomed_fg = "#272e33",
+                zoomed_bg = "#7fbbb3",
+            }
+        else
+            -- Solarized colours
+            colours = {
+                unzoomed_bg = "#eee8d5",
+                zoomed_fg = "#fdf6e3",
+                zoomed_bg = "#268BD2",
+            }
+        end
 
         -- Function to get the current filename: if the current filename equals
         -- `main.nf` also include the parent directory, otherwise just return
@@ -54,6 +42,8 @@ return {
             end
         end
 
+        -- Functions for getting filename and colours when zoomed in using the
+        -- `simple-zoom.nvim` plugin
         local function get_filename_is_zoomed_in()
             local filename = get_filename()
             if vim.t["simple-zoom"] == nil then
@@ -62,12 +52,11 @@ return {
                 return filename .. " 󰍉"
             end
         end
-
         local function get_colour_zoomed_in()
             if vim.t["simple-zoom"] == "zoom" then
-                return { bg = colours.blue, fg = colours.base03 }
+                return { bg = colours.zoomed_bg, fg = colours.zoomed_fg }
             else
-                return { bg = colours.base02 }
+                return { bg = colours.unzoomed_bg }
             end
         end
 
