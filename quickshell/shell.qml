@@ -7,121 +7,129 @@ import Quickshell.Services.Pipewire
 import Quickshell.Widgets
 
 Scope {
-	id: root
+    id: root
 
-	// Bind the Pipewire node so its volume will be tracked
-	PwObjectTracker {
-		objects: [ Pipewire.defaultAudioSink ]
-	}
+    // Bind the Pipewire node so its volume will be tracked
+    PwObjectTracker {
+        objects: [ Pipewire.defaultAudioSink ]
+    }
 
     // Get volume and muted status from the default audio sink
     property real volume: Pipewire.defaultAudioSink?.audio.volume ?? 0
     property bool muted: Pipewire.defaultAudioSink?.audio.muted ?? false
 
     // Do not show widget by default
-	property bool shouldShowOsd: false
+    property bool shouldShowOsd: false
 
-	Connections {
-		target: Pipewire.defaultAudioSink?.audio
+    Connections {
+        target: Pipewire.defaultAudioSink?.audio
 
         // Show widget on volume/mute status change
-		function onVolumeChanged() {
-			root.shouldShowOsd = true
-			hideTimer.restart()
-		}
+        function onVolumeChanged() {
+            root.shouldShowOsd = true
+            hideTimer.restart()
+        }
         function onMutedChanged() {
             root.shouldShowOsd = true
             hideTimer.restart()
         }
-	}
+    }
 
     // Specify for how long the widget should be shown
-	Timer {
-		id: hideTimer
-		interval: 1250
-		onTriggered: root.shouldShowOsd = false
-	}
+    Timer {
+        id: hideTimer
+        interval: 1250
+        onTriggered: root.shouldShowOsd = false
+    }
 
-	// The OSD window will be created and destroyed based on shouldShowOsd.
-	// PanelWindow.visible could be set instead of using a loader, but using
-	// a loader will reduce the memory overhead when the window isn't open.
-	LazyLoader {
-		active: root.shouldShowOsd
+    // Create one OSD window per monitor, all driven by the same shouldShowOsd.
+    // Using Variants over Quickshell.screens instead of a single LazyLoader
+    // ensures the OSD appears on every connected monitor simultaneously.
+    Variants {
+        model: Quickshell.screens
 
-        // This is the transparent box that contains all of the other elements.
-		PanelWindow {
-			// Since the panel's screen is unset, it will be picked by the compositor
-			// when the window is created. Most compositors pick the current active monitor.
+        delegate: Component {
+            // This is the transparent box that contains all of the other elements.
+            PanelWindow {
+                property var modelData
 
-            // Anchors the widget to the bottom of the screen with a margin
-			anchors.bottom: true
-			margins.bottom: screen.height / 10
-			exclusiveZone: 0
+                // Pin each window instance to its respective monitor
+                screen: modelData
 
-			implicitWidth: 400
-			implicitHeight: 50
-			color: "transparent"
+                // Toggle visibility instead of creating/destroying the window
+                visible: root.shouldShowOsd
 
-			// An empty click mask prevents the window from blocking mouse events
-			mask: Region {}
+                // Anchor the widget to the bottom of the screen with a margin
+                anchors.bottom: true
+                margins.bottom: screen.height / 10
+                exclusiveZone: 0
 
-            // This is the black, rounded-corner box that contains the rest of
-            // the elements; note that Quickshell uses Alpha + HEXA rather than
-            // HEXA + Alpha, which is how the standard is normally used.
-			Rectangle {
-				anchors.fill: parent
-				radius: height / 2
-				color: "#D9000000"
+                implicitWidth: 400
+                implicitHeight: 50
+                color: "transparent"
 
-                // This is the final container that contains a row-layout of
-                // multiple elements: the icon and the volume bar itself
-				RowLayout {
-                    spacing: 13
-					anchors {
-						fill: parent
-						leftMargin: 20
-						rightMargin: 20
-					}
+                // An empty click mask prevents the window from blocking mouse events
+                mask: Region {}
 
-                    // Icon pack is specified at the top of the file with the
-                    // `@ pragma IconTheme <icon-theme>` line
-					IconImage {
-                        source: root.muted
-                            ? Quickshell.iconPath("audio-volume-muted")
-                            : Quickshell.iconPath(root.volume > 0
-                                ? "audio-volume-high"
-                                : "player-volume"
-                            )
-						implicitSize: 30
-					}
+                // This is the black, rounded-corner box that contains the rest
+                // of the elements; note that Quickshell uses Alpha + HEXA
+                // rather than HEXA + Alpha, which is how the standard is
+                // normally used.
+                Rectangle {
+                    anchors.fill: parent
+                    radius: height / 2
+                    color: "#D9000000"
 
-                    // The background of the volume bar, i.e. the "non-filled"
-                    // part of the bar
-					Rectangle {
-						implicitHeight: 11
-						radius: 20
-						color: "#50ffffff"
+                    // This is the final container that contains a row-layout of
+                    // multiple elements: the icon and the volume bar itself
+                    RowLayout {
+                        spacing: 13
+                        anchors {
+                            fill: parent
+                            leftMargin: 20
+                            rightMargin: 20
+                        }
 
-						// Stretches to fill all horizontal left-over space
-						Layout.fillWidth: true
+                        // Icon pack is specified at the top of the file with the
+                        // `@ pragma IconTheme <icon-theme>` line
+                        IconImage {
+                            source: root.muted
+                                ? Quickshell.iconPath("audio-volume-muted")
+                                : Quickshell.iconPath(root.volume > 0
+                                    ? "audio-volume-high"
+                                    : "player-volume"
+                                )
+                            implicitSize: 30
+                        }
 
-                        // The foreground of the volume bar, i.e. the "filled"
+                        // The background of the volume bar, i.e. the "non-filled"
                         // part of the bar
-						Rectangle {
-							anchors {
-								left: parent.left
-								top: parent.top
-								bottom: parent.bottom
-							}
-							radius: parent.radius
-                            implicitWidth: parent.width *
-                                (Pipewire.defaultAudioSink?.audio.volume ?? 0)
-                            // Colour bar white or grey depending on muted status
-                            color: root.muted ? "#50ffffff" : "#ffffffff"
-						}
-					}
-				}
-			}
-		}
-	}
+                        Rectangle {
+                            implicitHeight: 11
+                            radius: 20
+                            color: "#50ffffff"
+
+                            // Stretches to fill all horizontal left-over space
+                            Layout.fillWidth: true
+
+                            // The foreground of the volume bar, i.e. the "filled"
+                            // part of the bar
+                            Rectangle {
+                                anchors {
+                                    left: parent.left
+                                    top: parent.top
+                                    bottom: parent.bottom
+                                }
+                                radius: parent.radius
+                                implicitWidth: parent.width *
+                                    (Pipewire.defaultAudioSink?.audio.volume ?? 0)
+                                // Colour bar white or grey depending on muted status
+                                color: root.muted ? "#50ffffff" : "#ffffffff"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
