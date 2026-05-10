@@ -82,7 +82,9 @@
 
     "battery": {
         "format": "{capacity}% <span font-family='Font Awesome 6 Free'>{icon}</span>",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "format-charging": "{capacity}% <span font-family='Font Awesome 6 Free'></span>",
+        "tooltip": false
     },
 
     "idle_inhibitor": {
