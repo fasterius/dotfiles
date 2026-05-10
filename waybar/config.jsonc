@@ -85,18 +85,6 @@
         "format-icons": ["", "", "", "", ""]
     },
 
-    "power-profiles-daemon": {
-        "format": "<span font-family='Font Awesome 6 Free'>{icon}</span>",
-        "tooltip-format": "Power profile: {profile}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "",
-            "performance": "",
-            "balanced": "",
-            "power-saver": ""
-        }
-    },
-
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
