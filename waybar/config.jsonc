@@ -61,12 +61,17 @@
         "tooltip": false
     },
 
-    // TODO: Add more advanced features, e.g. turning on/off, scanning, etc.
     "bluetooth": {
         "format-on": "󰂯",
         "format-off": "󰂲",
-        "format-connected": "󰂱 {num_connections}",
+        "format-connected": "󰂱 {num_connections}",
         "format-disabled": "",
+        "on-click": "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on",
+        "on-click-right": "blueman-manager",
+        "tooltip-format-on": "Bluetooth on",
+        "tooltip-format-off": "Bluetooth off",
+        "tooltip-format-connected": "{device_alias}",
+        "tooltip": true
     },
 
     "niri/language": {
@@ -82,7 +87,7 @@
 
     "power-profiles-daemon": {
         "format": "<span font-family='Font Awesome 6 Free'>{icon}</span>",
-        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+        "tooltip-format": "Power profile: {profile}",
         "tooltip": true,
         "format-icons": {
             "default": "",

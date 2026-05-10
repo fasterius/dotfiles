@@ -104,6 +104,7 @@ window-rule {
 window-rule {
     match app-id="LiveSplitOne" title="LiveSplit One"
     match app-id=r#"^steam$"# title="Steam Settings"
+    match app-id=r"blueman-manager"
     open-floating true
 }
 
