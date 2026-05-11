@@ -2,6 +2,8 @@
 return {
     "nvim-lualine/lualine.nvim",
     config = function()
+        local colours
+        local theme
         if vim.uv.os_gethostname() == "sajberspace" then
             -- Everforest colours
             colours = {
@@ -9,12 +11,27 @@ return {
                 zoomed_fg = "#272e33",
                 zoomed_bg = "#7fbbb3",
             }
+            theme = "auto"
         else
             -- Solarized colours
+            local solarized = {
+                base2 = "#073642",
+                base02 = "#eee8d5",
+                base03 = "#fdf6e3",
+                orange = "#cb4b16",
+                blue = "#268bd2",
+                cyan = "#2aa198",
+            }
+            theme = require("lualine.themes.solarized")
+            theme.normal.a.bg = solarized.base2 -- Black NORMAL mode
+            theme.insert.a.bg = solarized.blue -- Blue INSERT mode
+            theme.visual.a.bg = solarized.cyan -- Cyan VISUAL mode
+            theme.replace.a.bg = solarized.orange -- Orange REPLACE mode
+            theme.inactive.c.bg = solarized.base02 -- Inactive statusline
             colours = {
-                unzoomed_bg = "#eee8d5",
-                zoomed_fg = "#fdf6e3",
-                zoomed_bg = "#268BD2",
+                unzoomed_bg = solarized.base02,
+                zoomed_fg = solarized.base03,
+                zoomed_bg = solarized.blue,
             }
         end
 
@@ -64,7 +81,7 @@ return {
         require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = "auto",
+                theme = theme,
                 component_separators = "|",
                 section_separators = "",
             },
