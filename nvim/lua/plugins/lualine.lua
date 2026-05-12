@@ -6,12 +6,23 @@ return {
         local theme
         if vim.uv.os_gethostname() == "sajberspace" then
             -- Everforest colours
+            local everforest = {
+                white = "#d3c6aa",
+                green = "#a7c080",
+                red = "#e67e80",
+                magenta = "#d699b6",
+                black = "#414b50",
+            }
+            theme = require("lualine.themes.everforest")
+            theme.normal.a.bg = everforest.white -- White NORMAL mode
+            theme.insert.a.bg = everforest.green -- Green INSERT mode
+            theme.visual.a.bg = everforest.red -- Red VISUAL mode
+            theme.replace.a.bg = everforest.magenta -- Magenta REPLACE mode
             colours = {
                 unzoomed_bg = "#414b50",
                 zoomed_fg = "#272e33",
                 zoomed_bg = "#7fbbb3",
             }
-            theme = "auto"
         else
             -- Solarized colours
             local solarized = {
