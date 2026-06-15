@@ -21,7 +21,7 @@ syn keyword nextflowBoolean true false
 syn keyword nextflowConstant null
 syn keyword nextflowDirective accelerator afterScript beforeScript cache clusterOptions conda container containerOptions cpus disk echo errorStrategy executor ext label machineType maxErrors maxForks maxRetries memory module penv pod publishDir queue resourceLabels scratch stageInMode stageOutMode storeDir tag time validExitStatus
 syn keyword nextflowOperator branch buffer choice close collate collect collectFile combine concat count countBy cross distinct dump filter first flatMap flatten groupBy groupTuple ifEmpty into join last map max merge min mix multiMap phase print println randomSample reduce separate set splitCsv splitFasta splitFastq splitText spread subscribe sum tap toInteger toList toSortedList transpose unique until view
-syn keyword nextflowSpecial launchDir moduleDir nextflow params projectDir secrets workDir workflow include channel Channel process
+syn keyword nextflowSpecial launchDir moduleDir nextflow params projectDir secrets workDir workflow include channel Channel process topic
 syn keyword nextflowType file val path tuple env stdin as from
 syn match nextflowBlock "\v(input|output|script|shell|exec|stub|when):"
 syn match nextflowELExpr "\!{.\{-}}" contained
