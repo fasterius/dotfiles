@@ -49,7 +49,7 @@ return {
                 -- Ignore Zettelkasten-related files
                 file_ignore_patterns = {
                     "templates/new_note.md",
-                    "zettelkasten.bib",
+                    "zotero.bib",
                 },
             },
             extensions = {
