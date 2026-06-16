@@ -33,6 +33,7 @@ brew install \
     gcc \
     gh \
     git \
+    gitleaks \
     gnu-sed \
     gnu-tar \
     graphviz \

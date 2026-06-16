@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Git hook dispatcher script for mixing global hooks with local, per-repo hooks.
+# Will run global hooks for every repo on the system, an additionally check for
+# local hooks and run those as well. Global hooks are executed before local
+# ones.
+
+HOOK_NAME=$(basename "$0")
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+LOCAL_HOOK="$REPO_ROOT/.git/hooks/$HOOK_NAME"
+
+# -----------------------------------------
+# Global hooks
+# -----------------------------------------
+
+case "$HOOK_NAME" in
+    pre-commit)
+        if command -v gitleaks >/dev/null 2>&1; then
+            gitleaks git --pre-commit --staged --redact --verbose ||  exit 1
+        fi
+        ;;
+esac
+
+# -----------------------------------------
+# Local hooks
+# -----------------------------------------
+
+if [ -x "$LOCAL_HOOK" ]; then
+    "$LOCAL_HOOK" "$@" || exit $?
+fi
+
+# Finish with exit status zero if no local hooks found
+exit 0

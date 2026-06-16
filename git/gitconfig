@@ -6,6 +6,7 @@
 # Global gitignore
 [core]
 	excludesfile = ~/.gitignore_global
+	hooksPath = ~/.dotfiles/git/hooks
 
 # Use `main` as default branch instead of `master`
 [init]
