@@ -90,11 +90,12 @@ window-rule {
     match app-id=r#"^Alacritty$"#
     match app-id=r#"^*Calendar$"#
     match app-id=r#"^discord$"#
-    match app-id=r#"^org.qbittorrent.qBittorrent$"#
+    match app-id=r#"^Godot"#
     match app-id=r#"^libreoffice-*"#
     match app-id=r#"^*Lutris$"#
     match app-id=r#"^*Nautilus$"#
     match app-id=r#"^obsidian$"#
+    match app-id=r#"^org.qbittorrent.qBittorrent$"#
     match app-id=r#"^Spotify$"#
     match app-id=r#"^steam$"# title="Steam"
     open-maximized true
@@ -162,6 +163,8 @@ binds {
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "Discord"; }
     Super+F hotkey-overlay-title="Run or raise Firefox" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "firefox"; }
+    Super+G hotkey-overlay-title="Run or raise Godot" \
+        { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "godot"; }
     Super+N hotkey-overlay-title="Run or raise Nautilus" \
         { spawn "~/.dotfiles/scripts/niri-run-or-raise/niri-run-or-raise.sh" "nautilus"; }
     Super+O hotkey-overlay-title="Run or raise Obsidian" \
