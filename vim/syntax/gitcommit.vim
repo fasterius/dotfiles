@@ -22,6 +22,7 @@ syn region gitcommitDiff start=/\%(^diff --\%(git\|cc\|combined\) \)\@=/ end=/^$
 
 syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
 syn match   gitcommitSummary	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
+syn match   gitcommitSummary    "^\%(\w\+\%(([^)]\+)\)\=!\=: \)\@=.\{0,72\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell " Added (extends allowed line length to 50 for conventional commits)
 syn match   gitcommitOverflow	".*" contained contains=@Spell
 syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 syn match   gitcommitComment	"^#.*"
