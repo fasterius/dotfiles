@@ -1,4 +1,4 @@
-snippet lint "Git pre-commit hook for general linting"
+snippet hook-lint "Git pre-commit hook for general linting"
 	#!/bin/bash
 
 	# Prevent commit on failed EditorConfig, Ruff or Prettier
@@ -12,7 +12,7 @@ snippet lint "Git pre-commit hook for general linting"
 	npx prettier --check . || exit_function "prettier"
 	ruff . || exit_function "ruff"
 
-snippet lint-nfcore "Git pre-push hook for nf-core linting"
+snippet hook-nfcore-lint "Git pre-push hook for nf-core linting"
 	#!/bin/bash
 
 	# Prevent push on failed nf-core linting
@@ -34,3 +34,25 @@ snippet lint-nfcore "Git pre-push hook for nf-core linting"
 	}
 
 	nf-core pipelines lint || linting_function
+
+snippet hook-conventional-commits "Git commit-msg hook for conventional commits"
+    #!/bin/bash
+
+    # Check for Conventional Commits standard adherence, with deviation from the
+    # default configuration (allowing WIP commits and subject line length), plus
+    # stripping of e.g. informational comment lines prior to checking for cleaner
+    # and more overviewable output.
+
+    # Create a temporary file to store stripped commit message in and delete it
+    # after script completion
+    STRIPPED=$(mktemp)
+    trap 'rm -f "$STRIPPED"' EXIT
+
+    # Strip commit message using Git itself
+    git stripspace --strip-comments < "$1" > "$STRIPPED"
+
+    # Validate the stripped commit message
+    commit-check \
+        --message "$STRIPPED" \
+        --allow-wip-commits true \
+        --subject-max-length 72
