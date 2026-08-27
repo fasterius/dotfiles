@@ -12,10 +12,6 @@
 [init]
 	defaultBranch = main
 
-# Include diff when writing commit messages
-[commit]
-    verbose = true
-
 # Sort branches by commit date instead of alphabetically
 [branch]
     sort = -committerdate
