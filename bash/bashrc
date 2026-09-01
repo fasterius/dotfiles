@@ -57,6 +57,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Source Conda
     source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
+    # Claude Code sandbox
+    alias claude-sandbox='~/projects/claude-sandbox/run-claude.sh'
+
 fi
 
 # Add to PATH
