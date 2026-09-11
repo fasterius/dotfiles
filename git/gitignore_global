@@ -40,3 +40,6 @@ results-*
 
 # SLURM
 **/slurm-*.out
+
+# Claude Code
+**/.claude*
