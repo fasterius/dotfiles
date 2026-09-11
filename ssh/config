@@ -12,3 +12,8 @@ Host dardel
 
 Host github.com
   IdentityFile ~/.ssh/github
+
+host git.bioconductor.org
+  User git
+  HostName git.bioconductor.org
+  IdentityFile ~/.ssh/bioconductor
