@@ -42,6 +42,7 @@ brew install \
     jj \
     lua \
     lua-language-server \
+    luarocks \
     marksman \
     neovim \
     openjdk@17 \
