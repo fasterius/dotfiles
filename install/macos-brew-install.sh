@@ -42,6 +42,7 @@ brew install \
     jj \
     lua \
     lua-language-server \
+    luacheck \
     luarocks \
     marksman \
     neovim \
