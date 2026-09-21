@@ -1,4 +1,4 @@
 -- Various text objects
-return {
-    "wellle/targets.vim",
-}
+vim.pack.add({
+    "https://github.com/wellle/targets.vim",
+})

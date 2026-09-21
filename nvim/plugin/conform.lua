@@ -1,8 +1,11 @@
 -- Formatting
-return {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    config = function()
+-- Lazy loading on first buffer write
+vim.api.nvim_create_autocmd("BufWritePre", {
+    once = true,
+    callback = function()
+        vim.pack.add({
+            "https://github.com/stevearc/conform.nvim",
+        })
         require("conform").setup({
             formatters_by_ft = {
                 html = { "prettier" },
@@ -16,4 +19,4 @@ return {
             },
         })
     end,
-}
+})

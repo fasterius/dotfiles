@@ -1,34 +1,30 @@
 -- Work with Quarto files
-return {
-    "quarto-dev/quarto-nvim",
-    dependencies = {
-        { "hrsh7th/nvim-cmp" },
-        { "jmbuhr/otter.nvim" },
-        { "nvim-treesitter/nvim-treesitter" },
+-- No lazy loading; used to be lazily loaded on `quarto` filetype
+vim.pack.add({
+    "https://github.com/quarto-dev/quarto-nvim",
+    "https://github.com/hrsh7th/nvim-cmp",
+    "https://github.com/jmbuhr/otter.nvim",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+})
+require("quarto").setup({
+    closePreviewOnExit = true,
+    lspFeatures = {
+        enabled = true,
+        languages = { "r", "python", "bash", "ojs" },
+        chunks = "curly",
+        diagnostics = {
+            enabled = true,
+            triggers = { "BufWritePost" },
+        },
+        completion = {
+            enabled = true,
+        },
     },
-    ft = "quarto",
-    config = function()
-        require("quarto").setup({
-            closePreviewOnExit = true,
-            lspFeatures = {
-                enabled = true,
-                languages = { "r", "python", "bash", "ojs" },
-                chunks = "curly",
-                diagnostics = {
-                    enabled = true,
-                    triggers = { "BufWritePost" },
-                },
-                completion = {
-                    enabled = true,
-                },
-            },
-        })
+})
 
-        -- Add Observable as JavaScript for LSP and Treesitter
-        vim.filetype.add({
-            extension = {
-                ojs = "javascript",
-            },
-        })
-    end,
-}
+-- Add Observable as JavaScript for LSP and Treesitter
+vim.filetype.add({
+    extension = {
+        ojs = "javascript",
+    },
+})

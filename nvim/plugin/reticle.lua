@@ -1,10 +1,8 @@
 -- Disable cursorline for inactive splits
-return {
-    "tummetott/reticle.nvim",
-    config = function()
-        require("reticle").setup({
-            -- Do not disable cursorline in insert mode
-            disable_in_insert = false,
-        })
-    end,
-}
+vim.pack.add({
+    "https://github.com/tummetott/reticle.nvim",
+})
+require("reticle").setup({
+    -- Do not disable cursorline in insert mode
+    disable_in_insert = false,
+})

@@ -1,17 +1,18 @@
 -- Autocompletion with various sources
-return {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-        "hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
-        "hrsh7th/cmp-nvim-lsp", -- Builtin LSP source for nvim-cmp
-        "hrsh7th/cmp-path", -- System paths source for nvim-cmp
-        "saadparwaiz1/cmp_luasnip", -- Snippet source for nvim-cmp
-        "L3MON4D3/LuaSnip", -- Snippet engine in Lua
-        "onsails/lspkind.nvim", -- Shows devicons in completion types
-        "nvim-tree/nvim-web-devicons", -- Icons for with patched fonts
-    },
-    config = function()
+-- Lazy load when entering Insert mode the first time
+vim.api.nvim_create_autocmd("InsertEnter", {
+    once = true,
+    callback = function()
+        vim.pack.add({
+            "https://github.com/hrsh7th/nvim-cmp", -- Main completion engine
+            "https://github.com/hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
+            "https://github.com/hrsh7th/cmp-nvim-lsp", -- Builtin LSP source for nvim-cmp
+            "https://github.com/hrsh7th/cmp-path", -- System paths source for nvim-cmp
+            "https://github.com/saadparwaiz1/cmp_luasnip", -- Snippet source for nvim-cmp
+            "https://github.com/L3MON4D3/LuaSnip", -- Snippet engine in Lua
+            "https://github.com/onsails/lspkind.nvim", -- Shows devicons in completion types
+            "https://github.com/nvim-tree/nvim-web-devicons", -- Icons for with patched fonts
+        })
         local cmp = require("cmp")
         local luasnip = require("luasnip")
 
@@ -76,4 +77,4 @@ return {
         -- Load snippets lazily
         require("luasnip.loaders.from_snipmate").lazy_load()
     end,
-}
+})

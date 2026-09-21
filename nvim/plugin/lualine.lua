@@ -1,103 +1,104 @@
 -- Fancier statusline
-return {
-    "nvim-lualine/lualine.nvim",
-    dependencies = "fasterius/mainly.nvim",
-    config = function()
-        local colours
-        local theme
-        if vim.uv.os_gethostname() == "sajberspace" then
-            -- Everforest colours
-            local everforest = {
-                white = "#d3c6aa",
-                green = "#a7c080",
-                red = "#e67e80",
-                magenta = "#d699b6",
-                black = "#414b50",
-            }
-            theme = require("lualine.themes.everforest")
-            theme.normal.a.bg = everforest.white -- White NORMAL mode
-            theme.insert.a.bg = everforest.green -- Green INSERT mode
-            theme.visual.a.bg = everforest.red -- Red VISUAL mode
-            theme.replace.a.bg = everforest.magenta -- Magenta REPLACE mode
-            colours = {
-                unzoomed_bg = "#414b50",
-                zoomed_fg = "#272e33",
-                zoomed_bg = "#7fbbb3",
-            }
-        else
-            -- Solarized colours
-            local solarized = {
-                base2 = "#073642",
-                base02 = "#eee8d5",
-                base03 = "#fdf6e3",
-                orange = "#cb4b16",
-                blue = "#268bd2",
-                cyan = "#2aa198",
-            }
-            theme = require("lualine.themes.solarized")
-            theme.normal.a.bg = solarized.base2 -- Black NORMAL mode
-            theme.insert.a.bg = solarized.blue -- Blue INSERT mode
-            theme.visual.a.bg = solarized.cyan -- Cyan VISUAL mode
-            theme.replace.a.bg = solarized.orange -- Orange REPLACE mode
-            theme.inactive.c.bg = solarized.base02 -- Inactive statusline
-            colours = {
-                unzoomed_bg = solarized.base02,
-                zoomed_fg = solarized.base03,
-                zoomed_bg = solarized.blue,
-            }
-        end
+vim.pack.add({
+    "https://github.com/nvim-lualine/lualine.nvim",
+    "https://github.com/fasterius/mainly.nvim",
+    "https://github.com/fasterius/simple-zoom.nvim",
+})
 
-        -- Functions for getting filename and colours when zoomed in using the
-        -- `simple-zoom.nvim` and `mainly.nvim` plugins
-        local mainly_filename = require("mainly").filename
-        local function get_filename_is_zoomed_in()
-            if vim.t["simple-zoom"] == nil then
-                return mainly_filename()
-            elseif type(vim.t["simple-zoom"]) == "table" then
-                return mainly_filename() .. " 󰍉"
-            end
-        end
-        local function get_colour_zoomed_in()
-            if type(vim.t["simple-zoom"]) == "table" then
-                return { bg = colours.zoomed_bg, fg = colours.zoomed_fg }
-            else
-                return { bg = colours.unzoomed_bg }
-            end
-        end
+-- Set colours based on hostname
+local colours
+local theme
+if vim.uv.os_gethostname() == "sajberspace" then
+    -- Everforest colours
+    local everforest = {
+        white = "#d3c6aa",
+        green = "#a7c080",
+        red = "#e67e80",
+        magenta = "#d699b6",
+        black = "#414b50",
+    }
+    theme = require("lualine.themes.everforest")
+    theme.normal.a.bg = everforest.white -- White NORMAL mode
+    theme.insert.a.bg = everforest.green -- Green INSERT mode
+    theme.visual.a.bg = everforest.red -- Red VISUAL mode
+    theme.replace.a.bg = everforest.magenta -- Magenta REPLACE mode
+    colours = {
+        unzoomed_bg = "#414b50",
+        zoomed_fg = "#272e33",
+        zoomed_bg = "#7fbbb3",
+    }
+else
+    -- Solarized colours
+    local solarized = {
+        base2 = "#073642",
+        base02 = "#eee8d5",
+        base03 = "#fdf6e3",
+        orange = "#cb4b16",
+        blue = "#268bd2",
+        cyan = "#2aa198",
+    }
+    theme = require("lualine.themes.solarized")
+    theme.normal.a.bg = solarized.base2 -- Black NORMAL mode
+    theme.insert.a.bg = solarized.blue -- Blue INSERT mode
+    theme.visual.a.bg = solarized.cyan -- Cyan VISUAL mode
+    theme.replace.a.bg = solarized.orange -- Orange REPLACE mode
+    theme.inactive.c.bg = solarized.base02 -- Inactive statusline
+    colours = {
+        unzoomed_bg = solarized.base02,
+        zoomed_fg = solarized.base03,
+        zoomed_bg = solarized.blue,
+    }
+end
 
-        -- Lualine setup
-        require("lualine").setup({
-            options = {
-                icons_enabled = true,
-                theme = theme,
-                component_separators = "|",
-                section_separators = "",
+-- Functions for getting filename and colours when zoomed in using the
+-- `simple-zoom.nvim` and `mainly.nvim` plugins
+local mainly_filename = require("mainly").filename
+local function get_filename_is_zoomed_in()
+    if vim.t["simple-zoom"] == nil then
+        return mainly_filename()
+    elseif type(vim.t["simple-zoom"]) == "table" then
+        return mainly_filename() .. " 󰍉"
+    end
+end
+local function get_colour_zoomed_in()
+    if type(vim.t["simple-zoom"]) == "table" then
+        return { bg = colours.zoomed_bg, fg = colours.zoomed_fg }
+    else
+        return { bg = colours.unzoomed_bg }
+    end
+end
+
+-- Lualine setup
+require("lualine").setup({
+    options = {
+        icons_enabled = true,
+        theme = theme,
+        component_separators = "|",
+        section_separators = "",
+    },
+    sections = {
+        lualine_a = { "mode" },
+        lualine_b = {},
+        lualine_c = {
+            {
+                get_filename_is_zoomed_in,
+                color = get_colour_zoomed_in,
             },
-            sections = {
-                lualine_a = { "mode" },
-                lualine_b = {},
-                lualine_c = {
-                    {
-                        get_filename_is_zoomed_in,
-                        color = get_colour_zoomed_in,
-                    },
-                    { "diff" },
-                },
-                lualine_x = {
-                    { "diagnostics" },
-                    { "filetype" },
-                },
-                lualine_y = { "progress" },
-                lualine_z = { "location" },
-            },
-            inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = { mainly_filename },
-                lualine_x = { "filetype" },
-                lualine_y = {},
-                lualine_z = {},
-            },
-        })
-    end,
-}
+            { "diff" },
+        },
+        lualine_x = {
+            { "diagnostics" },
+            { "filetype" },
+        },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { mainly_filename },
+        lualine_x = { "filetype" },
+        lualine_y = {},
+        lualine_z = {},
+    },
+})

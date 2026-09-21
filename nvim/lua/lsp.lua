@@ -1,3 +1,9 @@
+-- TODO: This loads a plugin outside of `plugin/`. It works, but feel wrong. Can
+-- this be optimised somehow?
+vim.pack.add({
+    "https://github.com/hrsh7th/cmp-nvim-lsp",
+})
+
 -- LSP capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())

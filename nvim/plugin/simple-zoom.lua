@@ -1,13 +1,8 @@
 -- Emulates Tmux zoom functionality
-return {
-    "fasterius/simple-zoom.nvim",
-    keys = {
-        { "<localleader>z", ":SimpleZoomToggle<CR>" },
-    },
-    cmd = "SimpleZoomToggle",
-    config = function()
-        require("simple-zoom").setup({
-            hide_tabline = true,
-        })
-    end,
-}
+-- No lazy loading; used to be lazily loaded on keybinds
+vim.pack.add({
+    "https://github.com/fasterius/simple-zoom.nvim",
+})
+require("simple-zoom").setup({
+    hide_tabline = true,
+})

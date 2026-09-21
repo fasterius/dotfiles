@@ -1,7 +1,5 @@
 -- Alignment around arbitrary characters
-return {
-    "junegunn/vim-easy-align",
-    keys = {
-        { "ga", "<plug>(EasyAlign)", mode = { "n", "x" }, desc = "EasyAlign" },
-    },
-}
+-- No lazy loading; used to be lazily loaded on commands
+vim.pack.add({
+    "https://github.com/junegunn/vim-easy-align",
+})
