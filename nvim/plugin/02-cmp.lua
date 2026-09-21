@@ -76,5 +76,12 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
         -- Load snippets lazily
         require("luasnip.loaders.from_snipmate").lazy_load()
+
+        -- Loading happens DURING the dispatch of the first autocommand above,
+        -- so the plugin misses its own trigger; re-fire that trigger after
+        -- loading
+        vim.schedule(function()
+            vim.api.nvim_exec_autocmds("InsertEnter", { modeline = false })
+        end)
     end,
 })
