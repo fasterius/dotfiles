@@ -1,0 +1,12 @@
+snippet annotate-clusters "Annotate clusters with cell types"
+    ${1:cluster_to_celltype} = {
+        "0":  "",
+        "1":  "",
+        "2":  "",
+        "3":  "",
+        "4":  "",
+    }
+    adata.obs["cell_type"] = (
+        adata.obs["leiden_${2:0.1}"]
+            .map(${1:cluster_to_celltype})
+            .astype("category")
