@@ -33,6 +33,9 @@ vim.o.clipboard = "unnamedplus"
 -- Disable mouse
 vim.o.mouse = ""
 
+-- Add "I" to the default `shortmess` of "ltToOCF" to disable intro screen
+vim.o.shortmess = "ltToOCFI"
+
 -- Use case-insensitive searches, except when using capital letters
 vim.o.ignorecase = true
 vim.o.smartcase = true
