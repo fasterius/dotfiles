@@ -18,7 +18,10 @@ vim.schedule(function()
                 and (data.kind == "install" or data.kind == "update")
             then
                 local path = data.spec.path
-                vim.notify("Building telescope-fzf-native...", vim.log.levels.INFO)
+                vim.notify(
+                    "Building telescope-fzf-native...",
+                    vim.log.levels.INFO
+                )
                 vim.system({ "make" }, { cwd = path }, function(obj)
                     if obj.code == 0 then
                         vim.notify("telescope-fzf-native built successfully")

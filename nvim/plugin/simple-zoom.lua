@@ -6,3 +6,4 @@ vim.pack.add({
 vim.g.simple_zoom = {
     hide_tabline = true,
 }
+vim.keymap.set("n", "<localleader>z", ":SimpleZoomToggle<CR>")
