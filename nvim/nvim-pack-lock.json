@@ -126,10 +126,6 @@
       "rev": "0d2077398552f069abccbd964a26dd7cd26882cd",
       "src": "https://github.com/gbprod/substitute.nvim"
     },
-    "targets.vim": {
-      "rev": "6325416da8f89992b005db3e4517aaef0242602e",
-      "src": "https://github.com/wellle/targets.vim"
-    },
     "telekasten.nvim": {
       "rev": "760c7cdbbd0bb5337d11533bc09732223c752e41",
       "src": "https://github.com/renerocksai/telekasten.nvim"
