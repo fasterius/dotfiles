@@ -50,6 +50,12 @@ else
     }
 end
 
+-- Configure `mainly.nvim`
+vim.g.mainly = {
+    allowed_sources = { "local", "nf-core" },
+    include_component = false,
+}
+
 -- Functions for getting filename and colours when zoomed in using the
 -- `simple-zoom.nvim` and `mainly.nvim` plugins
 local mainly_filename = require("mainly").filename

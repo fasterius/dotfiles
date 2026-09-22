@@ -3,6 +3,6 @@
 vim.pack.add({
     "https://github.com/fasterius/simple-zoom.nvim",
 })
-require("simple-zoom").setup({
+vim.g.simple_zoom = {
     hide_tabline = true,
-})
+}

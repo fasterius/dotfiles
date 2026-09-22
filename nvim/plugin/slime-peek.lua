@@ -3,9 +3,9 @@ vim.pack.add({
     "https://github.com/fasterius/slime-peek.nvim",
     "https://github.com/jpalardy/vim-slime",
 })
-require("slime_peek").setup({
+vim.g.slime_peek = {
     use_yaml_language = false,
-})
+}
 
 -- Word under cursor mappings
 vim.keymap.set("n", "<localleader>h", require("slime_peek").peek_head)
