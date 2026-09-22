@@ -36,10 +36,6 @@
       "rev": "8d79f2410c76e62b92e51c28c82e28c1c5a3daeb",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
-    "helpful.vim": {
-      "rev": "3f2c44f02e69a268b593a17bd53c8deb184df2f1",
-      "src": "https://github.com/tweekmonster/helpful.vim"
-    },
     "indent-blankline.nvim": {
       "rev": "f1e186e44d3b7f9ae918008e2c28ce37c6023d2d",
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
@@ -64,10 +60,6 @@
       "rev": "2ffe79f1f021def8dd1fcd81deb16f1bb0d989f3",
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
-    "nvim-colorizer.lua": {
-      "rev": "72a05f62c52241bc7441c820eb53946f92b2e6a4",
-      "src": "https://github.com/NvChad/nvim-colorizer.lua"
-    },
     "nvim-hlslens": {
       "rev": "be2d7b2be01860b5445a007ff2bc72b29896db6b",
       "src": "https://github.com/kevinhwang91/nvim-hlslens"
@@ -79,10 +71,6 @@
     "nvim-surround": {
       "rev": "8b47db616ef658b8fc27e61db2896aa2f40134de",
       "src": "https://github.com/kylechui/nvim-surround"
-    },
-    "nvim-tree.lua": {
-      "rev": "478c69c0fe253caea88de9c5e138bfa77395a59a",
-      "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {
       "rev": "f603a2f4da48728f80257fb5fbb90145fd1dc173",
