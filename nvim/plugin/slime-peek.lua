@@ -1,5 +1,4 @@
 -- Convenience functions for data exploration with `vim-slime`
--- No lazy loading; used to be lazily loaded on keybinds
 vim.pack.add({
     "https://github.com/fasterius/slime-peek.nvim",
     "https://github.com/jpalardy/vim-slime",
