@@ -7,8 +7,18 @@ vim.keymap.set("n", "<CR>", ":noh<CR>")
 
 -- Store relative line number movement larger than 1 in the jumplist
 -- Move by visual lines instead of physical lines
-vim.keymap.set("n", "j", [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']], { expr = true })
-vim.keymap.set("n", "k", [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk']], { expr = true })
+vim.keymap.set(
+    "n",
+    "j",
+    [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']],
+    { expr = true }
+)
+vim.keymap.set(
+    "n",
+    "k",
+    [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk']],
+    { expr = true }
+)
 vim.keymap.set("n", "0", "g0")
 vim.keymap.set("n", "$", "g$")
 
@@ -27,14 +37,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "]d", function()
-    vim.diagnostic.jump({ count = -1, float = true })
-end)
-vim.keymap.set("n", "]d", function()
-    vim.diagnostic.jump({ count = 1, float = true })
-end)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- Neovim development
 vim.keymap.set("n", "<localleader>x", ":source %<CR>")
