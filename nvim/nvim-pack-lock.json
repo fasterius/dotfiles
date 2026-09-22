@@ -158,10 +158,6 @@
       "rev": "9815a55dbcd817784458df7a18acacc6f82b1241",
       "src": "https://github.com/junegunn/vim-easy-align"
     },
-    "vim-repeat": {
-      "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
-      "src": "https://github.com/tpope/vim-repeat"
-    },
     "vim-slime": {
       "rev": "305b4d81ff4630af5137fdeffb54aa0fef14761b",
       "src": "https://github.com/jpalardy/vim-slime"
