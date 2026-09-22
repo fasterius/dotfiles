@@ -3,16 +3,30 @@
 vim.pack.add({
     "https://github.com/gbprod/substitute.nvim",
 })
+require("substitute").setup()
 
 -- Substitute
-local substitute = require("substitute")
-vim.keymap.set("n", "s", substitute.operator, { noremap = true })
-vim.keymap.set("x", "s", substitute.visual, { noremap = true })
-vim.keymap.set("n", "ss", substitute.line, { noremap = true })
-vim.keymap.set("n", "S", substitute.eol, { noremap = true })
+vim.keymap.set("n", "s", require("substitute").operator, { noremap = true })
+vim.keymap.set("x", "s", require("substitute").visual, { noremap = true })
+vim.keymap.set("n", "ss", require("substitute").line, { noremap = true })
+vim.keymap.set("n", "S", require("substitute").eol, { noremap = true })
 
 -- Substitute over range
-local range = require("substitute.range")
-vim.keymap.set("n", "<leader>s", range.operator, { noremap = true })
-vim.keymap.set("x", "<leader>s", range.visual, { noremap = true })
-vim.keymap.set("n", "<leader>ss", range.word, { noremap = true })
+vim.keymap.set(
+    "n",
+    "<leader>s",
+    require("substitute.range").operator,
+    { noremap = true }
+)
+vim.keymap.set(
+    "x",
+    "<leader>s",
+    require("substitute.range").visual,
+    { noremap = true }
+)
+vim.keymap.set(
+    "n",
+    "<leader>ss",
+    require("substitute.range").word,
+    { noremap = true }
+)
