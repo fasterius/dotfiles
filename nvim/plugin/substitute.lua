@@ -1,5 +1,4 @@
 -- Add operators for substitutions
--- No lazy loading; used to be lazily loaded on keybinds
 vim.pack.add({
     "https://github.com/gbprod/substitute.nvim",
 })

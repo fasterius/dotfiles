@@ -1,5 +1,4 @@
 -- An all-purpose REPL for sending code to a terminal
--- No lazy loading; used to be lazily loaded on keybinds
 vim.pack.add({
     "https://github.com/jpalardy/vim-slime",
 })

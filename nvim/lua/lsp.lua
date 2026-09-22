@@ -1,5 +1,4 @@
--- TODO: This loads a plugin outside of `plugin/`. It works, but feel wrong. Can
--- this be optimised somehow?
+-- The LSP setup needs to load the completion plugin here, before `plugin/`
 vim.pack.add({
     "https://github.com/hrsh7th/cmp-nvim-lsp",
 })

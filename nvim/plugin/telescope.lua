@@ -1,5 +1,4 @@
 -- Fuzzy finding with Telescope
--- No lazy loading; used to be lazily loaded on keybinds
 -- Defer loading until after startup is finished
 vim.schedule(function()
     vim.pack.add({

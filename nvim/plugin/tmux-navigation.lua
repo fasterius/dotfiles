@@ -1,5 +1,4 @@
 -- Movement between Neovim and Tmux
--- No lazy loading; used to be lazily loaded on keymaps
 vim.pack.add({
     "https://github.com/christoomey/vim-tmux-navigator",
 })
