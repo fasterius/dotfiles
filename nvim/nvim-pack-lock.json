@@ -161,10 +161,6 @@
       "rev": "deb76867c302f933c8f21753806cbf2d8461b548",
       "src": "https://github.com/kana/vim-textobj-indent"
     },
-    "vim-textobj-line": {
-      "rev": "1a6780d29adcf7e464e8ddbcd0be0a9df1a37339",
-      "src": "https://github.com/kana/vim-textobj-line"
-    },
     "vim-textobj-user": {
       "rev": "41a675ddbeefd6a93664a4dc52f302fe3086a933",
       "src": "https://github.com/kana/vim-textobj-user"
