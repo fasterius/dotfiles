@@ -6,6 +6,11 @@ return {
         ".luarc.jsonc",
         ".git",
     },
+    -- Reset `formatexpr` so that it doesn't get hijacked from `lua-ls`'s
+    -- range-formatting support
+    on_attach = function(_, bufnr)
+        vim.bo[bufnr].formatexpr = ""
+    end,
     settings = {
         Lua = {
             diagnostics = { globals = { "vim" } },

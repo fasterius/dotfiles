@@ -29,31 +29,6 @@ vim.lsp.config("*", {
 -- Disable built-in colourization
 vim.lsp.document_color.enable(false)
 
--- Autocommand for LSP attachment
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("lsp", {}),
-    callback = function(args)
-        -- Get LSP name (same as filename in `lsp/` directory)
-        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-        -- Disable autoformatting for Nextflow and R
-        if vim.tbl_contains({ "nextflow-ls", "r-ls" }, client.name) then
-            client.server_capabilities.documentFormattingProvider = false
-            vim.bo[args.buf].formatexpr = ""
-        end
-
-        -- Reset `formatexpr` for Lua to be able to use `gq`
-        if vim.tbl_contains({ "lua-ls" }, client.name) then
-            vim.bo[args.buf].formatexpr = ""
-        end
-
-        -- Disable semantic tokens for Nextflow
-        if client.name == "nextflow-ls" then
-            client.server_capabilities.semanticTokensProvider = false
-        end
-    end,
-})
-
 -- Enable all language servers in `lsp/` directory
 local lsp_configs = {}
 for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
