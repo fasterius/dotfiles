@@ -40,11 +40,20 @@ vim.o.shortmess = "ltToOCFI"
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Set formatoptions globally
+--   Auto-wrap comments using 'textwidth' (c)
+--   Allow `gq`-formatting of comments (q)
+--   Auto-wrap text using 'textwidth' (t)
+--   Remove comment leader when joining lines (j)
+--   Auto-wrap lists to follow list element indentation (n)
+vim.o.formatoptions = "cjqtn"
+
 -- Add additional format list pattern; first pattern is the default, the second
 -- will also allow formatting of lists starting with [-*+].
 vim.o.formatlistpat = "^\\s*\\d\\+[\\]:.)}\t ]\\s*\\|^\\s*[-*+]\\s\\+"
 
--- Show completion popup even with only one match and do not select a match automatically
+-- Show completion popup even with only one match and do not select a match
+-- automatically
 vim.o.completeopt = "menuone,noselect"
 
 -- Disable the default Neovim file tree browser `netwr` in favour of plugins
