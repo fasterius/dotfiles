@@ -57,8 +57,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # Source Conda
     source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
-    # Claude Code sandbox
-    alias claude-sandbox='~/projects/claude-sandbox/run-claude.sh'
+    # Claude Code sandbox aliases
+    alias claude-sandbox='~/projects/claude-sandbox/run-claude-egress-filtered.sh'
+    alias claude='~/projects/claude-sandbox/run-claude-egress-open.sh'
 
     # Luarocks for Busted-based testing of Neovim plugins.
     # Requires luarocks `luarocks --lua-version 5.1 install busted` as well as
