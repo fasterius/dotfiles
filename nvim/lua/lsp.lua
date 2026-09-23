@@ -5,7 +5,11 @@ vim.pack.add({
 
 -- LSP capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+capabilities = vim.tbl_deep_extend(
+    "force",
+    capabilities,
+    require("cmp_nvim_lsp").default_capabilities()
+)
 capabilities = vim.tbl_deep_extend("force", capabilities, {
     textDocument = {
         completion = {
@@ -33,8 +37,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
         -- Disable autoformatting for Nextflow and R
-        if client.name == "nextflow-ls" or client.name == "r-ls" then
+        if vim.tbl_contains({ "nextflow-ls", "r-ls" }, client.name) then
             client.server_capabilities.documentFormattingProvider = false
+            vim.bo[args.buf].formatexpr = ""
+        end
+
+        -- Reset `formatexpr` for Lua to be able to use `gq`
+        if vim.tbl_contains({ "lua-ls" }, client.name) then
+            vim.bo[args.buf].formatexpr = ""
         end
 
         -- Disable semantic tokens for Nextflow
