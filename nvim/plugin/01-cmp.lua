@@ -20,8 +20,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
             sources = {
                 { name = "buffer" },
                 { name = "luasnip" },
-                { name = "nvim_lsp" }, -- Neovim's built-in LSP
-                { name = "otter" }, -- For Quarto documents
+                { name = "nvim_lsp" },
             },
 
             -- Borders around completion popups
