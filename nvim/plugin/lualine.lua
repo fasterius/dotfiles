@@ -5,47 +5,35 @@ vim.pack.add({
     "https://github.com/fasterius/simple-zoom.nvim",
 })
 
--- Set colours based on hostname
+-- Set colours based on hostname; see `lua/colours.lua` for the full palettes
+local palette = require("colours")
 local colours
 local theme
 if vim.uv.os_gethostname() == "sajberspace" then
     -- Everforest colours
-    local everforest = {
-        white = "#d3c6aa",
-        green = "#a7c080",
-        red = "#e67e80",
-        magenta = "#d699b6",
-        black = "#414b50",
-    }
+    local everforest = palette.everforest
     theme = require("lualine.themes.everforest")
     theme.normal.a.bg = everforest.white -- White NORMAL mode
     theme.insert.a.bg = everforest.green -- Green INSERT mode
     theme.visual.a.bg = everforest.red -- Red VISUAL mode
     theme.replace.a.bg = everforest.magenta -- Magenta REPLACE mode
     colours = {
-        unzoomed_bg = "#414b50",
-        zoomed_fg = "#272e33",
-        zoomed_bg = "#7fbbb3",
+        unzoomed_bg = everforest.black,
+        zoomed_fg = everforest.background,
+        zoomed_bg = everforest.blue,
     }
 else
     -- Solarized colours
-    local solarized = {
-        base2 = "#073642",
-        base02 = "#eee8d5",
-        base03 = "#fdf6e3",
-        orange = "#cb4b16",
-        blue = "#268bd2",
-        cyan = "#2aa198",
-    }
+    local solarized = palette.solarized
     theme = require("lualine.themes.solarized")
-    theme.normal.a.bg = solarized.base2 -- Black NORMAL mode
+    theme.normal.a.bg = solarized.base02 -- Black NORMAL mode
     theme.insert.a.bg = solarized.blue -- Blue INSERT mode
     theme.visual.a.bg = solarized.cyan -- Cyan VISUAL mode
     theme.replace.a.bg = solarized.orange -- Orange REPLACE mode
-    theme.inactive.c.bg = solarized.base02 -- Inactive statusline
+    theme.inactive.c.bg = solarized.base2 -- Inactive statusline
     colours = {
-        unzoomed_bg = solarized.base02,
-        zoomed_fg = solarized.base03,
+        unzoomed_bg = solarized.base2,
+        zoomed_fg = solarized.base3,
         zoomed_bg = solarized.blue,
     }
 end
