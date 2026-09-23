@@ -7,11 +7,5 @@ vim.api.nvim_create_autocmd("InsertEnter", {
             "https://github.com/windwp/nvim-autopairs",
         })
         require("nvim-autopairs").setup()
-
-        -- Insert `()` after completing functions with `nvim-cmp`
-        require("cmp").event:on(
-            "confirm_done",
-            require("nvim-autopairs.completion.cmp").on_confirm_done()
-        )
     end,
 })

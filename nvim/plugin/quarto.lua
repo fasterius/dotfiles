@@ -5,7 +5,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.pack.add({
             "https://github.com/quarto-dev/quarto-nvim",
-            "https://github.com/hrsh7th/nvim-cmp",
             "https://github.com/jmbuhr/otter.nvim",
             "https://github.com/nvim-treesitter/nvim-treesitter",
         })
