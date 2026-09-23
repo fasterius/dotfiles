@@ -1,11 +1,38 @@
--- Lua port of Solarized colour scheme
--- Only use this with a specific hostname
-if vim.uv.os_gethostname() ~= "sajberspace" then
+-- Set colourscheme conditionally on hostname
+if vim.uv.os_gethostname() == "sajberspace" then
+    -- Everforest Dark theme
+    vim.pack.add({
+        { src = "https://github.com/neanias/everforest-nvim" },
+    })
+    require("everforest").setup({
+        background = "hard",
+    })
+    vim.o.background = "dark"
+    require("everforest").load()
+
+    -- Colours for `indent-blankline.lua`
+    vim.api.nvim_set_hl(0, "IblIndent", { fg = "#2e383c" })
+
+    -- Telescope
+    vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#a7c080", bold = true })
+
+    -- Everforest [hard, dark] reference chart
+    -- background:   '#272e33'
+    -- foreground:   '#d3c6aa'
+    -- black:        '#414b50'
+    -- bright black: '#475258'
+    -- red:          '#e67e80'
+    -- green:        '#a7c080'
+    -- yellow:       '#dbbc7f'
+    -- blue:         '#7fbbb3'
+    -- magenta:      '#d699b6'
+    -- cyan:         '#83c092'
+    -- white:        '#d3c6aa'
+else
+    -- Solarized Light theme
     vim.pack.add({
         { src = "https://github.com/ishan9299/nvim-solarized-lua" },
     })
-
-    -- Light Solarized theme
     vim.o.background = "light"
     vim.cmd([[ colorscheme solarized ]])
 
@@ -39,23 +66,23 @@ if vim.uv.os_gethostname() ~= "sajberspace" then
 
     -- Telescope colours
     vim.api.nvim_set_hl(0, "TelescopeMatching", { fg = "#268BD2", bold = true })
-end
 
--- Solarized colour reference chart
--- See https://ethanschoonover.com/solarized/ for details
--- Base03:    #002B36;
--- Base02:    #073642;
--- Base01:    #586E75;
--- Base00:    #657B83;
--- Base0:     #839496;
--- base1:     #93A1A1;
--- base2:     #EEE8D5;
--- base3:     #FDF6E3;
--- yellow:    #B58900;
--- orange:    #CB4B16;
--- red:       #DC322F;
--- magenta:   #D33682;
--- violet:    #6C71C4;
--- blue:      #268BD2;
--- cyan:      #2AA198;
--- green:     #859900;
+    -- Solarized colour reference chart
+    -- See https://ethanschoonover.com/solarized/ for details
+    -- Base03:    #002B36;
+    -- Base02:    #073642;
+    -- Base01:    #586E75;
+    -- Base00:    #657B83;
+    -- Base0:     #839496;
+    -- base1:     #93A1A1;
+    -- base2:     #EEE8D5;
+    -- base3:     #FDF6E3;
+    -- yellow:    #B58900;
+    -- orange:    #CB4B16;
+    -- red:       #DC322F;
+    -- magenta:   #D33682;
+    -- violet:    #6C71C4;
+    -- blue:      #268BD2;
+    -- cyan:      #2AA198;
+    -- green:     #859900;
+end
