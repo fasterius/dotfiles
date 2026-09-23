@@ -9,15 +9,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     command = ":set formatoptions=cjqtn",
 })
 
--- Conceal when in `telekasten` filetype
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = "telekasten",
-    callback = function()
-        vim.o.conceallevel = 2
-        vim.o.concealcursor = "nc"
-    end,
-})
-
 -- Open Telescope's `find_files` or `git_files` when Neovim is called
 -- without a specific file to open
 vim.api.nvim_create_autocmd("VimEnter", {

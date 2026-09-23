@@ -72,4 +72,13 @@ vim.schedule(function()
 
     -- Remove semantic token which interfered with above highlights
     vim.api.nvim_set_hl(0, "@lsp.type.class.telekasten", {})
+
+    -- Conceal when in `telekasten` filetype
+    vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = "telekasten",
+        callback = function()
+            vim.o.conceallevel = 2
+            vim.o.concealcursor = "nc"
+        end,
+    })
 end)
