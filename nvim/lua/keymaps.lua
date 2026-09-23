@@ -32,6 +32,3 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-
--- Neovim development
-vim.keymap.set("n", "<localleader>x", ":source %<CR>")
