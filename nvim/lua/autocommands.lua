@@ -8,25 +8,3 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = "*",
     command = ":set formatoptions=cjqtn",
 })
-
--- Open Telescope's `find_files` or `git_files` when Neovim is called
--- without a specific file to open
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        -- Don't run if the filetype is `man` (Neovim used as a manpager)
-        if vim.bo.filetype == "man" then
-            return
-        end
-
-        if next(vim.fn.argv()) == nil then
-            vim.schedule(function()
-                local telescope = require("telescope.builtin")
-                if os.execute("git rev-parse --is-inside-work-tree >> /dev/null 2>&1") == 0 then
-                    telescope.git_files()
-                else
-                    telescope.find_files()
-                end
-            end)
-        end
-    end,
-})
