@@ -5,11 +5,51 @@ vim.pack.add({
 
 local fzf = require("fzf-lua")
 fzf.setup({
-    -- Generate fzf's colours from the current colourscheme
+    -- Generate `fzf`'s colours from the colourscheme and link `fzf-lua`'s
+    -- highlights (several are hardcoded by default) to the colourscheme groups
     fzf_colors = true,
+    hls = {
+        fzf = {
+            match = "Directory",
+            prompt = "Directory",
+            pointer = "Directory",
+            marker = "Directory",
+            spinner = "Directory",
+        },
+        header_text = "Comment",
+        header_bind = "Directory",
+        path_linenr = "Comment",
+        path_colnr = "Comment",
+        live_prompt = "Normal",
+        live_sym = "Directory",
+        buf_nr = "Comment",
+        buf_flag_cur = "Directory",
+        buf_flag_alt = "Comment",
+    },
+
+    -- `ripgrep` colours grep results itself, so it can't use the groups above;
+    -- `green`/`blue` are the colourscheme's terminal colours, 245 is grey
+    grep = {
+        rg_opts = "--column --line-number --no-heading --color=always "
+            .. "--smart-case --max-columns=4096 "
+            .. "--colors=path:fg:cyan "
+            .. "--colors=line:fg:245 "
+            .. "--colors=column:fg:245 "
+            .. "--colors=match:fg:blue "
+            .. "-e", -- Flag signifies that the next argument is the pattern
+    },
+
+    -- No file icons (no icon plugin is installed), which otherwise leaves an
+    -- empty icon column before file names
+    defaults = {
+        file_icons = false,
+    },
 
     winopts = {
+        -- Set window width to 90% of Neovim's width
         width = 0.9,
+        -- Don't dim the buffers behind the picker
+        backdrop = false,
     },
 
     -- Ignore Zettelkasten-related files

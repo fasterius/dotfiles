@@ -15,13 +15,6 @@ if vim.uv.os_gethostname() == "sajberspace" then
 
     -- Colours for `indent-blankline.lua`
     vim.api.nvim_set_hl(0, "IblIndent", { fg = everforest.indent })
-
-    -- Matching characters in fzf-lua
-    vim.api.nvim_set_hl(
-        0,
-        "FzfLuaFzfMatch",
-        { fg = everforest.green, bold = true }
-    )
 else
     -- Solarized Light theme
     local solarized = palette.solarized
@@ -89,13 +82,6 @@ else
         0,
         "GitSignsDelete",
         { bg = solarized.base2, fg = solarized.red }
-    )
-
-    -- Matching characters in fzf-lua
-    vim.api.nvim_set_hl(
-        0,
-        "FzfLuaFzfMatch",
-        { fg = solarized.blue, bold = true }
     )
 
     -- Completion kind colours for `blink.cmp`
