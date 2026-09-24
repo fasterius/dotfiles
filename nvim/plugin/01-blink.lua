@@ -8,6 +8,12 @@ vim.pack.add({
 })
 
 require("blink.cmp").setup({
+    appearance = {
+        -- Link kind highlights to legazy `nvim-cmp` colourschemes, which is
+        -- required for the Solarized theme used
+        use_nvim_cmp_as_default = true,
+    },
+
     keymap = {
         preset = "none",
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -52,6 +58,14 @@ require("blink.cmp").setup({
 
     snippets = { preset = "luasnip" },
 })
+
+-- Set the menus' background/border background to the default background colour
+vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "Normal" })
+vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "FloatBorder" })
+vim.api.nvim_set_hl(0, "BlinkCmpDoc", { link = "Normal" })
+vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "FloatBorder" })
+vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelp", { link = "Normal" })
+vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { link = "FloatBorder" })
 
 -- LuaSnip configuration
 require("luasnip").setup({
