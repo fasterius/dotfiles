@@ -4,8 +4,47 @@ vim.schedule(function()
     vim.pack.add({
         "https://github.com/renerocksai/telekasten.nvim",
         "https://github.com/nvim-telescope/telescope.nvim",
+        "https://github.com/nvim-telescope/telescope-bibtex.nvim",
         "https://github.com/nvim-lua/plenary.nvim",
     })
+
+    -- Telescope is only used for Telekasten's pickers
+    local actions = require("telescope.actions")
+    require("telescope").setup({
+        defaults = {
+            layout_config = {
+                width = 0.9,
+            },
+            mappings = {
+                i = {
+                    -- Disable scrolling inside preview windows
+                    ["<C-u>"] = false,
+                    ["<C-d>"] = false,
+                    -- Make a single <Esc> exit Telescope
+                    ["<Esc>"] = actions.close,
+                    -- Send selected/whole list to quickfix list
+                    ["<C-q>"] = actions.smart_send_to_qflist,
+                },
+            },
+            -- Ignore Zettelkasten-related files
+            file_ignore_patterns = {
+                "templates/new_note.md",
+                "zotero.bib",
+            },
+        },
+        extensions = {
+            bibtex = {
+                custom_formats = {
+                    -- Custom format for Zettelkasten with Telekasten plugin
+                    { id = "telekasten", cite_marker = "@%s" },
+                },
+                citation_format = "{{author}} (**{{year}}**), _{{title}}_. [^@{{label}}]",
+                -- Wrap long lines inside previewer
+                wrap = true,
+            },
+        },
+    })
+    require("telescope").load_extension("bibtex")
 
     -- Home directory for Zettelkasten
     local home = vim.fn.expand("~/docs/zettelkasten")
