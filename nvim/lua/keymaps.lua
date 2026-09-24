@@ -10,13 +10,13 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set(
     "n",
     "j",
-    [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'j' : 'gj']],
+    [[v:count ? (v:count > 1 ? "m'" . v:count : '') . 'j' : 'gj']],
     { expr = true }
 )
 vim.keymap.set(
     "n",
     "k",
-    [[v:count ? (v:count >= 1 ? "m'" . v:count : '') . 'k' : 'gk']],
+    [[v:count ? (v:count > 1 ? "m'" . v:count : '') . 'k' : 'gk']],
     { expr = true }
 )
 vim.keymap.set("n", "0", "g0")
