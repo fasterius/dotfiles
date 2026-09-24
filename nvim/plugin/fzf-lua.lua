@@ -93,7 +93,6 @@ vim.keymap.set("n", "<leader>sd", fzf.diagnostics_workspace)
 -- LSP
 vim.keymap.set("n", "<leader>ds", fzf.lsp_document_symbols)
 vim.keymap.set("n", "<leader>ws", fzf.lsp_live_workspace_symbols)
-vim.keymap.set("n", "gr", fzf.lsp_references)
 
 -- Open `git_files` or `files` when Neovim is called without a specific file
 vim.api.nvim_create_autocmd("VimEnter", {
