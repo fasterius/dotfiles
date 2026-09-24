@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         -- dispatch of this one, so it misses this write; run it directly
         vim.api.nvim_exec_autocmds(
             "BufWritePre",
-            { group = "tidy", buf = args.buf, modeline = false }
+            { group = "tidy", buffer = args.buf, modeline = false }
         )
     end,
 })

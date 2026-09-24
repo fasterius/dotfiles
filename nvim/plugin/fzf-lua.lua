@@ -29,7 +29,7 @@ fzf.setup({
     },
 
     -- `ripgrep` colours grep results itself, so it can't use the groups above;
-    -- `green`/`blue` are the colourscheme's terminal colours, 245 is grey
+    -- `cyan`/`blue` are the colourscheme's terminal colours, 245 is grey
     grep = {
         rg_opts = "--column --line-number --no-heading --color=always "
             .. "--smart-case --max-columns=4096 "

@@ -13,15 +13,15 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
         require("blink.cmp").setup({
             appearance = {
-                -- Link kind highlights to legacy `nvim-cmp` colourschemes (required
-                -- for the Solarized theme used)
+                -- Link kind highlights to legacy `nvim-cmp` colourschemes
+                -- (required for the Solarized theme used)
                 use_nvim_cmp_as_default = true,
             },
 
             keymap = {
                 -- Default keymaps, following Vim's own completion keymaps
                 --   C-n/C-p + Down/Up: Next/previous item
-                --   C-y              : Accept selection (or first if no selection)
+                --   C-y              : Accept selection (or first item)
                 --   C-e              : Cancel
                 --   Tab/S-Tab        : Jump between snippet placeholders
                 --   C-b/C-f          : Scroll documentation
@@ -64,7 +64,8 @@ vim.api.nvim_create_autocmd("InsertEnter", {
             snippets = { preset = "luasnip" },
         })
 
-        -- Set the menus' background/border background to the default background colour
+        -- Set the menus' background/border background to the default
+        -- background colour
         vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "Normal" })
         vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "FloatBorder" })
         vim.api.nvim_set_hl(0, "BlinkCmpDoc", { link = "Normal" })
