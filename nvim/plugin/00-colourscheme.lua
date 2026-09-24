@@ -84,6 +84,10 @@ else
         { bg = solarized.base2, fg = solarized.red }
     )
 
+    -- Markdown checkboxes (`- [ ]` and `- [x]`)
+    vim.api.nvim_set_hl(0, "@markup.list.unchecked", { fg = solarized.orange })
+    vim.api.nvim_set_hl(0, "@markup.list.checked", { fg = solarized.orange })
+
     -- Completion kind colours for `blink.cmp`
     vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = solarized.blue })
 end
