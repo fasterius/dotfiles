@@ -3,7 +3,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 -- Clear search highlights
-vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Store relative line number movement larger than 1 in the jumplist
 -- Move by visual lines instead of physical lines
