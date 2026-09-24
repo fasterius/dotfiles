@@ -56,7 +56,7 @@ vim.o.formatlistpat = "^\\s*\\d\\+[\\]:.)}\t ]\\s*\\|^\\s*[-*+]\\s\\+"
 -- automatically
 vim.o.completeopt = "menuone,noselect"
 
--- Disable the default Neovim file tree browser `netwr` in favour of plugins
+-- Disable the default Neovim file tree browser `netwr`
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
