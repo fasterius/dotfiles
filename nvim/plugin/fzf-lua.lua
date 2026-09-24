@@ -14,7 +14,6 @@ fzf.setup({
 
     -- Ignore Zettelkasten-related files
     file_ignore_patterns = {
-        "templates/new_note.md",
         "zotero.bib",
     },
 
@@ -41,10 +40,10 @@ local function git_root()
     return fzf.path.git_root({}, true)
 end
 vim.keymap.set("n", "<leader>sg", function()
-    fzf.live_grep({ cwd = git_root })
+    fzf.live_grep({ cwd = git_root() })
 end)
 vim.keymap.set("n", "<leader>sw", function()
-    fzf.grep_cword({ cwd = git_root })
+    fzf.grep_cword({ cwd = git_root() })
 end)
 vim.keymap.set("n", "<leader>sh", fzf.helptags)
 vim.keymap.set("n", "<leader>sd", fzf.diagnostics_workspace)

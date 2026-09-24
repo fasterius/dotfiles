@@ -16,12 +16,7 @@ if vim.uv.os_gethostname() == "sajberspace" then
     -- Colours for `indent-blankline.lua`
     vim.api.nvim_set_hl(0, "IblIndent", { fg = everforest.indent })
 
-    -- Matching characters in Telescope (Telekasten) and fzf-lua
-    vim.api.nvim_set_hl(
-        0,
-        "TelescopeMatching",
-        { fg = everforest.green, bold = true }
-    )
+    -- Matching characters in fzf-lua
     vim.api.nvim_set_hl(
         0,
         "FzfLuaFzfMatch",
@@ -96,12 +91,7 @@ else
         { bg = solarized.base2, fg = solarized.red }
     )
 
-    -- Matching characters in Telescope (Telekasten) and fzf-lua
-    vim.api.nvim_set_hl(
-        0,
-        "TelescopeMatching",
-        { fg = solarized.blue, bold = true }
-    )
+    -- Matching characters in fzf-lua
     vim.api.nvim_set_hl(
         0,
         "FzfLuaFzfMatch",

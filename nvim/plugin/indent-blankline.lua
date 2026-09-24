@@ -7,7 +7,7 @@ require("ibl").setup({
     -- Do not show scope
     scope = { enabled = false },
 
-    -- Exclude default filetypes + telekasten filetype
+    -- Exclude default filetypes
     exclude = {
         filetypes = {
             "lspinfo",
@@ -16,9 +16,6 @@ require("ibl").setup({
             "help",
             "man",
             "gitcommit",
-            "TelescopePrompt",
-            "TelescopeResults",
-            "telekasten",
         },
     },
 })

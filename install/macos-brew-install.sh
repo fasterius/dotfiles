@@ -44,6 +44,7 @@ brew install \
     lua-language-server \
     luacheck \
     luarocks \
+    markdown-oxide \
     marksman \
     neovim \
     openjdk@17 \
