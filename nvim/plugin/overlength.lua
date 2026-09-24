@@ -4,13 +4,13 @@ vim.pack.add({
 })
 
 -- Get highlight of CursorLine for overlength colour specification
-local hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
+local hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
 
 -- Config
 require("overlength").setup({
 
     -- Set colour of overlength to the same as CursorLine colour group
-    colors = { bg = hl.background },
+    colors = { bg = hl.bg },
 
     -- Highlight only the column itself
     highlight_to_eol = false,
