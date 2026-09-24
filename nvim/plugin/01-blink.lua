@@ -32,14 +32,22 @@ require("blink.cmp").setup({
     },
 
     completion = {
-        -- Only accept an item that was explicitly navigated to
+        -- Do not preselect the first completion item
         list = {
             selection = { preselect = false },
         },
 
-        -- Borders around completion popups
+        -- Completion menu
         menu = {
             border = "rounded",
+            -- Set columns to [kind icon, label, kind label]
+            draw = {
+                columns = {
+                    { "kind_icon" },
+                    { "label", "label_description", gap = 1 },
+                    { "kind" },
+                },
+            },
         },
         documentation = {
             auto_show = true,
@@ -69,7 +77,6 @@ vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { link = "FloatBorder" })
 
 -- LuaSnip configuration
 require("luasnip").setup({
-
     -- Update repeated placeholders while writing
     update_events = "TextChanged,TextChangedI",
 

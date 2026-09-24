@@ -97,4 +97,7 @@ else
         "TelescopeMatching",
         { fg = solarized.blue, bold = true }
     )
+
+    -- Completion kind colours for `blink.cmp`
+    vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = solarized.blue })
 end
