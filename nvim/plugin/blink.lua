@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
                 -- Completion menu
                 menu = {
-                    border = "rounded",
                     -- Set columns to [kind icon, label, kind label]
                     draw = {
                         columns = {
@@ -50,7 +49,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
                 },
                 documentation = {
                     auto_show = true,
-                    window = { border = "rounded" },
                 },
 
                 -- Insert `()` after completing functions/methods
