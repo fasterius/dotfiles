@@ -28,6 +28,7 @@ require("nvim-treesitter").install({
     "bash",
     "dockerfile",
     "javascript",
+    "json",
     "lua",
     "markdown",
     "markdown_inline",
@@ -42,10 +43,11 @@ require("nvim-treesitter").install({
 -- Enable highlighting and indentation support
 vim.api.nvim_create_autocmd("FileType", {
     callback = function()
-        -- Enable treesitter highlighting and disable regex syntax
-        pcall(vim.treesitter.start)
-        -- Enable treesitter-based indentation
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- Enable treesitter highlighting and treesitter-based indentation
+        -- for languages with an installed parser
+        if pcall(vim.treesitter.start) then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
     end,
 })
 
