@@ -1,5 +1,6 @@
--- Zettelkasten: the `markdown-oxide` LSP  provides links, backlinks and
--- renaming, while fzf-lua provides the pickers
+-- Local plugin `zettelkasten`
+-- The `markdown-oxide` LSP  provides links, backlinks and renaming, while
+-- `fzf-lua` provides the pickers
 local zettelkasten = require("zettelkasten")
 
 -- BibTeX citations; defer loading until startup is finished
@@ -42,6 +43,60 @@ local function remove_note()
     end
 end
 
+-- Two steps: first select a tag (`Constant`) from the available workspace
+-- symbols in `markdown-oxide`, then search for all notes with that tag with the
+-- normal file picker
+local function search_tags()
+    local fzf = require("fzf-lua")
+    -- Only run when `markdown-oxide` is running
+    local client =
+        vim.lsp.get_clients({ bufnr = 0, name = "markdown-oxide" })[1]
+    if not client then
+        return
+    end
+    -- Get workspace symbols
+    client:request("workspace/symbol", { query = "" }, function(err, result)
+        if err or not result then
+            return
+        end
+        -- Group the occurrences by tag, as `file:line:col` entries
+        local tags = {}
+        for _, symbol in ipairs(result) do
+            if symbol.kind == vim.lsp.protocol.SymbolKind.Constant then
+                local file = vim.uri_to_fname(symbol.location.uri)
+                local start = symbol.location.range.start
+                tags[symbol.name] = tags[symbol.name] or {}
+                table.insert(
+                    tags[symbol.name],
+                    string.format(
+                        "%s:%d:%d:",
+                        vim.fs.relpath(zettelkasten.dir, file) or file,
+                        start.line + 1,
+                        start.character + 1
+                    )
+                )
+            end
+        end
+        local names = vim.tbl_keys(tags)
+        table.sort(names)
+        -- Step 1: search among found tags
+        fzf.fzf_exec(names, {
+            prompt = "Tags> ",
+            -- Step 2: search among found (tagged) files
+            actions = {
+                ["enter"] = function(selected)
+                    fzf.fzf_exec(tags[selected[1]], {
+                        prompt = selected[1] .. "> ",
+                        cwd = zettelkasten.dir,
+                        previewer = "builtin",
+                        actions = fzf.defaults.actions.files,
+                    })
+                end,
+            },
+        })
+    end, 0)
+end
+
 -- Global keymaps
 vim.keymap.set("n", "<leader>zf", function()
     require("fzf-lua").files({ cwd = zettelkasten.dir })
@@ -71,19 +126,13 @@ vim.api.nvim_create_autocmd("FileType", {
         local function map(lhs, rhs)
             vim.keymap.set("n", lhs, rhs, { buffer = ev.buf })
         end
-        map("<leader>zz", vim.lsp.buf.definition)
-        map("<leader>zb", function()
+        map("<leader>zz", vim.lsp.buf.definition) -- Go to note
+        map("<leader>zb", function() -- List backlinks
             -- Always show the picker, even with a single backlink
             require("fzf-lua").lsp_references({ jump1 = false })
         end)
         map("<leader>zr", vim.lsp.buf.rename)
         map("<leader>zR", remove_note)
-
-        -- Tags are reported as `Constant` workspace symbols
-        map("<leader>zt", function()
-            require("fzf-lua").lsp_workspace_symbols({
-                regex_filter = "^%[Constant%]",
-            })
-        end)
+        map("<leader>zt", search_tags)
     end,
 })
