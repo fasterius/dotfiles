@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 
         require("blink.cmp").setup({
             appearance = {
-                -- Link kind highlights to legazy `nvim-cmp` colourschemes (required
+                -- Link kind highlights to legacy `nvim-cmp` colourschemes (required
                 -- for the Solarized theme used)
                 use_nvim_cmp_as_default = true,
             },
