@@ -40,10 +40,11 @@ fzf.setup({
             .. "-e", -- Flag signifies that the next argument is the pattern
     },
 
-    -- No file icons (no icon plugin is installed), which otherwise leaves an
-    -- empty icon column before file names
-    defaults = {
-        file_icons = false,
+    -- No git status column in `git_files`, which is blank for unchanged files
+    git = {
+        files = {
+            git_icons = false,
+        },
     },
 
     winopts = {
