@@ -9,15 +9,6 @@ vim.pack.add({
 -- LSP capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-capabilities = vim.tbl_deep_extend("force", capabilities, {
-    textDocument = {
-        completion = {
-            completionItem = {
-                snippetSupport = true,
-            },
-        },
-    },
-})
 
 -- General LSP configuration (is overridden by specific LSP configs)
 vim.lsp.config("*", {
