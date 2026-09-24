@@ -97,12 +97,12 @@ local function search_tags()
     end, 0)
 end
 
--- Global keymaps
+-- Global keymaps (no icons; all notes are Markdown)
 vim.keymap.set("n", "<leader>zf", function()
-    require("fzf-lua").files({ cwd = zettelkasten.dir })
+    require("fzf-lua").files({ cwd = zettelkasten.dir, file_icons = false })
 end)
 vim.keymap.set("n", "<leader>zg", function()
-    require("fzf-lua").live_grep({ cwd = zettelkasten.dir })
+    require("fzf-lua").live_grep({ cwd = zettelkasten.dir, file_icons = false })
 end)
 vim.keymap.set("n", "<leader>zn", create_note)
 vim.keymap.set("n", "<leader>zB", function()
@@ -129,7 +129,10 @@ vim.api.nvim_create_autocmd("FileType", {
         map("<leader>zz", vim.lsp.buf.definition) -- Go to note
         map("<leader>zb", function() -- List backlinks
             -- Always show the picker, even with a single backlink
-            require("fzf-lua").lsp_references({ jump1 = false })
+            require("fzf-lua").lsp_references({
+                jump1 = false,
+                file_icons = false,
+            })
         end)
         map("<leader>zr", vim.lsp.buf.rename)
         map("<leader>zR", remove_note)
