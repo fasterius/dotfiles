@@ -9,26 +9,21 @@ vim.pack.add({
 
 require("blink.cmp").setup({
     appearance = {
-        -- Link kind highlights to legazy `nvim-cmp` colourschemes, which is
-        -- required for the Solarized theme used
+        -- Link kind highlights to legazy `nvim-cmp` colourschemes (required
+        -- for the Solarized theme used)
         use_nvim_cmp_as_default = true,
     },
 
     keymap = {
-        preset = "none",
-        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-        ["<CR>"] = { "accept", "fallback" },
-        ["<C-d>"] = {
-            function(cmp)
-                cmp.scroll_documentation_up(4)
-            end,
-        },
-        ["<C-f>"] = {
-            function(cmp)
-                cmp.scroll_documentation_down(4)
-            end,
-        },
+        -- Default keymaps, following Vim's own completion keymaps
+        --   C-n/C-p + Down/Up: Next/previous item
+        --   C-y              : Accept selection (or first if no selection)
+        --   C-e              : Cancel
+        --   Tab/S-Tab        : Jump between snippet placeholders
+        --   C-b/C-f          : Scroll documentation
+        --   C-k              : Signature help
+        --   Enter            : Not mapped
+        preset = "default",
     },
 
     completion = {
