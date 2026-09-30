@@ -4,5 +4,8 @@ vim.schedule(function()
     vim.pack.add({
         "https://github.com/kylechui/nvim-surround",
     })
-    require("nvim-surround").setup()
+    require("nvim-surround").setup({
+        -- Don't highlight the target text
+        highlight = { duration = false },
+    })
 end)
