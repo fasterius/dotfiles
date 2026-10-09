@@ -1,8 +1,11 @@
-# Source custom HPC profile if in a SSH session
+# Do nothing for non-interactive shells
+[[ $- != *i* ]] && return
+
+# Source custom HPC profile if in a SSH session on a known HPC system
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    if $(uname -n | grep -q "uppmax") ; then
+    if uname -n | grep -q "uppmax"; then
         source "$HOME/.dotfiles/bash/uppmax_profile"
-    else
+    elif [[ -d /cfs/klemming ]]; then
         source "$HOME/.dotfiles/bash/pdc_profile"
     fi
 fi
