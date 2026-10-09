@@ -23,7 +23,6 @@
         "bluetooth",
         "niri/language",
         "battery",
-        "power-profiles-daemon",
         "idle_inhibitor",
         "clock",
         "custom/eww-power"
