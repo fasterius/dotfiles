@@ -3,7 +3,6 @@ Host *
   ControlPath ~/.ssh/sockets/%r@%h-%p
   ControlPersist 600
   AddKeysToAgent yes
-  UseKeychain yes
 
 Host dardel
   User erikfas
