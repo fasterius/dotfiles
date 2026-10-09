@@ -47,7 +47,7 @@ brew install \
     markdown-oxide \
     marksman \
     neovim \
-    openjdk@17 \
+    openjdk@21 \
     pandoc \
     prettier \
     readline \
