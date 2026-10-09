@@ -19,9 +19,9 @@ bash ~/.dotfiles/install/install-software.sh
 if [[ "$(uname)" == "Darwin" ]]; then
     echo ""
     echo "--------------  Hiding MacOS home directories --------------"
-    bash ~/.dotfiles/isntall/macos-hide-directories.sh
+    bash ~/.dotfiles/install/macos-hide-directories.sh
 
     echo ""
     echo "--------------  Installing Homebrew software --------------"
-    bash ~/.dotfiles/isntall/macos-brew-install.sh
+    bash ~/.dotfiles/install/macos-brew-install.sh
 fi

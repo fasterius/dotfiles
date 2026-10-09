@@ -20,7 +20,7 @@ l = ["log", "-T", "my_log_comfortable", "-r", ".."]
 "empty description placeholder" = {fg = "bright red", bold = false, italic = true}
 "empty" = {fg = "bright red", bold = false, italic = true}
 "git_head" = "yellow"
-"git_refsl" = "yellow"
+"git_refs" = "yellow"
 "node working_copy" = { fg = "yellow", bold = true }
 "rest" = "bright cyan"
 "root" = "yellow"
