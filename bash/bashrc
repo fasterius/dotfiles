@@ -194,6 +194,7 @@ git_branch() {
     # Start in current directory without knowing where the Git directory is
     local DIR="$PWD"
     local GIT_DIR=""
+    local HEAD=""
 
     # Loop until the Git directory is found
     while [[ -n "$DIR" ]]; do
@@ -201,6 +202,15 @@ git_branch() {
         # If Git directory is found, break loop
         if [[ -d "$DIR/.git" ]]; then
             GIT_DIR="$DIR/.git"
+            break
+        fi
+
+        # In worktrees and submodules `.git` is a file containing `gitdir:
+        # <path>`, pointing to the actual Git directory
+        if [[ -f "$DIR/.git" ]]; then
+            read -r GIT_DIR < "$DIR/.git"
+            GIT_DIR="${GIT_DIR#gitdir: }"
+            [[ "$GIT_DIR" != /* ]] && GIT_DIR="$DIR/$GIT_DIR"
             break
         fi
 

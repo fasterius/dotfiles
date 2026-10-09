@@ -7,8 +7,6 @@ set -euo pipefail
 # ones.
 
 HOOK_NAME=$(basename "$0")
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
-LOCAL_HOOK="$REPO_ROOT/.git/hooks/$HOOK_NAME"
 
 # -----------------------------------------
 # Global hooks
@@ -25,6 +23,10 @@ esac
 # -----------------------------------------
 # Local hooks
 # -----------------------------------------
+
+GIT_DIR=$(git rev-parse --git-common-dir 2>/dev/null) || exit 0
+GIT_DIR=$(cd "$GIT_DIR" && pwd)
+LOCAL_HOOK="$GIT_DIR/hooks/$HOOK_NAME"
 
 if [ -x "$LOCAL_HOOK" ]; then
     "$LOCAL_HOOK" "$@" || exit $?
