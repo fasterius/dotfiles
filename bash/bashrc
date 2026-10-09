@@ -66,6 +66,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # `luarocks --lua-version 5.1 install nlua`.
     eval "$(luarocks path --lua-version 5.1)"
 
+    # Use GNU readlink
+    alias readlink='greadlink'
+
 fi
 
 # Add to PATH
@@ -151,9 +154,6 @@ alias ......='cd ../../../../..'
 
 # Auto-clour `grep` output
 alias grep='grep --color=auto'
-
-# Use GNU readlink
-alias readlink='greadlink'
 
 # Git aliases
 alias ga='git add'
