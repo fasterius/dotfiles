@@ -4,15 +4,20 @@
 
 OS="$(uname)"
 if [[ "$OS" == "Linux" ]]; then
-    FONT_PATH="~/.local/share/fonts/"
+    FONT_PATH="$HOME/.local/share/fonts/"
 elif [[ "$OS" == "Darwin" ]]; then
-    FONT_PATH="~/Library/Fonts/"
+    FONT_PATH="$HOME/Library/Fonts/"
 fi
 
 # Check if font is already installed
 FONT_NAME="MesloLGSNerdFontMono"
-FONT_FILES=("$FONT_PATH"/$FONT_NAME-{Regular,Bold,BoldItalic,Italic}.ttf)
-if (( ${#FONT_FILES[@]} == 4 )); then
+INSTALLED=true
+for STYLE in Regular Bold BoldItalic Italic; do
+    if [[ ! -f "$FONT_PATH/$FONT_NAME-$STYLE.ttf" ]]; then
+        INSTALLED=false
+    fi
+done
+if [[ "$INSTALLED" == true ]]; then
     echo "$FONT_NAME already installed"
     exit 0
 fi
