@@ -62,11 +62,12 @@ fzf.setup({
     actions = {
         files = {
             true, -- Keep the default actions
-            -- Send the whole list to the quickfix list (`alt-q` sends only
-            -- the selected items)
+            -- Send the selected items to the quickfix list, or the whole list
+            -- if nothing is selected
             ["ctrl-q"] = {
                 fn = fzf.actions.file_sel_to_qf,
-                prefix = "select-all",
+                prefix = "transform(if [ $FZF_SELECT_COUNT -eq 0 ]; "
+                    .. "then echo select-all; fi)",
             },
         },
     },
