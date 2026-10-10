@@ -83,8 +83,10 @@ export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.pixi/bin:$PATH"
 
-# Autocompletion for Pixi
-eval "$(pixi completion --shell bash)"
+# Lazy-loaded autocompletion for Pixi; returning 124 makes Bash retry with the
+# newly loaded completion
+_pixi_lazy() { eval "$(pixi completion --shell bash)"; return 124; }
+complete -F _pixi_lazy pixi
 
 # Enable fzf
 eval "$(fzf --bash)"
