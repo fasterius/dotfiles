@@ -9,4 +9,4 @@
 	url = git@github.com:fasterius/niri-run-or-raise.git
 [submodule "scripts/quick-whisper"]
 	path = scripts/quick-whisper
-	url = https://github.com/fasterius/quick-whisper
+	url = git@github.com:fasterius/quick-whisper.git
