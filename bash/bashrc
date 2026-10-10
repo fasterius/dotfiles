@@ -24,6 +24,9 @@ if [[ "$(uname)" == "Linux" ]]; then
     # Use GNOME as default XDG desktop; gtk as fallback
     export XDG_CURRENT_DESKTOP=GNOME
     export QT_QPA_PLATFORMTHEME=gtk
+
+    # Point `niri msg` to the currently running Niri instance (if any)
+    source "$HOME/.dotfiles/scripts/niri-set-socket-env.sh"
 fi
 
 # MacOS-specific settings
