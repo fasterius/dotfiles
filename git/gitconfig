@@ -1,16 +1,16 @@
 # User settings
 [user]
-	name = Erik Fasterius
-	email = erik.fasterius@outlook.com
+    name = Erik Fasterius
+    email = erik.fasterius@outlook.com
 
 # Global gitignore
 [core]
-	excludesfile = ~/.gitignore_global
-	hooksPath = ~/.dotfiles/git/hooks
+    excludesfile = ~/.gitignore_global
+    hooksPath = ~/.dotfiles/git/hooks
 
 # Use `main` as default branch instead of `master`
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 # Sort branches by commit date instead of alphabetically
 [branch]
@@ -18,12 +18,12 @@
 
 # Automatically remove local branches/tags no longer on the remote
 [fetch]
-	prune = true
+    prune = true
     pruneTags = true
 
 # Only allow fast-forward merges when pulling
 [pull]
-	ff = only
+    ff = only
 
 [push]
     # Automatically push tags
@@ -40,7 +40,7 @@
     mnemonicPrefix = true
 
 [rebase]
-    # Automatically squash `!fixup` commits into their target commits
+    # Automatically squash `fixup!` commits into their target commits
     autoSquash = true
     # Automatically stash local changes when rebasing from a remote
     autoStash = true
@@ -75,6 +75,6 @@
 [format]
     pretty = format:%C(yellow)commit %H %C(auto)%d %nAuthor: %C(cyan)%aN %C(italic reset)(%ae) %nDate:   %C(blue)%ar %C(italic reset)(%ai) %n%n%C(bold reset)%w(0,6,6)%s%n%C(reset)%+b
 
-# Add `line` custom format for use in `glo` alias (see `bash_profile`)
+# Add `line` custom format for use in `glo` alias (see `bashrc`)
 [pretty]
     line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s

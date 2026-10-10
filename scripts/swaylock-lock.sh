@@ -26,4 +26,4 @@ swaylock \
     --separator-color 000000cc \
     --text-color ffffffcc \
     --text-ver-color ffffffcc \
-    --text-wrong-color ffffffcc \
+    --text-wrong-color ffffffcc
