@@ -21,7 +21,7 @@ brew install \
     act \
     badgeify \
     bash \
-    bash-completion \
+    bash-completion@2 \
     bat \
     btop \
     coreutils \
