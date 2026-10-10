@@ -148,7 +148,7 @@ alias coac='conda activate'
 alias code='conda deactivate'
 
 # Do not save workspace when exiting R
-alias r='r --no-save'
+alias r='R --no-save'
 
 # Move upwards multiple directories
 alias ..='cd ..'
