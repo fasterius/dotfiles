@@ -1,39 +1,33 @@
 #!/bin/bash
 
 # Script that hides the default MacOS home folders from Finder, but creates a
-# new subdirectory with symbolic links to them for access when needed.
-
-# Store current directory
-cwd=$(pwd)
-
-# Move to home directory
-cd ~
+# new subdirectory with symbolic links to them for access when needed. Safe to
+# run multiple times.
 
 # Create directory for symlinks
-mkdir home
+mkdir -p "$HOME/home"
 
 # Directories to hide
-DIRS='Desktop'
-DIRS=$DIRS' Documents'
-DIRS=$DIRS' Downloads'
-DIRS=$DIRS' Library'
-DIRS=$DIRS' Movies'
-DIRS=$DIRS' Music'
-DIRS=$DIRS' Pictures'
-DIRS=$DIRS' Public'
+DIRS=(
+    Desktop
+    Documents
+    Downloads
+    Library
+    Movies
+    Music
+    Pictures
+    Public
+)
 
 # Loop over directories
-for DIR in $DIRS; do
+for DIR in "${DIRS[@]}"; do
 
     # Get lowercase directory name
-    DIRNAME=$(echo $DIR | tr '[:upper:]' '[:lower:]')
+    DIRNAME=$(echo "$DIR" | tr '[:upper:]' '[:lower:]')
 
-    # Make symlink
-    ln -s ~/$DIR home/$DIRNAME
+    # Make symlink, replacing any existing one
+    ln -sfn "$HOME/$DIR" "$HOME/home/$DIRNAME"
 
     # Hide directory from Finder
-    SetFile -a V $DIR
+    SetFile -a V "$HOME/$DIR"
 done
-
-# Move to starting directory
-cd $cwd
