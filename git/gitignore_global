@@ -5,8 +5,8 @@
 **/.Rhistory
 
 # Vim undo history and swap-files
-**/*.un*
-**/*.swp*
+**/*.un~
+**/*.sw[a-p]
 
 # Open Excel/Word/Powerpoint documents
 **/*~$*.xlsx
@@ -19,7 +19,7 @@
 **/.ipynb_checkpoints
 
 # Conda environments
-**/*-env
+**/*-env/
 
 # Nextflow files
 **/.nextflow*
