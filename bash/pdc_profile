@@ -1,9 +1,12 @@
-# Load more recent module versions
-module load git
-module load tmux
-module load pixi
-module load nextflow
-module load PDC/24.11 apptainer/1.4.0-cpeGNU-24.11
+# Load more recent module versions, in a single call as each `module` call is
+# slow (modules are loaded in the order given)
+module load \
+    git \
+    tmux \
+    pixi \
+    nextflow \
+    PDC/24.11 \
+    apptainer/1.4.0-cpeGNU-24.11
 
 # Add custom software to PATH
 export PATH="$HOME/opt/nvim/bin:$PATH"
