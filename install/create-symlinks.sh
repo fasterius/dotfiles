@@ -90,29 +90,27 @@ mkdir -p $HOME/.ssh/sockets
 ln -sfn $HOME/.dotfiles/ssh/config $HOME/.ssh
 
 
-# --------------------------- OS-specific configs -----------------------------
+# ----------------------- Colour scheme-specific configs -----------------------
 
-# Some configs requires symlinking different files depending on the current
-# hostname, usually because of the desired colour scheme or font size.
+# Some configs can't select their colour scheme at runtime, so the file for the
+# current host's colour scheme (`<name>-<colourscheme>.<ext>`) is symlinked to
+# `<name>.<ext>`.
 
-HOST_CONFIGS=(
-    alacritty.toml
-    btop.conf
+COLOURSCHEME="$($HOME/.dotfiles/scripts/dotfiles-colourscheme.sh)"
+COLOURSCHEME_CONFIGS=(
+    alacritty/alacritty.toml
+    bash/inputrc-colours
+    btop/btop.conf
 )
 
-echo "Creating other symlinks ..."
-for HOST_CONFIG in ${HOST_CONFIGS[@]}; do
-    APP="${HOST_CONFIG/.*/}"
-    EXT="${HOST_CONFIG/*./}"
-    if [[ "$HOST" == "sajberspace" ]]; then
-        ln -sfn \
-            $HOME/.dotfiles/${APP}/${APP}-everforest.${EXT} \
-            $HOME/.dotfiles/${APP}/${APP}.${EXT}
+echo "Creating symlinks for the \"$COLOURSCHEME\" colour scheme ..."
+for CONFIG in ${COLOURSCHEME_CONFIGS[@]}; do
+    if [[ "$CONFIG" == *.* ]]; then
+        SOURCE="${CONFIG%.*}-$COLOURSCHEME.${CONFIG##*.}"
     else
-        ln -sfn \
-            $HOME/.dotfiles/${APP}/${APP}-solarized.${EXT} \
-            $HOME/.dotfiles/${APP}/${APP}.${EXT}
+        SOURCE="$CONFIG-$COLOURSCHEME"
     fi
+    ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
 done
 
 # --------------------------------- Scripts -----------------------------------

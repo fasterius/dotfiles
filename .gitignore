@@ -8,6 +8,7 @@ autoload/
 # Btop log files
 btop/btop.log
 
-# OS-specific symlinks
+# Colour scheme-specific symlinks (created by `install/create-symlinks.sh`)
 alacritty/alacritty.toml
+bash/inputrc-colours
 btop/btop.conf

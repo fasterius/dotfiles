@@ -1,0 +1,3 @@
+# Everforest (dark) cursor colours: grey in insert mode, aqua in command mode
+set vi-ins-mode-string \1\e[2 q\e]12;#D3C6AA\a\2
+set vi-cmd-mode-string \1\e[2 q\e]12;#83C092\a\2

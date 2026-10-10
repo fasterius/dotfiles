@@ -83,13 +83,13 @@ export PATH="$HOME/.pixi/bin:$PATH"
 # Autocompletion for Pixi
 eval "$(pixi completion --shell bash)"
 
-# Enable fzf and change default colours
+# Enable fzf
 eval "$(fzf --bash)"
-if [ "$(hostname)" == "sajberspace" ]; then
-    source ~/.dotfiles/bash/fzf-colours-everforest.sh
-else
-    source ~/.dotfiles/bash/fzf-colours-solarized.sh
-fi
+
+# Set colours (fzf, bat, etc.) for the current host's colour scheme
+DOTFILES_COLOURSCHEME="$("$HOME/.dotfiles/scripts/dotfiles-colourscheme.sh")"
+export DOTFILES_COLOURSCHEME
+source "$HOME/.dotfiles/bash/colours-$DOTFILES_COLOURSCHEME.sh"
 
 # Locale
 export LC_ALL=en_GB.UTF-8

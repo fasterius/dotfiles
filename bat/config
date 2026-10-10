@@ -1,6 +1,3 @@
-# Set theme to Solarized (light)
---theme="Solarized (light)"
-
 # Use italic text where available
 --italic-text=always
 
