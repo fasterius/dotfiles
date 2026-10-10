@@ -73,11 +73,6 @@ if [[ "$OS" == "Darwin" ]]; then
     alias claude-sandbox='~/projects/claude-sandbox/run-claude-egress-filtered.sh'
     alias claude='~/projects/claude-sandbox/run-claude-egress-open.sh'
 
-    # Luarocks for Busted-based testing of Neovim plugins.
-    # Requires luarocks `luarocks --lua-version 5.1 install busted` as well as
-    # `luarocks --lua-version 5.1 install nlua`.
-    eval "$(luarocks path --lua-version 5.1)"
-
     # Use GNU readlink
     alias readlink='greadlink'
 
@@ -98,6 +93,12 @@ eval "$(fzf --bash)"
 DOTFILES_COLOURSCHEME="$("$HOME/.dotfiles/scripts/dotfiles-colourscheme.sh")"
 export DOTFILES_COLOURSCHEME
 source "$HOME/.dotfiles/bash/colours-$DOTFILES_COLOURSCHEME.sh"
+
+# Set up Luarocks paths for Busted-based testing of Neovim plugins; run
+# `lua-test-env` once in the shell used for testing (not done at start-up, as
+# it's slow). Requires luarocks `luarocks --lua-version 5.1 install busted` as
+# well as `luarocks --lua-version 5.1 install nlua`.
+lua-test-env() { eval "$(luarocks path --lua-version 5.1)"; }
 
 # Locale
 export LC_ALL=en_GB.UTF-8
