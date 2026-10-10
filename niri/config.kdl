@@ -88,12 +88,12 @@ window-rule {
 // Open various apps in maximised mode
 window-rule {
     match app-id=r#"^Alacritty$"#
-    match app-id=r#"^*Calendar$"#
+    match app-id=r#"Calendar$"#
     match app-id=r#"^discord$"#
     match app-id=r#"^Godot"#
-    match app-id=r#"^libreoffice-*"#
-    match app-id=r#"^*Lutris$"#
-    match app-id=r#"^*Nautilus$"#
+    match app-id=r#"^libreoffice"#
+    match app-id=r#"Lutris$"#
+    match app-id=r#"Nautilus$"#
     match app-id=r#"^obsidian$"#
     match app-id=r#"^org.qbittorrent.qBittorrent$"#
     match app-id=r#"^Spotify$"#
