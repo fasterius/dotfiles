@@ -3,15 +3,17 @@
 
 # Source custom HPC profile if in a SSH session on a known HPC system
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    if uname -n | grep -q "uppmax"; then
+    if [[ "$HOSTNAME" == *uppmax* ]]; then
         source "$HOME/.dotfiles/bash/uppmax_profile"
     elif [[ -d /cfs/klemming ]]; then
         source "$HOME/.dotfiles/bash/pdc_profile"
     fi
 fi
 
+OS="$(uname)"
+
 # Linux-specific settings
-if [[ "$(uname)" == "Linux" ]]; then
+if [[ "$OS" == "Linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
     export PATH="$PATH:/usr/share/git-core/contrib"
 
@@ -30,7 +32,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 # MacOS-specific settings
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OS" == "Darwin" ]]; then
 
     # Silence the OS X zsh message
     export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -46,16 +48,14 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
     # Add Homebrew paths to PATH
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
-    export PATH="`brew --prefix git`/share/git-core/contrib/diff-highlight/:$PATH"
+    export PATH="/opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/:$PATH"
 
     # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
     export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
 
-    # Bash and Docker completion
+    # Bash completion (also loads completions installed by Homebrew packages)
     [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
         && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
-    [[ -r "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker" ]] \
-        && . "/opt/homebrew/Cellar/docker-completion/23.0.4/etc/bash_completion.d/docker"
 
     # Files to ignore for tab-completion
     export FIGNORE="$FIGNORE:.un~:DS_Store"
@@ -186,9 +186,11 @@ alias gwd='git switch --detach'
 # Prompt ---------------------------------------------------------------------
 
 # Function to get conda env if in an activated environment
+# (uses only Bash built-ins, as this runs at every prompt)
 conda_env() {
-    basename $(echo $CONDA_DEFAULT_ENV) 2> /dev/null \
-        | sed -e 's/\(.*\)/(\1) /'
+    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+        printf '(%s) ' "${CONDA_DEFAULT_ENV##*/}"
+    fi
 }
 
 # Function to get branch if inside a git repository
