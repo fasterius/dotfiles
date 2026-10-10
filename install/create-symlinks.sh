@@ -123,6 +123,11 @@ SCRIPTS=(
     tmux-new.sh
 )
 
+# Linux-only scripts
+if [[ "$OS" == "Linux" ]]; then
+    SCRIPTS+=(proton-ge-update.sh)
+fi
+
 mkdir -p $HOME/.local/bin
 
 # Symlink all scripts into `$HOME/.local/bin`
