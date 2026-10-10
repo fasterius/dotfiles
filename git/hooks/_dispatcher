@@ -15,7 +15,9 @@ HOOK_NAME=$(basename "$0")
 case "$HOOK_NAME" in
     pre-commit)
         if command -v gitleaks >/dev/null 2>&1; then
-            gitleaks git --pre-commit --staged --redact --verbose ||  exit 1
+            # Only print output when leaks are found
+            gitleaks git --pre-commit --staged --redact --verbose \
+                --no-banner --log-level warn || exit 1
         fi
         ;;
 esac
