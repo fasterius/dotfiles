@@ -1,0 +1,91 @@
+# GNOME settings
+#
+# Can be applied by running `install/create-symlinks.sh` or manually with:
+# `sed "s|@HOME@|$HOME|g" ~/.dotfiles/gnome/settings.dconf | dconf load /`
+
+[org/gnome/desktop/interface]
+color-scheme='prefer-dark'
+accent-color='green'
+enable-animations=false
+clock-format='24h'
+clock-show-weekday=true
+
+# Set wallpaper; requires replacement of `@HOME@`, see above
+[org/gnome/desktop/background]
+picture-uri='file://@HOME@/Dropbox/wallpaper.jpg'
+picture-uri-dark='file://@HOME@/Dropbox/wallpaper.jpg'
+
+# English and Swedish keyboard
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'us'), ('xkb', 'se')]
+
+# Touchpad
+[org/gnome/desktop/peripherals/touchpad]
+tap-to-click=true
+
+# No workspaces
+[org/gnome/mutter]
+dynamic-workspaces=false
+
+[org/gnome/desktop/wm/preferences]
+num-workspaces=1
+
+# Blank and lock the screen after 10 minutes
+[org/gnome/desktop/session]
+idle-delay=uint32 600
+
+[org/gnome/desktop/screensaver]
+lock-enabled=true
+lock-delay=uint32 0
+
+# Suspend after 15 minutes of inactivity
+[org/gnome/settings-daemon/plugins/power]
+sleep-inactive-ac-type='suspend'
+sleep-inactive-ac-timeout=900
+sleep-inactive-battery-type='suspend'
+sleep-inactive-battery-timeout=900
+
+# Keybinds; GNOME keys all share <Super><Shift> prefix
+[org/gnome/desktop/wm/keybindings]
+close=['<Super><Shift>q']
+move-to-monitor-left=['<Super><Shift>h']
+move-to-monitor-down=['<Super><Shift>j']
+move-to-monitor-up=['<Super><Shift>k']
+move-to-monitor-right=['<Super><Shift>l']
+
+[org/gnome/mutter/keybindings]
+toggle-tiled-left=['<Super><Shift>Left']
+toggle-tiled-right=['<Super><Shift>Right']
+
+[org/gnome/shell/keybindings]
+toggle-overview=['<Super><Shift>o']
+
+[org/gnome/settings-daemon/plugins/media-keys]
+screensaver=['<Super><Shift>x']
+
+[org/gnome/shell]
+disable-user-extensions=false
+enabled-extensions=['appindicatorsupport@rgcjonas.gmail.com', 'run-or-raise@edvard.cz', 'just-perfection-desktop@just-perfection', 'fullscreen-avoider@noobsai.github.com', 'toggleAudio@blackeyeprojects.de']
+
+[org/gnome/shell/extensions/toggle-audio]
+toggle-headphone-key=['<Super><Shift>a']
+
+[org/gnome/shell/extensions/just-perfection]
+accessibility-menu=false
+calendar=false
+clock-menu-position=1
+clock-menu-position-offset=7
+double-super-to-appgrid=false
+events-button=false
+notification-banner-position=2
+panel-in-overview=true
+quick-settings-dark-mode=false
+quick-settings-night-light=false
+support-notifier-showed-version=34
+support-notifier-type=0
+weather=false
+workspace=false
+workspace-peek=false
+workspace-popup=false
+workspaces-in-app-grid=false
+world-clock=false

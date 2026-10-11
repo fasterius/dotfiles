@@ -135,3 +135,14 @@ echo "Creating script symlinks ..."
 for SCRIPT in ${SCRIPTS[@]}; do
     ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" $HOME/.local/bin
 done
+
+# ------------------------------- GNOME settings -------------------------------
+
+# Load GNOME settings with `dconf`; uses an `@HOME@` placeholder for the home
+# directory, as dconf can't expand variables.
+
+if [[ "$HOST" == "sajberspace" ]] && command -v dconf > /dev/null; then
+    echo "Loading GNOME settings ..."
+    sed "s|@HOME@|$HOME|g" $HOME/.dotfiles/gnome/settings.dconf \
+        | dconf load /
+fi
