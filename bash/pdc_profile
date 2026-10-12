@@ -5,8 +5,8 @@ module load \
     tmux \
     pixi \
     nextflow \
-    PDC/24.11 \
-    apptainer/1.4.0-cpeGNU-24.11
+    PDC \
+    apptainer
 
 # Add custom software to PATH
 export PATH="$HOME/opt/nvim/bin:$PATH"
