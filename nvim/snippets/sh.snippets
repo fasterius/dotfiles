@@ -21,13 +21,13 @@ snippet hook-conventional-commits "Git commit-msg hook for conventional commits"
     # Create a temporary file to store stripped commit message in and delete it
     # after script completion
     STRIPPED=$(mktemp)
-    trap 'rm -f "$STRIPPED"' EXIT
+    trap 'rm -f "\$STRIPPED"' EXIT
 
     # Strip commit message using Git itself
-    git stripspace --strip-comments < "$1" > "$STRIPPED"
+    git stripspace --strip-comments < "\$1" > "\$STRIPPED"
 
     # Validate the stripped commit message
     commit-check \
-        --message "$STRIPPED" \
+        --message "\$STRIPPED" \
         --allow-wip-commits true \
         --subject-max-length 72
