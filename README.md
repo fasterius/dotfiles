@@ -110,3 +110,15 @@ installed as submodules:
 - [`quick-whisper`](https://github.com/fasterius/quick-whisper): A
   cross-platform script for local speech-to-text transcription using
   `whisper.cpp`.
+
+## Archived configs
+
+Configs that are no longer in use are removed from the repository, but kept in
+Git tags so they can be found and restored if needed:
+
+- `niri`: Niri desktop setup (Niri, Waybar, eww, Quickshell, Mako, Fuzzel
+  and related scripts).
+- `jj`: [Jujutsu](https://github.com/jj-vcs/jj) config.
+
+To browse an archived config, use _e.g._ `git show niri:niri/config.kdl`; to
+restore it, use `git checkout niri -- niri/`.
