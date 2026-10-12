@@ -66,7 +66,9 @@ in one of the following ways:
 - **Special cases:** Pixi's config and global manifest are linked into
   `~/.pixi/`, and the SSH config into `~/.ssh/`.
 
-Configs are linked on a per-machine basis.
+Some configs are only linked where they apply: OS-specific ones on that OS,
+and GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`)
+only on machines with GNOME installed.
 
 ## Colour schemes
 

@@ -2,9 +2,8 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
-# Get current OS and host
+# Get current OS
 OS="$(uname)"
-HOST="$(hostname)"
 
 # Make sure a temporary directory for storing (Neo)vim's history/backups exists
 mkdir -p $HOME/.tmp
@@ -25,12 +24,12 @@ CONFIGS=(
     vim
 )
 
-# Home PC-only software
-if [[ "$HOST" == "sajberspace" ]]; then
-    CONFIGS+=(
-        feh
-        gnome/run-or-raise
-    )
+# Configs only linked when the software is installed
+if command -v feh > /dev/null; then
+    CONFIGS+=(feh)
+fi
+if command -v gnome-shell > /dev/null; then
+    CONFIGS+=(gnome/run-or-raise)
 fi
 
 # Create symlinks in `$HOME/.config`
@@ -134,7 +133,7 @@ done
 # Load GNOME settings with `dconf`; uses an `@HOME@` placeholder for the home
 # directory, as dconf can't expand variables.
 
-if [[ "$HOST" == "sajberspace" ]] && command -v dconf > /dev/null; then
+if command -v gnome-shell > /dev/null && command -v dconf > /dev/null; then
     echo "Loading GNOME settings ..."
     sed "s|@HOME@|$HOME|g" $HOME/.dotfiles/gnome/settings.dconf \
         | dconf load /
