@@ -29,14 +29,8 @@ CONFIGS=(
 # Home PC-only software
 if [[ "$HOST" == "sajberspace" ]]; then
     CONFIGS+=(
-        eww
         feh
-        fuzzel
         gnome/run-or-raise
-        mako
-        niri
-        quickshell
-        waybar
     )
 fi
 

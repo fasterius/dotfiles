@@ -4,9 +4,6 @@
 [submodule "scripts/docker-X11-interactive"]
 	path = scripts/docker-X11-interactive
 	url = git@github.com:fasterius/docker-X11-interactive.git
-[submodule "scripts/niri-run-or-raise"]
-	path = scripts/niri-run-or-raise
-	url = git@github.com:fasterius/niri-run-or-raise.git
 [submodule "scripts/quick-whisper"]
 	path = scripts/quick-whisper
 	url = git@github.com:fasterius/quick-whisper.git
