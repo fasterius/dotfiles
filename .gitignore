@@ -1,9 +1,8 @@
 # Vim files
-*.un~
 .viminfo
 .netrwhist
-plugged/
-autoload/
+vim/plugged/
+vim/autoload/
 
 # Btop log files
 btop/btop.log
