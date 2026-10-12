@@ -1,7 +1,7 @@
--- Set colourscheme conditionally on hostname
+-- Set colour scheme for the current host (see `lua/colourscheme.lua`)
 -- See `lua/colours.lua` for the full palettes
 local palette = require("colours")
-if vim.uv.os_gethostname() == "sajberspace" then
+if require("colourscheme") == "everforest" then
     -- Everforest Dark theme
     local everforest = palette.everforest
     vim.pack.add({

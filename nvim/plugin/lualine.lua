@@ -6,11 +6,12 @@ vim.pack.add({
     "https://github.com/fasterius/simple-zoom.nvim",
 })
 
--- Set colours based on hostname; see `lua/colours.lua` for the full palettes
+-- Set colours for the host's colour scheme (see `lua/colourscheme.lua`);
+-- see `lua/colours.lua` for the full palettes
 local palette = require("colours")
 local colours
 local theme
-if vim.uv.os_gethostname() == "sajberspace" then
+if require("colourscheme") == "everforest" then
     -- Everforest colours
     local everforest = palette.everforest
     theme = require("lualine.themes.everforest")
