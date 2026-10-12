@@ -202,6 +202,9 @@ nnoremap g# g#zzzv
 nnoremap <CR> :noh<CR>
 
 " Backup, swap and undo settings
+if !isdirectory(expand('~/.tmp'))    " Create directory for the files below
+    call mkdir(expand('~/.tmp'), 'p', 0700)
+endif
 set backup                           " Keep backup files
 set backupdir=~/.tmp,/var/tmp,/tmp   " Store backups in these directories
 set backupskip=/tmp/*,/private/tmp/* " Do not backup in these directories

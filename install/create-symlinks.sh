@@ -5,9 +5,6 @@
 # Get current OS
 OS="$(uname)"
 
-# Make sure a temporary directory for storing (Neo)vim's history/backups exists
-mkdir -p $HOME/.tmp
-
 # ------------------------------- XDG Configs ----------------------------------
 
 # Make sure XDG config directory exists
