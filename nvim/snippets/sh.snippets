@@ -10,13 +10,14 @@ snippet hook-lint "Git pre-commit hook for general linting"
 	luacheck --quiet .
 	busted .
 
-snippet hook-conventional-commits "Git commit-msg hook for conventional commits"
+snippet hook-conventional-commits "Git commit-msg hook for conventional commits and branches"
     #!/bin/bash
 
-    # Check for Conventional Commits standard adherence, with deviation from the
-    # default configuration (allowing WIP commits and subject line length), plus
-    # stripping of e.g. informational comment lines prior to checking for cleaner
-    # and more overviewable output.
+    # Check for Conventional Commits standard adherence for the commit message
+    # and Conventional Branch adherence for the current branch name, with
+    # deviation from the default configuration (allowing WIP commits and subject
+    # line length), plus stripping of e.g. informational comment lines prior to
+    # checking for cleaner and more overviewable output.
 
     # Create a temporary file to store stripped commit message in and delete it
     # after script completion
@@ -26,8 +27,17 @@ snippet hook-conventional-commits "Git commit-msg hook for conventional commits"
     # Strip commit message using Git itself
     git stripspace --strip-comments < "\$1" > "\$STRIPPED"
 
-    # Validate the stripped commit message
+    # Only check the branch name if the branch doesn't exist on any remote
+    BRANCH_CHECK=""
+    BRANCH=$(git symbolic-ref --short -q HEAD)
+    if [[ -n "\$BRANCH" ]] \
+        && [[ -z "$(git for-each-ref "refs/remotes/*/\$BRANCH")" ]]; then
+        BRANCH_CHECK="--branch"
+    fi
+
+    # Validate the stripped commit message and (if applicable) the branch name
     commit-check \
         --message "\$STRIPPED" \
+        \$BRANCH_CHECK \
         --allow-wip-commits true \
         --subject-max-length 72
