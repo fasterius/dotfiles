@@ -39,7 +39,6 @@ brew install \
     graphviz \
     gzip \
     imagemagick \
-    jj \
     lua \
     lua-language-server \
     luacheck \

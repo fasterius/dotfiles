@@ -19,7 +19,6 @@ CONFIGS=(
     alacritty
     bat
     btop
-    jj
     marksman
     nvim
     stylua
