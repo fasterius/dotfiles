@@ -90,7 +90,7 @@ ln -sfn $HOME/.dotfiles/ssh/config $HOME/.ssh
 
 COLOURSCHEME="$($HOME/.dotfiles/scripts/dotfiles-colourscheme.sh)"
 COLOURSCHEME_CONFIGS=(
-    alacritty/alacritty.toml
+    alacritty/colours.toml
     bash/inputrc-colours
     btop/btop.conf
 )
@@ -102,6 +102,23 @@ for CONFIG in ${COLOURSCHEME_CONFIGS[@]}; do
     else
         SOURCE="$CONFIG-$COLOURSCHEME"
     fi
+    ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
+done
+
+# ---------------------------- OS-specific configs -----------------------------
+
+# Some configs differ between operating systems (e.g. font sizes, which depend
+# on the display), so the file for the current OS (`<name>-<os>.<ext>`, with
+# the OS in lowercase, e.g. `darwin` or `linux`) is symlinked to `<name>.<ext>`.
+
+OS_NAME="$(echo "$OS" | tr '[:upper:]' '[:lower:]')"
+OS_CONFIGS=(
+    alacritty/size.toml
+)
+
+echo "Creating symlinks for the \"$OS_NAME\" OS ..."
+for CONFIG in ${OS_CONFIGS[@]}; do
+    SOURCE="${CONFIG%.*}-$OS_NAME.${CONFIG##*.}"
     ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
 done
 

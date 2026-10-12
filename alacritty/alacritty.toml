@@ -1,0 +1,19 @@
+# Alacritty config, combined from several files that are loaded in order, with
+# later files overriding earlier ones:
+#
+#   - `alacritty-common.toml`: settings shared by all machines
+#   - `colours.toml`: colours for the host's colour scheme (symlinked by
+#     `install/create-symlinks.sh` to `colours-<colourscheme>.toml`)
+#   - `size.toml`: font size and padding for the current OS (symlinked by
+#     `install/create-symlinks.sh` to `size-<os>.toml`)
+#   - `local.toml`: optional, untracked, machine-specific overrides
+#
+# Missing files are skipped.
+
+[general]
+import = [
+    "alacritty-common.toml",
+    "colours.toml",
+    "size.toml",
+    "local.toml",
+]

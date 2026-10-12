@@ -1,13 +1,3 @@
-[general]
-import = ["alacritty-common.toml"]
-
-[font]
-size = 17.0
-
-[window.padding]
-x = 5
-y = 7
-
 [colors.primary]
 background = "#fdf6e3"
 foreground = "#586e75"

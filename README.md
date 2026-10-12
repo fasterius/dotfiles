@@ -68,9 +68,12 @@ in one of the following ways:
 - **Special cases:** Pixi's config and global manifest are linked into
   `~/.pixi/`, and the SSH config into `~/.ssh/`.
 
-Some configs are only linked where they apply: OS-specific ones on that OS,
-and GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`)
-only on machines with GNOME installed.
+Some configs are only linked where they apply: OS-specific ones on that OS, and
+GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`) only
+on machines with GNOME installed. Configs that differ between operating systems
+come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
+`alacritty/size-darwin.toml`), and the one for the current OS is symlinked to
+`<name>.<ext>` by `create-symlinks.sh`.
 
 ## Colour schemes
 
