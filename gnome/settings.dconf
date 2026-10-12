@@ -57,11 +57,13 @@ move-to-monitor-right=['<Super><Shift>l']
 toggle-tiled-left=['<Super><Shift>Left']
 toggle-tiled-right=['<Super><Shift>Right']
 
-[org/gnome/shell/keybindings]
-toggle-overview=['<Super><Shift>o']
-
 [org/gnome/settings-daemon/plugins/media-keys]
 screensaver=['<Super><Shift>x']
+ # Free up <Super>o default GNOME keybind (screen rotation lock)
+rotate-video-lock-static=@as []
+
+[org/gnome/shell/keybindings]
+toggle-overview=['<Super><Shift>o']
 
 [org/gnome/shell]
 disable-user-extensions=false
