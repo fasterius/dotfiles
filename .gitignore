@@ -7,6 +7,9 @@ vim/autoload/
 # Btop log files
 btop/btop.log
 
+# Homebrew bundle lock file
+brew/Brewfile.lock.json
+
 # Colour scheme-specific symlinks (created by `install/create-symlinks.sh`)
 alacritty/alacritty.toml
 bash/inputrc-colours

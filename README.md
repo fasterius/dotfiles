@@ -30,8 +30,10 @@ in the `install/` directory:
 - `install-software.sh`: Installs software that isn't installable by a package
   manager, _e.g._ Pixi, Nextflow and nf-test.
 - `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
-- `macos-brew-install.sh`: Installs various software packages using the
-  [Homebrew](https://brew.sh/) package manager for MacOS.
+- `macos-brew-install.sh`: Installs the [Homebrew](https://brew.sh/) package
+  manager for MacOS and the packages listed in `brew/Brewfile`. The Brewfile
+  is linked to `~/.Brewfile`, so `brew bundle check --global` shows missing
+  packages and `brew bundle cleanup --global` shows unlisted ones.
 - `macos-hide-directories.sh`: Hides the default MacOS home directories
   (_i.e._ "Desktop", "Downloads", _etc._) from Finder and creates symbolic
   links in a new `~/home/` directory for easy access without cluttering up the

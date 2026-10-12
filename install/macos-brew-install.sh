@@ -15,51 +15,7 @@ if [[ $(command -v brew) == "" ]]; then
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# Install formulae
-echo "Installing brew formulae ..."
-brew install \
-    act \
-    badgeify \
-    bash \
-    bash-completion@2 \
-    bat \
-    btop \
-    coreutils \
-    cmake \
-    docker-completion \
-    fd \
-    ffmpeg \
-    gawk \
-    gcc \
-    gh \
-    git \
-    gitleaks \
-    gnu-sed \
-    gnu-tar \
-    graphviz \
-    gzip \
-    imagemagick \
-    lua \
-    lua-language-server \
-    luacheck \
-    luarocks \
-    markdown-oxide \
-    marksman \
-    neovim \
-    openjdk@21 \
-    pandoc \
-    prettier \
-    readline \
-    ripgrep \
-    ruff \
-    sox \
-    tmux \
-    tree \
-    tree-sitter \
-    vim \
-    wget
-
-# Install casks
-echo "Installing brew casks ..."
-brew install --cask \
-    keycastr
+# Install everything listed in the Brewfile
+echo "Installing Homebrew packages ..."
+BREW="$(command -v brew || echo /opt/homebrew/bin/brew)"
+"$BREW" bundle --file="$HOME/.dotfiles/brew/Brewfile"
