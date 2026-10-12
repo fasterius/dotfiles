@@ -81,7 +81,6 @@ notification-banner-position=2
 panel-in-overview=true
 quick-settings-dark-mode=false
 quick-settings-night-light=false
-support-notifier-showed-version=34
 support-notifier-type=0
 weather=false
 workspace=false
