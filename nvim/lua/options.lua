@@ -66,6 +66,9 @@ vim.g.loaded_netrwPlugin = 1
 -- Use bash as default shell
 vim.o.shell = "bash"
 
+-- Spelling
+vim.o.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+
 -- [[ Split settings ]]
 vim.o.splitbelow = true -- Create horizontal splits below
 vim.o.splitright = true -- Create vertical splits to the right
