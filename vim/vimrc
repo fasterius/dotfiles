@@ -201,16 +201,16 @@ nnoremap g# g#zzzv
 " Clear search highlights
 nnoremap <CR> :noh<CR>
 
-" Backup, swap and undo settings
-if !isdirectory(expand('~/.tmp'))    " Create directory for the files below
-    call mkdir(expand('~/.tmp'), 'p', 0700)
+" Backup, swap and undo settings; the trailing `//` makes Vim use the full path
+if !isdirectory(expand('~/.tmp'))         " Create directory for files below
+    call mkdir(expand('~/.tmp'), 'p')
 endif
-set backup                           " Keep backup files
-set backupdir=~/.tmp,/var/tmp,/tmp   " Store backups in these directories
-set backupskip=/tmp/*,/private/tmp/* " Do not backup in these directories
-set directory=~/.tmp,/var/tmp,/tmp   " Store swapfiles in these directories
-set undofile                         " Keep undofiles
-set undodir=~/.tmp,/var/tmp,/tmp     " Stor undofiles in these directories
+set backup                                " Keep backup files
+set backupdir=~/.tmp//,/var/tmp//,/tmp//  " Store backups in these directories
+set backupskip=/tmp/*,/private/tmp/*      " Do not backup in these directories
+set directory=~/.tmp//,/var/tmp//,/tmp//  " Store swapfiles in these directories
+set undofile                              " Keep undofiles
+set undodir=~/.tmp//,/var/tmp//,/tmp//    " Store undofiles in these directories
 
 " General Key Mappings: {{{1
 

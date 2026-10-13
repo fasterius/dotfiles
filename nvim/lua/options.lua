@@ -79,11 +79,13 @@ vim.o.tabstop = 4 -- Tabs are 4 spaces wide
 vim.o.shiftwidth = 4 -- Use 4 spaces when indenting
 
 -- [[ Backup, swap and undo settings ]]
-vim.o.backup = true -- Keep backup files
-vim.o.backupdir = "/tmp"
-vim.o.directory = "/tmp"
-vim.o.undofile = true -- Keep undofiles
-vim.o.undodir = "/tmp"
+-- Swap and undo files use Neovim's defaults (`stdpath("state")`), but backups
+-- need to be pointed there
+local backupdir = vim.fn.stdpath("state") .. "/backup"
+vim.fn.mkdir(backupdir, "p") -- Create directory if missing
+vim.o.backup = true
+vim.o.backupdir = backupdir .. "//" -- Use full file paths
+vim.o.undofile = true
 
 -- [[ Folding ]]
 vim.o.foldlevel = 10 -- No more than 10 folds
