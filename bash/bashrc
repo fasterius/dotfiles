@@ -66,10 +66,6 @@ if [[ "$OS" == "Darwin" ]]; then
     # Source Conda
     source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
-    # Claude Code sandbox aliases
-    alias claude-sandbox='~/projects/claude-sandbox/run-claude-egress-filtered.sh'
-    alias claude='~/projects/claude-sandbox/run-claude-egress-open.sh'
-
     # Use GNU readlink
     alias readlink='greadlink'
 
