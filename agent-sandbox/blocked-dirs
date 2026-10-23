@@ -1,0 +1,12 @@
+# Home directories
+~/docs
+~/home
+~/learning
+~/opt
+~/teaching
+
+# Project directories
+~/projects
+~/projects/[0-9][0-9][0-9][0-9]-*/**
+~/projects/[0-9][0-9][0-9][0-9][0-9]-*/**
+~/projects/personal/**

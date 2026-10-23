@@ -24,4 +24,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     echo ""
     echo "--------------  Installing Homebrew software --------------"
     bash ~/.dotfiles/install/macos-brew-install.sh
+
+    echo ""
+    echo "--------------  Installing launchd services --------------"
+    bash ~/.dotfiles/install/macos-launchd-services.sh
 fi

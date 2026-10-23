@@ -31,13 +31,16 @@ in the `install/` directory:
   manager, _e.g._ Pixi, Nextflow and nf-test.
 - `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
 - `macos-brew-install.sh`: Installs the [Homebrew](https://brew.sh/) package
-  manager for MacOS and the packages listed in `brew/Brewfile`. The Brewfile
-  is linked to `~/.Brewfile`, so `brew bundle check --global` shows missing
+  manager for MacOS and the packages listed in `brew/Brewfile`. The Brewfile is
+  linked to `~/.Brewfile`, so `brew bundle check --global` shows missing
   packages and `brew bundle cleanup --global` shows unlisted ones.
-- `macos-hide-directories.sh`: Hides the default MacOS home directories
-  (_i.e._ "Desktop", "Downloads", _etc._) from Finder and creates symbolic
-  links in a new `~/home/` directory for easy access without cluttering up the
-  default home directory.
+- `macos-hide-directories.sh`: Hides the default MacOS home directories (_i.e._
+  "Desktop", "Downloads", _etc._) from Finder and creates symbolic links in a
+  new `~/home/` directory for easy access without cluttering up the default home
+  directory.
+- `macos-launchd-services.sh`: Installs and (re)loads the `launchd` services in
+  `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server;
+  safe to run multiple times.
 
 Scripts prefixed with `macos-` only apply to MacOS; the others work on either
 platform.
@@ -66,7 +69,12 @@ in one of the following ways:
   `~/.local/bin/`. Scripts used by other configs are called by their full path
   instead.
 - **Special cases:** Pixi's config and global manifest are linked into
-  `~/.pixi/`, and the SSH config into `~/.ssh/`.
+  `~/.pixi/`, and the SSH config into `~/.ssh/`. The `agent-sandbox` command is
+  linked into `~/.local/bin/` from its own repository in
+  `~/projects/agent-sandbox`, if that has been cloned.
+- **`launchd` services:** the services in `launchd/` are copied into
+  `~/Library/LaunchAgents/` by `macos-launchd-services.sh` instead, with the
+  home directory filled in; re-run it after changing them.
 
 Some configs are only linked where they apply: OS-specific ones on that OS, and
 GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`) only

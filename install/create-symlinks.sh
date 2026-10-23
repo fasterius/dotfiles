@@ -12,9 +12,11 @@ mkdir -p $HOME/.config
 
 # List config files to be symlinked into XDG-compliant directories
 CONFIGS=(
+    agent-sandbox
     alacritty
     bat
     btop
+    llama.cpp
     marksman
     nvim
     stylua
@@ -80,6 +82,14 @@ ln -sfn $HOME/.dotfiles/pixi/manifests/pixi-global.toml $HOME/.pixi/manifests
 
 mkdir -p $HOME/.ssh/sockets
 ln -sfn $HOME/.dotfiles/ssh/config $HOME/.ssh
+
+# The `agent-sandbox` command lives in its own repository, so it is only linked
+# if that has been cloned
+
+if [[ -x $HOME/projects/agent-sandbox/agent-sandbox ]]; then
+    mkdir -p $HOME/.local/bin
+    ln -sfn $HOME/projects/agent-sandbox/agent-sandbox $HOME/.local/bin
+fi
 
 
 # ----------------------- Colour scheme-specific configs -----------------------
