@@ -40,7 +40,9 @@ in the `install/` directory:
   directory.
 - `macos-launchd-services.sh`: Installs and (re)loads the `launchd` services in
   `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server
-  and a `tailscaled` that runs without root; safe to run multiple times.
+  and a `tailscaled` that runs without root, and creates the `llama.cpp`
+  server's API key in `~/.local/share/llama.cpp/api-key` if it's missing; safe
+  to run multiple times.
 
 Scripts prefixed with `macos-` only apply to MacOS; the others work on either
 platform.

@@ -7,7 +7,8 @@
             "npm": "@ai-sdk/openai-compatible",
             "name": "llama.cpp (host)",
             "options": {
-                "baseURL": "http://llm.internal:8080/v1"
+                "baseURL": "http://llm.internal:8080/v1",
+                "apiKey": "{file:/run/secrets/llm-api-key}"
             },
             "models": {
                 "qwen3.8-27b": {
