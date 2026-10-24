@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script that installs the launchd services in `launchd/` on MacOS Uses an
+# Script that installs the launchd services in `launchd/` on MacOS. Uses an
 # `@HOME@` placeholder for the home directory, as launchd can't expand
 # variables, so the services are copied rather than symlinked; each is reloaded
 # so that changes take effect. Safe to run multiple times.
@@ -15,6 +15,10 @@ fi
 SERVICES=()
 if command -v llama-server > /dev/null; then
     SERVICES+=(org.llama-cpp.server)
+fi
+if command -v tailscaled > /dev/null; then
+    SERVICES+=(com.tailscale.tailscaled-userspace)
+    mkdir -p "$HOME/.local/state/tailscale"
 fi
 
 mkdir -p "$HOME/Library/LaunchAgents"

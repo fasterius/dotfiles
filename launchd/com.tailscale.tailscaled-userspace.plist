@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+    Runs `tailscaled` as the user rather than as root, with userspace networking
+    instead of a network interface, so that other devices on the tailnet can
+    only reach what is shared with `tailscale serve`. The state and the socket
+    are kept in `~/.local/state/tailscale`, so the `tailscale` CLI needs a
+    matching `--socket` (set by an alias in `bash/bashrc`). Log uploads to
+    Tailscale are turned off. Installed by `install/macos-launchd-services.sh`,
+    which replaces `@HOME@` with the home directory, as launchd can't expand
+    variables.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.tailscale.tailscaled-userspace</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/tailscaled</string>
+        <string>--tun=userspace-networking</string>
+        <string>--statedir=@HOME@/.local/state/tailscale</string>
+        <string>--socket=@HOME@/.local/state/tailscale/tailscaled.sock</string>
+        <string>--no-logs-no-support</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>@HOME@/Library/Logs/tailscaled.log</string>
+    <key>StandardErrorPath</key>
+    <string>@HOME@/Library/Logs/tailscaled.log</string>
+</dict>
+</plist>

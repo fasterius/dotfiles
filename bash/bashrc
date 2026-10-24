@@ -152,6 +152,11 @@ alias code='conda deactivate'
 # Do not save workspace when exiting R
 alias r='R --no-save'
 
+# Talk to `tailscaled` on MacOS (see `launchd/`)
+if [[ "$OS" == "Darwin" ]]; then
+    alias tailscale='tailscale --socket="$HOME/.local/state/tailscale/tailscaled.sock"'
+fi
+
 # Move upwards multiple directories
 alias ..='cd ..'
 alias ...='cd ../..'

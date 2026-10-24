@@ -39,8 +39,8 @@ in the `install/` directory:
   new `~/home/` directory for easy access without cluttering up the default home
   directory.
 - `macos-launchd-services.sh`: Installs and (re)loads the `launchd` services in
-  `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server;
-  safe to run multiple times.
+  `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server
+  and a `tailscaled` that runs without root; safe to run multiple times.
 
 Scripts prefixed with `macos-` only apply to MacOS; the others work on either
 platform.
