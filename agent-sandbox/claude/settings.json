@@ -7,10 +7,21 @@
         "blockReadsOutsideWorkingDirectories": false
     },
     "theme": "auto",
-    "preferredNotifChannel": "terminal_bell",
+    "preferredNotifChannel": "notifications_disabled",
     "hooks": {
         "Stop": [
             {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "{ printf '\\a' > /dev/tty; } 2>/dev/null || printf '\\a' > /proc/1/fd/1 2>/dev/null || true"
+                    }
+                ]
+            }
+        ],
+        "Notification": [
+            {
+                "matcher": "permission_prompt|elicitation_dialog|elicitation_url_dialog|agent_needs_input|worker_permission_prompt",
                 "hooks": [
                     {
                         "type": "command",
