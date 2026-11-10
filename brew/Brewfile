@@ -29,7 +29,7 @@ brew "ruff"
 brew "stylua"
 brew "tmux"
 brew "tree"
-brew "tree-sitter"
+brew "tree-sitter-cli"
 brew "typescript-language-server"
 
 # MacOS-only packages
