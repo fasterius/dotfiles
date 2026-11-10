@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# Script to run every install script in a OS-specific manner
+# Script that sets up a machine by running every script in `install/` in an
+# OS-specific manner
 
 source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
 

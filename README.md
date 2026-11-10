@@ -18,12 +18,11 @@ up first. The repository is expected to live in `~/.dotfiles`:
 git clone --recursive git@github.com:fasterius/dotfiles.git ~/.dotfiles
 ```
 
-In order to simplify usage of this repo, you can execute the scripts contained
-in the `install/` directory:
+The two entry points are at the top level of the repository: `install.sh` sets
+up a machine by running the scripts in `install/` in an OS-dependent manner, and
+`check.sh` checks the result. The scripts in `install/` can also be run one at a
+time:
 
-- `install-wrapper.sh`: Runs all the subsequent scripts in an OS-dependent
-  manner (you would usually want to run this, unless you're specifically only
-  interested in a single one of the other scripts).
 - `create-symlinks.sh`: Creates all the symbolic links needed for all the
   various profiles and configs contained in this repository; safe to run
   multiple times.
@@ -89,11 +88,11 @@ differ between systems and are only done once per machine:
      locale.
 3. **Add host settings**, if the machine needs anything other than the defaults
    (see [Host settings](#host-settings)).
-4. **Run the install scripts** with `~/.dotfiles/install/install-wrapper.sh`,
-   then start a new shell or source `bashrc`.
-5. **Check the result** with `~/.dotfiles/scripts/dotfiles-doctor.sh`, which
-   lists any missing software that the configs rely on and prints the versions
-   of software with a minimum version requirement.
+4. **Run the install scripts** with `~/.dotfiles/install.sh`, then start a new
+   shell or source `bashrc`.
+5. **Check the result** with `~/.dotfiles/check.sh`, which lists any missing
+   software that the configs rely on and prints the versions of software with a
+   minimum version requirement.
 
 ### Updating
 
