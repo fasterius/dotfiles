@@ -52,9 +52,43 @@ in the `install/` directory:
 Scripts prefixed with `macos-` only apply to MacOS; the others work on either
 platform.
 
-Afterwards, run `scripts/dotfiles-doctor.sh` to list any missing software that
-the configs rely on, and to print the versions of software with a minimum
-version requirement.
+### Setting up a new system
+
+The steps that need root are written out here rather than scripted, as they
+differ between systems and are only done once per machine:
+
+1. **Clone the repository** (see above).
+2. **Install system packages** (needs root):
+   - **MacOS:** nothing; `brew-install.sh` installs Homebrew, which takes care
+     of everything that's needed.
+   - **Ubuntu:** a C compiler, the `en_GB.UTF-8` locale used by `bashrc`, and
+     Homebrew:
+
+     ```bash
+     sudo apt install build-essential curl
+     sudo locale-gen en_GB.UTF-8
+     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+     ```
+
+     For Docker, add Docker's apt repository and install its packages following
+     the [installation guide](https://docs.docker.com/engine/install/ubuntu/),
+     then add yourself to the `docker` group and log in again:
+
+     ```bash
+     sudo usermod -aG docker "$USER"
+     ```
+
+   - **Other Linux systems** (_e.g._ Fedora or HPC systems): Homebrew isn't
+     used, so Neovim and the tools in `brew/Brewfile` need to come from the
+     system's package manager or modules instead, as do a C compiler and the
+     locale.
+3. **Add host settings**, if the machine needs anything other than the defaults
+   (see [Host settings](#host-settings)).
+4. **Run the install scripts** with `~/.dotfiles/install/install-wrapper.sh`,
+   then start a new shell or source `bashrc`.
+5. **Check the result** with `~/.dotfiles/scripts/dotfiles-doctor.sh`, which
+   lists any missing software that the configs rely on and prints the versions
+   of software with a minimum version requirement.
 
 ### Updating
 
