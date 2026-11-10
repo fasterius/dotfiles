@@ -55,7 +55,8 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
     export FIGNORE="$FIGNORE:.un~:DS_Store"
 
     # Source Conda
-    source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
+    [[ -r "$HOME/opt/miniforge3/etc/profile.d/conda.sh" ]] \
+        && source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
 
     # Use GNU readlink
     alias readlink='greadlink'
@@ -73,7 +74,9 @@ _pixi_lazy() { eval "$(pixi completion --shell bash)"; return 124; }
 complete -F _pixi_lazy pixi
 
 # Enable fzf
-eval "$(fzf --bash)"
+if command -v fzf > /dev/null; then
+    eval "$(fzf --bash)"
+fi
 
 # Set colours (fzf, bat, etc.) for the current host's colour scheme
 source "$HOME/.dotfiles/bash/colours-$DOTFILES_COLOURSCHEME.sh"
@@ -88,11 +91,14 @@ lua-test-env() { eval "$(luarocks path --lua-version 5.1)"; }
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
 
-# Default editor
-export EDITOR=nvim
-
-# Manpager
-export MANPAGER='nvim +Man!'
+# Default editor and manpager, with Vim as fallback
+if command -v nvim > /dev/null; then
+    export EDITOR=nvim
+    export MANPAGER='nvim +Man!'
+elif command -v vim > /dev/null; then
+    export EDITOR=vim
+    export MANPAGER='vim +MANPAGER --not-a-term -'
+fi
 
 # Predictable SSH authentication socket location
 # From http://qq.is/tutorial/2011/11/17/ssh-keys-through-screen.html
