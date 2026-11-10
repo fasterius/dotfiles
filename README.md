@@ -29,7 +29,8 @@ in the `install/` directory:
   multiple times.
 - `install-with-pixi.sh`: Installs Pixi and the environments in its global
   manifest (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
-- `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
+- `install-fonts.sh`: Installs the Meslo LGS Nerd Font, except on headless
+  machines.
 - `brew-install.sh`: Installs the packages listed in `brew/Brewfile` with
   [Homebrew](https://brew.sh/), installing Homebrew itself first on MacOS. On
   Linux, Homebrew must already be installed. The Brewfile is linked to

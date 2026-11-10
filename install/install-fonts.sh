@@ -3,6 +3,14 @@
 # Script to install Meslo LGS Nerd Font Mono
 
 source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+
+# Fonts are only used by terminals on the machine itself, which headless
+# machines (_e.g._ servers accessed over SSH) don't have
+if [[ "$DOTFILES_HEADLESS" == 1 ]]; then
+    echo "Headless machine; not installing fonts"
+    exit 0
+fi
+
 if [[ "$DOTFILES_OS" == "linux" ]]; then
     FONT_PATH="$HOME/.local/share/fonts/"
 elif [[ "$DOTFILES_OS" == "darwin" ]]; then
