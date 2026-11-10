@@ -72,11 +72,16 @@ differ between systems and are only done once per machine:
 
      For Docker, add Docker's apt repository and install its packages following
      the [installation guide](https://docs.docker.com/engine/install/ubuntu/),
-     then add yourself to the `docker` group and log in again:
+     then add yourself to the `docker` group:
 
      ```bash
      sudo usermod -aG docker "$USER"
      ```
+
+     Group memberships are only read when logging in, so start a fresh session
+     afterwards: close any shared SSH connection to the machine first (from the
+     local machine, with `ssh -O exit <host>`; see `ControlMaster` in
+     `ssh/config`), and restart tmux if it's running (`tmux kill-server`).
 
    - **Other Linux systems** (_e.g._ Fedora or HPC systems): Homebrew isn't
      used, so Neovim and the tools in `brew/Brewfile` need to come from the
