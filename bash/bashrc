@@ -1,13 +1,13 @@
 # Do nothing for non-interactive shells
 [[ $- != *i* ]] && return
 
+# Load the current host's settings (environment variables)
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+export DOTFILES_COLOURSCHEME DOTFILES_HPC DOTFILES_SLOW_FS
+
 # Source custom HPC profile if in a SSH session on a known HPC system
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    if [[ "$HOSTNAME" == *uppmax* ]]; then
-        source "$HOME/.dotfiles/bash/uppmax_profile"
-    elif [[ -d /cfs/klemming ]]; then
-        source "$HOME/.dotfiles/bash/pdc_profile"
-    fi
+if [[ -n "$DOTFILES_HPC" && ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) ]]; then
+    source "$HOME/.dotfiles/bash/${DOTFILES_HPC}_profile"
 fi
 
 OS="$(uname)"
@@ -85,8 +85,6 @@ complete -F _pixi_lazy pixi
 eval "$(fzf --bash)"
 
 # Set colours (fzf, bat, etc.) for the current host's colour scheme
-DOTFILES_COLOURSCHEME="$("$HOME/.dotfiles/scripts/dotfiles-colourscheme.sh")"
-export DOTFILES_COLOURSCHEME
 source "$HOME/.dotfiles/bash/colours-$DOTFILES_COLOURSCHEME.sh"
 
 # Set up Luarocks paths for Busted-based testing of Neovim plugins; run

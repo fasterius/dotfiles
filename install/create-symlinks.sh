@@ -98,19 +98,19 @@ fi
 # current host's colour scheme (`<name>-<colourscheme>.<ext>`) is symlinked to
 # `<name>.<ext>`.
 
-COLOURSCHEME="$($HOME/.dotfiles/scripts/dotfiles-colourscheme.sh)"
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
 COLOURSCHEME_CONFIGS=(
     alacritty/colours.toml
     bash/inputrc-colours
     btop/btop.conf
 )
 
-echo "Creating symlinks for the \"$COLOURSCHEME\" colour scheme ..."
+echo "Creating symlinks for the \"$DOTFILES_COLOURSCHEME\" colour scheme ..."
 for CONFIG in ${COLOURSCHEME_CONFIGS[@]}; do
     if [[ "$CONFIG" == *.* ]]; then
-        SOURCE="${CONFIG%.*}-$COLOURSCHEME.${CONFIG##*.}"
+        SOURCE="${CONFIG%.*}-$DOTFILES_COLOURSCHEME.${CONFIG##*.}"
     else
-        SOURCE="$CONFIG-$COLOURSCHEME"
+        SOURCE="$CONFIG-$DOTFILES_COLOURSCHEME"
     fi
     ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
 done

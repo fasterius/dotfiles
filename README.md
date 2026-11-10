@@ -85,22 +85,39 @@ come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
 `alacritty/size-darwin.toml`), and the one for the current OS is symlinked to
 `<name>.<ext>` by `create-symlinks.sh`.
 
+## Host settings
+
+The choices that differ between machines and can't be detected are defined in a
+single place, `scripts/dotfiles-host.sh`, which recognises the current host
+(mostly by hostname) and sets:
+
+- `DOTFILES_COLOURSCHEME`: the colour scheme (default: Solarized; see below).
+- `DOTFILES_HPC`: the HPC system whose `bash/<name>_profile` is loaded in SSH
+  sessions (default: nothing).
+- `DOTFILES_SLOW_FS`: set to `1` on hosts where Git operations are slow, which
+  turns off the Neovim `Gitsigns` plugin (default: `0`).
+
+Unknown hosts get the defaults. Bash and `create-symlinks.sh` source the script,
+and Bash exports the variables; programs started from Bash (_e.g._ Neovim) only
+read the exported variables. The script can also be run with the name of a
+setting (`colourscheme`, `hpc` or `slow-fs`) to print its value, which is how
+Tmux gets the colour scheme.
+
+To add a new machine that needs something other than the defaults, add its
+hostname to the `case` statement in `dotfiles-host.sh` and re-run
+`create-symlinks.sh`.
+
 ## Colour schemes
 
-Which colour scheme a machine uses is defined in a single place,
-`scripts/dotfiles-colourscheme.sh`, which prints the colour scheme for the
-current hostname. Configs with colours come in one file per colour scheme, named
+Configs with colours come in one file per colour scheme, named
 `<name>-<colourscheme>.<ext>`, and select the right one in one of two ways:
 
-- **At runtime:** Bash and Tmux call the script when they start and load the
-  matching file, _e.g._ `bash/colours-everforest.sh`. Bash also exports the
-  result as `DOTFILES_COLOURSCHEME`.
+- **At runtime:** Bash, Tmux and Neovim get the colour scheme from the host
+  settings when they start and load the matching file or colours, _e.g._
+  `bash/colours-everforest.sh`.
 - **At install:** programs that can't run a script themselves get a symlink from
   `<name>.<ext>` to the matching file, created by `create-symlinks.sh`. These
   symlinks are not tracked by Git.
-
-To add a new machine, add its hostname to `dotfiles-colourscheme.sh` and
-re-run `create-symlinks.sh`.
 
 ## Git hooks
 
