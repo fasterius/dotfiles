@@ -17,13 +17,6 @@ if [[ "$DOTFILES_OS" == "linux" ]]; then
 
     # Specify location of manual Neovim 0.12 installation
     export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
-
-    # Icon locations
-    export XDG_ICON_DIRS="/usr/share/icons:/usr/local/share/icons:$HOME/.local/share/icons"
-
-    # Use GNOME as default XDG desktop; gtk as fallback
-    export XDG_CURRENT_DESKTOP=GNOME
-    export QT_QPA_PLATFORMTHEME=gtk
 fi
 
 # MacOS-specific settings
