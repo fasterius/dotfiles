@@ -2,6 +2,8 @@
 
 # Script to run every install script in a OS-specific manner
 
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+
 # Run common scripts
 echo ""
 echo "--------------  Creating symlinks -------------- "
@@ -16,7 +18,7 @@ echo "--------------  Installing software -------------- "
 bash ~/.dotfiles/install/install-software.sh
 
 # MacOS-specific scripts
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$DOTFILES_OS" == "darwin" ]]; then
     echo ""
     echo "--------------  Hiding MacOS home directories --------------"
     bash ~/.dotfiles/install/macos-hide-directories.sh

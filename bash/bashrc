@@ -10,10 +10,8 @@ if [[ -n "$DOTFILES_HPC" && ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) ]]; then
     source "$HOME/.dotfiles/bash/${DOTFILES_HPC}_profile"
 fi
 
-OS="$(uname)"
-
 # Linux-specific settings
-if [[ "$OS" == "Linux" ]]; then
+if [[ "$DOTFILES_OS" == "linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
     export PATH="$PATH:/usr/share/git-core/contrib"
 
@@ -29,7 +27,7 @@ if [[ "$OS" == "Linux" ]]; then
 fi
 
 # MacOS-specific settings
-if [[ "$OS" == "Darwin" ]]; then
+if [[ "$DOTFILES_OS" == "darwin" ]]; then
 
     # Silence the OS X zsh message
     export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -161,7 +159,7 @@ alias code='conda deactivate'
 alias r='R --no-save'
 
 # Talk to `tailscaled` on MacOS (see `launchd/`)
-if [[ "$OS" == "Darwin" ]]; then
+if [[ "$DOTFILES_OS" == "darwin" ]]; then
     alias tailscale='tailscale --socket="$HOME/.local/state/tailscale/tailscaled.sock"'
 fi
 

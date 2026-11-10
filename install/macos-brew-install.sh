@@ -4,7 +4,8 @@
 # MacOS systems. Does not install anything on non-Darwin systems.
 
 # Check for MacOS
-if [[ ! "$(uname)" == "Darwin" ]]; then
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+if [[ "$DOTFILES_OS" != "darwin" ]]; then
     echo "Not on MacOS; not installing Homebrew"
     exit 0
 fi

@@ -2,8 +2,8 @@
 
 # Script that creates symbolic links for all relevant files in the repository
 
-# Get current OS
-OS="$(uname)"
+# Get the current host's settings (environment variables)
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
 
 # ------------------------------- XDG Configs ----------------------------------
 
@@ -52,7 +52,7 @@ CONFIGS_HOME=(
 )
 
 # MacOS-only software
-if [[ "$OS" == "Darwin" ]]; then
+if [[ "$DOTFILES_OS" == "darwin" ]]; then
     CONFIGS_HOME+=(
         brew/Brewfile
         scripts/docker-X11-interactive/xinitrc.d
@@ -98,7 +98,6 @@ fi
 # current host's colour scheme (`<name>-<colourscheme>.<ext>`) is symlinked to
 # `<name>.<ext>`.
 
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
 COLOURSCHEME_CONFIGS=(
     alacritty/colours.toml
     bash/inputrc-colours
@@ -121,14 +120,13 @@ done
 # on the display), so the file for the current OS (`<name>-<os>.<ext>`, with
 # the OS in lowercase, e.g. `darwin` or `linux`) is symlinked to `<name>.<ext>`.
 
-OS_NAME="$(echo "$OS" | tr '[:upper:]' '[:lower:]')"
 OS_CONFIGS=(
     alacritty/size.toml
 )
 
-echo "Creating symlinks for the \"$OS_NAME\" OS ..."
+echo "Creating symlinks for the \"$DOTFILES_OS\" OS ..."
 for CONFIG in ${OS_CONFIGS[@]}; do
-    SOURCE="${CONFIG%.*}-$OS_NAME.${CONFIG##*.}"
+    SOURCE="${CONFIG%.*}-$DOTFILES_OS.${CONFIG##*.}"
     ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
 done
 
@@ -143,7 +141,7 @@ SCRIPTS=(
 )
 
 # Linux-only scripts
-if [[ "$OS" == "Linux" ]]; then
+if [[ "$DOTFILES_OS" == "linux" ]]; then
     SCRIPTS+=(proton-ge-update.sh)
 fi
 

@@ -2,10 +2,10 @@
 
 # Script to install Meslo LGS Nerd Font Mono
 
-OS="$(uname)"
-if [[ "$OS" == "Linux" ]]; then
+source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+if [[ "$DOTFILES_OS" == "linux" ]]; then
     FONT_PATH="$HOME/.local/share/fonts/"
-elif [[ "$OS" == "Darwin" ]]; then
+elif [[ "$DOTFILES_OS" == "darwin" ]]; then
     FONT_PATH="$HOME/Library/Fonts/"
 fi
 

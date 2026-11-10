@@ -87,9 +87,16 @@ come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
 
 ## Host settings
 
-The choices that differ between machines and can't be detected are defined in a
-single place, `scripts/dotfiles-host.sh`, which recognises the current host
-(mostly by hostname) and sets:
+Everything that differs between machines is defined in a single place,
+`scripts/dotfiles-host.sh`. It detects facts about the current host, which
+configs and install scripts use instead of detecting them themselves:
+
+- `DOTFILES_OS`: the operating system, `darwin` or `linux`, as used in the names
+  of OS-specific configs.
+- `DOTFILES_HEADLESS`: `1` on Linux hosts without a desktop, otherwise `0`.
+
+It also sets the choices that can't be detected, recognising the current host
+(mostly by hostname):
 
 - `DOTFILES_COLOURSCHEME`: the colour scheme (default: Solarized; see below).
 - `DOTFILES_HPC`: the HPC system whose `bash/<name>_profile` is loaded in SSH
@@ -97,10 +104,10 @@ single place, `scripts/dotfiles-host.sh`, which recognises the current host
 - `DOTFILES_SLOW_FS`: set to `1` on hosts where Git operations are slow, which
   turns off the Neovim `Gitsigns` plugin (default: `0`).
 
-Unknown hosts get the defaults. Bash and `create-symlinks.sh` source the script,
-and Bash exports the variables; programs started from Bash (_e.g._ Neovim) only
+Unknown hosts get the defaults. Bash and the install scripts source the script,
+and Bash exports the choices; programs started from Bash (_e.g._ Neovim) only
 read the exported variables. The script can also be run with the name of a
-setting (`colourscheme`, `hpc` or `slow-fs`) to print its value, which is how
+choice (`colourscheme`, `hpc` or `slow-fs`) to print its value, which is how
 Tmux gets the colour scheme.
 
 To add a new machine that needs something other than the defaults, add its
