@@ -105,6 +105,16 @@ export EDITOR=nvim
 # Manpager
 export MANPAGER='nvim +Man!'
 
+# Predictable SSH authentication socket location
+# From http://qq.is/tutorial/2011/11/17/ssh-keys-through-screen.html
+SOCK="$HOME/.ssh/agent-$HOSTNAME"
+if test $SSH_AUTH_SOCK && [ $SSH_AUTH_SOCK != $SOCK ]
+then
+    ln -sf $SSH_AUTH_SOCK $SOCK
+    export SSH_AUTH_SOCK=$SOCK
+fi
+unset SOCK
+
 # List command ----------------------------------------------------------------
 
 # List colours
