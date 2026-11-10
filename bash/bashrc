@@ -82,7 +82,6 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
 fi
 
 # Add to PATH
-export PATH="$HOME/opt:$PATH" # TODO: Remove from MacOS and use `.local/bin`
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.pixi/bin:$PATH"
 
