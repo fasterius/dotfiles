@@ -10,6 +10,33 @@ if [[ -n "$DOTFILES_HPC" && ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) ]]; then
     source "$HOME/.dotfiles/bash/${DOTFILES_HPC}_profile"
 fi
 
+# Add Homebrew's envs from its default prefix on MacOS or Linux, if installed;
+# same as `eval $(brew shellenv)`, but without the slow `brew` call
+for BREW_PREFIX in /opt/homebrew /home/linuxbrew/.linuxbrew; do
+    if [[ -x "$BREW_PREFIX/bin/brew" ]]; then
+        export HOMEBREW_PREFIX="$BREW_PREFIX"
+        export HOMEBREW_CELLAR="$BREW_PREFIX/Cellar"
+        # The Git repository is in its own directory on Linux
+        if [[ -d "$BREW_PREFIX/Homebrew" ]]; then
+            export HOMEBREW_REPOSITORY="$BREW_PREFIX/Homebrew"
+        else
+            export HOMEBREW_REPOSITORY="$BREW_PREFIX"
+        fi
+        export PATH="$BREW_PREFIX/bin:$BREW_PREFIX/sbin:$PATH"
+        export MANPATH="$BREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+        export INFOPATH="$BREW_PREFIX/share/info:${INFOPATH:-}"
+        break
+    fi
+done
+unset BREW_PREFIX
+
+# Use Homebrew's Java (_e.g._ for Nextflow), which is keg-only and thus not in
+# PATH by default
+if [[ -x "$HOMEBREW_PREFIX/opt/openjdk@21/bin/java" ]]; then
+    export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk@21"
+    export PATH="$JAVA_HOME/bin:$PATH"
+fi
+
 # Linux-specific settings
 if [[ "$DOTFILES_OS" == "linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
@@ -25,15 +52,6 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
     # Silence the OS X zsh message
     export BASH_SILENCE_DEPRECATION_WARNING=1
 
-    # Add Homebrew's envs; same as `eval $(brew shellenv)`, but without the slow
-    # `brew` call
-    export HOMEBREW_PREFIX="/opt/homebrew"
-    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
-    export HOMEBREW_REPOSITORY="/opt/homebrew"
-    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
-
     # Local paths
     PATH="/usr/local/bin:$PATH"
 
@@ -43,9 +61,6 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
     # Add Homebrew paths to PATH
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
     export PATH="/opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/:$PATH"
-
-    # Explicitly add path for Java installation (fixes issues with Java/Nextflow)
-    export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
 
     # Bash completion (also loads completions installed by Homebrew packages)
     [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
