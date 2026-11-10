@@ -1,30 +1,18 @@
-# Homebrew packages for MacOS. Installed by `install/macos-brew-install.sh`, or
-# with `brew bundle --global`. Use `brew bundle check --global` to list missing
-# packages and `brew bundle cleanup --global` to list installed packages that
-# aren't in this file.
+# Homebrew packages for MacOS and Linux (where Homebrew is installed, _e.g._
+# Ubuntu). Installed by `install/brew-install.sh`, or with `brew bundle
+# --global`. Use `brew bundle check --global` to list missing packages and `brew
+# bundle cleanup --global` to list installed packages that aren't in this file.
 
 # Formulae
 brew "act"
-brew "bash"
-brew "bash-completion@2"
 brew "bat"
 brew "btop"
-brew "coreutils"
 brew "cmake"
-brew "docker-completion"
 brew "fd"
-brew "ffmpeg"
-brew "gawk"
-brew "gcc"
 brew "gh"
-brew "git"
 brew "gitleaks"
-brew "gnu-sed"
-brew "gnu-tar"
 brew "graphviz"
-brew "gzip"
 brew "imagemagick"
-brew "llama.cpp"
 brew "lua"
 brew "lua-language-server"
 brew "luacheck"
@@ -35,17 +23,32 @@ brew "neovim"
 brew "openjdk@21"
 brew "pandoc"
 brew "prettier"
-brew "readline"
 brew "ripgrep"
 brew "ruff"
-brew "sox"
-brew "tailscale"
 brew "tmux"
 brew "tree"
 brew "tree-sitter"
-brew "vim"
-brew "wget"
 
-# Casks
-cask "keycastr"
-cask "badgeify"
+# MacOS-only packages
+if OS.mac?
+    brew "bash"
+    brew "bash-completion@2"
+    brew "coreutils"
+    brew "docker-completion"
+    brew "ffmpeg"
+    brew "gawk"
+    brew "gcc"
+    brew "git"
+    brew "gnu-sed"
+    brew "gnu-tar"
+    brew "gzip"
+    brew "llama.cpp"
+    brew "readline"
+    brew "sox"
+    brew "tailscale"
+    brew "vim"
+    brew "wget"
+
+    cask "keycastr"
+    cask "badgeify"
+end

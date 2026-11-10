@@ -17,15 +17,15 @@ echo ""
 echo "--------------  Installing software -------------- "
 bash ~/.dotfiles/install/install-software.sh
 
+echo ""
+echo "--------------  Installing Homebrew software --------------"
+bash ~/.dotfiles/install/brew-install.sh
+
 # MacOS-specific scripts
 if [[ "$DOTFILES_OS" == "darwin" ]]; then
     echo ""
     echo "--------------  Hiding MacOS home directories --------------"
     bash ~/.dotfiles/install/macos-hide-directories.sh
-
-    echo ""
-    echo "--------------  Installing Homebrew software --------------"
-    bash ~/.dotfiles/install/macos-brew-install.sh
 
     echo ""
     echo "--------------  Installing launchd services --------------"

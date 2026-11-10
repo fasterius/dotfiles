@@ -44,6 +44,7 @@ CONFIGS_HOME=(
     bash/bashrc
     bash/bash_profile
     bash/inputrc
+    brew/Brewfile
     conda/condarc
     git/gitconfig
     git/gitignore_global
@@ -54,7 +55,6 @@ CONFIGS_HOME=(
 # MacOS-only software
 if [[ "$DOTFILES_OS" == "darwin" ]]; then
     CONFIGS_HOME+=(
-        brew/Brewfile
         scripts/docker-X11-interactive/xinitrc.d
     )
 fi
