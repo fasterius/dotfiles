@@ -48,6 +48,10 @@ in the `install/` directory:
 Scripts prefixed with `macos-` only apply to MacOS; the others work on either
 platform.
 
+Afterwards, run `scripts/dotfiles-doctor.sh` to list any missing software that
+the configs rely on, and to print the versions of software with a minimum
+version requirement.
+
 ### Updating
 
 After pulling changes, run the following to pick up any changed submodules and
