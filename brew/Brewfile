@@ -5,10 +5,12 @@
 
 # Formulae
 brew "act"
+brew "bash-language-server"
 brew "bat"
 brew "btop"
 brew "cmake"
 brew "fd"
+brew "fzf"
 brew "gh"
 brew "gitleaks"
 brew "graphviz"
@@ -25,9 +27,11 @@ brew "pandoc"
 brew "prettier"
 brew "ripgrep"
 brew "ruff"
+brew "stylua"
 brew "tmux"
 brew "tree"
 brew "tree-sitter"
+brew "typescript-language-server"
 
 # MacOS-only packages
 if OS.mac?
