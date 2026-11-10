@@ -30,6 +30,20 @@ for BREW_PREFIX in /opt/homebrew /home/linuxbrew/.linuxbrew; do
 done
 unset BREW_PREFIX
 
+# Bash completion for Homebrew packages, through Homebrew's own bash-completion
+# where installed (MacOS), or by loading them directly (Linux, where the
+# system's bash-completion doesn't look in Homebrew's prefix)
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+    if [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
+        source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+    else
+        for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*; do
+            [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+        done
+        unset COMPLETION
+    fi
+fi
+
 # Linux-specific settings
 if [[ "$DOTFILES_OS" == "linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
@@ -54,10 +68,6 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
     # Add Homebrew paths to PATH
     export PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
     export PATH="/opt/homebrew/opt/git/share/git-core/contrib/diff-highlight/:$PATH"
-
-    # Bash completion (also loads completions installed by Homebrew packages)
-    [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] \
-        && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
     # Files to ignore for tab-completion
     export FIGNORE="$FIGNORE:.un~:DS_Store"
