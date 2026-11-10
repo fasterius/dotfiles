@@ -16,3 +16,8 @@ host git.bioconductor.org
   User git
   HostName git.bioconductor.org
   IdentityFile ~/.ssh/bioconductor
+
+Host kcsc
+  User ubuntu
+  HostName 193.10.159.34
+  IdentityFile ~/.ssh/kcsc
