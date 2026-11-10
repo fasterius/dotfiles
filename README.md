@@ -27,8 +27,8 @@ in the `install/` directory:
 - `create-symlinks.sh`: Creates all the symbolic links needed for all the
   various profiles and configs contained in this repository; safe to run
   multiple times.
-- `install-software.sh`: Installs software that isn't installable by a package
-  manager, _e.g._ Pixi, Nextflow and nf-test.
+- `install-with-pixi.sh`: Installs Pixi and the environments in its global
+  manifest (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
 - `install-fonts.sh`: Installs the Meslo LGS Nerd Font.
 - `brew-install.sh`: Installs the packages listed in `brew/Brewfile` with
   [Homebrew](https://brew.sh/), installing Homebrew itself first on MacOS. On

@@ -14,8 +14,8 @@ echo "--------------  Installing fonts -------------- "
 bash ~/.dotfiles/install/install-fonts.sh
 
 echo ""
-echo "--------------  Installing software -------------- "
-bash ~/.dotfiles/install/install-software.sh
+echo "--------------  Installing Pixi software -------------- "
+bash ~/.dotfiles/install/install-with-pixi.sh
 
 echo ""
 echo "--------------  Installing Homebrew software --------------"

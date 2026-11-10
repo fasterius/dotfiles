@@ -1,5 +1,10 @@
 version = 1
 
+[envs.nextflow]
+channels = ["conda-forge", "bioconda"]
+dependencies = { nextflow = "*", nf-test = "*" }
+exposed = { nextflow = "nextflow", nf-test = "nf-test", java = "java" }
+
 [envs.vim-language-server]
 channels = ["conda-forge", "bioconda"]
 dependencies = { vim-language-server = "*" }

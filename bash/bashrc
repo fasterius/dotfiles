@@ -30,13 +30,6 @@ for BREW_PREFIX in /opt/homebrew /home/linuxbrew/.linuxbrew; do
 done
 unset BREW_PREFIX
 
-# Use Homebrew's Java (_e.g._ for Nextflow), which is keg-only and thus not in
-# PATH by default
-if [[ -x "$HOMEBREW_PREFIX/opt/openjdk@21/bin/java" ]]; then
-    export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk@21"
-    export PATH="$JAVA_HOME/bin:$PATH"
-fi
-
 # Linux-specific settings
 if [[ "$DOTFILES_OS" == "linux" ]]; then
     # Specify location of diff-highlight (included in Git core)
