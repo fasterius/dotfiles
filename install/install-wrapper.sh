@@ -21,6 +21,10 @@ echo ""
 echo "--------------  Installing Homebrew software --------------"
 bash ~/.dotfiles/install/brew-install.sh
 
+echo ""
+echo "--------------  Installing Nextflow language server --------------"
+bash ~/.dotfiles/install/install-nextflow-ls.sh
+
 # MacOS-specific scripts
 if [[ "$DOTFILES_OS" == "darwin" ]]; then
     echo ""

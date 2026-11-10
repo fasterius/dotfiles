@@ -35,6 +35,9 @@ in the `install/` directory:
   Linux, Homebrew must already be installed. The Brewfile is linked to
   `~/.Brewfile`, so that `brew bundle check --global` shows missing packages and
   `brew bundle cleanup --global` shows unlisted ones.
+- `install-nextflow-ls.sh`: Installs the latest release of the Nextflow language
+  server into `~/.local/share/nextflow-language-server/`, with its launcher
+  linked as `~/.local/bin/nextflow-lsp`.
 - `macos-hide-directories.sh`: Hides the default MacOS home directories (_i.e._
   "Desktop", "Downloads", _etc._) from Finder and creates symbolic links in a
   new `~/home/` directory for easy access without cluttering up the default home

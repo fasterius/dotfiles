@@ -1,9 +1,5 @@
 return {
-    cmd = {
-        "java",
-        "-jar",
-        vim.fn.expand("$HOME/opt/nextflow-language-server-all.jar"),
-    },
+    cmd = { "nextflow-lsp" },
     filetypes = { "nextflow" },
     root_markers = { "nextflow.config", ".git" },
     -- Disable autoformatting and semantic tokens
