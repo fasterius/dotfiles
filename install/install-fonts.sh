@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Script to install Meslo LGS Nerd Font Mono
 
