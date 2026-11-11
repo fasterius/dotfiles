@@ -5,7 +5,7 @@
 # `~/.local/bin/nextflow-lsp`. Remove the bundle and re-run the script to update
 # it.
 
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 
 DIR="$HOME/.local/share/nextflow-language-server"
 BIN="$HOME/.local/bin"

@@ -2,8 +2,8 @@
 [[ $- != *i* ]] && return
 
 # Load the current host's settings (environment variables)
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
-export DOTFILES_COLOURSCHEME DOTFILES_HPC DOTFILES_SLOW_FS
+source "$HOME/.dotfiles/host.sh"
+export DOTFILES_COLOURSCHEME DOTFILES_HOST DOTFILES_HPC DOTFILES_SLOW_FS
 
 # Source custom HPC profile if in a SSH session on a known HPC system
 if [[ -n "$DOTFILES_HPC" && ( -n "$SSH_CLIENT" || -n "$SSH_TTY" ) ]]; then
@@ -84,6 +84,12 @@ fi
 # Add to PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.pixi/bin:$PATH"
+
+# Add the dotfiles' own commands, including those specific to this OS and host
+export PATH="$HOME/.dotfiles/bin:$HOME/.dotfiles/bin/$DOTFILES_OS:$PATH"
+if [[ -n "$DOTFILES_HOST" ]]; then
+    export PATH="$HOME/.dotfiles/bin/$DOTFILES_HOST:$PATH"
+fi
 
 # Lazy-loaded autocompletion for Pixi; returning 124 makes Bash retry with the
 # newly loaded completion

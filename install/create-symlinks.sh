@@ -3,7 +3,7 @@
 # Script that creates symbolic links for all relevant files in the repository
 
 # Get the current host's settings (environment variables)
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 
 # ------------------------------- XDG Configs ----------------------------------
 
@@ -55,7 +55,7 @@ CONFIGS_HOME=(
 # MacOS-only software
 if [[ "$DOTFILES_OS" == "darwin" ]]; then
     CONFIGS_HOME+=(
-        scripts/docker-X11-interactive/xinitrc.d
+        external/docker-X11-interactive/xinitrc.d
     )
 fi
 
@@ -128,29 +128,6 @@ echo "Creating symlinks for the \"$DOTFILES_OS\" OS ..."
 for CONFIG in ${OS_CONFIGS[@]}; do
     SOURCE="${CONFIG%.*}-$DOTFILES_OS.${CONFIG##*.}"
     ln -sfn $HOME/.dotfiles/$SOURCE $HOME/.dotfiles/$CONFIG
-done
-
-# --------------------------------- Scripts -----------------------------------
-
-# List scripts to be symlinked
-SCRIPTS=(
-    apptainer-in-docker.sh
-    conda-intel-env/conda-intel-env.sh
-    docker-X11-interactive/docker-X11-interactive.sh
-    tmux-new.sh
-)
-
-# Linux-only scripts
-if [[ "$DOTFILES_OS" == "linux" ]]; then
-    SCRIPTS+=(proton-ge-update.sh)
-fi
-
-mkdir -p $HOME/.local/bin
-
-# Symlink all scripts into `$HOME/.local/bin`
-echo "Creating script symlinks ..."
-for SCRIPT in ${SCRIPTS[@]}; do
-    ln -sfn "$HOME/.dotfiles/scripts/$SCRIPT" $HOME/.local/bin
 done
 
 # ------------------------------- GNOME settings -------------------------------

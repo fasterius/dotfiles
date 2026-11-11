@@ -3,7 +3,7 @@
 # Script that sets up a machine by running every script in `install/` in an
 # OS-specific manner
 
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 
 # Run common scripts
 echo ""

@@ -2,7 +2,7 @@
 
 # Script to install Meslo LGS Nerd Font Mono
 
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 
 # Fonts are only used by terminals on the machine itself, which headless
 # machines (_e.g._ servers accessed over SSH) don't have

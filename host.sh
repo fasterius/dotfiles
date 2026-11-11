@@ -29,12 +29,16 @@ fi
 # ---------------------------------- Choices -----------------------------------
 
 DOTFILES_COLOURSCHEME="solarized"
+DOTFILES_HOST=""    # Host whose commands in `bin/<name>/` to add to PATH
 DOTFILES_HPC=""     # HPC system whose `bash/<name>_profile` to load
 DOTFILES_SLOW_FS=0  # 1 disables features that are slow on parallel filesystems
 
 # Bash's `$HOSTNAME` avoids spawning `hostname`, which is slow on some systems
 case "${HOSTNAME:-$(hostname)}" in
-    sajberspace) DOTFILES_COLOURSCHEME="everforest" ;;
+    sajberspace)
+        DOTFILES_COLOURSCHEME="everforest"
+        DOTFILES_HOST="sajberspace"
+        ;;
     *uppmax*)    DOTFILES_HPC="uppmax" ;;
     *login1*)    DOTFILES_SLOW_FS=1 ;;
 esac

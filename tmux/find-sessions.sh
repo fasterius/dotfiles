@@ -4,10 +4,10 @@
 # Requires Tmux version 3.2 or above.
 #
 # Usage:
-#   $ tmux-find-sessions.sh
+#   $ ~/.dotfiles/tmux/find-sessions.sh
 #
 # Example keybind in `tmux.conf`:
-#   $ bind-key f run-shell tmux-find-sessions.sh
+#   $ bind-key f run-shell ~/.dotfiles/tmux/find-sessions.sh
 
 # List session names
 SESSIONS=$(tmux list-sessions -F "#{session_name}")

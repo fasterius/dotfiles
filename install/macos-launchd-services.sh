@@ -6,7 +6,7 @@
 # so that changes take effect. Safe to run multiple times.
 
 # Check for MacOS
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 if [[ "$DOTFILES_OS" != "darwin" ]]; then
     echo "Not on MacOS; not installing launchd services"
     exit 0

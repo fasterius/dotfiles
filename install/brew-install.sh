@@ -4,7 +4,7 @@
 # Homebrew itself is installed if it's missing; on Linux, it's only used if it
 # has already been installed.
 
-source "$HOME/.dotfiles/scripts/dotfiles-host.sh"
+source "$HOME/.dotfiles/host.sh"
 
 # Find Homebrew path
 BREW="$(command -v brew)"

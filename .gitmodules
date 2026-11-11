@@ -1,9 +1,3 @@
-[submodule "scripts/conda-intel-env"]
-	path = scripts/conda-intel-env
-	url = git@github.com:fasterius/conda-intel-env.git
 [submodule "scripts/docker-X11-interactive"]
-	path = scripts/docker-X11-interactive
+	path = external/docker-X11-interactive
 	url = git@github.com:fasterius/docker-X11-interactive.git
-[submodule "scripts/quick-whisper"]
-	path = scripts/quick-whisper
-	url = git@github.com:fasterius/quick-whisper.git

@@ -114,9 +114,10 @@ in one of the following ways:
   `~/.config/nvim` → `~/.dotfiles/nvim`.
 - **Home directory configs:** single files are linked as hidden files in `~/`,
   _e.g._ `~/.bashrc` → `~/.dotfiles/bash/bashrc`.
-- **Scripts:** the scripts meant to be run by hand are linked into
-  `~/.local/bin/`. Scripts used by other configs are called by their full path
-  instead.
+- **Commands:** the commands in `bin/` are added to PATH by `bashrc` together
+  with those in `bin/<os>/` (_e.g._ `bin/darwin/`) on that OS, and those in
+  `bin/<host>/` on the host whose `DOTFILES_HOST` is set to that name (see [Host
+  settings](#host-settings)).
 - **Special cases:** Pixi's config and global manifest are linked into
   `~/.pixi/`, and the SSH config into `~/.ssh/`. The `agent-sandbox` command is
   linked into `~/.local/bin/` from its own repository in
@@ -135,8 +136,8 @@ come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
 ## Host settings
 
 Everything that differs between machines is defined in a single place,
-`scripts/dotfiles-host.sh`. It detects facts about the current host, which
-configs and install scripts use instead of detecting them themselves:
+`host.sh`. It detects facts about the current host, which configs and install
+scripts use instead of detecting them themselves:
 
 - `DOTFILES_OS`: the operating system, `darwin` or `linux`, as used in the names
   of OS-specific configs.
@@ -146,6 +147,8 @@ It also sets the choices that can't be detected, recognising the current host
 (mostly by hostname):
 
 - `DOTFILES_COLOURSCHEME`: the colour scheme (default: Solarized; see below).
+- `DOTFILES_HOST`: the host whose commands in `bin/<name>/` are added to PATH
+  (default: nothing).
 - `DOTFILES_HPC`: the HPC system whose `bash/<name>_profile` is loaded in SSH
   sessions (default: nothing).
 - `DOTFILES_SLOW_FS`: set to `1` on hosts where Git operations are slow, which
@@ -158,8 +161,7 @@ choice (`colourscheme`, `hpc` or `slow-fs`) to print its value, which is how
 Tmux gets the colour scheme.
 
 To add a new machine that needs something other than the defaults, add its
-hostname to the `case` statement in `dotfiles-host.sh` and re-run
-`create-symlinks.sh`.
+hostname to the `case` statement in `host.sh` and re-run `create-symlinks.sh`.
 
 ## Colour schemes
 
@@ -188,16 +190,11 @@ new symlink to `_dispatcher` if a repository needs another type of hook.
 
 ## Included software
 
-Some software included here live in their respective repositories and are
-installed as submodules:
+Some software included here live in their respective repositories, and are
+included as submodules in `external/`:
 
-- [`conda-intel-env`](https://github.com/fasterius/conda-intel-env): A helper
-  script for creating Intel-based Conda environments on MacOS ARM64.
 - [`docker-X11-interactive`](https://github.com/fasterius/docker-X11-interactive):
   A helper script for interactive plotting inside Docker containers on MacOS.
-- [`quick-whisper`](https://github.com/fasterius/quick-whisper): A
-  cross-platform script for local speech-to-text transcription using
-  `whisper.cpp`.
 
 ## Archived configs
 
