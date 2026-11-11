@@ -8,6 +8,50 @@
 This is my collection of `dotfiles`, covering everything from Bash to Neovim.
 I use both MacOS and Linux, and the configs are written to work on either.
 
+## Layout
+
+The entry points and general directories are at the top level of the repository,
+next to one directory per program:
+
+| Path            | Contents                                                   |
+| --------------- | ---------------------------------------------------------- |
+| `install.sh`    | Sets up a machine with the scripts in `install/`           |
+| `check.sh`      | Checks for missing software and minimum versions           |
+| `host.sh`       | Per-host facts and choices                                 |
+| `install/`      | The individual install steps                               |
+| `bin/`          | Commands added to PATH, also `bin/<os>/` and `bin/<host>/` |
+| `brew/`         | Homebrew packages for MacOS and Linux                      |
+| `pixi/`         | Pixi's config and global manifest                          |
+| `launchd/`      | MacOS services for software from Homebrew                  |
+| `external/`     | Software from other repositories (Git submodules)          |
+| Everything else | One program's config each, _e.g._ `nvim/` or `tmux/`       |
+
+Each program has its own directory, which `symlinks.sh` links into place in one
+of the following ways:
+
+- **XDG configs:** the whole directory is linked into `~/.config/`, _e.g._
+  `~/.config/nvim` → `~/.dotfiles/nvim`.
+- **Home directory configs:** single files are linked as hidden files in `~/`,
+  _e.g._ `~/.bashrc` → `~/.dotfiles/bash/bashrc`.
+- **Commands:** the commands in `bin/` are added to PATH by `bashrc` together
+  with those in `bin/<os>/` (_e.g._ `bin/darwin/`) on that OS, and those in
+  `bin/<host>/` on the host whose `DOTFILES_HOST` is set to that name (see [Host
+  settings](#host-settings)).
+- **Special cases:** Pixi's config and global manifest are linked into
+  `~/.pixi/`, and the SSH config into `~/.ssh/`. The `agent-sandbox` command is
+  linked into `~/.local/bin/` from its own repository in
+  `~/projects/agent-sandbox`, if that has been cloned.
+- **`launchd` services:** the services in `launchd/` are copied into
+  `~/Library/LaunchAgents/` by `macos-launchd-services.sh` instead, with the
+  home directory filled in; re-run it after changing them.
+
+Some configs are only linked where they apply: OS-specific ones on that OS, and
+GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`) only
+on machines with GNOME installed. Configs that differ between operating systems
+come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
+`alacritty/size-darwin.toml`), and the one for the current OS is symlinked to
+`<name>.<ext>` by `symlinks.sh`.
+
 ## Installation
 
 Some scripts are included as submodules, so make sure you clone using the
@@ -17,37 +61,6 @@ up first. The repository is expected to live in `~/.dotfiles`:
 ```bash
 git clone --recursive git@github.com:fasterius/dotfiles.git ~/.dotfiles
 ```
-
-The two entry points are at the top level of the repository: `install.sh` sets
-up a machine by running the scripts in `install/` in an OS-dependent manner, and
-`check.sh` checks the result. The scripts in `install/` can also be run one at a
-time:
-
-- `symlinks.sh`: Creates all the symbolic links needed for all the various
-  profiles and configs contained in this repository; safe to run multiple times.
-- `pixi.sh`: Installs Pixi and the environments in its global manifest
-  (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
-- `fonts.sh`: Installs the Meslo LGS Nerd Font, except on headless machines.
-- `brew.sh`: Installs the packages listed in `brew/Brewfile` with
-  [Homebrew](https://brew.sh/), installing Homebrew itself first on MacOS. On
-  Linux, Homebrew must already be installed. The Brewfile is linked to
-  `~/.Brewfile`, so that `brew bundle check --global` shows missing packages and
-  `brew bundle cleanup --global` shows unlisted ones.
-- `nextflow-ls.sh`: Installs the latest release of the Nextflow language server
-  into `~/.local/share/nextflow-language-server/`, with its launcher linked as
-  `~/.local/bin/nextflow-lsp`.
-- `macos-hide-directories.sh`: Hides the default MacOS home directories (_i.e._
-  "Desktop", "Downloads", _etc._) from Finder and creates symbolic links in a
-  new `~/home/` directory for easy access without cluttering up the default home
-  directory.
-- `macos-launchd-services.sh`: Installs and (re)loads the `launchd` services in
-  `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server
-  and a `tailscaled` that runs without root, and creates the `llama.cpp`
-  server's API key in `~/.local/share/llama.cpp/api-key` if it's missing; safe
-  to run multiple times.
-
-Scripts prefixed with `macos-` only apply to MacOS; the others work on either
-platform.
 
 ### Setting up a new system
 
@@ -103,33 +116,36 @@ git submodule update --init
 ~/.dotfiles/install/symlinks.sh
 ```
 
-## Layout
+### Install scripts
 
-Each program has its own directory, which `symlinks.sh` links into place in one
-of the following ways:
+`install.sh` runs the scripts in `install/` in an OS-dependent manner, but they
+can also be run one at a time:
 
-- **XDG configs:** the whole directory is linked into `~/.config/`, _e.g._
-  `~/.config/nvim` → `~/.dotfiles/nvim`.
-- **Home directory configs:** single files are linked as hidden files in `~/`,
-  _e.g._ `~/.bashrc` → `~/.dotfiles/bash/bashrc`.
-- **Commands:** the commands in `bin/` are added to PATH by `bashrc` together
-  with those in `bin/<os>/` (_e.g._ `bin/darwin/`) on that OS, and those in
-  `bin/<host>/` on the host whose `DOTFILES_HOST` is set to that name (see [Host
-  settings](#host-settings)).
-- **Special cases:** Pixi's config and global manifest are linked into
-  `~/.pixi/`, and the SSH config into `~/.ssh/`. The `agent-sandbox` command is
-  linked into `~/.local/bin/` from its own repository in
-  `~/projects/agent-sandbox`, if that has been cloned.
-- **`launchd` services:** the services in `launchd/` are copied into
-  `~/Library/LaunchAgents/` by `macos-launchd-services.sh` instead, with the
-  home directory filled in; re-run it after changing them.
+- `symlinks.sh`: Creates all the symbolic links needed for all the various
+  profiles and configs contained in this repository; safe to run multiple times.
+- `pixi.sh`: Installs Pixi and the environments in its global manifest
+  (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
+- `fonts.sh`: Installs the Meslo LGS Nerd Font, except on headless machines.
+- `brew.sh`: Installs the packages listed in `brew/Brewfile` with
+  [Homebrew](https://brew.sh/), installing Homebrew itself first on MacOS. On
+  Linux, Homebrew must already be installed. The Brewfile is linked to
+  `~/.Brewfile`, so that `brew bundle check --global` shows missing packages and
+  `brew bundle cleanup --global` shows unlisted ones.
+- `nextflow-ls.sh`: Installs the latest release of the Nextflow language server
+  into `~/.local/share/nextflow-language-server/`, with its launcher linked as
+  `~/.local/bin/nextflow-lsp`.
+- `macos-hide-directories.sh`: Hides the default MacOS home directories (_i.e._
+  "Desktop", "Downloads", _etc._) from Finder and creates symbolic links in a
+  new `~/home/` directory for easy access without cluttering up the default home
+  directory.
+- `macos-launchd-services.sh`: Installs and (re)loads the `launchd` services in
+  `launchd/` for the software that is installed, _e.g._ the `llama.cpp` server
+  and a `tailscaled` that runs without root, and creates the `llama.cpp`
+  server's API key in `~/.local/share/llama.cpp/api-key` if it's missing; safe
+  to run multiple times.
 
-Some configs are only linked where they apply: OS-specific ones on that OS, and
-GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`) only
-on machines with GNOME installed. Configs that differ between operating systems
-come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
-`alacritty/size-darwin.toml`), and the one for the current OS is symlinked to
-`<name>.<ext>` by `symlinks.sh`.
+Scripts prefixed with `macos-` only apply to MacOS; the others work on either
+platform.
 
 ## Host settings
 
