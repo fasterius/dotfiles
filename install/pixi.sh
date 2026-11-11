@@ -15,7 +15,7 @@ else
     echo "Pixi is already installed"
 fi
 
-# Pixi global environments, from the manifest linked by `create-symlinks.sh`
+# Pixi global environments, from the manifest linked by `symlinks.sh`
 echo "Installing Pixi global environments ..."
 PIXI="$(command -v pixi || echo "$BIN/pixi")"
 "$PIXI" global sync

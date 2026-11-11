@@ -23,21 +23,19 @@ up a machine by running the scripts in `install/` in an OS-dependent manner, and
 `check.sh` checks the result. The scripts in `install/` can also be run one at a
 time:
 
-- `create-symlinks.sh`: Creates all the symbolic links needed for all the
-  various profiles and configs contained in this repository; safe to run
-  multiple times.
-- `install-with-pixi.sh`: Installs Pixi and the environments in its global
-  manifest (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
-- `install-fonts.sh`: Installs the Meslo LGS Nerd Font, except on headless
-  machines.
-- `brew-install.sh`: Installs the packages listed in `brew/Brewfile` with
+- `symlinks.sh`: Creates all the symbolic links needed for all the various
+  profiles and configs contained in this repository; safe to run multiple times.
+- `pixi.sh`: Installs Pixi and the environments in its global manifest
+  (`pixi/manifests/pixi-global.toml`) with `pixi global sync`.
+- `fonts.sh`: Installs the Meslo LGS Nerd Font, except on headless machines.
+- `brew.sh`: Installs the packages listed in `brew/Brewfile` with
   [Homebrew](https://brew.sh/), installing Homebrew itself first on MacOS. On
   Linux, Homebrew must already be installed. The Brewfile is linked to
   `~/.Brewfile`, so that `brew bundle check --global` shows missing packages and
   `brew bundle cleanup --global` shows unlisted ones.
-- `install-nextflow-ls.sh`: Installs the latest release of the Nextflow language
-  server into `~/.local/share/nextflow-language-server/`, with its launcher
-  linked as `~/.local/bin/nextflow-lsp`.
+- `nextflow-ls.sh`: Installs the latest release of the Nextflow language server
+  into `~/.local/share/nextflow-language-server/`, with its launcher linked as
+  `~/.local/bin/nextflow-lsp`.
 - `macos-hide-directories.sh`: Hides the default MacOS home directories (_i.e._
   "Desktop", "Downloads", _etc._) from Finder and creates symbolic links in a
   new `~/home/` directory for easy access without cluttering up the default home
@@ -58,8 +56,8 @@ differ between systems and are only done once per machine:
 
 1. **Clone the repository** (see above).
 2. **Install system packages** (needs root):
-   - **MacOS:** nothing; `brew-install.sh` installs Homebrew, which takes care
-     of everything that's needed.
+   - **MacOS:** nothing; `brew.sh` installs Homebrew, which takes care of
+     everything that's needed.
    - **Ubuntu:** a C compiler, the `en_GB.UTF-8` locale used by `bashrc`, and
      Homebrew:
 
@@ -102,13 +100,13 @@ new symlinks:
 ```bash
 git submodule sync
 git submodule update --init
-~/.dotfiles/install/create-symlinks.sh
+~/.dotfiles/install/symlinks.sh
 ```
 
 ## Layout
 
-Each program has its own directory, which `create-symlinks.sh` links into place
-in one of the following ways:
+Each program has its own directory, which `symlinks.sh` links into place in one
+of the following ways:
 
 - **XDG configs:** the whole directory is linked into `~/.config/`, _e.g._
   `~/.config/nvim` → `~/.dotfiles/nvim`.
@@ -131,7 +129,7 @@ GNOME-related ones (including loading `gnome/settings.dconf` with `dconf`) only
 on machines with GNOME installed. Configs that differ between operating systems
 come in one file per OS, named `<name>-<os>.<ext>` (_e.g._
 `alacritty/size-darwin.toml`), and the one for the current OS is symlinked to
-`<name>.<ext>` by `create-symlinks.sh`.
+`<name>.<ext>` by `symlinks.sh`.
 
 ## Host settings
 
@@ -161,7 +159,7 @@ choice (`colourscheme`, `hpc` or `slow-fs`) to print its value, which is how
 Tmux gets the colour scheme.
 
 To add a new machine that needs something other than the defaults, add its
-hostname to the `case` statement in `host.sh` and re-run `create-symlinks.sh`.
+hostname to the `case` statement in `host.sh` and re-run `symlinks.sh`.
 
 ## Colour schemes
 
@@ -172,8 +170,8 @@ Configs with colours come in one file per colour scheme, named
   settings when they start and load the matching file or colours, _e.g._
   `bash/colours-everforest.sh`.
 - **At install:** programs that can't run a script themselves get a symlink from
-  `<name>.<ext>` to the matching file, created by `create-symlinks.sh`. These
-  symlinks are not tracked by Git.
+  `<name>.<ext>` to the matching file, created by `symlinks.sh`. These symlinks
+  are not tracked by Git.
 
 ## Git hooks
 

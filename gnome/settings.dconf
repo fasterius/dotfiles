@@ -1,6 +1,6 @@
 # GNOME settings
 #
-# Can be applied by running `install/create-symlinks.sh` or manually with:
+# Can be applied by running `install/symlinks.sh` or manually with:
 # `sed "s|@HOME@|$HOME|g" ~/.dotfiles/gnome/settings.dconf | dconf load /`
 
 [org/gnome/desktop/interface]

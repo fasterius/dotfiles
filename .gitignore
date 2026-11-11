@@ -10,7 +10,7 @@ btop/btop.log
 # Homebrew bundle lock file
 brew/Brewfile.lock.json
 
-# Colour scheme- and OS-specific symlinks (created by `create-symlinks.sh`)
+# Colour scheme- and OS-specific symlinks (created by `symlinks.sh`)
 alacritty/colours.toml
 alacritty/size.toml
 bash/inputrc-colours

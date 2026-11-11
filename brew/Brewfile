@@ -1,7 +1,7 @@
 # Homebrew packages for MacOS and Linux (where Homebrew is installed, _e.g._
-# Ubuntu). Installed by `install/brew-install.sh`, or with `brew bundle
-# --global`. Use `brew bundle check --global` to list missing packages and `brew
-# bundle cleanup --global` to list installed packages that aren't in this file.
+# Ubuntu). Installed by `install/brew.sh`, or with `brew bundle --global`. Use
+# `brew bundle check --global` to list missing packages and `brew bundle cleanup
+# --global` to list installed packages that aren't in this file.
 
 # Formulae
 brew "act"

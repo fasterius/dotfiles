@@ -3,9 +3,9 @@
 #
 #   - `alacritty-common.toml`: settings shared by all machines
 #   - `colours.toml`: colours for the host's colour scheme (symlinked by
-#     `install/create-symlinks.sh` to `colours-<colourscheme>.toml`)
+#     `install/symlinks.sh` to `colours-<colourscheme>.toml`)
 #   - `size.toml`: font size and padding for the current OS (symlinked by
-#     `install/create-symlinks.sh` to `size-<os>.toml`)
+#     `install/symlinks.sh` to `size-<os>.toml`)
 #   - `local.toml`: optional, untracked, machine-specific overrides
 #
 # Missing files are skipped.

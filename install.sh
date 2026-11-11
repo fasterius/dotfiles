@@ -8,23 +8,23 @@ source "$HOME/.dotfiles/host.sh"
 # Run common scripts
 echo ""
 echo "--------------  Creating symlinks -------------- "
-bash ~/.dotfiles/install/create-symlinks.sh
+bash ~/.dotfiles/install/symlinks.sh
 
 echo ""
 echo "--------------  Installing fonts -------------- "
-bash ~/.dotfiles/install/install-fonts.sh
+bash ~/.dotfiles/install/fonts.sh
 
 echo ""
 echo "--------------  Installing Pixi software -------------- "
-bash ~/.dotfiles/install/install-with-pixi.sh
+bash ~/.dotfiles/install/pixi.sh
 
 echo ""
 echo "--------------  Installing Homebrew software --------------"
-bash ~/.dotfiles/install/brew-install.sh
+bash ~/.dotfiles/install/brew.sh
 
 echo ""
 echo "--------------  Installing Nextflow language server --------------"
-bash ~/.dotfiles/install/install-nextflow-ls.sh
+bash ~/.dotfiles/install/nextflow-ls.sh
 
 # MacOS-specific scripts
 if [[ "$DOTFILES_OS" == "darwin" ]]; then
