@@ -3,9 +3,8 @@
     name = Erik Fasterius
     email = erik.fasterius@outlook.com
 
-# Global gitignore
+# Global hooks path
 [core]
-    excludesfile = ~/.gitignore_global
     hooksPath = ~/.dotfiles/git/hooks
 
 # Use `main` as default branch instead of `master`

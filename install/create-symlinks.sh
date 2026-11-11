@@ -16,10 +16,12 @@ CONFIGS=(
     alacritty
     bat
     btop
+    git
     llama.cpp
     marksman
     nvim
     stylua
+    tmux
     vim
 )
 
@@ -46,10 +48,7 @@ CONFIGS_HOME=(
     bash/inputrc
     brew/Brewfile
     conda/condarc
-    git/gitconfig
-    git/gitignore_global
     lintr/lintr
-    tmux/tmux.conf
 )
 
 # MacOS-only software
