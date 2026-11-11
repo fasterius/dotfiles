@@ -72,10 +72,6 @@ if [[ "$DOTFILES_OS" == "darwin" ]]; then
     # Files to ignore for tab-completion
     export FIGNORE="$FIGNORE:.un~:DS_Store"
 
-    # Source Conda
-    [[ -r "$HOME/opt/miniforge3/etc/profile.d/conda.sh" ]] \
-        && source "$HOME/opt/miniforge3/etc/profile.d/conda.sh"
-
     # Use GNU readlink
     alias readlink='greadlink'
 
@@ -175,10 +171,6 @@ alias tnn='tmux new -t'
 alias ta='tmux attach -t'
 alias tl='tmux ls'
 
-# Conda aliases
-alias coac='conda activate'
-alias code='conda deactivate'
-
 # Do not save workspace when exiting R
 alias r='R --no-save'
 
@@ -222,9 +214,8 @@ alias gwd='git switch --detach'
 
 # Prompt ---------------------------------------------------------------------
 
-# Function to get conda env if in an activated environment
-# (uses only Bash built-ins, as this runs at every prompt)
-conda_env() {
+# Function to get the name of the active Pixi or Conda environment (if any)
+env_name() {
     if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
         printf '(%s) ' "${CONDA_DEFAULT_ENV##*/}"
     fi
@@ -284,7 +275,7 @@ git_branch() {
 }
 
 # Build prompt
-export PS1='\[\e[0;95m\]$(conda_env)'       # Conda environment (purple)
+export PS1='\[\e[0;95m\]$(env_name)'        # Pixi/Conda environment (purple)
 export PS1=$PS1'\[\e[m\][\h: '              # Hostname (grey)
 export PS1=$PS1'\[\e[0;34m\]\w\[\e[m\]]'    # Current directory (blue)
 export PS1=$PS1'\[\e[0;36m\]$(git_branch)' # Git branch (teal)

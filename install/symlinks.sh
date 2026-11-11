@@ -16,6 +16,7 @@ CONFIGS=(
     alacritty
     bat
     btop
+    conda
     git
     llama.cpp
     marksman
@@ -47,7 +48,6 @@ CONFIGS_HOME=(
     bash/bash_profile
     bash/inputrc
     brew/Brewfile
-    conda/condarc
     lintr/lintr
 )
 
