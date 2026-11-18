@@ -209,15 +209,3 @@ included as submodules in `external/`:
 
 - [`docker-X11-interactive`](https://github.com/fasterius/docker-X11-interactive):
   A helper script for interactive plotting inside Docker containers on MacOS.
-
-## Archived configs
-
-Configs that are no longer in use are removed from the repository, but kept in
-Git tags so they can be found and restored if needed:
-
-- `niri`: Niri desktop setup (Niri, Waybar, eww, Quickshell, Mako, Fuzzel
-  and related scripts).
-- `jj`: [Jujutsu](https://github.com/jj-vcs/jj) config.
-
-To browse an archived config, use _e.g._ `git show niri:niri/config.kdl`; to
-restore it, use `git checkout niri -- niri/`.
