@@ -77,3 +77,5 @@
 # Add `line` custom format for use in `glo` alias (see `bashrc`)
 [pretty]
     line = format:%C(yellow)%h %C(blue)%>(12)%ar %C(cyan)%aN%C(auto)%d %C(reset)%s
+[merge]
+	conflictStyle = zdiff3
