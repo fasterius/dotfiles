@@ -64,6 +64,12 @@ local function get_colour_zoomed_in()
     end
 end
 
+-- Function to show PR review info when a review is active
+local function gh_review_status()
+    local ok, gh_review = pcall(require, "gh_review")
+    return ok and gh_review.statusline() or ""
+end
+
 -- Lualine setup
 require("lualine").setup({
     options = {
@@ -83,6 +89,7 @@ require("lualine").setup({
             { "diff" },
         },
         lualine_x = {
+            { gh_review_status },
             { "diagnostics" },
             { "filetype" },
         },

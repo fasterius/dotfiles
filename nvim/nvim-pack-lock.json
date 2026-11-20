@@ -29,6 +29,10 @@
       "rev": "13bb178a299f7493dd64427a58e61904c4b58ecb",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "gh-review.nvim": {
+      "rev": "a8f7913cbe9bf9310c2f8eace85b9747f7f84325",
+      "src": "https://github.com/gh-tui-tools/gh-review.nvim"
+    },
     "gitsigns.nvim": {
       "rev": "8d79f2410c76e62b92e51c28c82e28c1c5a3daeb",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
