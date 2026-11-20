@@ -90,4 +90,10 @@ else
 
     -- Completion kind colours for `blink.cmp`
     vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = solarized.blue })
+
+    -- Diff highlights as background tints
+    vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#e4ecda" }) -- 12% cyan
+    vim.api.nvim_set_hl(0, "DiffChange", { bg = "#f7edd1" }) -- 8% yellow
+    vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#f9decd" }) -- 12% red
+    vim.api.nvim_set_hl(0, "DiffText", { bg = "#efe0b6" }) -- 20% yellow
 end

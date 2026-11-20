@@ -8,8 +8,9 @@ vim.o.number = true
 -- Add background highlight to current line
 vim.o.cursorline = true
 
--- Don't show the tilde (~) character at lines beyond the file
-vim.opt.fillchars = { eob = " " }
+-- Don't show the tilde (~) character at lines beyond the file, and don't show
+-- any character for filler lines in diffs
+vim.opt.fillchars = { eob = " ", diff = " " }
 
 -- Wrap lines at 80 characters
 vim.o.textwidth = 80
