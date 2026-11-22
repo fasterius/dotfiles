@@ -101,6 +101,7 @@ COLOURSCHEME_CONFIGS=(
     alacritty/colours.toml
     bash/inputrc-colours
     btop/btop.conf
+    agent-sandbox/opencode/tui.json
 )
 
 echo "Creating symlinks for the \"$DOTFILES_COLOURSCHEME\" colour scheme ..."

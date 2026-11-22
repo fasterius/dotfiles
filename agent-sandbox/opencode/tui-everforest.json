@@ -1,0 +1,12 @@
+{
+    "$schema": "https://opencode.ai/tui.json",
+    "theme": "everforest",
+    "attention": {
+        "enabled": true,
+        "notifications": true,
+        "sound": false
+    },
+    "plugin": [
+        "./session-bell.ts"
+    ]
+}

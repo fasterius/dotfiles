@@ -15,6 +15,7 @@ alacritty/colours.toml
 alacritty/size.toml
 bash/inputrc-colours
 btop/btop.conf
+agent-sandbox/opencode/tui.json
 
 # Machine-specific Alacritty overrides
 alacritty/local.toml
