@@ -109,6 +109,16 @@ vim.keymap.set("n", "<leader>zB", function()
     require("fzf-bibtex").search()
 end)
 
+-- Define the syntax matches that conceal wiki links in a buffer
+local function conceal_wiki_links(buf)
+    vim.api.nvim_buf_call(buf, function()
+        vim.cmd([==[
+            syntax match markdownWikiLinkStart /\[\[\([^\]|]*|\)\=\ze[^\]]/ conceal
+            syntax match markdownWikiLinkEnd /\(\[\[[^\]]*\)\@<=\]\]/ conceal
+        ]==])
+    end)
+end
+
 -- Notes-only keymaps and settings
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
@@ -123,25 +133,24 @@ vim.api.nvim_create_autocmd("FileType", {
 
         -- Conceal wiki links: `[[Target|alias]]` shows `alias` and
         -- `[[Target]]` shows `Target`. Tree-sitter's Markdown parser has no
-        -- wiki-link support, so use syntax matches, defined on `Syntax` as
-        -- loading the syntax file clears earlier ones.
+        -- wiki-link support, so use syntax matches. Define them now, as the
+        -- syntax file isn't loaded at all when Tree-sitter highlighting is
+        -- already running, and again on `Syntax`, as loading the syntax file
+        -- clears earlier ones.
+        conceal_wiki_links(ev.buf)
         vim.api.nvim_create_autocmd("Syntax", {
+            group = vim.api.nvim_create_augroup(
+                "zettelkasten-conceal-" .. ev.buf,
+                { clear = true }
+            ),
             buffer = ev.buf,
             callback = function()
-                vim.cmd([=[
-                    syntax match markdownWikiLinkStart /\[\[\([^\]|]*|\)\=\ze[^\]]/ conceal
-                    syntax match markdownWikiLinkEnd /\(\[\[[^\]]*\)\@<=\]\]/ conceal
-                ]=])
+                conceal_wiki_links(ev.buf)
             end,
         })
 
         -- Make `gq` count concealed wiki links by their displayed width
         vim.bo[ev.buf].formatexpr = "v:lua.require('zettelkasten').formatexpr()"
-
-        -- The syntax file may already have loaded
-        if vim.bo[ev.buf].syntax ~= "" then
-            vim.api.nvim_exec_autocmds("Syntax", { buffer = ev.buf })
-        end
 
         -- The LSP targets whatever is under the cursor: a heading, a link
         -- (its target note) or, anywhere else, the current note itself
