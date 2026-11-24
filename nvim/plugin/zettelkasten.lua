@@ -134,6 +134,10 @@ vim.api.nvim_create_autocmd("FileType", {
                 ]=])
             end,
         })
+
+        -- Make `gq` count concealed wiki links by their displayed width
+        vim.bo[ev.buf].formatexpr = "v:lua.require('zettelkasten').formatexpr()"
+
         -- The syntax file may already have loaded
         if vim.bo[ev.buf].syntax ~= "" then
             vim.api.nvim_exec_autocmds("Syntax", { buffer = ev.buf })
