@@ -121,6 +121,24 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.conceallevel = 2
         vim.opt_local.concealcursor = "nc"
 
+        -- Conceal wiki links: `[[Target|alias]]` shows `alias` and
+        -- `[[Target]]` shows `Target`. Tree-sitter's Markdown parser has no
+        -- wiki-link support, so use syntax matches, defined on `Syntax` as
+        -- loading the syntax file clears earlier ones.
+        vim.api.nvim_create_autocmd("Syntax", {
+            buffer = ev.buf,
+            callback = function()
+                vim.cmd([=[
+                    syntax match markdownWikiLinkStart /\[\[\([^\]|]*|\)\=\ze[^\]]/ conceal
+                    syntax match markdownWikiLinkEnd /\(\[\[[^\]]*\)\@<=\]\]/ conceal
+                ]=])
+            end,
+        })
+        -- The syntax file may already have loaded
+        if vim.bo[ev.buf].syntax ~= "" then
+            vim.api.nvim_exec_autocmds("Syntax", { buffer = ev.buf })
+        end
+
         -- The LSP targets whatever is under the cursor: a heading, a link
         -- (its target note) or, anywhere else, the current note itself
         local function map(lhs, rhs)
