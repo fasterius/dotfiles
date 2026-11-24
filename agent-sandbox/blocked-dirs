@@ -1,7 +1,7 @@
 # Home directories
-~/docs
-~/home
-~/learning
+~/docs/**
+~/home/**
+~/learning/**
 ~/opt
 ~/teaching
 
