@@ -4,10 +4,9 @@
     Runs `llama-server` in router mode with the presets in
     `~/.config/llama.cpp/models.ini`, keeping at most one model in memory and
     unloading it after five minutes without requests. Requests need the API key
-    in `~/.local/share/llama.cpp/api-key`, only web pages served from localhost
-    may make cross-origin requests, and the slots monitoring endpoint is off, so
-    that clients can't see the state of each other's requests. Installed by
-    `install/macos-launchd-services.sh`, which also creates the API key and
+    in `~/.local/share/llama.cpp/api-key`, and the slots monitoring endpoint is
+    off, so that clients can't see the state of each other's requests. Installed
+    by `install/macos-launchd-services.sh`, which also creates the API key and
     replaces `@HOME@` with the home directory, as launchd can't expand
     variables.
 -->
@@ -26,8 +25,6 @@
         <string>300</string>
         <string>--api-key-file</string>
         <string>@HOME@/.local/share/llama.cpp/api-key</string>
-        <string>--cors-origins</string>
-        <string>localhost</string>
         <string>--no-slots</string>
         <string>--host</string>
         <string>127.0.0.1</string>
